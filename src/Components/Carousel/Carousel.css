@@ -1,0 +1,71 @@
+.carousel-component{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-buttons{
+  width: 660px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.carousel-button{
+  background-image: url(../../Assets/MenuIcons/button-border.png);
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 250px;
+  background-position-y: 30px;
+  background-size: 180px;
+  color: white;
+  text-align: center;
+  position: relative;
+  transition: 0.5s transform;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-delay: 300ms;
+  margin: 0px 20px 0px 20px;
+
+}
+
+.carousel-title{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  font-size: 20px;
+}
+
+.carousel-icon{
+  margin-top: 16px;
+  width: 180px;
+}
+
+.slider{
+  transition: 500ms all;
+  transition-timing-function: ease-in-out;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.selected{
+
+  transform: scale(1.4);
+}
+
+.indicator{
+  position: absolute;
+  top: 30px;
+  width: 180px;
+  height: 175px;
+  animation: rotate 2s linear infinite;
+  transform-origin: 90px 88px;
+}
+
+@keyframes rotate{
+  100%{
+    transform: rotate(360deg);
+  }
+}

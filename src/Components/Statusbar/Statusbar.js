@@ -9,7 +9,7 @@ class Statusbar extends Component{
   render(){
     return(
       <div className="status-bar-component">
-        <div className="title"> MANUAL RESISTIVITY </div>
+        <div className="title"> SYSTEMS </div>
         <div className="icons">
           <Volume/>
           <Wifi/>

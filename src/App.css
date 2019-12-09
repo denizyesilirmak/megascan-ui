@@ -1,4 +1,11 @@
+@font-face {
+  font-family: 'RussoOne';
+  src: url('./Assets/Fonts/Russo_One/RussoOne-Regular.ttf') format('truetype'), 
+   url('./Assets/Fonts/Russo_One/RussoOne-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}  
+
 body{
   background-image: url('./Assets/background.png');
   background-size: cover;
+  font-family: RussoOne;
 }

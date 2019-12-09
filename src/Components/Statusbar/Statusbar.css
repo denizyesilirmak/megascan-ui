@@ -1,0 +1,30 @@
+.status-bar-component{
+  width: 100vw;
+  height: 53px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-bar-component .title{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 28px;
+  text-align: center;
+  white-space: pre;
+} 
+
+.status-bar-component .icons{
+  padding-right: 2%;
+  width: 28%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -17,7 +17,7 @@ class Navigator extends Component {
     }
     else if (prevProps.activeSettingTab % 3 === 0 && this.props.activeSettingTab % 3 === 2) {
       console.log("sayfa sol")
-      this.refs.naviSlider.style.transform = `translateX(${-1 * this.props.activeSettingTab * 480}px)`
+      this.refs.naviSlider.style.transform = `translateX(${-1*Math.trunc((this.props.activeSettingTab)/3) * 660}px)`
     }
   }
 

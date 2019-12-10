@@ -6,7 +6,7 @@
 
 .navigator-buttons{
   display: flex;
-  transition: .1s all;
+  transition: .3s all;
   
 }
 
@@ -26,6 +26,7 @@
 }
 
 .navigator-button.selected{
+  transition: 0.4s all;
   background: #d3be7b;
   color: black;
 }

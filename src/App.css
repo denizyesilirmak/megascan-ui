@@ -9,3 +9,11 @@ body{
   background-size: cover;
   font-family: RussoOne;
 }
+
+.component{
+  margin-left: 5vh;
+  width: 94vw;
+  height: 360px;
+  position: absolute;
+  top: 100px;
+}

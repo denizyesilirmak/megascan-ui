@@ -1,0 +1,39 @@
+.navigator-component{
+  width: 660px;
+  height: 60px;
+}
+
+.navigator-buttons{
+  display: flex;
+}
+
+.navigator-button{
+  width: 196px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px 0px 10px;
+  border: 2px solid #8a7940;
+  border-radius: 15px;
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.navigator-button.selected{
+  background: #d3be7b;
+  color: black;
+}
+
+.navigator-left-arrow{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.navigator-right-arrow{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}

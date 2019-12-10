@@ -1,14 +1,18 @@
 .navigator-component{
   width: 660px;
   height: 60px;
+  overflow: hidden;
 }
 
 .navigator-buttons{
   display: flex;
+  transition: .1s all;
+  
 }
 
 .navigator-button{
   width: 196px;
+  min-width: 196px;
   height: 56px;
   display: flex;
   align-items: center;

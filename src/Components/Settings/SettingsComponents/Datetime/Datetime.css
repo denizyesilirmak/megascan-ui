@@ -13,9 +13,11 @@
   border: 2px solid #8a7940;
   border-radius: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   color: white;
+  background: #000;
 }
 
 .time-container{
@@ -25,7 +27,23 @@
   border: 2px solid #8a7940;
   border-radius: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   color: white;
+  background: #000;
+}
+
+.date-time-title{
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.date-time-value{
+  font-size: 30px;
+  margin-top: 20px;
 }

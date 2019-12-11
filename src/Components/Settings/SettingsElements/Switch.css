@@ -1,0 +1,26 @@
+.switch-component{
+  width: 100px;
+  height: 40px;
+  padding: 5px;
+  /* border: 2px solid yellow; */
+}
+
+.switch-component .toggler-container{
+  width: 100px;
+  height: 40px;
+  background: #fff;
+}
+
+.switch-component .toggler{
+  width: 50px;
+  height: 40px;
+  background: red;
+  transition: 0.4s all;
+}
+
+.switch-component .status{
+  color: white;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 20px;
+}

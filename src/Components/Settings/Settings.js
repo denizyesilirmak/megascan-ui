@@ -82,7 +82,7 @@ class Settings extends Component {
   renderSettingsComponent = () => {
     switch (this.state.activeSettingTabName) {
       case 'power':
-        return (<Power />)
+          return (<Power />)
       default:
         break;
     }
@@ -94,7 +94,8 @@ class Settings extends Component {
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div className="settings-component-container">
           {
-            this.renderSettingsComponent()
+
+              this.renderSettingsComponent()
           }
         </div>
         <SocketHelper ref="socket" onMessage={this.handleKeyDown} />

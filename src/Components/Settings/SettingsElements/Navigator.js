@@ -10,7 +10,6 @@ class Navigator extends Component {
   // }
 
   componentDidUpdate(prevProps) {
-    console.log("eskisi: " + prevProps.activeSettingTab % 3, "yenisi: " + this.props.activeSettingTab % 3)
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {
       this.refs.naviSlider.style.transform = `translateX(${-1 * this.props.activeSettingTab * 220}px)`
     }

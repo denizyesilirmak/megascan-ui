@@ -1,25 +1,59 @@
 import React, { Component } from 'react'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import './Power.css'
 
+import '../../SettingsElements/Switch'
+
+import PowerSavingIcon from '../../../../Assets/MenuIcons/power-saving.png'
+import Switch from '../../SettingsElements/Switch';
 
 class Power extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      percentage: 50
+    }
+  }
+  componentDidMount() {
+    // setInterval(() => {      
+    //   this.setState({
+    //     percentage: Math.trunc(Math.random()*100)
+    //   })
+    // }, 1000);
+  }
+
   render() {
     return (
       <div className="power-settings-component">
-        {/* <svg width="120" height="120" >
-          <circle cx="60" cy="60" r="54" stroke="yellow" stroke-width="8" fill="#FFFFFF00"></circle>
-          <circle cx="60" cy="60" r="54" stroke="red" stroke-width="8" fill="#FFFFFF00" stroke-dasharray="calc(35 * 31.42 / 100) 31.42"></circle>
-        </svg> */}
-
-        <svg height="100" width="100">
-          {/* <circle r="40" cx="45" cy="45" fill="white" /> */}
-          <circle r="40" cx="45" cy="45" fill="transparent"
-            stroke="yellow"
-            stroke-width="10"
-            stroke-dasharray="calc(2*3.14*40 - 50)"
+        <div className="progress">
+          <CircularProgressbar
+            value={this.state.percentage}
+            text={`${this.state.percentage}%`}
+            counterClockwise
+            styles={{
+              path: {
+                stroke: `#d3be7b`,
+                transition: 'stroke-dashoffset 0.5s ease 0s',
+                strokeLinecap: 'butt'
+              },
+              trail: {
+                stroke: 'rgba(255,255,255,0)',
+              },
+              text: {
+                fill: '#d3be7b',
+                fontSize: '18px',
+              }
+            }}
           />
-        </svg>
-
+        </div>
+        <section>
+          <img src={PowerSavingIcon} alt="power-saver"></img>
+          <div className="power-saver-title"> Power Saving </div>
+        </section>
+        <section>
+          <Switch on={true} />
+        </section>
       </div>
     )
   }

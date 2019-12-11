@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // import ButtonSound from './Assets/sounds/next.mp3'
 const Websocket = require('websocket').w3cwebsocket
 
-const SOCKET_ADDRESS = 'ws://localhost:8080'
+const SOCKET_ADDRESS = 'ws://192.168.1.131:8080'
 
 class Socket extends Component {
   constructor(props) {

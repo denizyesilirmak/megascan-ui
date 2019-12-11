@@ -1,4 +1,16 @@
 .settings-component{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.settings-component-container{
+  background: rgba(0, 0, 0, 0.644);
+  width: 650px;
+  height: 270px;
+  margin-top: 20px;
+  border: 2px solid #8a7940;
+  border-radius: 10px;
 }

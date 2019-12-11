@@ -3,44 +3,48 @@ import Navigator from './SettingsElements/Navigator'
 import SocketHelper from '../../SocketHelper'
 import './Settings.css'
 
+import Power from './SettingsComponents/Power/Power'
+
 class Settings extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      activeSettingTab: 0
+      activeSettingTab: 0,
+      activeSettingTabName: 'power',
+      verticalIndex: 0
     }
 
     this.buttons = [
       {
-        name: "Power"
+        name: "power"
       },
       {
-        name: "Time & Date"
+        name: "datetime"
       },
       {
-        name: "Storage"
+        name: "storage"
       },
       {
-        name: "Connection"
+        name: "connection"
       },
       {
-        name: "Security"
+        name: "security"
       },
       {
-        name: "Reset"
+        name: "reset"
       },
       {
-        name: "Display"
+        name: "display"
       },
       {
-        name: "Language"
+        name: "language"
       },
       {
-        name: "Sound"
+        name: "sound"
       },
       {
-        name: "Info"
+        name: "info"
       },
     ]
   }
@@ -67,15 +71,32 @@ class Settings extends Component {
         break
     }
 
+    let activeTabName = this.buttons[tempActiveSettingTab]
+
     this.setState({
-      activeSettingTab: tempActiveSettingTab
+      activeSettingTab: tempActiveSettingTab,
+      activeSettingTabName: activeTabName.name
     })
+  }
+
+  renderSettingsComponent = () => {
+    switch (this.state.activeSettingTabName) {
+      case 'power':
+        return (<Power />)
+      default:
+        break;
+    }
   }
 
   render() {
     return (
       <div className="settings-component component">
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
+        <div className="settings-component-container">
+          {
+            this.renderSettingsComponent()
+          }
+        </div>
         <SocketHelper ref="socket" onMessage={this.handleKeyDown} />
       </div>
     )

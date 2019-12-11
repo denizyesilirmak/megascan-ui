@@ -12,20 +12,18 @@ class Navigator extends Component {
   componentDidUpdate(prevProps) {
     console.log("eskisi: " + prevProps.activeSettingTab % 3, "yenisi: " + this.props.activeSettingTab % 3)
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {
-      console.log("sayfa sağ")
       this.refs.naviSlider.style.transform = `translateX(${-1 * this.props.activeSettingTab * 220}px)`
     }
     else if (prevProps.activeSettingTab % 3 === 0 && this.props.activeSettingTab % 3 === 2) {
-      console.log("sayfa sol")
-      this.refs.naviSlider.style.transform = `translateX(${-1*Math.trunc((this.props.activeSettingTab)/3) * 660}px)`
+      this.refs.naviSlider.style.transform = `translateX(${-1 * Math.trunc((this.props.activeSettingTab) / 3) * 660}px)`
     }
   }
 
   render() {
     return (
       <div className="navigator-component">
-        <img alt="left" className="navigator-left-arrow" src={LeftArrow}></img>
-        <img alt="right" className="navigator-right-arrow" src={RightArrow}></img>
+        <img alt="left" className={`navigator-left-arrow ${this.props.activeSettingTab !== 0 ? 'show': 'hide'}`} src={LeftArrow}></img>
+        <img alt="right" className={`navigator-right-arrow ${this.props.activeSettingTab !== 9 ? 'show': 'hide'}`} src={RightArrow}></img>
 
         <div className="navigator-buttons" ref="naviSlider">
           {

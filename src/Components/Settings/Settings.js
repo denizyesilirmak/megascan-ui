@@ -16,6 +16,8 @@ class Settings extends Component {
       verticalIndex: 0
     }
 
+
+
     this.buttons = [
       {
         name: "power"
@@ -50,6 +52,12 @@ class Settings extends Component {
     ]
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.refs.settings.style.opacity = 1
+    }, 200);
+  }
+
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempActiveSettingTab = this.state.activeSettingTab
@@ -66,7 +74,10 @@ class Settings extends Component {
 
         return
       case 'back':
-        this.props.navigateTo("menuScreen")
+        this.refs.settings.style.opacity = 0
+        setTimeout(() => {
+          this.props.navigateTo("menuScreen")
+        }, 500);
         return
       default:
         break
@@ -93,7 +104,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <div className="settings-component component">
+      <div ref="settings" className="settings-component component">
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div className="settings-component-container">
           {

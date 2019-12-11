@@ -60,6 +60,12 @@ class Mainmenu extends Component {
     ]
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.refs.mainmenu.style.opacity = 1
+    }, 100);
+  }
+
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempIndex = this.state.index
@@ -73,7 +79,13 @@ class Mainmenu extends Component {
           tempIndex++
         break
       case 'ok':
-        this.props.navigateTo(this.buttons[this.state.index+1].screenName)
+        this.refs.mainmenu.style.transform = "scale(2)"
+        this.refs.mainmenu.style.opacity = 0
+        setTimeout(() => {
+          if (this.buttons[this.state.index + 1].screenName !== ""){
+            this.props.navigateTo(this.buttons[this.state.index + 1].screenName)
+          }
+        }, 500);
         return
       case 'back':
 
@@ -89,7 +101,7 @@ class Mainmenu extends Component {
 
   render() {
     return (
-      <div className="mainmenu-component">
+      <div ref="mainmenu" className="mainmenu-component">
         <Carousel buttons={this.buttons} index={this.state.index} />
         <SocketHelper ref="socket" onMessage={this.handleKeyDown} />
       </div>

@@ -17,12 +17,19 @@ class App extends Component {
     }
   }
 
+  navigateTo = (screenName) => {
+    console.log(screenName)
+    this.setState({
+      activeScreen: screenName
+    })
+  }
+
   renderScreen = () => {
     switch (this.state.activeScreen) {
       case "menuScreen":
-        return (<MainMenu />)
+        return (<MainMenu navigateTo={this.navigateTo}/>)
       case "settingsScreen":
-        return (<Settings />)
+        return (<Settings navigateTo={this.navigateTo}/>)
       default:
         break;
     }

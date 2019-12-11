@@ -8,7 +8,6 @@ import ButtonIndicator from '../../Assets/MenuIcons/button-indicator.png'
 
 
 class Carousel extends Component {
-
   componentDidUpdate() {
     this.refs.slider.style.transform = "translateX(" + -220 * this.props.index + "px)"
   }

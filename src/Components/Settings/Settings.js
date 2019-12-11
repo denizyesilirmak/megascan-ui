@@ -66,7 +66,7 @@ class Settings extends Component {
 
         return
       case 'back':
-
+        this.props.navigateTo("menuScreen")
         return
       default:
         break

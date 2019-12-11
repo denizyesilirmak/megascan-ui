@@ -24,31 +24,38 @@ class Mainmenu extends Component {
     this.buttons = [
       {
         name: "Ground Scan",
-        icon: GroundScanIcon
+        icon: GroundScanIcon,
+        screenName: ""
       },
       {
         name: "Geophysical",
-        icon: GeoPhysicalIcon
+        icon: GeoPhysicalIcon,
+        screenName: ""
       },
       {
         name: "Auto LRL",
-        icon: AutoLRLIcon
+        icon: AutoLRLIcon,
+        screenName: ""
       },
       {
         name: "CTRL LRL",
-        icon: CtrlLrlIcon
+        icon: CtrlLrlIcon,
+        screenName: ""
       },
       {
         name: "Ionic",
-        icon: IonicIcon
+        icon: IonicIcon,
+        screenName: ""
       },
       {
         name: "Bionic",
-        icon: BionicIcon
+        icon: BionicIcon,
+        screenName: ""
       },
       {
         name: "Setting",
-        icon: SettingIcon
+        icon: SettingIcon,
+        screenName: "settingsScreen"
       }
     ]
   }
@@ -58,15 +65,15 @@ class Mainmenu extends Component {
     let tempIndex = this.state.index
     switch (socketData.payload) {
       case 'left':
-        if(tempIndex>=0)
-        tempIndex--
+        if (tempIndex >= 0)
+          tempIndex--
         break
       case 'right':
-        if(tempIndex<this.buttons.length-2)
+        if (tempIndex < this.buttons.length - 2)
           tempIndex++
         break
       case 'ok':
-
+        this.props.navigateTo(this.buttons[this.state.index+1].screenName)
         return
       case 'back':
 
@@ -83,7 +90,7 @@ class Mainmenu extends Component {
   render() {
     return (
       <div className="mainmenu-component">
-        <Carousel buttons={this.buttons} index={this.state.index}/>
+        <Carousel buttons={this.buttons} index={this.state.index} />
         <SocketHelper ref="socket" onMessage={this.handleKeyDown} />
       </div>
     )

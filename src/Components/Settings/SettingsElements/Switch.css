@@ -9,13 +9,15 @@
   width: 100px;
   height: 40px;
   background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .switch-component .toggler{
   width: 50px;
   height: 40px;
   background: red;
-  transition: 0.4s all;
+  transition: 0.3s all;
 }
 
 .switch-component .status{

@@ -4,6 +4,7 @@ import SocketHelper from '../../SocketHelper'
 import './Settings.css'
 
 import Power from './SettingsComponents/Power/Power'
+import Datetime from './SettingsComponents/Datetime/Datetime'
 
 class Settings extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Settings extends Component {
 
     this.state = {
       activeSettingTab: 0,
-      activeSettingTabName: 'power',
+      activeSettingTabName: 'datetime',
       verticalIndex: 0
     }
 
@@ -82,7 +83,9 @@ class Settings extends Component {
   renderSettingsComponent = () => {
     switch (this.state.activeSettingTabName) {
       case 'power':
-          return (<Power />)
+        return (<Power />)
+      case 'datetime':
+        return (<Datetime />)
       default:
         break;
     }
@@ -95,7 +98,7 @@ class Settings extends Component {
         <div className="settings-component-container">
           {
 
-              this.renderSettingsComponent()
+            this.renderSettingsComponent()
           }
         </div>
         <SocketHelper ref="socket" onMessage={this.handleKeyDown} />

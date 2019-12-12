@@ -4,6 +4,7 @@ import './Statusbar.css'
 import Volume from './StatusbarElements/Volume'
 import Wifi from './StatusbarElements/Wifi'
 import Battery from './StatusbarElements/Battery'
+import Clock from './StatusbarElements/Clock'
 
 class Statusbar extends Component{
   render(){
@@ -14,6 +15,7 @@ class Statusbar extends Component{
           <Volume/>
           <Wifi/>
           <Battery/>
+          <Clock/>
         </div>
       </div>
     )

@@ -12,7 +12,7 @@ class Settings extends Component {
 
     this.state = {
       activeSettingTab: 0,
-      activeSettingTabName: 'datetime',
+      activeSettingTabName: 'power',
       verticalIndex: 0
     }
 

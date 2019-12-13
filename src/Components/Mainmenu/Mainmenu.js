@@ -35,7 +35,7 @@ class Mainmenu extends Component {
       {
         name: "Auto LRL",
         icon: AutoLRLIcon,
-        screenName: ""
+        screenName: "autoLrlScanScreen"
       },
       {
         name: "CTRL LRL",

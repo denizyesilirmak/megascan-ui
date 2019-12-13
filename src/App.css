@@ -11,9 +11,9 @@ body{
 }
 
 .component{
-  margin-left: 5vh;
-  width: 94vw;
-  height: 360px;
+  margin-left: 22px;
+  width: 756px;
+  height: 367px;
   position: absolute;
   top: 100px;
 }

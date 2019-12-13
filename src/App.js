@@ -6,6 +6,7 @@ import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
 
+import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 
 class App extends Component {
 
@@ -13,7 +14,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "menuScreen"
+      activeScreen: "autoLrlScanScreen"
     }
   }
 
@@ -27,9 +28,11 @@ class App extends Component {
   renderScreen = () => {
     switch (this.state.activeScreen) {
       case "menuScreen":
-        return (<MainMenu navigateTo={this.navigateTo}/>)
+        return (<MainMenu navigateTo={this.navigateTo} />)
       case "settingsScreen":
-        return (<Settings navigateTo={this.navigateTo}/>)
+        return (<Settings navigateTo={this.navigateTo} />)
+      case "autoLrlScanScreen":
+        return (<AutoLRL navigateTo={this.navigateTo} />)
       default:
         break;
     }

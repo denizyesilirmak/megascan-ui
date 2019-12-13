@@ -10,12 +10,12 @@ class Security extends Component{
     return(
       <div className="security-component">
         <div className="security-part">
-          <img src={WarningIcon}/>
+          <img alt="warn" src={WarningIcon}/>
           <span>Don't forget the pin!</span>
         </div>
 
         <div className="security-part">
-          <img src={ChangePinIcon}/>
+          <img alt="change" src={ChangePinIcon}/>
           <span>CHANGE PIN</span>
         </div>
 

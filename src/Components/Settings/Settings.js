@@ -55,7 +55,7 @@ class Settings extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.refs.settings.style.opacity = 1
-    }, 200);
+    }, 15);
   }
 
   handleKeyDown = (socketData) => {

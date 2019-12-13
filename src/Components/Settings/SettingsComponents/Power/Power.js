@@ -3,7 +3,6 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './Power.css'
 
-import '../../SettingsElements/Switch'
 
 import PowerSavingIcon from '../../../../Assets/MenuIcons/power-saving.png'
 import Switch from '../../SettingsElements/Switch';

@@ -9,11 +9,6 @@ class Switch extends Component {
     }
   }
   componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        on: !this.state.on
-      })
-    }, 1000);
   }
 
   render() {

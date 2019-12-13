@@ -5,6 +5,8 @@ import './Settings.css'
 
 import Power from './SettingsComponents/Power/Power'
 import Datetime from './SettingsComponents/Datetime/Datetime'
+import Security from "./SettingsComponents/Security/Security";
+import Display from './SettingsComponents/Display/Display'
 
 class Settings extends Component {
   constructor(props) {
@@ -15,8 +17,6 @@ class Settings extends Component {
       activeSettingTabName: 'power',
       verticalIndex: 0
     }
-
-
 
     this.buttons = [
       {
@@ -75,6 +75,7 @@ class Settings extends Component {
         return
       case 'back':
         this.refs.settings.style.opacity = 0
+        this.refs.settings.style.transform = "translateY(200px)"
         setTimeout(() => {
           this.props.navigateTo("menuScreen")
         }, 500);
@@ -97,6 +98,10 @@ class Settings extends Component {
         return (<Power />)
       case 'datetime':
         return (<Datetime />)
+      case 'security':
+        return (<Security />)
+      case 'display':
+        return (<Display />)
       default:
         break;
     }
@@ -105,10 +110,9 @@ class Settings extends Component {
   render() {
     return (
       <div ref="settings" className="settings-component component">
-        <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
+        <Navigator selected={true} activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div className="settings-component-container">
           {
-
             this.renderSettingsComponent()
           }
         </div>

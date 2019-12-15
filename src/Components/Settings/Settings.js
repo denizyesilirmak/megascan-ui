@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Navigator from './SettingsElements/Navigator'
-import SocketHelper from '../../SocketHelper'
+import socketHelper from '../../SocketHelper'
 import './Settings.css'
 
 import Power from './SettingsComponents/Power/Power'
@@ -53,6 +53,7 @@ class Settings extends Component {
   }
 
   componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.settings.style.opacity = 1
     }, 15);
@@ -116,7 +117,6 @@ class Settings extends Component {
             this.renderSettingsComponent()
           }
         </div>
-        <SocketHelper ref="socket" onMessage={this.handleKeyDown} />
       </div>
     )
   }

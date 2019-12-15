@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Mainmenu.css'
-import SocketHelper from '../../SocketHelper'
+import socketHelper from '../../SocketHelper'
 import Carousel from '../Carousel/Carousel'
 
 
@@ -61,6 +61,7 @@ class Mainmenu extends Component {
   }
 
   componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.mainmenu.style.opacity = 1
     }, 100);
@@ -103,7 +104,6 @@ class Mainmenu extends Component {
     return (
       <div ref="mainmenu" className="mainmenu-component">
         <Carousel buttons={this.buttons} index={this.state.index} />
-        <SocketHelper ref="socket" onMessage={this.handleKeyDown} />
       </div>
     )
   }

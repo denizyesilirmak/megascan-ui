@@ -1,130 +1,67 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-// import ButtonSound from './Assets/sounds/next.mp3'
-const Websocket = require('websocket').w3cwebsocket
+import io from 'socket.io-client'
 
-const SOCKET_ADDRESS = 'ws://192.168.1.131:8080'
+const SOCKET_SERVER_ADDRESS = 'ws://192.168.0.131:8080'
+const VOID = () => {}
 
-class Socket extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      ws: new Websocket(SOCKET_ADDRESS),
-      shouldReconnect: true,
-      hasError: false
+class SocketHelper {
+
+  constructor() {
+    if (!SocketHelper.instance) {
+      // Init
+      this._currentMessageHandler = VOID
+      this._messageHandlerStack = []
+      this._socket = null
+      this._socket = io(SOCKET_SERVER_ADDRESS)
+      this._setMessageHandler(this._getLastMessageHandler())
+
+      SocketHelper.instance = this
+    }
+    return SocketHelper.instance
+  }
+
+  _getLastMessageHandler = () => {
+    if (this._messageHandlerStack.length > 0) {
+      return this._messageHandlerStack.pop()
+    } else {
+      return VOID
     }
   }
 
-  componentDidCatch(error, info) {
-    this.setState({ hasError: true });
+  _setMessageHandler = (fn) => {
+    this._socket.removeAllListeners('message')
+    this._socket.on('message', fn)
+    this._currentMessageHandler = fn
   }
 
-  componentDidMount() {
-    this._isMounted = true
-    try {
-
-      this.initSocket()
-    } catch{
-      console.error("Uyarı: SerialBridge kapalı olabilir? Ulaşamıyorum.")
-    }
+  send = (msg) => {
+    this._socket.send(msg)
   }
 
-  componentWillUnmount() {
-    this.setState({
-      shouldReconnect: false
+  attach = (fn) => {
+    this._messageHandlerStack.push(this._currentMessageHandler)
+    this._setMessageHandler(fn)
+  }
+
+  attachSpecial = (event, fn) => {
+    this._socket.on(event, msg => {
+      fn(msg)
     })
-    clearTimeout(this.timeout)
-    let socket = this.state.ws
-    socket.close()
-    this._isMounted = false
   }
 
-  initSocket = () => {
-    let socket = this.state.ws
+  detachSpecial = (event) => {
+    this._socket.removeAllListeners(event)
+  }
 
-    socket.onmessage = (ev) => {
-      const messageData = JSON.parse(ev.data)
-      if (this.props.debug) { console.log(messageData) }
-      if (messageData.type === 'scan_') {
-        this.props.onScanData(messageData)
-      } else if (messageData.type === 'button') {
-        this.props.onMessage(messageData)
-      } else if (messageData.type === 'accessory_error') {
-        try {
-          this.props.accessoryError(messageData)
-        } catch (error) {
-          
-        }
-      }
-
+  detach = () => {
+    const last = this._getLastMessageHandler()
+    if (last !== VOID) {
+      this._setMessageHandler(last)
     }
-
-    socket.onclose = () => {
-      if (this.state.shouldReconnect && this._isMounted) {
-        this.timeout = setTimeout(() => {
-          this.setState({
-            ws: new Websocket(SOCKET_ADDRESS)
-          })
-          this.initSocket()
-        }, 1000)
-      }
-    }
-  }
-
-  requestScan = async (line, cb) => {
-    // console.log('Scan requested: ', line)
-    const socket = this.state.ws
-    try {
-
-      socket.send(line)
-    } catch{
-      console.error("Uyarı: SerialBridge kapalı olabilir? Ulaşamıyorum.")
-    }
-
-    let req = new Promise((resolve, reject) => {
-      socket.addEventListener('message', (ev) => {
-        resolve(JSON.parse(ev.data))
-      }, { once: true })
-    })
-
-    let res = await req
-    // res.type = 'sensor' // TEST
-    return res
-  }
-
-  requestBattery() {
-    const socket = this.state.ws
-    socket.send('P')
-    // console.log("battery")
-  }
-
-  requestTitre() {
-    const socket = this.state.ws
-    socket.send('vib')
-  }
-
-  requestTurnOff() {
-    const socket = this.state.ws
-    socket.send('T')
-  }
-
-  requestReboot() {
-    const socket = this.state.ws
-    socket.send('Y')
-  }
-
-
-
-  render() {
-    return <div style={{ display: 'none' }} > >
-    {/* <audio ref="audio" volume="0.1" src={ButtonSound} /> */}
-    </div>
   }
 
 }
 
-Socket.propTypes = {
-  onMessage: PropTypes.func
-}
+const socketHelperInstance = new SocketHelper()
+// Object.freeze(socketHelperInstance) // Extra measure
 
-export default Socket
+export default socketHelperInstance

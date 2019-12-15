@@ -5,7 +5,6 @@ import './App.css';
 import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
-
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 
 class App extends Component {

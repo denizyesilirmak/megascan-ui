@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const SOCKET_SERVER_ADDRESS = 'ws://192.168.0.131:8080'
+const SOCKET_SERVER_ADDRESS = 'ws://192.168.0.31:8080'
 const VOID = () => {}
 
 class SocketHelper {

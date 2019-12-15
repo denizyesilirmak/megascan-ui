@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import './Carousel.css'
 
+import { set } from 'warp-client'
+
 import LeftArrow from '../../Assets/MenuIcons/left-arrow1.png'
 import RightArrow from '../../Assets/MenuIcons/right-arrow1.png'
-
 import ButtonIndicator from '../../Assets/MenuIcons/button-indicator.png'
 
 class Carousel extends Component {
   componentDidUpdate () {
     this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
+    set('title', this.props.buttons[this.props.index + 1].name)
   }
 
   render () {

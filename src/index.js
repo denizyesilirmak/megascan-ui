@@ -4,6 +4,12 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import { WarpGate } from 'warp-client'
 
-serviceWorker.register()
+// const initialStore = {
+//   tema: 'dark'
+// }
+
+ReactDOM.render(<WarpGate /* initialStore={initialStore} */ logger devTools serverAddress='http://localhost:3131'><App /></WarpGate>, document.getElementById('root'))
+
+serviceWorker.unregister()

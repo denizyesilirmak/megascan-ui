@@ -9,6 +9,7 @@
     "react-live-clock": "^3.1.0",
     "react-scripts": "3.2.0",
     "socket.io-client": "^2.3.0",
+    "warp-client": "yalanyali/warp-client",
     "websocket": "^1.0.31"
   },
   "scripts": {

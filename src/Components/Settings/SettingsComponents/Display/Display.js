@@ -11,6 +11,7 @@ class Display extends Component {
       <div className="display-component">
         <div className="display-part">
           <Switch on={true} />
+          <div className="display-part-title">Sleep Mode</div>
         </div>
         <div className="display-part">
           <div className="progress">
@@ -24,17 +25,17 @@ class Display extends Component {
                   transition: 'stroke-dashoffset 0.5s ease 0s',
                   strokeLinecap: 'butt'
                 },
-                trail: {
-                  stroke: 'rgba(255,255,255,0)',
-                },
                 text: {
                   fill: '#d3be7b',
                   fontSize: '18px',
-                }
+                },
+                trailColor: "red"
               }}
             />
           </div>
+          <div className="display-part-title">Brigthness</div>
         </div>
+        
       </div>
     )
   }

@@ -9,10 +9,23 @@
 
 .display-component .display-part{
   width: 180px;
-  height: 230px;
-  border: 2px solid whitesmoke;
+  height: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.199);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background: black;
+  flex-direction: column;
+  padding-top: 30px;
+}
+
+.display-component .display-part:first-child{
+  padding-top: 60px;
+  height: 170px;
+}
+
+.display-component .display-part-title{
+  color: white;
+  font-size: 18px;
+  margin-bottom: 15px;
 }

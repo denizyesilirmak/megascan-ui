@@ -5,9 +5,10 @@ import LeftArrow from '../../../Assets/MenuIcons/left-arrow2.png'
 import RightArrow from '../../../Assets/MenuIcons/right-arrow2.png'
 
 class Navigator extends Component {
-  // constructor(props){
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {
@@ -21,8 +22,8 @@ class Navigator extends Component {
   render() {
     return (
       <div className="navigator-component">
-        <img alt="left" className={`navigator-left-arrow ${this.props.activeSettingTab !== 0 ? 'show': 'hide'}`} src={LeftArrow}></img>
-        <img alt="right" className={`navigator-right-arrow ${this.props.activeSettingTab !== 9 ? 'show': 'hide'}`} src={RightArrow}></img>
+        <img alt="left" className={`navigator-left-arrow ${this.props.activeSettingTab !== 0 ? 'show' : 'hide'}`} src={LeftArrow}></img>
+        <img alt="right" className={`navigator-right-arrow ${this.props.activeSettingTab !== 9 ? 'show' : 'hide'}`} src={RightArrow}></img>
 
         <div className="navigator-buttons" ref="naviSlider">
           {

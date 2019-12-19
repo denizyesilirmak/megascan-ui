@@ -7,6 +7,7 @@ import Power from './SettingsComponents/Power/Power'
 import Datetime from './SettingsComponents/Datetime/Datetime'
 import Security from "./SettingsComponents/Security/Security";
 import Display from './SettingsComponents/Display/Display'
+import Info from './SettingsComponents/Info/Info'
 
 class Settings extends Component {
   constructor(props) {
@@ -62,6 +63,7 @@ class Settings extends Component {
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempActiveSettingTab = this.state.activeSettingTab
+    let tempVerticalIndex = this.state.verticalIndex
     switch (socketData.payload) {
       case 'left':
         if (tempActiveSettingTab > 0)
@@ -70,6 +72,12 @@ class Settings extends Component {
       case 'right':
         if (tempActiveSettingTab < this.buttons.length - 1)
           tempActiveSettingTab++
+        break
+      case 'down':
+        tempVerticalIndex++
+        break
+      case 'up':
+        tempVerticalIndex++
         break
       case 'ok':
 
@@ -89,7 +97,8 @@ class Settings extends Component {
 
     this.setState({
       activeSettingTab: tempActiveSettingTab,
-      activeSettingTabName: activeTabName.name
+      activeSettingTabName: activeTabName.name,
+      verticalIndex: tempVerticalIndex % 2
     })
   }
 
@@ -103,6 +112,8 @@ class Settings extends Component {
         return (<Security />)
       case 'display':
         return (<Display />)
+      case 'info':
+        return (<Info />)
       default:
         break;
     }
@@ -110,9 +121,9 @@ class Settings extends Component {
 
   render() {
     return (
-      <div ref="settings" className="settings-component component">
-        <Navigator selected={true} activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
-        <div className="settings-component-container">
+      <div ref="settings" className={`settings-component component `}>
+        <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
+        <div className={`settings-component-container  ${this.state.verticalIndex === 1 ? 'selected' : ''}`}>
           {
             this.renderSettingsComponent()
           }

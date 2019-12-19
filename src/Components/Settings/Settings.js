@@ -61,6 +61,7 @@ class Settings extends Component {
     }, 15);
   }
 
+
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempActiveSettingTab = this.state.activeSettingTab

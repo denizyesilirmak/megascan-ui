@@ -6,6 +6,7 @@
   opacity: 1;
   transition: 1s all;
   background: black;
+  opacity: 0;
 }
 
 .auto-lrl-component .auto-lrl-indicator{
@@ -36,4 +37,8 @@
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
+}
+
+.auto-lrl-scan rect{
+  transition: .8s all;
 }

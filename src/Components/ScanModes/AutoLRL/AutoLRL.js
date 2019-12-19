@@ -3,10 +3,19 @@ import socketHelper from '../../../SocketHelper'
 import './AutoLRL.css'
 
 import AutoLRLScan from './AutoLRLScan'
+import AutoLRLSettings from './AutoLRLSettings'
 
 class AutoLRL extends Component {
 
-  
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      settingsActive: true
+    }
+  }
+
+
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
@@ -18,7 +27,9 @@ class AutoLRL extends Component {
     if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
       case 'ok':
-
+        this.setState({
+          settingsActive: !this.state.settingsActive
+        })
         return
       case 'back':
         console.log("back")
@@ -36,7 +47,12 @@ class AutoLRL extends Component {
   render() {
     return (
       <div ref="autoLrl" className="auto-lrl-component component">
-        <AutoLRLScan></AutoLRLScan>
+        {
+          this.state.settingsActive ?
+            <AutoLRLSettings />
+            :
+            <AutoLRLScan />
+        }
       </div>
     )
   }

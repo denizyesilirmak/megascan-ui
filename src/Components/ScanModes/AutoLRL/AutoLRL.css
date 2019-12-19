@@ -11,14 +11,13 @@
 .auto-lrl-component .auto-lrl-indicator{
   width: 600px;
   height: 130px;
-  background: red;
   margin-top: 40px;
 }
 
 .auto-lrl-component .auto-lrl-direction{
   color: white;
   font-size: 22px;
-  margin-top: 30px;
+  margin-top: 20px;
   background: #000;
   padding: 5px 15px 5px 15px;
 }
@@ -30,4 +29,11 @@
   font-size: 25px;
   color: white;
   border-radius: 10px;
+}
+
+.auto-lrl-scan{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
 }

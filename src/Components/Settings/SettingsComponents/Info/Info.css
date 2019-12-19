@@ -5,5 +5,30 @@
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
-  background: red;
+}
+
+.info-component .info-rq{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-component .info-data{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.info-data .info-data-item{
+  background: rgba(255, 255, 255, 0.733);
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
 }

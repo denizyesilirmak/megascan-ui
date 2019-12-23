@@ -9,6 +9,7 @@ import Security from "./SettingsComponents/Security/Security";
 import Display from './SettingsComponents/Display/Display'
 import Info from './SettingsComponents/Info/Info'
 import Reset from './SettingsComponents/Reset/Reset'
+import Language from './SettingsComponents/Language/Language'
 
 class Settings extends Component {
   constructor(props) {
@@ -116,6 +117,8 @@ class Settings extends Component {
         return (<Display />)
       case 'info':
         return (<Info />)
+      case 'language':
+        return (<Language />)
       case 'reset':
         return (<Reset />)
       default:

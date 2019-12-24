@@ -17,7 +17,7 @@ class Language extends Component {
     super(props)
 
     this.state = {
-      index: -1
+      index: 0
     }
 
     this.buttons = [
@@ -49,18 +49,30 @@ class Language extends Component {
     ]
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    let direction = true
     setInterval(() => {
-      this.setState({
-        index: this.state+1
-      })
+      if(direction){
+        this.setState({
+          index: this.state.index + 1
+        })
+        if(this.state.index === 3)
+        direction = false
+      }
+      else{
+        this.setState({
+          index: this.state.index - 1
+        })
+        if(this.state.index === -1)
+        direction = true
+      }
     }, 1500);
   }
 
   render() {
     return (
       <div className="language-component">
-        <div>
+        <div style={{width: "800px", height: "350px" , transform: "scale(0.8)", marginTop: 20}}>
           <Carousel buttons={this.buttons} index={this.state.index} />
         </div>
       </div>

@@ -40,7 +40,7 @@ class Mainmenu extends Component {
       {
         name: "CTRL LRL",
         icon: CtrlLrlIcon,
-        screenName: ""
+        screenName: "ctrlLrlScanScreen"
       },
       {
         name: "Ionic",

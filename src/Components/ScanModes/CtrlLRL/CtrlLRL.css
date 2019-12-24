@@ -1,0 +1,10 @@
+.ctrl-lrl-component {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transition: 1s all;
+  background: black;
+  opacity: 0;
+}

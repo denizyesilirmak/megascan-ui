@@ -5,10 +5,10 @@ import LeftArrow from '../../../Assets/MenuIcons/left-arrow2.png'
 import RightArrow from '../../../Assets/MenuIcons/right-arrow2.png'
 
 class Navigator extends Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
 
-  }
+  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {

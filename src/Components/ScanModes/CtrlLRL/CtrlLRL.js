@@ -5,6 +5,7 @@ import Navigator from '../../Settings/SettingsElements/Navigator'
 
 import SoilType from './CtrlLRLComponents/SoilType/SoilType'
 import Frequency from './CtrlLRLComponents/Frequency/Frequency'
+import Distance from './CtrlLRLComponents/Distance/Distance'
 
 class CtrlLRL extends Component {
 
@@ -92,7 +93,7 @@ class CtrlLRL extends Component {
       case "frequency":
         return <Frequency/>
       case "distance":
-        break
+        return <Distance/>
       case "depth":
         break
       case "search":

@@ -1,0 +1,41 @@
+.distance-component{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.distance-container{
+  width: 350px;
+  height: 230px;
+  background-image: url(../../../../../Assets/MenuIcons/ctrl-lrl-distance.png);
+  background-size: cover;
+}
+
+.distance-indicator{
+  position: relative;
+  left: 110px;
+  top: 4px;
+}
+
+.distance-value{
+  color: white;
+  font-size: 20px;
+  position: fixed;
+  background: rgb(44, 44, 44);
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  top: 290px;
+  left: 353px;
+  font-size: 25px;
+  text-align: center;
+  width: 90px;
+  height: 30px;
+  border: 2px solid white;
+}
+
+.distance-container path{
+  transition: opacity 0.4s;
+}

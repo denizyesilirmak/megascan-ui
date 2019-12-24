@@ -53,7 +53,7 @@ class Mainmenu extends Component {
         screenName: ""
       },
       {
-        name: "Setting",
+        name: "Settings",
         icon: SettingIcon,
         screenName: "settingsScreen"
       }

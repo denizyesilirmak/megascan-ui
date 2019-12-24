@@ -1,0 +1,23 @@
+.frequency-component{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.frequency-selector{
+  display: flex;
+  align-content: center;
+  margin-bottom: 10px;
+}
+
+.frequency-value{
+  color: white;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  font-size: 35px;
+  width: 240px;
+}

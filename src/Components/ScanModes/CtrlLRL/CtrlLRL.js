@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import socketHelper from '../../../SocketHelper'
 import './CtrlLRL.css'
 import Navigator from '../../Settings/SettingsElements/Navigator'
 
 import SoilType from './CtrlLRLComponents/SoilType/SoilType'
+import Frequency from './CtrlLRLComponents/Frequency/Frequency'
 
 class CtrlLRL extends Component {
 
@@ -34,12 +36,61 @@ class CtrlLRL extends Component {
 
   }
 
+  componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
+    setTimeout(() => {
+      this.refs.ctrllrl.style.opacity = 1
+    }, 15);
+  }
+
+  handleKeyDown = (socketData) => {
+    if (socketData.type !== 'button') { return }
+    let tempActiveSettingTab = this.state.activeSettingTab
+    let tempVerticalIndex = this.state.verticalIndex
+    switch (socketData.payload) {
+      case 'left':
+        if (tempActiveSettingTab > 0)
+          tempActiveSettingTab--
+        break
+      case 'right':
+        if (tempActiveSettingTab < this.buttons.length - 1)
+          tempActiveSettingTab++
+        break
+      case 'down':
+        tempVerticalIndex++
+        break
+      case 'up':
+        tempVerticalIndex++
+        break
+      case 'ok':
+
+        return
+      case 'back':
+        this.refs.ctrllrl.style.opacity = 0
+        this.refs.ctrllrl.style.transform = "translateY(200px)"
+        setTimeout(() => {
+          this.props.navigateTo("menuScreen")
+        }, 500);
+        return
+      default:
+        break
+    }
+
+    let activeTabName = this.buttons[tempActiveSettingTab]
+
+    this.setState({
+      activeSettingTab: tempActiveSettingTab,
+      activeSettingTabName: activeTabName.name,
+      verticalIndex: tempVerticalIndex % 2
+    })
+  }
+
   renderCtrlLrlComponent = () => {
     switch (this.state.activeSettingTabName) {
       case "soiltype":
         return <SoilType/>
       case "frequency":
-        break
+        return <Frequency/>
       case "distance":
         break
       case "depth":
@@ -53,7 +104,7 @@ class CtrlLRL extends Component {
 
   render() {
     return (
-      <div className="ctrl-lrl-component component">
+      <div ref="ctrllrl" className="ctrl-lrl-component component">
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons} />
         <div className={`settings-component-container  ${this.state.verticalIndex === 1 ? 'selected' : ''}`}>
           {

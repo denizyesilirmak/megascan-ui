@@ -1,0 +1,30 @@
+.soiltype-component{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+.soiltype-buttons{
+  width: 480px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 33% 33% 33%;
+}
+
+.soiltype-buttons .soiltype-button{
+  border: 2px solid rgb(58, 58, 22);
+  border-radius: 10px;
+  width: 200px;
+  height: 50px;
+  align-self: center;
+  justify-self: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}

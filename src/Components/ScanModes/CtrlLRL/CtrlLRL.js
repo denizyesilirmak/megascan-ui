@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './CtrlLRL.css'
 import Navigator from '../../Settings/SettingsElements/Navigator'
 
+import SoilType from './CtrlLRLComponents/SoilType/SoilType'
+
 class CtrlLRL extends Component {
 
   constructor(props) {
@@ -35,7 +37,7 @@ class CtrlLRL extends Component {
   renderCtrlLrlComponent = () => {
     switch (this.state.activeSettingTabName) {
       case "soiltype":
-        break
+        return <SoilType/>
       case "frequency":
         break
       case "distance":

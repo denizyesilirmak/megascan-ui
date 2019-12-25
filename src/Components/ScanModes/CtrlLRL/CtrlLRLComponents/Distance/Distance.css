@@ -39,3 +39,15 @@
 .distance-container path{
   transition: opacity 0.4s;
 }
+
+.distance-component .left-arrow{
+  left: 70px;
+  top: 190px;
+}
+
+
+
+.distance-component .right-arrow{
+  right: 70px;
+  top: 190px;
+}

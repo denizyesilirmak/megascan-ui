@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import './Distance.css'
 
 import CtrlLrlMan from '../../../../../Assets/MenuIcons/ctrl-lrl-distance.png'
+import LeftArrow from '../../../../../Assets/MenuIcons/left-arrow1.png'
+import RightArrow from '../../../../../Assets/MenuIcons/right-arrow1.png'
+
 
 class Distance extends Component {
   constructor(props){
@@ -29,13 +32,15 @@ class Distance extends Component {
         if(this.state.distance === 0)
         direction = true
       }
-    }, 35);
+    }, 100);
   }
 
 
   render() {
     return (
       <div className="distance-component">
+        <img alt="arr" src={LeftArrow} className="left-arrow"></img>
+        <img alt="arr" src={RightArrow} className="right-arrow"></img>
         <div className="distance-container">
           <div className="distance-value">{this.state.distance} m</div>
           <svg width="240" height="80" className="distance-indicator">

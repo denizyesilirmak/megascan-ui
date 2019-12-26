@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import socketHelper from '../../../SocketHelper'
 import './LiveStream.css'
 
 const COLORS = {
@@ -23,10 +24,16 @@ class LiveStrem extends Component {
   }
 
   componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
+    setTimeout(() => {
+      this.refs.livestream.style.opacity = 1
+    }, 15);
+
+
     var c = this.refs.streamCanvas
     var ctx = c.getContext("2d");
 
-    setInterval(() => {
+    this.testInterval = setInterval(() => {
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(Math.random()*255))
       tmpStream.shift()
@@ -74,9 +81,40 @@ class LiveStrem extends Component {
   }
 
 
+  handleKeyDown = (socketData) => {
+    if (socketData.type !== 'button') { return }
+    switch (socketData.payload) {
+      case 'left':
+        break
+      case 'right':
+
+        break
+      case 'down':
+
+        break
+      case 'up':
+
+        break
+      case 'ok':
+
+        return
+      case 'back':
+        clearInterval(this.testInterval)
+        this.refs.livestream.style.opacity = 0
+        this.refs.livestream.style.transform = "translateY(200px)"
+        setTimeout(() => {
+          this.props.navigateTo("menuScreen")
+        }, 500);
+        return
+      default:
+        break
+    }
+  }
+
+
   render() {
     return (
-      <div className="live-stream-component component">
+      <div ref="livestream" className="live-stream-component component">
         <div className="live-stream-top">
           <div className="stream-plot">
             <canvas ref="streamCanvas" width="560" height="280">

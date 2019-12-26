@@ -11,6 +11,7 @@ import CtrlLrlIcon from '../../Assets/MenuIcons/m-ctrl-lrl.png'
 import IonicIcon from '../../Assets/MenuIcons/m-ionic.png'
 import BionicIcon from '../../Assets/MenuIcons/m-bionic.png'
 import SettingIcon from '../../Assets/MenuIcons/m-settings.png'
+import LiveStreamIcon from '../../Assets/MenuIcons/m-live-stream.png'
 
 class Mainmenu extends Component {
   constructor(props) {
@@ -51,6 +52,11 @@ class Mainmenu extends Component {
         name: "Bionic",
         icon: BionicIcon,
         screenName: ""
+      },
+      {
+        name: "Live Stream",
+        icon: LiveStreamIcon,
+        screenName: "liveStreamScreen"
       },
       {
         name: "Settings",

@@ -30,5 +30,5 @@
 .stream-plot canvas{
   background: lightblue;
   margin: 0px 20px 20px 20px;
-  border-radius: 20px;
+  border: 2px solid white;
 }

@@ -1,3 +1,34 @@
-.live-stream-component{
-  background: red;
+.live-stream-component {
+  background: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.live-stream-top {
+  height: 285px;
+  display: flex;
+}
+
+.live-stream-bottom {
+  height: 80px;
+}
+
+.stream-plot{
+  width: 580px;
+  height: 100%;
+
+}
+
+.stream-orientation{
+  width: 176px;
+  height: 100%;
+  background-image: url(../../../Assets/MenuIcons/orientation-indicator.jpg);
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.stream-plot canvas{
+  background: lightblue;
+  margin: 0px 20px 20px 20px;
+  border-radius: 20px;
 }

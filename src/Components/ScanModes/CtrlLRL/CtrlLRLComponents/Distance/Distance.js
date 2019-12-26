@@ -16,23 +16,23 @@ class Distance extends Component {
   }
 
   componentDidMount(){
-    let direction = true
-    setInterval(() => {
-      if(direction){
-        this.setState({
-          distance: this.state.distance + 1
-        })
-        if(this.state.distance === 99)
-        direction = false
-      }
-      else{
-        this.setState({
-          distance: this.state.distance - 1
-        })
-        if(this.state.distance === 0)
-        direction = true
-      }
-    }, 100);
+    // let direction = true
+    // setInterval(() => {
+    //   if(direction){
+    //     this.setState({
+    //       distance: this.state.distance + 1
+    //     })
+    //     if(this.state.distance === 99)
+    //     direction = false
+    //   }
+    //   else{
+    //     this.setState({
+    //       distance: this.state.distance - 1
+    //     })
+    //     if(this.state.distance === 0)
+    //     direction = true
+    //   }
+    // }, 100);
   }
 
 

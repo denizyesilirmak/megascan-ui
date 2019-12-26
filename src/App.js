@@ -5,9 +5,10 @@ import './App.css';
 import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
-
+//Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
+import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
 
 class App extends Component {
 
@@ -15,7 +16,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "ctrlLrlScanScreen"
+      activeScreen: "liveStreamScreen"
     }
   }
 
@@ -36,6 +37,8 @@ class App extends Component {
         return (<AutoLRL navigateTo={this.navigateTo} />)
       case "ctrlLrlScanScreen":
         return (<CtrlLRL navigateTo={this.navigateTo} />)
+      case "liveStreamScreen":
+        return (<LiveStream navigateTo={this.navigateTo} />)
       default:
         break;
     }

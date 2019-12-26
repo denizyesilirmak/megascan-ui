@@ -2,6 +2,7 @@
   width: 660px;
   height: 60px;
   overflow: hidden;
+  opacity: .2;
 }
 
 .navigator-buttons{

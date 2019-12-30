@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import socketHelper from '../../../SocketHelper'
 import './LiveStream.css'
 
+
 const COLORS = {
   jet: [
     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
@@ -17,9 +18,10 @@ class LiveStrem extends Component {
   constructor(props) {
     super(props)
 
-
+    this.instantData = 0
     this.state = {
-      stream: [127, 127, 127, 127, 127, 255, 127, 127, 127, 127]
+      stream: [127, 127, 127, 127, 127, 255, 127, 127, 127, 127],
+      angle: 90
     }
   }
 
@@ -30,31 +32,11 @@ class LiveStrem extends Component {
     }, 15);
 
 
-    var c = this.refs.streamCanvas
-    var ctx = c.getContext("2d");
+
 
     this.testInterval = setInterval(() => {
-      let tmpStream = this.state.stream
-      tmpStream.push(parseInt(Math.random()*255))
-      tmpStream.shift()
-      this.setState({
-        stream: tmpStream
-      })
-      var grd = ctx.createLinearGradient(0, 0, 560, 0);
-      grd.addColorStop(0, this.getColor(this.state.stream[0]));
-      grd.addColorStop(.1, this.getColor(this.state.stream[1]));
-      grd.addColorStop(.2, this.getColor(this.state.stream[2]));
-      grd.addColorStop(.3, this.getColor(this.state.stream[3]));
-      grd.addColorStop(.4, this.getColor(this.state.stream[4]));
-      grd.addColorStop(.5, this.getColor(this.state.stream[5]));
-      grd.addColorStop(.6, this.getColor(this.state.stream[6]));
-      grd.addColorStop(.7, this.getColor(this.state.stream[7]));
-      grd.addColorStop(.8, this.getColor(this.state.stream[8]));
-      grd.addColorStop(.9, this.getColor(this.state.stream[9]));
-  
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, 560, 280);
-    }, 250);
+      socketHelper.send('Q')
+    }, 150);
 
 
 
@@ -82,32 +64,62 @@ class LiveStrem extends Component {
 
 
   handleKeyDown = (socketData) => {
-    if (socketData.type !== 'button') { return }
-    switch (socketData.payload) {
-      case 'left':
-        break
-      case 'right':
+    if (socketData.type === 'button') {
+      switch (socketData.payload) {
+        case 'left':
+          break
+        case 'right':
 
-        break
-      case 'down':
+          break
+        case 'down':
 
-        break
-      case 'up':
+          break
+        case 'up':
 
-        break
-      case 'ok':
+          break
+        case 'ok':
 
-        return
-      case 'back':
-        clearInterval(this.testInterval)
-        this.refs.livestream.style.opacity = 0
-        this.refs.livestream.style.transform = "translateY(200px)"
-        setTimeout(() => {
-          this.props.navigateTo("menuScreen")
-        }, 500);
-        return
-      default:
-        break
+          return
+        case 'back':
+          clearInterval(this.testInterval)
+          this.refs.livestream.style.opacity = 0
+          this.refs.livestream.style.transform = "translateY(200px)"
+          setTimeout(() => {
+            this.props.navigateTo("menuScreen")
+          }, 500);
+          return
+        default:
+          break
+      }
+    }
+    else if (socketData.type === 'sensor') {
+      var c = this.refs.streamCanvas
+      var ctx = c.getContext("2d");
+      this.instantData = socketData.payload
+      let tmpStream = this.state.stream
+      tmpStream.push(parseInt(this.instantData))
+      tmpStream.shift()
+      this.setState({
+        stream: tmpStream,
+        angle: socketData.angle.trim()
+      })
+      var grd = ctx.createLinearGradient(0, 0, 560, 0);
+      grd.addColorStop(0, this.getColor(this.state.stream[0]));
+      grd.addColorStop(.1, this.getColor(this.state.stream[1]));
+      grd.addColorStop(.2, this.getColor(this.state.stream[2]));
+      grd.addColorStop(.3, this.getColor(this.state.stream[3]));
+      grd.addColorStop(.4, this.getColor(this.state.stream[4]));
+      grd.addColorStop(.5, this.getColor(this.state.stream[5]));
+      grd.addColorStop(.6, this.getColor(this.state.stream[6]));
+      grd.addColorStop(.7, this.getColor(this.state.stream[7]));
+      grd.addColorStop(.8, this.getColor(this.state.stream[8]));
+      grd.addColorStop(.9, this.getColor(this.state.stream[9]));
+
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, 560, 280);
+
+      // ANGLE
+      this.refs.indicatorRef.style.transform = `translateY(${this.state.angle*1.5 - 145}px)`
     }
   }
 
@@ -122,7 +134,9 @@ class LiveStrem extends Component {
             </canvas>
           </div>
           <div className="stream-orientation">
-
+            <div className="line" >
+              <div ref="indicatorRef" className="indicator-angle"><span>Normal</span></div>
+            </div>
           </div>
         </div>
         <div className="live-stream-bottom">

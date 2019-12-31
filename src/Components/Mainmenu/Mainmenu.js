@@ -26,7 +26,7 @@ class Mainmenu extends Component {
       {
         name: "Ground Scan",
         icon: GroundScanIcon,
-        screenName: ""
+        screenName: "groundScanMethodSelectionScreen"
       },
       {
         name: "Geophysical",
@@ -88,6 +88,7 @@ class Mainmenu extends Component {
       case 'ok':
         this.refs.mainmenu.style.transform = "scale(2)"
         this.refs.mainmenu.style.opacity = 0
+        
         setTimeout(() => {
           if (this.buttons[this.state.index + 1].screenName !== ""){
             this.props.navigateTo(this.buttons[this.state.index + 1].screenName)

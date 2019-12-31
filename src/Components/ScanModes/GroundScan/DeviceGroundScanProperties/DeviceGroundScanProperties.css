@@ -17,6 +17,7 @@
   justify-content: center;
   align-items: center;
   border: 2px solid #8a7940;
+  transition: background .6s;
 }
 
 .dgsp-tab.selected {
@@ -25,5 +26,8 @@
 }
 
 .dgsp-content{
-  height: 300px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  height: 200px;
 }

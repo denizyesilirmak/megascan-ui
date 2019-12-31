@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Distance.css'
 
-import CtrlLrlMan from '../../../../../Assets/MenuIcons/ctrl-lrl-distance.png'
+// import CtrlLrlMan from '../../../../../Assets/MenuIcons/ctrl-lrl-distance.png'
 import LeftArrow from '../../../../../Assets/MenuIcons/left-arrow1.png'
 import RightArrow from '../../../../../Assets/MenuIcons/right-arrow1.png'
 

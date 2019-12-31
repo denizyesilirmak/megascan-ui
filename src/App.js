@@ -9,6 +9,7 @@ import Settings from './Components/Settings/Settings'
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
 import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
+import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundScanMethodSelection/GroundScanMethodSelection'
 
 class App extends Component {
 
@@ -16,7 +17,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "liveStreamScreen"
+      activeScreen: "groundScanMethodSelectionScreen"
     }
   }
 
@@ -39,6 +40,8 @@ class App extends Component {
         return (<CtrlLRL navigateTo={this.navigateTo} />)
       case "liveStreamScreen":
         return (<LiveStream navigateTo={this.navigateTo} />)
+      case "groundScanMethodSelectionScreen":
+        return (<GroundScanMethodSelection navigateTo={this.navigateTo} />)
       default:
         break;
     }

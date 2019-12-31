@@ -13,7 +13,7 @@ class Frequency extends Component {
           <div className="frequency-value">5000 MHz</div>
           <img src={RightArrow} alt="right" />
         </div>
-        <img src={FrequencyIcon}/>
+        <img alt="" src={FrequencyIcon}/>
       </div>
     )
   }

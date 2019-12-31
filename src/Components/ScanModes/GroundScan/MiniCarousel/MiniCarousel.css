@@ -56,3 +56,15 @@
 .msb-selected{
   transform: scale(1.1);
 }
+
+.msb-arrow{
+  position: absolute;
+}
+
+.msb-arrow.left{
+  left: 15px;
+}
+
+.msb-arrow.right{
+  right: 15px;
+}

@@ -10,6 +10,7 @@ import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
 import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
 import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundScanMethodSelection/GroundScanMethodSelection'
+import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
 
 class App extends Component {
 
@@ -17,7 +18,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "groundScanMethodSelectionScreen"
+      activeScreen: "deviceGroundScanPropertiesScreen"
     }
   }
 
@@ -42,6 +43,8 @@ class App extends Component {
         return (<LiveStream navigateTo={this.navigateTo} />)
       case "groundScanMethodSelectionScreen":
         return (<GroundScanMethodSelection navigateTo={this.navigateTo} />)
+      case "deviceGroundScanPropertiesScreen":
+        return (<DeviceGroundScanProperties navigateTo={this.navigateTo} />)
       default:
         break;
     }

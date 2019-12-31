@@ -3,16 +3,16 @@ import './MiniCarousel.css'
 
 import DeviceIcon from '../../../../Assets/MenuIcons/m-device.png'
 import IconIndicator from '../../../../Assets/MenuIcons/button-indicator.png'
+import RightArrow from '../../../../Assets/MenuIcons/right-arrow1.png'
+import LeftArrow from '../../../../Assets/MenuIcons/left-arrow1.png'
 
 class MiniCarousel extends Component {
 
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <div className="method-selection-buttons">
-
+        <img alt="left" className="msb-arrow left" src={LeftArrow}></img>
+        <img alt="left" className="msb-arrow right" src={RightArrow}></img>
         {
           this.props.buttons.map((e, k) => {
             return (

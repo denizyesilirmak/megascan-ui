@@ -34,6 +34,9 @@ class Plot extends Component {
       [214, 211, 215, 210, 207, 210, 212, 216, 215, 213]
     ]
 
+    this.data = this.Interpolate(this.data , 3)
+
+
     this.dataWidthLength = this.data[0].length
     this.dataHeightLength = this.data.length
     this.rectWidth = (620 / this.dataWidthLength)
@@ -67,7 +70,54 @@ class Plot extends Component {
     this.setState({
       reducedData: this.reducedData
     })
+
+    
   }
+
+  Interpolate = (data, factor) => {
+    var level = factor
+    var i_row = []
+    var interpolated_array = []
+    var interpolated_rows = []
+    //2D iterpolation for x axis
+    for (var k = 0; k < data.length; k++) {
+      i_row.push(data[k][0])
+      for (var i = 0; i < data[k].length - 1; i++) {
+        var fark = data[k][i] - data[k][i + 1]
+        for (var y = 0; y < level; y++) {
+          i_row.push(parseInt(data[k][i] - (fark / (level + 1) * (y + 1))))
+        }
+        i_row.push(data[k][i + 1])
+      }
+      interpolated_array.push(i_row)
+      i_row = []
+    }
+    //2D iterpolation for y axis
+    for (var i = 0; i < interpolated_array.length - 1; i++) {
+      for (var k = 0; k < level; k++) {
+        for (var j = 0; j < interpolated_array[0].length; j++) {
+          var fark = interpolated_array[i][j] - interpolated_array[i + 1][j]
+          i_row.push(parseInt(interpolated_array[i][j] - (fark / (level + 1) * (k + 1))))
+          if (interpolated_array[0].length - 1 == j) {
+            interpolated_rows.push(i_row)
+            var i_row = []
+          }
+        }
+      }
+      i_row = []
+    }
+    var result = []
+    var j = 0
+    for (let i = 0; i < interpolated_array.length - 1; i++) {
+      result.push(interpolated_array[i])
+      for (j; j < ((i + 1) * level); j++) {
+        result.push(interpolated_rows[j])
+      }
+    }
+    result.push(interpolated_array[interpolated_array.length - 1])
+    return result
+  }
+  
 
 
 
@@ -101,7 +151,7 @@ class Plot extends Component {
                 return (
                   row.map((d, l) => {
                     return (
-                      <rect key={k * l + Math.random()} height={this.rectHeight} width={this.rectWidth} y={k * this.rectHeight} x={l * this.rectWidth} fill={this.getColor(50 - d)} />
+                      <rect key={k * l + Math.random()} height={this.rectHeight} width={this.rectWidth} y={k * this.rectHeight} x={l * this.rectWidth} style={{ fill: this.getColor(50 - d) }} />
                     )
                   })
                 )

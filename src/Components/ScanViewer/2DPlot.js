@@ -34,13 +34,18 @@ class Plot extends Component {
       [214, 211, 215, 210, 207, 210, 212, 216, 215, 213]
     ]
 
-    this.data = this.Interpolate(this.data , 3)
+    this.gridWidthLength = this.data[0].length
+    this.gridHeightLength = this.data.length
+    this.gridWidth = Math.ceil(620 / this.gridWidthLength)
+    this.gridHeight = Math.ceil(280 / this.gridHeightLength)
+
+    this.data = this.Interpolate(this.data, 3)
 
 
     this.dataWidthLength = this.data[0].length
     this.dataHeightLength = this.data.length
-    this.rectWidth = (620 / this.dataWidthLength)
-    this.rectHeight = (280 / this.dataHeightLength).toFixed(1)
+    this.rectWidth = Math.ceil(620 / this.dataWidthLength)
+    this.rectHeight = Math.ceil(280 / this.dataHeightLength)
     this.total = 0
     this.dataCount = this.data[0].length * this.data.length
 
@@ -71,7 +76,7 @@ class Plot extends Component {
       reducedData: this.reducedData
     })
 
-    
+
   }
 
   Interpolate = (data, factor) => {
@@ -117,7 +122,7 @@ class Plot extends Component {
     result.push(interpolated_array[interpolated_array.length - 1])
     return result
   }
-  
+
 
 
 
@@ -154,6 +159,24 @@ class Plot extends Component {
                       <rect key={k * l + Math.random()} height={this.rectHeight} width={this.rectWidth} y={k * this.rectHeight} x={l * this.rectWidth} style={{ fill: this.getColor(50 - d) }} />
                     )
                   })
+                )
+              })
+            }
+          </g>
+
+          <g opacity="0.3">
+            {
+
+              this.data.map((d, l) => {
+                return (
+                  <line key={l} strokeWidth="2" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#000000" />
+                )
+              })
+            }
+            {
+              this.data[0].map((d, l) => {
+                return (
+                  <line key={l} strokeWidth="2" y2="280" x2={l*this.gridWidth} y1="0" x1={l*this.gridWidth} stroke="#000000" />
                 )
               })
             }

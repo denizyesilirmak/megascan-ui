@@ -39,7 +39,7 @@ class Plot extends Component {
     this.gridWidth = Math.ceil(620 / this.gridWidthLength)
     this.gridHeight = Math.ceil(280 / this.gridHeightLength)
 
-    this.data = this.Interpolate(this.data, 3)
+    this.data = this.Interpolate(this.data, 4)
 
 
     this.dataWidthLength = this.data[0].length
@@ -98,21 +98,21 @@ class Plot extends Component {
       i_row = []
     }
     //2D iterpolation for y axis
-    for (var i = 0; i < interpolated_array.length - 1; i++) {
-      for (var k = 0; k < level; k++) {
+    for (i = 0; i < interpolated_array.length - 1; i++) {
+      for (k = 0; k < level; k++) {
         for (var j = 0; j < interpolated_array[0].length; j++) {
-          var fark = interpolated_array[i][j] - interpolated_array[i + 1][j]
+          fark = interpolated_array[i][j] - interpolated_array[i + 1][j]
           i_row.push(parseInt(interpolated_array[i][j] - (fark / (level + 1) * (k + 1))))
-          if (interpolated_array[0].length - 1 == j) {
+          if (interpolated_array[0].length - 1 === j) {
             interpolated_rows.push(i_row)
-            var i_row = []
+            i_row = []
           }
         }
       }
       i_row = []
     }
     var result = []
-    var j = 0
+    j = 0
     for (let i = 0; i < interpolated_array.length - 1; i++) {
       result.push(interpolated_array[i])
       for (j; j < ((i + 1) * level); j++) {
@@ -164,19 +164,19 @@ class Plot extends Component {
             }
           </g>
 
-          <g opacity="0.3">
+          <g opacity="0.4">
             {
 
               this.data.map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="2" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#000000" />
+                  <line key={l} strokeWidth="1" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#ffffff" />
                 )
               })
             }
             {
               this.data[0].map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="2" y2="280" x2={l*this.gridWidth} y1="0" x1={l*this.gridWidth} stroke="#000000" />
+                  <line key={l} strokeWidth="1" y2="280" x2={l*this.gridWidth} y1="0" x1={l*this.gridWidth} stroke="#ffffff" />
                 )
               })
             }

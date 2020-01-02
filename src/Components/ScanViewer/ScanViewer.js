@@ -7,13 +7,15 @@ import searchIcon from '../../Assets/MenuIcons/icon-search.png'
 import uploadIcon from '../../Assets/MenuIcons/icon-upload.png'
 import filterIcon from '../../Assets/MenuIcons/icon-filter.png'
 
+import Plot from './2DPlot'
+
 class ScanViewer extends Component {
   render() {
     return (
       <div className="scan-viewer-component component">
         <div className="sv-top">
           <div className="sv-scan-container">
-
+            <Plot/>
           </div>
           <div className="sv-buttons">
             <div className="sv-button" style={{backgroundImage: `url(${gridIcon})`}}></div>

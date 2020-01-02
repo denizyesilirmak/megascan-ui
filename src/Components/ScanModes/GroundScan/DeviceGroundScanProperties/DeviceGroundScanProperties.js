@@ -9,6 +9,8 @@ import ManualIcon from '../../../../Assets/MenuIcons/menu-icon-manual-scan.png'
 import AutomaticIcon from '../../../../Assets/MenuIcons/menu-icon-automatic-scan.png'
 import AlternateIcon from '../../../../Assets/MenuIcons/m-alternative-scan.png'
 import OneDirectionIcon from '../../../../Assets/MenuIcons/m-one-direction-scan.png'
+import LeftStartPointIcon from '../../../../Assets/MenuIcons/menu-icon-left.png'
+import RightStartPointIcon from '../../../../Assets/MenuIcons/menu-icon-right.png'
 
 import upArrow from '../../../../Assets/MenuIcons/up-arrow.png'
 import downArrow from '../../../../Assets/MenuIcons/down-arrow.png'
@@ -42,10 +44,22 @@ class DeviceGroundScanProperties extends Component {
       }
     ]
 
+    this.startPointButtons = [
+      {
+        name: "left",
+        icon: LeftStartPointIcon
+      },
+      {
+        name: "right",
+        icon: RightStartPointIcon
+      }
+    ]
+
     this.state = {
-      activeTabIndex: 4 * 200 + 2,
+      activeTabIndex: 4 * 200 + 3,
       scanModeIndex: 2 * 200,
       scanPathIndex: 2 * 200,
+      startPointIndex: 2* 200
     }
   }
 
@@ -70,7 +84,7 @@ class DeviceGroundScanProperties extends Component {
       case 2:
         return (
           <div className="dgsp-content scan-step-content">
-            <div className="scan-step-selector">
+            <div className="scan-step-selector selected">
               <img src={upArrow} alt="column"></img>
               <div className="scan-step-value">10</div>
               <img src={downArrow} alt="column"></img>
@@ -86,7 +100,7 @@ class DeviceGroundScanProperties extends Component {
       case 3:
         return (
           <div className="dgsp-content">
-
+            <MiniCarousel buttons={this.startPointButtons} selectedButtonIndex={this.state.scanPathIndex % 2}></MiniCarousel>
           </div>
         )
 

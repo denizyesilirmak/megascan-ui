@@ -134,8 +134,8 @@ class DeviceGroundScanProperties extends Component {
           return
         case 'back':
           clearInterval(this.testInterval)
-          this.refs.gsms.style.opacity = 0
-          this.refs.gsms.style.transform = "translateY(200px)"
+          this.refs.dgsp.style.opacity = 0
+          this.refs.dgsp.style.transform = "translateY(200px)"
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
           }, 500);
@@ -148,7 +148,7 @@ class DeviceGroundScanProperties extends Component {
 
   render() {
     return (
-      <div className="device-ground-scan-properties component">
+      <div ref="dgsp" className="device-ground-scan-properties component">
         <div className="dgsp-tabs">
           <img alt="left" className="" src={TabLeftArrow} />
           <div className={`dgsp-tab ${this.state.activeTabIndex % 4 === 0 ? "selected" : ""}`}>Scan Mode</div>

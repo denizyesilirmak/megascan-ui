@@ -11,8 +11,8 @@ class Security extends Component{
   render(){
     return(
       <div className="power-settings">
-        <SetttingsItem icon={SecurityIcon} title="Change Pin" mode="toggle" />
-        <SetttingsItem icon={PinIcon} title="Change Pin" mode="popup" />s
+        <SetttingsItem icon={SecurityIcon} title="Change Pin" mode="toggle"  selected={true}/>
+        <SetttingsItem icon={PinIcon} title="Change Pin" mode="popup"  selected={false}/>
       </div>
     )
   }

@@ -12,7 +12,7 @@ class SettingsItem extends Component {
 
   render() {
     return (
-      <div className="settings-item">
+      <div className={`settings-item ${this.props.selected ? 'selected' : ''}`}>
         <img className="settings-item-icon" src={this.props.icon} alt="icon"></img>
         <div className="title"> {this.props.title} </div>
         {
@@ -31,7 +31,7 @@ class SettingsItem extends Component {
         {
           this.props.mode === "slider" ?
             <div className="slider-container">
-              <img id="left-arrow"  alt="la" src={LeftArrowIcon} />
+              <img id="left-arrow" alt="la" src={LeftArrowIcon} />
               <div className="slider">
                 <div className="slider-value" />
               </div>

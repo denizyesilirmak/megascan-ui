@@ -14,7 +14,7 @@ class PowerSettings extends Component{
   render(){
     return(
       <div className="power-settings">
-        <SetttingsItem icon={PowerIcon} title="Power Saver" mode="toggle"/>
+        <SetttingsItem icon={PowerIcon} title="Power Saver" mode="toggle" selected={true}/>
       </div>
     )
   }

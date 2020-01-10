@@ -9,7 +9,12 @@
   justify-content: flex-start;
   align-items: center;
   font-size: 20px;
-  background: rgb(29, 20, 2);
+  background: rgb(24, 18, 2);
+}
+
+.settings-item.selected{
+  background: #6d613a;
+  color: black;
 }
 
 .settings-item-icon {

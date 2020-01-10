@@ -10,9 +10,9 @@ class Reset extends Component{
   render(){
     return(
       <div className="power-settings">
-        <SetttingsItem icon={ResetIcon} title="Reset Settings" mode="popup"/>
-        <SetttingsItem icon={FactoryReset} title="Factory Reset" mode="popup"/>
-        <SetttingsItem icon={ClearMemoryIcon} title="Clear Memory" mode="popup"/>
+        <SetttingsItem icon={ResetIcon} title="Reset Settings" mode="popup"  selected={true}/>
+        <SetttingsItem icon={FactoryReset} title="Factory Reset" mode="popup" selected={false}/>
+        <SetttingsItem icon={ClearMemoryIcon} title="Clear Memory" mode="popup" selected={false}/>
       </div>
     )
   }

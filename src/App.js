@@ -56,7 +56,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Statusbar />
+        <Statusbar title={this.state.activeScreen} />
         {
           this.renderScreen()
         }

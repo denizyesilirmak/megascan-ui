@@ -18,7 +18,7 @@ class Statusbar extends Component {
   render () {
     return (
       <div className='status-bar-component'>
-        <div className='title'> SYSTEMS </div>
+        <div className='title'> {this.props.title} </div>
         <div className='icons'>
           <Volume />
           <Wifi />

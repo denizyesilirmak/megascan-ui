@@ -4,12 +4,9 @@ import socketHelper from '../../SocketHelper'
 import './Settings.css'
 
 import Power from './SettingsComponents/Power/Power'
-import Datetime from './SettingsComponents/Datetime/Datetime'
-import Security from "./SettingsComponents/Security/Security";
-import Display from './SettingsComponents/Display/Display'
-import Info from './SettingsComponents/Info/Info'
+import DateTime from './SettingsComponents/Datetime/DateTime'
+import Security from './SettingsComponents/Security/Security'
 import Reset from './SettingsComponents/Reset/Reset'
-import Language from './SettingsComponents/Language/Language'
 
 class Settings extends Component {
   constructor(props) {
@@ -110,15 +107,9 @@ class Settings extends Component {
       case 'power':
         return (<Power />)
       case 'datetime':
-        return (<Datetime />)
+        return (<DateTime />)
       case 'security':
         return (<Security />)
-      case 'display':
-        return (<Display />)
-      case 'info':
-        return (<Info />)
-      case 'language':
-        return (<Language />)
       case 'reset':
         return (<Reset />)
       default:

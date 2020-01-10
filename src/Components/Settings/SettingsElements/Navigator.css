@@ -1,8 +1,8 @@
 .navigator-component{
   width: 660px;
-  height: 60px;
+  height: 50px;
   overflow: hidden;
-  opacity: .2;
+  opacity: 1;
 }
 
 .navigator-buttons{
@@ -14,7 +14,7 @@
 .navigator-button{
   width: 196px;
   min-width: 196px;
-  height: 56px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,11 +35,11 @@
 .navigator-left-arrow{
   position: absolute;
   left: 20px;
-  top: 20px;
+  top: 14px;
 }
 
 .navigator-right-arrow{
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 14px;
 }

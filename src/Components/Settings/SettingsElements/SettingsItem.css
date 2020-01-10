@@ -1,0 +1,55 @@
+.settings-item {
+  width: 96%;
+  height: 60px;
+  margin-left: 2%;
+  margin-top: 10px;
+  border: 2px solid #8a7940;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 20px;
+}
+
+.settings-item-icon{
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+}
+
+.settings-item .title{
+  margin-left: 10px;
+}
+
+.settings-item .toggle{
+  width: 80px;
+  height: 40px;
+  position: relative;
+  margin-left: auto;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
+
+.settings-item .toggle .handle{
+  width: 30px;
+  height: 30px;
+  background: red;
+  margin: 5px;
+  border-radius: 5px;
+  transition: .5s all;
+}
+
+.settings-item .toggle .handle.on{
+  background: rgb(12, 180, 12);
+  transform: translateX(40px);
+}
+
+.popup-icon{
+  position: relative;
+  margin-left: auto;
+  margin-right: 10px;
+  border-radius: 10px;
+  width: 40px;
+}

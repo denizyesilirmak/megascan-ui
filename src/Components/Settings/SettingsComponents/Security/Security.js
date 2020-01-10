@@ -1,27 +1,16 @@
 import React, { Component } from 'react'
 import './Security.css'
-import WarningIcon from '../../../../Assets/MenuIcons/icon-warning.png'
-import ChangePinIcon from '../../../../Assets/MenuIcons/icon-change-pin.png'
+import SecurityIcon from '../../../../Assets/MenuIcons/security.svg'
+import PinIcon from '../../../../Assets/MenuIcons/pin.svg'
 
-import Switch from '../../SettingsElements/Switch';
+import SetttingsItem from '../../SettingsElements/SettingsItem'
 
 class Security extends Component{
   render(){
     return(
-      <div className="security-component">
-        <div className="security-part">
-          <img alt="warn" src={WarningIcon}/>
-          <span>Don't forget the pin!</span>
-        </div>
-
-        <div className="security-part">
-          <img alt="change" src={ChangePinIcon}/>
-          <span>CHANGE PIN</span>
-        </div>
-
-        <div className="security-part" style={{marginBottom: 25}}>
-          <Switch on={true}/>
-        </div>
+      <div className="power-settings">
+        <SetttingsItem icon={SecurityIcon} title="Change Pin" mode="toggle" />
+        <SetttingsItem icon={PinIcon} title="Change Pin" mode="popup" />s
       </div>
     )
   }

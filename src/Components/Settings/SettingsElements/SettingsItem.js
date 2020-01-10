@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './SettingsItem.css'
-import PowerSaver from '../../../Assets/MenuIcons/power-saving.png'
 import Popup from '../../../Assets/MenuIcons/popup.svg'
+import LeftArrowIcon from '../../../Assets/MenuIcons/left-arrow2.png'
+import RightArrowIcon from '../../../Assets/MenuIcons/right-arrow2.png'
 
 class SettingsItem extends Component {
   constructor(props) {
@@ -23,7 +24,20 @@ class SettingsItem extends Component {
 
         {
           this.props.mode === "popup" ?
-            <img className="popup-icon" src={Popup}/>
+            <img className="popup-icon" src={Popup} />
+            : ''
+        }
+
+        {
+          this.props.mode === "slider" ?
+            <div className="slider-container">
+              <img id="left-arrow"  alt="la" src={LeftArrowIcon} />
+              <div className="slider">
+                <div className="slider-value" />
+              </div>
+              <img id="right-arrow" alt="la" src={RightArrowIcon} />
+            </div>
+
             : ''
         }
       </div>

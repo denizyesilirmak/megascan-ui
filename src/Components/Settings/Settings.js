@@ -10,6 +10,7 @@ import Reset from './SettingsComponents/Reset/Reset'
 import Display from './SettingsComponents/Display/Display'
 import Language from './SettingsComponents/Language/Language'
 import Sound from './SettingsComponents/Sound/Sound'
+import Info from './SettingsComponents/Info/Info'
 
 class Settings extends Component {
   constructor(props) {
@@ -121,6 +122,8 @@ class Settings extends Component {
         return (<Language />)
       case 'sound':
         return (<Sound />)
+      case 'info':
+        return (<Info />)
       default:
         break;
     }

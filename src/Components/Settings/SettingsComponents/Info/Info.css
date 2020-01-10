@@ -1,0 +1,40 @@
+.info-container {
+  display: flex;
+  height: 100%;
+}
+
+.info-left {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.info-right {
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.info-item{
+  background: rgba(255, 255, 255, 0.801);
+  padding: 5px 10px 5px 10px;
+  font-size: 20px;
+  width: 370px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.info-item span:first-child{
+  font-size: 15px;
+}
+
+.info-item #germany-flag{
+  width: 50px;
+  margin-left: 20px;
+}

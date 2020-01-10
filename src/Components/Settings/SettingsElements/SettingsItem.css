@@ -73,16 +73,20 @@
   transition: 0.3s width;
 }
 
-.settings-item .slider-container{
+.settings-item .slider-container {
   margin-left: auto;
   display: flex;
   margin-right: 10px;
 }
 
-.settings-item #left-arrow{
-margin-right: 5px;
+.settings-item #left-arrow {
+  margin-right: 5px;
+  height: 20px;
+  margin-top: 10px;
 }
 
-.settings-item #right-arrow{
-margin-left: 5px;
+.settings-item #right-arrow {
+  margin-left: 5px;
+  height: 20px;
+  margin-top: 10px;
 }

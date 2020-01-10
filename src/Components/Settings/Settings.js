@@ -8,6 +8,7 @@ import DateTime from './SettingsComponents/Datetime/DateTime'
 import Security from './SettingsComponents/Security/Security'
 import Reset from './SettingsComponents/Reset/Reset'
 import Display from './SettingsComponents/Display/Display'
+import Language from './SettingsComponents/Language/Language'
 
 class Settings extends Component {
   constructor(props) {
@@ -115,6 +116,8 @@ class Settings extends Component {
         return (<Reset />)
       case 'display':
         return (<Display />)
+      case 'language':
+        return (<Language />)
       default:
         break;
     }

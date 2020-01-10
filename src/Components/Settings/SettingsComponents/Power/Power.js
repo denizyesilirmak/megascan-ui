@@ -51,7 +51,7 @@ class Power extends Component {
           <div className="power-saver-title"> Power Saving </div>
         </section>
         <section>
-          <Switch on={true} />
+          <Switch on={false} />
         </section>
       </div>
     )

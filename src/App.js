@@ -15,12 +15,11 @@ import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/Device
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 
 class App extends Component {
-
   constructor(props) {
     super(props)
 
     this.state = {
-      activeScreen: "scanViewerScreen"
+      activeScreen: "menuScreen"
     }
   }
 

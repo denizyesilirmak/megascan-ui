@@ -107,6 +107,11 @@ class Mainmenu extends Component {
     })
   }
 
+  componentWillUnmount(){
+    console.log("main menu unmount")
+    socketHelper.detach(this.handleKeyDown)
+  }
+
   render() {
     return (
       <div ref="mainmenu" className="mainmenu-component">

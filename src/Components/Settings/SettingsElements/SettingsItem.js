@@ -18,7 +18,7 @@ class SettingsItem extends Component {
         {
           this.props.mode === "toggle" ?
             <div className="toggle">
-              <div className="handle on"></div>
+              <div className={`handle ${this.props.on ? "on" : "off"}`}></div>
             </div> : ''
         }
 

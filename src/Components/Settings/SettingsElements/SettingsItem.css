@@ -36,6 +36,7 @@
   margin-right: 10px;
   border-radius: 10px;
   border: 2px solid #ffffff;
+  background: #000;
 }
 
 .settings-item .toggle .handle {
@@ -44,12 +45,13 @@
   background: red;
   margin: 5px;
   border-radius: 5px;
-  transition: .5s all;
+  transition: .3s all;
 }
 
 .settings-item .toggle .handle.on {
   background: rgb(12, 180, 12);
   transform: translateX(40px);
+  border-radius: 50%;
 }
 
 .popup-icon {

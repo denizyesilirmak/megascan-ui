@@ -24,7 +24,6 @@ class App extends Component {
   }
 
   navigateTo = (screenName) => {
-    console.log(screenName)
     this.setState({
       activeScreen: screenName
     })

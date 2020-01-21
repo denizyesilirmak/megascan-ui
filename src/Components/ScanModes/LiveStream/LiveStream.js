@@ -121,7 +121,7 @@ class LiveStrem extends Component {
       tmpStream.shift()
       this.setState({
         stream: tmpStream,
-        angle: socketData.angle.trim()
+        angle: this.clamp((socketData.angle.trim()), -125, 125)
       })
       var grd = ctx.createLinearGradient(0, 0, 560, 0);
       grd.addColorStop(0, this.getColor(this.state.stream[0]));
@@ -143,6 +143,10 @@ class LiveStrem extends Component {
     }
   }
   
+
+  clamp = (num, min, max) => {
+    return num <= min ? min : num >= max ? max : num;
+  }
 
 
   render() {

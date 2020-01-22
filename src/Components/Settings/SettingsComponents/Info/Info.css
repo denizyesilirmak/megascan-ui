@@ -1,34 +1,40 @@
-.info-component{
-  width: 100%;
-  height: 100%;
+.info-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
+  height: 100%;
 }
 
-.info-component .info-rq{
-  width: 30%;
-  height: 100%;
+.info-left {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.info-right {
+  width: 65%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.info-component .info-data{
-  width: 70%;
-  height: 100%;
-  display: flex;
   flex-direction: column;
-  font-size: 20px;
-  justify-content: center;
 }
 
-.info-data .info-data-item{
-  background: rgba(255, 255, 255, 0.733);
-  margin-bottom: 5px;
+.info-item{
+  background: rgba(255, 255, 255, 0.801);
+  padding: 5px 10px 5px 10px;
+  font-size: 20px;
+  width: 370px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: 10px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.info-item span:first-child{
+  font-size: 15px;
+}
+
+.info-item #germany-flag{
+  width: 50px;
+  margin-left: 20px;
 }

@@ -4,53 +4,75 @@ import socketHelper from '../../SocketHelper'
 import './Settings.css'
 
 import Power from './SettingsComponents/Power/Power'
-import Datetime from './SettingsComponents/Datetime/Datetime'
-import Security from "./SettingsComponents/Security/Security";
-import Display from './SettingsComponents/Display/Display'
-import Info from './SettingsComponents/Info/Info'
+import DateTime from './SettingsComponents/Datetime/DateTime'
+import Security from './SettingsComponents/Security/Security'
 import Reset from './SettingsComponents/Reset/Reset'
+import Display from './SettingsComponents/Display/Display'
 import Language from './SettingsComponents/Language/Language'
+import Sound from './SettingsComponents/Sound/Sound'
+import Info from './SettingsComponents/Info/Info'
+
+import DatePopup from './SettingsPopups/Date/DatePopup'
+import TimePopup from './SettingsPopups/Time/TimePopup'
+
 
 class Settings extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      activeSettingTab: 0,
-      activeSettingTabName: 'power',
-      verticalIndex: 0
+      activeSettingTab: 6,
+      activeSettingTabName: 'display',
+      verticalIndex: false,
+      subCursor: 0,
+
+      powersaver: false,
+      generalVolume: 50,
+      keyToneVolume: 50,
+      searchVolume: 50,
+      brightness: 10
     }
 
     this.buttons = [
       {
-        name: "power"
+        name: "power",
+        buttonCount: 1
       },
       {
-        name: "datetime"
+        name: "datetime",
+        buttonCount: 2
       },
       {
-        name: "storage"
+        name: "storage",
+        buttonCount: 1
       },
       {
-        name: "connection"
+        name: "connection",
+        buttonCount: 1
       },
       {
-        name: "security"
+        name: "security",
+        buttonCount: 2
       },
       {
-        name: "reset"
+        name: "reset",
+        buttonCount: 3
       },
       {
-        name: "display"
+        name: "display",
+        buttonCount: 2
       },
       {
-        name: "language"
+        name: "language",
+        buttonCount: 1
       },
       {
-        name: "sound"
+        name: "sound",
+        buttonCount: 3
       },
       {
-        name: "info"
+        name: "info",
+        buttonCount: 1
       },
     ]
   }
@@ -69,28 +91,56 @@ class Settings extends Component {
     let tempVerticalIndex = this.state.verticalIndex
     switch (socketData.payload) {
       case 'left':
-        if (tempActiveSettingTab > 0)
+        if (tempActiveSettingTab > 0 && !this.state.verticalIndex) {
+          this.setState({
+            subCursor: 0
+          })
           tempActiveSettingTab--
+        } else {
+          this.setState({brightness : this.state.brightness - 10})
+        }
         break
       case 'right':
-        if (tempActiveSettingTab < this.buttons.length - 1)
+        if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
+          this.setState({
+            subCursor: 0
+          })
           tempActiveSettingTab++
+        } else {
+          this.setState({brightness : this.state.brightness + 10})
+        }
         break
       case 'down':
-        tempVerticalIndex++
+        if (this.state.verticalIndex) {
+          if (this.buttons[this.state.activeSettingTab].buttonCount - 1 > this.state.subCursor)
+            this.setState({ subCursor: this.state.subCursor + 1 })
+        }
         break
       case 'up':
-        tempVerticalIndex++
+        if (this.state.verticalIndex) {
+          if (this.state.subCursor > 0)
+            this.setState({ subCursor: this.state.subCursor - 1 })
+        }
         break
       case 'ok':
+        if (this.state.verticalIndex === false) {
+          this.setState({ verticalIndex: true })
+        } else {
 
+        }
         return
       case 'back':
-        this.refs.settings.style.opacity = 0
-        this.refs.settings.style.transform = "translateY(200px)"
-        setTimeout(() => {
-          this.props.navigateTo("menuScreen")
-        }, 500);
+        if (this.state.verticalIndex === true) {
+          this.setState({ verticalIndex: false })
+        } else {
+          this.refs.settings.style.opacity = 0
+          this.refs.settings.style.transform = "translateY(400px)"
+          setTimeout(() => {
+            socketHelper.detach()
+            this.props.navigateTo("menuScreen")
+          }, 500);
+        }
+
         return
       default:
         break
@@ -101,26 +151,39 @@ class Settings extends Component {
     this.setState({
       activeSettingTab: tempActiveSettingTab,
       activeSettingTabName: activeTabName.name,
-      verticalIndex: tempVerticalIndex % 2
+      verticalIndex: tempVerticalIndex
     })
   }
 
   renderSettingsComponent = () => {
     switch (this.state.activeSettingTabName) {
       case 'power':
-        return (<Power />)
+        return (<Power selected={this.state.verticalIndex} on={this.state.powersaver} />)
       case 'datetime':
-        return (<Datetime />)
+        return (<DateTime selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'security':
-        return (<Security />)
-      case 'display':
-        return (<Display />)
-      case 'info':
-        return (<Info />)
-      case 'language':
-        return (<Language />)
+        return (<Security selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'reset':
-        return (<Reset />)
+        return (<Reset selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
+      case 'display':
+        return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} brightness={this.state.brightness} />)
+      case 'language':
+        return (<Language selected={this.state.verticalIndex} />)
+      case 'sound':
+        return (<Sound selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
+      case 'info':
+        return (<Info selected={this.state.verticalIndex} />)
+      default:
+        break;
+    }
+  }
+
+  renderPopup = (popup) => {
+    switch (popup) {
+      case "date":
+        return <DatePopup />
+      case "time":
+        return <TimePopup />
       default:
         break;
     }
@@ -129,8 +192,11 @@ class Settings extends Component {
   render() {
     return (
       <div ref="settings" className={`settings-component component `}>
+        {
+          // this.renderPopup("time")
+        }
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
-        <div className={`settings-component-container  ${this.state.verticalIndex === 1 ? 'selected' : ''}`}>
+        <div className={`settings-component-container  ${this.state.verticalIndex ? 'selected' : ''}`}>
           {
             this.renderSettingsComponent()
           }

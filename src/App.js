@@ -19,12 +19,11 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "menuScreen"
+      activeScreen: "settingsScreen"
     }
   }
 
   navigateTo = (screenName) => {
-    console.log(screenName)
     this.setState({
       activeScreen: screenName
     })
@@ -56,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Statusbar />
+        <Statusbar title={this.state.activeScreen} />
         {
           this.renderScreen()
         }

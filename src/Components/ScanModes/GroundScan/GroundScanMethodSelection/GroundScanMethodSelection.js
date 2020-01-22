@@ -51,12 +51,9 @@ class GroundScanMethodSelection extends Component {
 
           break
         case 'ok':
-
+          this.props.navigateTo("scanViewerScreen")
           return
         case 'back':
-          clearInterval(this.testInterval)
-          this.refs.gsms.style.opacity = 0
-          this.refs.gsms.style.transform = "translateY(200px)"
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
           }, 500);

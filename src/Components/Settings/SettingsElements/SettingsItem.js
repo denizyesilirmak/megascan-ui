@@ -33,7 +33,7 @@ class SettingsItem extends Component {
             <div className="slider-container">
               <img id="left-arrow" alt="la" src={LeftArrowIcon} />
               <div className="slider">
-                <div className="slider-value" />
+                <div className="slider-value" style={{ width: `${this.props.value}%` }} />
               </div>
               <img id="right-arrow" alt="la" src={RightArrowIcon} />
             </div>

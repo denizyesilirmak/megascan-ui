@@ -10,6 +10,8 @@
   align-items: center;
   font-size: 20px;
   background: rgb(24, 18, 2);
+  transition: background .2s;
+  transition-timing-function: ease-in-out;
 }
 
 .settings-item.selected{
@@ -71,7 +73,7 @@
 }
 
 .settings-item .slider-value {
-  width: 170px;
+  width: 140px;
   margin-left: 5px;
   margin-top: 5px;
   height: 30px;

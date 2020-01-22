@@ -12,18 +12,25 @@ import Language from './SettingsComponents/Language/Language'
 import Sound from './SettingsComponents/Sound/Sound'
 import Info from './SettingsComponents/Info/Info'
 
+import DatePopup from './SettingsPopups/Date/DatePopup'
+import TimePopup from './SettingsPopups/Time/TimePopup'
+
 
 class Settings extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      activeSettingTab: 0,
-      activeSettingTabName: 'power',
+      activeSettingTab: 6,
+      activeSettingTabName: 'display',
       verticalIndex: false,
       subCursor: 0,
 
-      powersaver: false
+      powersaver: false,
+      generalVolume: 50,
+      keyToneVolume: 50,
+      searchVolume: 50,
+      brightness: 10
     }
 
     this.buttons = [
@@ -84,19 +91,23 @@ class Settings extends Component {
     let tempVerticalIndex = this.state.verticalIndex
     switch (socketData.payload) {
       case 'left':
-        if (tempActiveSettingTab > 0 && !this.state.verticalIndex){
+        if (tempActiveSettingTab > 0 && !this.state.verticalIndex) {
           this.setState({
             subCursor: 0
           })
           tempActiveSettingTab--
+        } else {
+          this.setState({brightness : this.state.brightness - 10})
         }
         break
       case 'right':
-        if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex){
+        if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
           this.setState({
             subCursor: 0
           })
           tempActiveSettingTab++
+        } else {
+          this.setState({brightness : this.state.brightness + 10})
         }
         break
       case 'down':
@@ -155,7 +166,7 @@ class Settings extends Component {
       case 'reset':
         return (<Reset selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'display':
-        return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
+        return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} brightness={this.state.brightness} />)
       case 'language':
         return (<Language selected={this.state.verticalIndex} />)
       case 'sound':
@@ -167,9 +178,23 @@ class Settings extends Component {
     }
   }
 
+  renderPopup = (popup) => {
+    switch (popup) {
+      case "date":
+        return <DatePopup />
+      case "time":
+        return <TimePopup />
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <div ref="settings" className={`settings-component component `}>
+        {
+          // this.renderPopup("time")
+        }
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div className={`settings-component-container  ${this.state.verticalIndex ? 'selected' : ''}`}>
           {

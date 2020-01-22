@@ -8,6 +8,8 @@ import Wifi from './StatusbarElements/Wifi'
 import Battery from './StatusbarElements/Battery'
 import Clock from './StatusbarElements/Clock'
 
+import Logo from '../../Assets/Logos/1.png'
+
 class Statusbar extends Component {
   componentDidMount () {
     socketHelper.attachSpecial('battery', msg => {
@@ -18,6 +20,7 @@ class Statusbar extends Component {
   render () {
     return (
       <div className='status-bar-component'>
+        <img className="device-logo" src={Logo} alt="logo"></img>
         <div className='title'> {this.props.title} </div>
         <div className='icons'>
           <Volume />

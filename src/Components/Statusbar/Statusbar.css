@@ -29,3 +29,11 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.status-bar-component .device-logo{
+  width: 155px;
+  height: 70px;
+  position: absolute;
+  left: 30px;
+  top: 8px
+}

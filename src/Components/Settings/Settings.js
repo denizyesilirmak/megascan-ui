@@ -21,8 +21,8 @@ class Settings extends Component {
     super(props)
 
     this.state = {
-      activeSettingTab: 6,
-      activeSettingTabName: 'display',
+      activeSettingTab: 0,
+      activeSettingTabName: 'power',
       verticalIndex: false,
       subCursor: 0,
 

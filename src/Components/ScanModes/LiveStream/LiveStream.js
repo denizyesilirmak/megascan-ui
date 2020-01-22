@@ -79,8 +79,8 @@ class LiveStrem extends Component {
       g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
       b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
     };
-    console.log(String.fromCharCode(color.r)+ String.fromCharCode(color.g)+ String.fromCharCode(color.b));
-    return String(String.fromCharCode(color.r)+ String.fromCharCode(color.g)+ String.fromCharCode(color.b));
+    console.log(String.fromCharCode(color.r) + String.fromCharCode(color.g) + String.fromCharCode(color.b));
+    return String(String.fromCharCode(color.r) + String.fromCharCode(color.g) + String.fromCharCode(color.b));
   }
 
   handleKeyDown = (socketData) => {
@@ -121,7 +121,7 @@ class LiveStrem extends Component {
       tmpStream.shift()
       this.setState({
         stream: tmpStream,
-        angle: this.clamp((socketData.angle.trim()), -125, 125)
+        angle: socketData.angle.trim()
       })
       var grd = ctx.createLinearGradient(0, 0, 560, 0);
       grd.addColorStop(0, this.getColor(this.state.stream[0]));
@@ -139,10 +139,10 @@ class LiveStrem extends Component {
       ctx.fillRect(0, 0, 560, 280);
 
       // ANGLE
-      this.refs.indicatorRef.style.transform = `translateY(${this.state.angle*1.5 - 145}px)`
+      this.refs.indicatorRef.style.transform = `translateY(${this.clamp(this.state.angle * 1.5 - 145, -130, 130)}px)`
     }
   }
-  
+
 
   clamp = (num, min, max) => {
     return num <= min ? min : num >= max ? max : num;

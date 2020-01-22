@@ -20,39 +20,52 @@ class Settings extends Component {
     this.state = {
       activeSettingTab: 0,
       activeSettingTabName: 'power',
-      verticalIndex: false
+      verticalIndex: false,
+      subCursor: 0,
+
+      powersaver: false
     }
 
     this.buttons = [
       {
-        name: "power"
+        name: "power",
+        buttonCount: 1
       },
       {
-        name: "datetime"
+        name: "datetime",
+        buttonCount: 2
       },
       {
-        name: "storage"
+        name: "storage",
+        buttonCount: 1
       },
       {
-        name: "connection"
+        name: "connection",
+        buttonCount: 1
       },
       {
-        name: "security"
+        name: "security",
+        buttonCount: 2
       },
       {
-        name: "reset"
+        name: "reset",
+        buttonCount: 3
       },
       {
-        name: "display"
+        name: "display",
+        buttonCount: 2
       },
       {
-        name: "language"
+        name: "language",
+        buttonCount: 1
       },
       {
-        name: "sound"
+        name: "sound",
+        buttonCount: 3
       },
       {
-        name: "info"
+        name: "info",
+        buttonCount: 1
       },
     ]
   }
@@ -64,12 +77,6 @@ class Settings extends Component {
     }, 15);
   }
 
-  exitChild = () => {
-    this.setState({
-      verticalIndex: false
-    })
-  }
-
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
@@ -77,28 +84,52 @@ class Settings extends Component {
     let tempVerticalIndex = this.state.verticalIndex
     switch (socketData.payload) {
       case 'left':
-        if (tempActiveSettingTab > 0 && !this.state.verticalIndex)
+        if (tempActiveSettingTab > 0 && !this.state.verticalIndex){
+          this.setState({
+            subCursor: 0
+          })
           tempActiveSettingTab--
+        }
         break
       case 'right':
-        if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex)
+        if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex){
+          this.setState({
+            subCursor: 0
+          })
           tempActiveSettingTab++
+        }
         break
       case 'down':
-        tempVerticalIndex = true
+        if (this.state.verticalIndex) {
+          if (this.buttons[this.state.activeSettingTab].buttonCount - 1 > this.state.subCursor)
+            this.setState({ subCursor: this.state.subCursor + 1 })
+        }
         break
       case 'up':
-        tempVerticalIndex = false
+        if (this.state.verticalIndex) {
+          if (this.state.subCursor > 0)
+            this.setState({ subCursor: this.state.subCursor - 1 })
+        }
         break
       case 'ok':
+        if (this.state.verticalIndex === false) {
+          this.setState({ verticalIndex: true })
+        } else {
 
+        }
         return
       case 'back':
-        this.refs.settings.style.opacity = 0
-        this.refs.settings.style.transform = "translateY(400px)"
-        setTimeout(() => {
-          this.props.navigateTo("menuScreen")
-        }, 500);
+        if (this.state.verticalIndex === true) {
+          this.setState({ verticalIndex: false })
+        } else {
+          this.refs.settings.style.opacity = 0
+          this.refs.settings.style.transform = "translateY(400px)"
+          setTimeout(() => {
+            socketHelper.detach()
+            this.props.navigateTo("menuScreen")
+          }, 500);
+        }
+
         return
       default:
         break
@@ -116,19 +147,19 @@ class Settings extends Component {
   renderSettingsComponent = () => {
     switch (this.state.activeSettingTabName) {
       case 'power':
-        return (<Power selected={this.state.verticalIndex} exit={this.exitChild} />)
+        return (<Power selected={this.state.verticalIndex} on={this.state.powersaver} />)
       case 'datetime':
-        return (<DateTime selected={this.state.verticalIndex} />)
+        return (<DateTime selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'security':
-        return (<Security selected={this.state.verticalIndex} />)
+        return (<Security selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'reset':
-        return (<Reset selected={this.state.verticalIndex} />)
+        return (<Reset selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'display':
-        return (<Display selected={this.state.verticalIndex} />)
+        return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'language':
         return (<Language selected={this.state.verticalIndex} />)
       case 'sound':
-        return (<Sound selected={this.state.verticalIndex} />)
+        return (<Sound selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'info':
         return (<Info selected={this.state.verticalIndex} />)
       default:

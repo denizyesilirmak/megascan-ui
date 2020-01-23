@@ -11,8 +11,8 @@ class Security extends Component {
   render() {
     return (
       <div className="power-settings">
-        <SetttingsItem icon={SecurityIcon} title="Change Pin" mode="toggle" selected={this.props.cursorY % 2 === 0} />
-        <SetttingsItem icon={PinIcon} title="Change Pin" mode="popup" selected={this.props.cursorY % 2 === 1} />
+        <SetttingsItem icon={SecurityIcon} title="Change Pin" mode="toggle" selected={this.props.cursorY % 2 === 0 && this.props.selected} />
+        <SetttingsItem icon={PinIcon} title="Change Pin" mode="popup" selected={this.props.cursorY % 2 === 1 && this.props.selected} />
       </div>
     )
   }

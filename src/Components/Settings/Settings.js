@@ -25,6 +25,7 @@ class Settings extends Component {
       activeSettingTabName: 'power',
       verticalIndex: false,
       subCursor: 0,
+      activePopup: "",
 
       powersaver: false,
       generalVolume: 50,
@@ -97,7 +98,7 @@ class Settings extends Component {
           })
           tempActiveSettingTab--
         } else {
-          this.setState({brightness : this.state.brightness - 10})
+          this.setState({ brightness: this.state.brightness - 10 })
         }
         break
       case 'right':
@@ -107,7 +108,7 @@ class Settings extends Component {
           })
           tempActiveSettingTab++
         } else {
-          this.setState({brightness : this.state.brightness + 10})
+          this.setState({ brightness: this.state.brightness + 10 })
         }
         break
       case 'down':
@@ -123,22 +124,46 @@ class Settings extends Component {
         }
         break
       case 'ok':
-        if (this.state.verticalIndex === false) {
+        if (this.state.verticalIndex === false && this.state.activePopup === "") {
           this.setState({ verticalIndex: true })
         } else {
+          if (this.state.activeSettingTab === 0) {
+            //POWER
+            if (this.state.subCursor === 0) {
+              //Power saver
+              this.setState({ powersaver: !this.state.powersaver })
+            }
+          }
 
+          else if (this.state.activeSettingTab === 1) {
+            //Datetime
+            if (this.state.subCursor === 0) {
+              console.log("change date")
+              this.setState({ activePopup: "date" })
+            }
+            else if (this.state.subCursor === 1) {
+              console.log("change time")
+              this.setState({ activePopup: "date" })
+            }
+          }
         }
         return
       case 'back':
-        if (this.state.verticalIndex === true) {
+        if (this.state.verticalIndex === true && this.state.activePopup === "") {
           this.setState({ verticalIndex: false })
-        } else {
+        } else if (this.state.activePopup === "") {
           this.refs.settings.style.opacity = 0
           this.refs.settings.style.transform = "translateY(400px)"
           setTimeout(() => {
             socketHelper.detach()
             this.props.navigateTo("menuScreen")
           }, 500);
+        }
+
+        if (this.state.activePopup !== "") {
+          this.setState({
+            activePopup: ""
+          })
         }
 
         return
@@ -193,7 +218,7 @@ class Settings extends Component {
     return (
       <div ref="settings" className={`settings-component component `}>
         {
-          // this.renderPopup("time")
+          this.renderPopup(this.state.activePopup)
         }
         <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div className={`settings-component-container  ${this.state.verticalIndex ? 'selected' : ''}`}>

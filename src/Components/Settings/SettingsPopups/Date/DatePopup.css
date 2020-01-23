@@ -31,11 +31,11 @@
 }
 
 .settings-popup .item{
-  box-shadow: inset 0px 0px 10px 5px #ceb871;
+  box-shadow: inset 0px 0px 10px 5px #70643c;
   display: flex;
   flex-direction: column;
   height: 150px;
-  background: #6d5b21;
+  background: #29230e;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
@@ -55,8 +55,8 @@
 }
 
 .settings-popup .item.selected{
-  background: rgb(218, 56, 16);
-  box-shadow: inset 0px 0px 10px 5px #800404;
+  background: #d3be7b;
+  box-shadow: inset 0px 0px 10px 5px #302a0d;
 }
 
 .settings-popup .item #up-arrow{

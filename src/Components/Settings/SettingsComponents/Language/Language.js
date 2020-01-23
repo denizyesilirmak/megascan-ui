@@ -7,7 +7,7 @@ class Language extends Component{
   render(){
     return(
       <div className="power-settings">
-         <SetttingsItem icon={LanguageIcon} title="Change Lanuage" mode="popup"  selected={true}/>
+         <SetttingsItem icon={LanguageIcon} title="Change Lanuage" mode="popup"  selected={true && this.props.selected}/>
       </div>
     )
   }

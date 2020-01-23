@@ -9,7 +9,7 @@ class Display extends Component {
   render() {
     return (
       <div className="power-settings">
-        <SettingsItem title="Sleep Mode" icon={SleepModeIcon} mode="toggle" selected={this.props.cursorY % 2 === 0} on={this.props.sleepmode}/>
+        <SettingsItem title="Sleep Mode" icon={SleepModeIcon} mode="toggle" selected={this.props.cursorY % 2 === 0} on={this.props.on}/>
         <SettingsItem title="Brightness" icon={BrightnessIcon} mode="slider" selected={this.props.cursorY % 2 === 1} value={this.props.brightness} />
       </div>
     )

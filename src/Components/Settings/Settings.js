@@ -14,6 +14,7 @@ import Info from './SettingsComponents/Info/Info'
 
 import DatePopup from './SettingsPopups/Date/DatePopup'
 import TimePopup from './SettingsPopups/Time/TimePopup'
+import PinPopup from './SettingsPopups/Pin/PinPopup'
 
 
 class Settings extends Component {
@@ -228,6 +229,8 @@ class Settings extends Component {
         return <DatePopup />
       case "time":
         return <TimePopup />
+      case "pin":
+        return <PinPopup />
       default:
         break;
     }

@@ -5,6 +5,8 @@ import './App.css';
 import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
+import TurnOff from './Components/TurnOff/TurnOff'
+
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
@@ -19,7 +21,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "settingsScreen"
+      activeScreen: "turnOff"
     }
   }
 
@@ -35,6 +37,8 @@ class App extends Component {
         return (<MainMenu navigateTo={this.navigateTo} />)
       case "settingsScreen":
         return (<Settings navigateTo={this.navigateTo} />)
+      case "turnOff":
+        return (<TurnOff navigateTo={this.navigateTo} />)
       case "autoLrlScanScreen":
         return (<AutoLRL navigateTo={this.navigateTo} />)
       case "ctrlLrlScanScreen":

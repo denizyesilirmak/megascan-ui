@@ -28,6 +28,8 @@ class Settings extends Component {
       activePopup: "",
 
       powersaver: false,
+      pinlock: false,
+      sleepmode: false,
       generalVolume: 50,
       keyToneVolume: 50,
       searchVolume: 50,
@@ -97,8 +99,6 @@ class Settings extends Component {
             subCursor: 0
           })
           tempActiveSettingTab--
-        } else {
-          this.setState({ brightness: this.state.brightness - 10 })
         }
         break
       case 'right':
@@ -107,8 +107,6 @@ class Settings extends Component {
             subCursor: 0
           })
           tempActiveSettingTab++
-        } else {
-          this.setState({ brightness: this.state.brightness + 10 })
         }
         break
       case 'down':
@@ -144,6 +142,27 @@ class Settings extends Component {
             else if (this.state.subCursor === 1) {
               console.log("change time")
               this.setState({ activePopup: "date" })
+            }
+          }
+
+          else if (this.state.activeSettingTab === 4) {
+            //security
+            if (this.state.subCursor === 0) {
+              console.log("pin on off")
+              this.setState({ pinlock: !this.state.pinlock })
+            }
+            else if (this.state.subCursor === 1) {
+              console.log("change time")
+              this.setState({ activePopup: "pin" })
+            }
+          }
+
+
+          else if (this.state.activeSettingTab === 6) {
+            //security
+            if (this.state.subCursor === 0) {
+              console.log("sleep mode on offs")
+              this.setState({ sleepmode: !this.state.sleepmode })
             }
           }
         }
@@ -187,11 +206,11 @@ class Settings extends Component {
       case 'datetime':
         return (<DateTime selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'security':
-        return (<Security selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
+        return (<Security selected={this.state.verticalIndex} cursorY={this.state.subCursor} on={this.state.pinlock} />)
       case 'reset':
         return (<Reset selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
       case 'display':
-        return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} brightness={this.state.brightness} />)
+        return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} brightness={this.state.brightness} on={this.state.sleepmode} />)
       case 'language':
         return (<Language selected={this.state.verticalIndex} />)
       case 'sound':

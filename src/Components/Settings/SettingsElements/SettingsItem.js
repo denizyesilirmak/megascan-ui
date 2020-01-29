@@ -5,11 +5,6 @@ import LeftArrowIcon from '../../../Assets/MenuIcons/left-arrow2.png'
 import RightArrowIcon from '../../../Assets/MenuIcons/right-arrow2.png'
 
 class SettingsItem extends Component {
-  constructor(props) {
-    super(props)
-
-  }
-
   render() {
     return (
       <div className={`settings-item ${this.props.selected ? 'selected' : ''}`}>
@@ -24,7 +19,7 @@ class SettingsItem extends Component {
 
         {
           this.props.mode === "popup" ?
-            <img className="popup-icon" src={Popup} />
+            <img alt="p" className="popup-icon" src={Popup} />
             : ''
         }
 

@@ -36,9 +36,6 @@ class TurnOff extends Component{
             this.props.navigateTo("menuScreen")
         }, 500);
         return
-      case 'back':
-
-        return
       default:
         break
     }

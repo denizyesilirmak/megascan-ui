@@ -1,4 +1,4 @@
-import React, { Component, cloneElement } from 'react'
+import React, { Component } from 'react'
 import { QRCode } from "react-qr-svg";
 import './Info.css'
 import GermanyFlag from '../../../../Assets/MenuIcons/germany.svg'

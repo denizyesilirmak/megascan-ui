@@ -35,8 +35,8 @@ class LiveStrem extends Component {
 
 
     this.testInterval = setInterval(() => {
-      socketHelper.send('Q' + this.getColorAscii(this.state.stream[7]))
-    }, 50);
+      socketHelper.send('Q' + this.state.stream[9])
+    }, 60);
 
 
 
@@ -60,27 +60,6 @@ class LiveStrem extends Component {
       b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
     };
     return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
-  }
-
-  getColorAscii = (pct) => {
-    for (var i = 1; i < COLORS.jet.length - 1; i++) {
-      if (pct < COLORS.jet[i].pct) {
-        break;
-      }
-    }
-    const lower = COLORS.jet[i - 1];
-    const upper = COLORS.jet[i];
-    const range = upper.pct - lower.pct;
-    const rangePct = (pct - lower.pct) / range;
-    const pctLower = 1 - rangePct;
-    const pctUpper = rangePct;
-    const color = {
-      r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
-      g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
-      b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
-    };
-    console.log(String.fromCharCode(color.r) + String.fromCharCode(color.g) + String.fromCharCode(color.b));
-    return String(String.fromCharCode(color.r) + String.fromCharCode(color.g) + String.fromCharCode(color.b));
   }
 
   handleKeyDown = (socketData) => {

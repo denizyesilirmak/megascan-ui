@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SetttingsItem from '../../SettingsElements/SettingsItem'
 import './Power.css'
 import PowerIcon from '../../../../Assets/MenuIcons/battery.svg'
-import socketHelper from '../../../../SocketHelper'
+// import socketHelper from '../../../../SocketHelper'
 
 class PowerSettings extends Component {
 

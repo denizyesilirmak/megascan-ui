@@ -48,7 +48,7 @@
   width: 200px;
   height: 200px;
   animation: spin-full linear infinite;
-  animation-duration: 5s;
+  animation-duration: 4s;
 }
 
 @keyframes spin-full{
@@ -59,8 +59,8 @@
 
 .line-chart{
   width: 600px;
-  height: 70px;
-  background: tomato;
+  height: 80px;
+  /* background: tomato; */
   position: absolute;
   bottom: 20px;
   left: 50%;

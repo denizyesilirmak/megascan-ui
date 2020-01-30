@@ -9,6 +9,6 @@
   transition: .8s all !important;
 }
 
-svg{
+.plot svg{
   border-radius: 10px;
 }

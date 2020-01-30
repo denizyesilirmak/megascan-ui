@@ -19,7 +19,7 @@ class LineChart extends Component {
 
   componentDidUpdate() {
     for (let index = 0; index < this.lines.length; index++) {
-      this.lines[index] = Math.trunc(Math.sin(index * 0.085) * this.props.value * (65 / 255) + Math.random() * 4)
+      this.lines[index] = Math.trunc(Math.sin(index * 0.085) * this.props.value * (65 / 255) + Math.random() *8)
     }
   }
 
@@ -28,7 +28,7 @@ class LineChart extends Component {
       <svg width="600" height="80" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient spreadMethod="pad" y2="1" x2="0" y1="0" x1="0" id="svg_38">
-            <stop offset="0" stopColor="#ffff00ff" />
+            <stop offset="0" stopColor={`#ff${(255 - this.props.value).toString(16)}00ff`} />
             <stop offset="1" stopColor="#00ff0000" />
           </linearGradient>
         </defs>

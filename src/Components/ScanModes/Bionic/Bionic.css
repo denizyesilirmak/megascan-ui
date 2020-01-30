@@ -42,6 +42,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url(../../../Assets/MenuIcons/grid_mega_bionic.png);
+  background-size: cover;
 }
 
 .rotating-indicator-container .rotator{
@@ -65,4 +67,23 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.bionic rect{
+  transition: all 0.2s;
+}
+
+.dial{
+  width: 150px;
+  top: 120px
+}
+
+.gain-dial{
+  position: absolute;
+  left: 80px;
+}
+
+.sens-dial{
+  position: absolute;
+  right: 80px;
 }

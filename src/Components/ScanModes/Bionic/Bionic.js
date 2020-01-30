@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import './Bionic.css'
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles
+} from "react-circular-progressbar";
+import 'react-circular-progressbar/dist/styles.css';
 
 import socketHelper from '../../../SocketHelper'
 
@@ -11,16 +17,15 @@ import LineChart from './LineChat'
 
 
 class Bionic extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state={
+    this.state = {
       sensorData: 0
     }
   }
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-
     this.testInterval = setInterval(() => {
       socketHelper.send('Q')
     }, 60);
@@ -81,8 +86,37 @@ class Bionic extends Component {
           <LineChart value={this.state.sensorData} />
         </div>
 
+        <div className="dial gain-dial">
+          <CircularProgressbar
+            value={20}
+            text="Gain"
+            background
+            backgroundPadding={3}
+            styles={buildStyles({
+              backgroundColor: "#1bc122",
+              textColor: "#000",
+              pathColor: "#000",
+              trailColor: "transparent",
+              textSize: 11
+            })}
+          />
+        </div>
 
-
+        <div className="dial sens-dial">
+          <CircularProgressbar
+            value={50}
+            text="Sensitivity"
+            background
+            backgroundPadding={3}
+            styles={buildStyles({
+              backgroundColor: "#1bc122",
+              textColor: "#000",
+              pathColor: "#000",
+              trailColor: "transparent",
+              textSize: 11
+            })}
+          />
+        </div>
 
 
       </div>

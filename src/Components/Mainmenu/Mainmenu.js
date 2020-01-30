@@ -51,7 +51,7 @@ class Mainmenu extends Component {
       {
         name: "Bionic",
         icon: BionicIcon,
-        screenName: ""
+        screenName: "bionicScreen"
       },
       {
         name: "Live Stream",

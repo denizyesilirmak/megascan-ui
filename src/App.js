@@ -13,6 +13,7 @@ import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
 import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
 import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundScanMethodSelection/GroundScanMethodSelection'
 import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
+import Bionic from './Components/ScanModes/Bionic/Bionic'
 
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 
@@ -21,7 +22,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "menuScreen"
+      activeScreen: "bionicScreen"
     }
   }
 
@@ -51,6 +52,8 @@ class App extends Component {
         return (<DeviceGroundScanProperties navigateTo={this.navigateTo} />)
       case "scanViewerScreen":
         return (<ScanViewer navigateTo={this.navigateTo} />)
+      case "bionicScreen":
+        return (<Bionic navigateTo={this.navigateTo} />)
       default:
         break;
     }

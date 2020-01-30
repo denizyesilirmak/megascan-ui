@@ -1,3 +1,68 @@
-.bionic{
-  background: red;
+.bionic {
+  background: #000;
+}
+
+.bionic .b-button {
+  padding: 8px;
+  width: 50px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  position: absolute;
+
+}
+
+.bionic .b-button .label{
+  color: white;
+  margin-top: 5px;
+  line-break: strict;
+  text-align: center;
+}
+
+.bionic #depth-button{
+  left: 20px;
+  top: 10px;
+}
+
+.bionic #save-button{
+  right: 20px;
+  top: 10px;
+}
+
+.rotating-indicator-container{
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rotating-indicator-container .rotator{
+  width: 200px;
+  height: 200px;
+  animation: spin-full linear infinite;
+  animation-duration: 5s;
+}
+
+@keyframes spin-full{
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.line-chart{
+  width: 600px;
+  height: 70px;
+  background: tomato;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }

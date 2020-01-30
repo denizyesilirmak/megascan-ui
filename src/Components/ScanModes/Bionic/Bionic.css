@@ -1,5 +1,7 @@
 .bionic {
   background: #000;
+  opacity: 0;
+  transition: all 1s;
 }
 
 .bionic .b-button {
@@ -12,7 +14,11 @@
   align-items: center;
   justify-items: center;
   position: absolute;
+  border: 4px solid black;
+}
 
+.b-button.selected{
+  border-color: #8a7940;
 }
 
 .bionic .b-button .label{
@@ -75,7 +81,16 @@
 
 .dial{
   width: 150px;
-  top: 120px
+  top: 120px;
+  border: 4px solid;
+  border-color: black;
+  border-radius: 50%;
+  padding: 10px;
+  transition: .4s border-color;
+}
+
+.dial.selected{
+  border-color: #8a7940;
 }
 
 .gain-dial{

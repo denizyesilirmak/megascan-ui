@@ -20,12 +20,16 @@ class Bionic extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sensorData: 0
+      sensorData: 0,
+      cursorIndex: 4 * 1000
     }
   }
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    setTimeout(() => {
+      this.refs.bionic.style.opacity = 1
+    }, 20);
     this.testInterval = setInterval(() => {
       socketHelper.send('Q')
     }, 60);
@@ -33,11 +37,13 @@ class Bionic extends Component {
 
   handleKeyDown = (socketData) => {
     if (socketData.type === 'button') {
+      let tmpCursorIndex = this.state.cursorIndex
       switch (socketData.payload) {
         case 'left':
+          tmpCursorIndex--
           break
         case 'right':
-
+          tmpCursorIndex++
           break
         case 'down':
 
@@ -50,12 +56,17 @@ class Bionic extends Component {
           return
         case 'back':
           clearInterval(this.testInterval);
+          this.refs.bionic.style.opacity = 0
+          this.refs.bionic.style.transform = "translateY(400px)"
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
-          }, 250);
+          }, 500);
         default:
           break
       }
+      this.setState({
+        cursorIndex: tmpCursorIndex
+      })
     }
     else if (socketData.type === 'sensor') {
       this.setState({
@@ -66,14 +77,14 @@ class Bionic extends Component {
 
   render() {
     return (
-      <div className="bionic component">
+      <div ref="bionic" className="bionic component">
 
-        <div className="b-button" id="depth-button">
+        <div className={`b-button ${(this.state.cursorIndex % 4 === 0) ? "selected" : ""}`} id="depth-button">
           <img src={Depth_Icon} alt="depthicon" />
           <div className="label">Depth</div>
         </div>
 
-        <div className="b-button" id="save-button">
+        <div className={`b-button ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`} id="save-button">
           <img src={Save_Icon} alt="saveicon" />
           <div className="label">Save</div>
         </div>
@@ -86,7 +97,7 @@ class Bionic extends Component {
           <LineChart value={this.state.sensorData} />
         </div>
 
-        <div className="dial gain-dial">
+        <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`}>
           <CircularProgressbar
             value={20}
             text="Gain"
@@ -102,7 +113,7 @@ class Bionic extends Component {
           />
         </div>
 
-        <div className="dial sens-dial">
+        <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
           <CircularProgressbar
             value={50}
             text="Sensitivity"

@@ -1,0 +1,21 @@
+.ionic{
+  background: #000;
+}
+
+
+.ionic .b-button .label{
+  color: white;
+  margin-top: 5px;
+  line-break: strict;
+  text-align: center;
+}
+
+.ionic #depth-button{
+  left: 20px;
+  top: 10px;
+}
+
+.ionic #save-button{
+  right: 20px;
+  top: 10px;
+}

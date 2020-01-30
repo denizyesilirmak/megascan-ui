@@ -46,7 +46,7 @@ class Mainmenu extends Component {
       {
         name: "Ionic",
         icon: IonicIcon,
-        screenName: ""
+        screenName: "ionicScreen"
       },
       {
         name: "Bionic",

@@ -93,12 +93,12 @@
   border-color: #8a7940;
 }
 
-.gain-dial{
+.bionic .gain-dial{
   position: absolute;
   left: 80px;
 }
 
-.sens-dial{
+.bionic .sens-dial{
   position: absolute;
   right: 80px;
 }

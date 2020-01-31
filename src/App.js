@@ -23,7 +23,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "ionicScreen"
+      activeScreen: "menuScreen"
     }
   }
 

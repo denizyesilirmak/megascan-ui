@@ -101,7 +101,7 @@ class Mainmenu extends Component {
         }, 500);
         return
       case 'back':
-
+        this.props.navigateTo("turnOff")
         return
       default:
         break

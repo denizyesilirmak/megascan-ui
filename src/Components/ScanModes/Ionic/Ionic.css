@@ -1,5 +1,7 @@
 .ionic{
   background: #000;
+  opacity: 0;
+  transition: all 1s;
 }
 
 
@@ -13,9 +15,47 @@
 .ionic #depth-button{
   left: 20px;
   top: 10px;
+  z-index: 2;
 }
 
 .ionic #save-button{
-  right: 20px;
+  right: 250px;
   top: 10px;
+  z-index: 2;
+}
+
+.ionic-video{
+  filter: hue-rotate(200deg);
+  position: absolute;
+  z-index: 0;
+  left: 60px;
+  top: 130px;
+}
+
+.ionic .ionic-icon{
+  position: absolute;
+  z-index: 2;
+  left: 190px;
+  top: 20px;
+  width: 150px;
+}
+
+.ionic-chart{
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: -35px;
+  transform: scale(0.8);
+}
+
+.ionic .gain-dial{
+  position: absolute;
+  right: 20px;
+  top: 170px;
+}
+
+.ionic .sens-dial{
+  position: absolute;
+  right: 20px;
+  top: -20px;
 }

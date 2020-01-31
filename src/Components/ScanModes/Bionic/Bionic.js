@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Bionic.css'
 import {
   CircularProgressbar,
-  CircularProgressbarWithChildren,
   buildStyles
 } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
@@ -61,6 +60,7 @@ class Bionic extends Component {
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
           }, 500);
+          break
         default:
           break
       }

@@ -6,6 +6,7 @@ import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
 import TurnOff from './Components/TurnOff/TurnOff'
+import LockScreen from './Components/LockScreen/LockScreen.js'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -23,7 +24,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "menuScreen"
+      activeScreen: "lockScreen"
     }
   }
 
@@ -57,6 +58,8 @@ class App extends Component {
         return (<Bionic navigateTo={this.navigateTo} />)
       case "ionicScreen":
         return (<Ionic navigateTo={this.navigateTo} />)
+      case "lockScreen":
+        return (<LockScreen navigateTo={this.navigateTo} />)
       default:
         break;
     }

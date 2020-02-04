@@ -11,7 +11,8 @@ class LockScreen extends Component {
     this.state = {
       cursorX: 3 * 50,
       cursorY: 4 * 90,
-      pin: []
+      pin: [],
+      wrongPinPopup: false
     }
   }
 
@@ -21,6 +22,16 @@ class LockScreen extends Component {
       this.refs.lockHolder.style.opacity = 1
       this.refs.lockHolder.style.transform = "scale(1)"
     }, 1200);
+  }
+
+  renderWrongPinPopup() {
+    return (
+      <div className="black-overlay">
+        <div className="popup wrong-pin">
+          The pin you entered is incorrect. Please correct and try again.
+        </div>
+      </div>
+    )
   }
 
 
@@ -53,12 +64,11 @@ class LockScreen extends Component {
           else if (tempCursorY % 4 === 3) {
             tempPin.push('0')
           }
-        } 
-        else if(this.state.pin.length === 4){
+        }
+        else if (this.state.pin.length === 4) {
           this.props.navigateTo("menuScreen")
           return
         }
-
         break
       default:
         break
@@ -75,6 +85,11 @@ class LockScreen extends Component {
   render() {
     return (
       <div className="lock-screen">
+
+        {
+         (this.state.wrongPinPopup) ? this.renderWrongPinPopup() : ''
+        }
+
         <img className="lock-icon" alt="lock" src={LockIcon} />
         <div ref="lockHolder" className="lock-holder">
           <div className="pin">

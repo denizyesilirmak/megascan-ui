@@ -16,6 +16,7 @@ import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundS
 import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
 import Bionic from './Components/ScanModes/Bionic/Bionic'
 import Ionic from './Components/ScanModes/Ionic/Ionic'
+import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 
@@ -24,7 +25,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "menuScreen"
+      activeScreen: "manualScanScreen"
     }
   }
 
@@ -60,6 +61,8 @@ class App extends Component {
         return (<Ionic navigateTo={this.navigateTo} />)
       case "lockScreen":
         return (<LockScreen navigateTo={this.navigateTo} />)
+      case "manualScanScreen":
+        return (<ManualScan navigateTo={this.navigateTo} />)
       default:
         break;
     }

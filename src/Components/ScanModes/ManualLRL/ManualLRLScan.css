@@ -1,0 +1,50 @@
+.manual-lrl-scan {
+  background-color: black;
+}
+
+.manual-lrl-scan .gauge {
+  width: 309px;
+  height: 182px;
+  background-image: url(../../../Assets/MenuIcons/gauge.png);
+  position: absolute;
+  top: 20px;
+  left: 220px;
+}
+
+.manual-lrl-scan .gauge .gauge-dial {
+  position: relative;
+  left: 141px;
+  top: 28px;
+  transform-origin: 15px 130px;
+  animation: gauge 4s infinite linear;
+}
+
+@keyframes gauge {
+  0% {
+    transform: rotate(-80deg);
+  }
+  50% {
+    transform: rotate(80deg);
+  }
+  100% {
+    transform: rotate(-80deg);
+  }
+}
+
+
+
+.compass {
+  width: 110px;
+  height: 110px;
+  background-image: url(../../../Assets/MenuIcons/compas-mid.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.compass-out{
+  transition: all 1500ms;
+  transition-timing-function: ease-in-out;
+}

@@ -4,6 +4,7 @@ import './AutoLRL.css'
 
 import AutoLRLScan from './AutoLRLScan'
 import AutoLRLSettings from './AutoLRLSettings'
+import AutoLRLResultScreen from './AutoLRLResult'
 
 class AutoLRL extends Component {
 
@@ -11,7 +12,7 @@ class AutoLRL extends Component {
     super(props)
 
     this.state = {
-      settingsActive: true
+      activeScreen: 2
     }
   }
 
@@ -25,10 +26,15 @@ class AutoLRL extends Component {
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
+    let tempActiveScreen = this.state.activeScreen
     switch (socketData.payload) {
       case 'ok':
+        if(tempActiveScreen >= 0 && tempActiveScreen < 3){
+          tempActiveScreen ++
+        }
+        else if(tempActiveScreen === 3) tempActiveScreen = 0
         this.setState({
-          settingsActive: !this.state.settingsActive
+          activeScreen: tempActiveScreen
         })
         return
       case 'back':
@@ -44,14 +50,21 @@ class AutoLRL extends Component {
     }
   }
 
+  renderScreen = (screen) => {
+    switch (screen) {
+      case 0: return <AutoLRLSettings />
+      case 1: return <AutoLRLScan />
+      case 2: return <AutoLRLResultScreen />
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <div ref="autoLrl" className="auto-lrl-component component">
         {
-          this.state.settingsActive ?
-            <AutoLRLSettings />
-            :
-            <AutoLRLScan />
+          this.renderScreen(this.state.activeScreen)
         }
       </div>
     )

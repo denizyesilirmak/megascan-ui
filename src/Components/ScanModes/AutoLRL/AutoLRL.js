@@ -16,7 +16,6 @@ class AutoLRL extends Component {
     }
   }
 
-
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {

@@ -45,6 +45,22 @@
 }
 
 .compass-out{
-  transition: all 1500ms;
-  transition-timing-function: ease-in-out;
+  transition: all 1000ms;
+  transition-timing-function: linear;
+}
+
+.manual-lrl-scan .manual-signal{
+  position: absolute;
+  top: 230px;
+  left: 200px;
+}
+
+.manual-signal path{
+  animation: patha 0.3s linear infinite;
+}
+
+@keyframes patha{
+  100%{
+    transform: translateX(-30px);
+  }
 }

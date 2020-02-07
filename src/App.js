@@ -25,7 +25,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "manualScanScreen"
+      activeScreen: "menuScreen"
     }
   }
 
@@ -61,7 +61,7 @@ class App extends Component {
         return (<Ionic navigateTo={this.navigateTo} />)
       case "lockScreen":
         return (<LockScreen navigateTo={this.navigateTo} />)
-      case "manualScanScreen":
+      case "manualLRLScreen":
         return (<ManualScan navigateTo={this.navigateTo} />)
       default:
         break;

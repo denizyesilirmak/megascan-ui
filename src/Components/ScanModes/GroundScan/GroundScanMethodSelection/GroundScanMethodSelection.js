@@ -51,7 +51,7 @@ class GroundScanMethodSelection extends Component {
 
           break
         case 'ok':
-          this.props.navigateTo("scanViewerScreen")
+          this.props.navigateTo("deviceGroundScanPropertiesScreen")
           return
         case 'back':
           setTimeout(() => {

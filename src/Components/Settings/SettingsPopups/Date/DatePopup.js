@@ -12,19 +12,19 @@ class DatePopup extends Component {
 
           <div className="item">
             <img  id="up-arrow" src={upArrow} className="arrow" alt="arr" />
-            <div className="value">16</div>
+            <div className="value">{this.props.day}</div>
             <img  id="down-arrow" src={downArrow} className="arrow" alt="arr" />
           </div>
 
           <div className="item selected">
             <img  id="up-arrow" src={upArrow} className="arrow" alt="arr" />
-            <div className="value">JULY</div>
+            <div className="value">{this.props.month}</div>
             <img  id="down-arrow" src={downArrow} className="arrow" alt="arr" />
           </div>
 
           <div className="item">
             <img  id="up-arrow" src={upArrow} className="arrow" alt="arr" />
-            <div className="value">1991</div>
+            <div className="value">{this.props.year}</div>
             <img  id="down-arrow" src={downArrow} className="arrow" alt="arr" />
           </div>
 

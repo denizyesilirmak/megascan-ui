@@ -20,6 +20,8 @@ import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 
+// import SoundHelper from './SoundHelper'
+
 class App extends Component {
   constructor(props) {
     super(props)

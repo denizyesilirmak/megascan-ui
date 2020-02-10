@@ -34,7 +34,14 @@ class Settings extends Component {
       generalVolume: 50,
       keyToneVolume: 50,
       searchVolume: 50,
-      brightness: 10
+      brightness: 10,
+      hour: 0,
+      minute: 23,
+      day: 1,
+      month: 1,
+      year: 2003,
+      selectedTimeIndex: 0,
+      selectedDateIndex: 0
     }
 
     this.buttons = [
@@ -101,6 +108,11 @@ class Settings extends Component {
           })
           tempActiveSettingTab--
         }
+        else if (this.state.activePopup === "time") {
+          this.setState({
+            selectedTimeIndex: this.state.selectedTimeIndex + 1
+          })
+        }
         break
       case 'right':
         if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
@@ -109,17 +121,49 @@ class Settings extends Component {
           })
           tempActiveSettingTab++
         }
+
+        else if (this.state.activePopup === "time") {
+          this.setState({
+            selectedTimeIndex: this.state.selectedTimeIndex + 1
+          })
+        }
         break
       case 'down':
-        if (this.state.verticalIndex) {
+        if (this.state.verticalIndex && this.state.activePopup === "") {
           if (this.buttons[this.state.activeSettingTab].buttonCount - 1 > this.state.subCursor)
             this.setState({ subCursor: this.state.subCursor + 1 })
         }
+
+        if (this.state.activePopup === "time" && this.state.selectedTimeIndex % 2 === 0 && this.state.hour > 0) {
+          //change hour
+          this.setState({
+            hour: this.state.hour - 1
+          })
+        }
+        else if (this.state.activePopup === "time" && this.state.selectedTimeIndex % 2 === 1 && this.state.minute > 0) {
+          //change minutes
+          this.setState({
+            minute: this.state.minute - 1
+          })
+        }
+
         break
       case 'up':
-        if (this.state.verticalIndex) {
+        if (this.state.verticalIndex && this.state.activePopup === "") {
           if (this.state.subCursor > 0)
             this.setState({ subCursor: this.state.subCursor - 1 })
+        }
+        if (this.state.activePopup === "time" && this.state.selectedTimeIndex % 2 === 0 && this.state.hour < 23) {
+          //change hour
+          this.setState({
+            hour: this.state.hour + 1
+          })
+        }
+        else if (this.state.activePopup === "time" && this.state.selectedTimeIndex % 2 === 1 && this.state.minute < 59) {
+          //change minutes
+          this.setState({
+            minute: this.state.minute + 1
+          })
         }
         break
       case 'ok':
@@ -142,7 +186,7 @@ class Settings extends Component {
             }
             else if (this.state.subCursor === 1) {
               console.log("change time")
-              this.setState({ activePopup: "date" })
+              this.setState({ activePopup: "time" })
             }
           }
 
@@ -181,10 +225,10 @@ class Settings extends Component {
         }
 
         if (this.state.activePopup !== "") {
-          this.setState({
-            activePopup: ""
-          })
+          this.setState({ activePopup: "" })
         }
+
+
 
         return
       default:
@@ -226,9 +270,9 @@ class Settings extends Component {
   renderPopup = (popup) => {
     switch (popup) {
       case "date":
-        return <DatePopup />
+        return <DatePopup day={this.state.day} month={this.state.month} year={this.state.year} />
       case "time":
-        return <TimePopup />
+        return <TimePopup index={this.state.selectedTimeIndex % 2} hour={this.state.hour} minute={this.state.minute} />
       case "pin":
         return <PinPopup />
       default:

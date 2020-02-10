@@ -10,18 +10,18 @@ class TimePopup extends Component {
         <div className="popup-title">Change Date</div>
         <div className="date-picker">
 
-          <div className="item">
-            <img  id="up-arrow" src={upArrow} className="arrow" alt="arr" />
-            <div className="value">23</div>
-            <img  id="down-arrow" src={downArrow} className="arrow" alt="arr" />
+          <div className={`item ${this.props.index === 0 ? "selected" : ""}`}>
+            <img id="up-arrow" src={upArrow} className="arrow" alt="arr" />
+            <div className="value">{this.props.hour < 10 ? "0" + this.props.hour: this.props.hour}</div>
+            <img id="down-arrow" src={downArrow} className="arrow" alt="arr" />
           </div>
 
           <div className="time-seperator">:</div>
 
-          <div className="item selected">
-            <img  id="up-arrow" src={upArrow} className="arrow" alt="arr" />
-            <div className="value">59</div>
-            <img  id="down-arrow" src={downArrow} className="arrow" alt="arr" />
+          <div className={`item ${this.props.index === 1 ? "selected" : ""}`}>
+            <img id="up-arrow" src={upArrow} className="arrow" alt="arr" />
+            <div className="value">{this.props.minute < 10 ? "0" + this.props.minute: this.props.minute}</div>
+            <img id="down-arrow" src={downArrow} className="arrow" alt="arr" />
           </div>
 
         </div>

@@ -26,21 +26,33 @@ class LiveStrem extends Component {
   }
 
   componentDidMount() {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    this.context = new AudioContext();
+    this.oscillator = this.context.createOscillator();
+    this.oscillator.start(0)
+    this.connected = false;
+    this.playpause()
+
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.livestream.style.opacity = 1
     }, 15);
 
-
-
-
     this.testInterval = setInterval(() => {
       socketHelper.send('Q' + this.state.stream[9])
     }, 60);
 
-
-
   }
+
+  playpause = () => {
+    if (!this.connected) {
+      this.oscillator.connect(this.context.destination);
+    }
+    else {
+      this.oscillator.disconnect();
+    }
+    this.connected = !this.connected;
+  };
 
   getColor = (pct) => {
     for (var i = 1; i < COLORS.jet.length - 1; i++) {
@@ -80,6 +92,7 @@ class LiveStrem extends Component {
 
           return
         case 'back':
+          this.playpause()
           clearInterval(this.testInterval)
           this.refs.livestream.style.opacity = 0
           this.refs.livestream.style.transform = "translateY(200px)"
@@ -95,6 +108,7 @@ class LiveStrem extends Component {
       var c = this.refs.streamCanvas
       var ctx = c.getContext("2d");
       this.instantData = socketData.payload
+      this.oscillator.frequency.value = parseInt(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))
       tmpStream.shift()

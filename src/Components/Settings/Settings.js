@@ -113,6 +113,12 @@ class Settings extends Component {
             selectedTimeIndex: this.state.selectedTimeIndex + 1
           })
         }
+
+        else if (this.state.activePopup === "date") {
+          this.setState({
+            selectedDateIndex: this.state.selectedDateIndex + 1
+          })
+        }
         break
       case 'right':
         if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
@@ -125,6 +131,12 @@ class Settings extends Component {
         else if (this.state.activePopup === "time") {
           this.setState({
             selectedTimeIndex: this.state.selectedTimeIndex + 1
+          })
+        }
+
+        else if (this.state.activePopup === "date") {
+          this.setState({
+            selectedDateIndex: this.state.selectedDateIndex + 1
           })
         }
         break
@@ -147,6 +159,25 @@ class Settings extends Component {
           })
         }
 
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 0 && this.state.day > 0) {
+          //change day
+          this.setState({
+            hour: this.state.day - 1
+          })
+        }
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 1 && this.state.month > 0) {
+          //change month
+          this.setState({
+            month: this.state.month - 1
+          })
+        }
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 2 && this.state.year > 1999) {
+          //change month
+          this.setState({
+            year: this.state.year - 1
+          })
+        }
+
         break
       case 'up':
         if (this.state.verticalIndex && this.state.activePopup === "") {
@@ -163,6 +194,25 @@ class Settings extends Component {
           //change minutes
           this.setState({
             minute: this.state.minute + 1
+          })
+        }
+
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 0 && this.state.day < 30) {
+          //change day
+          this.setState({
+            day: this.state.day + 1
+          })
+        }
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 1 && this.state.month < 12) {
+          //change month
+          this.setState({
+            month: this.state.month + 1
+          })
+        }
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 2 && this.state.year < 2050) {
+          //change month
+          this.setState({
+            year: this.state.year + 1
           })
         }
         break
@@ -270,7 +320,7 @@ class Settings extends Component {
   renderPopup = (popup) => {
     switch (popup) {
       case "date":
-        return <DatePopup day={this.state.day} month={this.state.month} year={this.state.year} />
+        return <DatePopup index={this.state.selectedDateIndex % 3} day={this.state.day} month={this.state.month} year={this.state.year} />
       case "time":
         return <TimePopup index={this.state.selectedTimeIndex % 2} hour={this.state.hour} minute={this.state.minute} />
       case "pin":

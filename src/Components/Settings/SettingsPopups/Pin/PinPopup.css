@@ -1,0 +1,33 @@
+.change-pin{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.numpad-holder{
+  width: 210px;
+  height: 280px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 25% 25% 25% 25%;
+  align-items: center;
+  justify-items: center;
+}
+
+.numpad-holder .numpad-button{
+  color: white;
+  font-size: 40px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 10px;
+  border: 2px solid #8a7940;
+  background: #1b180d;
+}
+
+.numpad-holder .numpad-button.selected{
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}

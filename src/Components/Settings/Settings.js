@@ -159,20 +159,20 @@ class Settings extends Component {
           })
         }
 
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 0 && this.state.day > 0) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day > 0) {
           //change day
           this.setState({
-            hour: this.state.day - 1
+            day: this.state.day - 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 1 && this.state.month > 0) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 1 && this.state.month > 0) {
           //change month
           this.setState({
             month: this.state.month - 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 2 && this.state.year > 1999) {
-          //change month
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 2 && this.state.year > 1999) {
+          //change year
           this.setState({
             year: this.state.year - 1
           })
@@ -197,19 +197,19 @@ class Settings extends Component {
           })
         }
 
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 0 && this.state.day < 30) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day < 30) {
           //change day
           this.setState({
             day: this.state.day + 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 1 && this.state.month < 12) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 1 && this.state.month < 12) {
           //change month
           this.setState({
             month: this.state.month + 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 2 === 2 && this.state.year < 2050) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 2 && this.state.year < 2050) {
           //change month
           this.setState({
             year: this.state.year + 1
@@ -336,7 +336,7 @@ class Settings extends Component {
         {
           this.renderPopup(this.state.activePopup)
         }
-        <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
+        <Navigator active={!this.state.verticalIndex} activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div className={`settings-component-container  ${this.state.verticalIndex ? 'selected' : ''}`}>
           {
             this.renderSettingsComponent()

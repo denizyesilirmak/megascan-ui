@@ -5,10 +5,12 @@ import PowerIcon from '../../../../Assets/MenuIcons/battery.svg'
 // import socketHelper from '../../../../SocketHelper'
 
 class PowerSettings extends Component {
-
+  componentDidMount(){
+    this.refs.sc.style.opacity = 1
+  }
   render() {
     return (
-      <div className="power-settings">
+      <div ref="sc" className="power-settings">
         <SetttingsItem icon={PowerIcon} title="Power Saver" mode="toggle" selected={this.props.selected} on={this.props.on}/>
       </div>
     )

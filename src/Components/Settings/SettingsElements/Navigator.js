@@ -29,7 +29,7 @@ class Navigator extends Component {
           {
             this.props.buttons.map((e, k) => {
               return (
-                <div key={k} className={`navigator-button ${this.props.activeSettingTab === k ? 'selected' : ''}`}>
+                <div key={k} className={`navigator-button ${(this.props.activeSettingTab === k && this.props.active) ? 'selected' : ''}`}>
                   {e.name}
                 </div>
               )

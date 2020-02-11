@@ -40,6 +40,7 @@
   justify-content: center;
   border-radius: 20px;
   margin: 0px 10px 0px 10px;
+  min-width: 80px;
 }
 
 .settings-popup .item .value{
@@ -52,6 +53,8 @@
   border-radius: 10px;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: rgb(70, 58, 7);
+  min-width: 38px;
+  text-align: center;
 }
 
 .settings-popup .item.selected{

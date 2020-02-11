@@ -4,9 +4,14 @@ import './Info.css'
 import GermanyFlag from '../../../../Assets/MenuIcons/germany.svg'
 
 class Info extends Component {
+  componentDidMount(){
+    setTimeout(() => {
+      this.refs.sc.style.opacity = 1
+    }, 150);
+  }
   render() {
     return (
-      <div className="power-settings">
+      <div ref="sc" className="power-settings">
         <div className="info-container">
           <div className="info-left">
             <QRCode

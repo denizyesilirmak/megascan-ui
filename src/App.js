@@ -20,6 +20,9 @@ import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 
+//Sensor Controls
+import ControlMagnetometer from './Components/SensorControl/ControlMagnetometer'
+
 // import SoundHelper from './SoundHelper'
 
 class App extends Component {
@@ -65,6 +68,8 @@ class App extends Component {
         return (<LockScreen navigateTo={this.navigateTo} />)
       case "manualLRLScreen":
         return (<ManualScan navigateTo={this.navigateTo} />)
+      case "controlMagnetometer":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} />)
       default:
         break;
     }

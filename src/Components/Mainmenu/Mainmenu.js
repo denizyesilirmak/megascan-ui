@@ -85,7 +85,7 @@ class Mainmenu extends Component {
     let tempIndex = this.state.index
     switch (socketData.payload) {
       case 'left':
-        console.log("mainmenu: left")
+        // console.log("mainmenu: left")
         if (tempIndex >= 0)
           tempIndex--
         break

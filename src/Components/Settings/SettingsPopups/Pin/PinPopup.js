@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import './PinPopup.css'
+import socketHelper from '../../../../SocketHelper'
 class PinPopup extends Component {
+  componentDidMount(){
+    // socketHelper.attach(this.handleKeyDown)
+  }
+
+  handleKeyDown = () => {
+    console.log("pin change input")
+  }
   render() {
     return (
       <div className="settings-popup">

@@ -247,7 +247,7 @@ class Settings extends Component {
               this.setState({ pinlock: !this.state.pinlock })
             }
             else if (this.state.subCursor === 1) {
-              console.log("change time")
+              console.log("pin popup open")
               this.setState({ activePopup: "pin" })
             }
           }
@@ -277,8 +277,6 @@ class Settings extends Component {
         if (this.state.activePopup !== "") {
           this.setState({ activePopup: "" })
         }
-
-
 
         return
       default:

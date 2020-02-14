@@ -3,6 +3,7 @@
 ☐ Anamenüden bir tarama moduna girildiğinde, önce sensör kontrol sistemi açılacak
 ☐ Pin değiştirme menüsü eklenecek
 ☐ Pin değiştirirken eski pin doğrulanacak
+☐ Tarama ekranında kullanılan dial'lara aşağı yukarı ikonlar eklenecek
 
 
 *ATMEGA*
@@ -44,3 +45,4 @@
   Level P => P.-50 %50 charging
 ☐ RESISTIVITY R
   value R => R.600 
+

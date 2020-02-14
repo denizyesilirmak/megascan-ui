@@ -25,8 +25,9 @@ class Ionic extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    console.log("connected")
     setTimeout(() => {
       this.refs.ionic.style.opacity = 1
     }, 20);
@@ -34,24 +35,30 @@ class Ionic extends Component {
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
+    let tmpCursorIndex = this.state.cursorIndex
     switch (socketData.payload) {
       case 'left':
+        tmpCursorIndex--
         break
       case 'right':
+        tmpCursorIndex++
         break
       case 'back':
         console.log("mainmenu: ok")
         this.refs.ionic.style.transform = "translateY(400px)"
         this.refs.ionic.style.opacity = 0
-        
+
         setTimeout(() => {
-            socketHelper.detach()
-            this.props.navigateTo("menuScreen")
+          socketHelper.detach()
+          this.props.navigateTo("menuScreen")
         }, 500);
         return
       default:
         break
     }
+    this.setState({
+      cursorIndex: tmpCursorIndex
+    })
   }
 
   render() {
@@ -62,7 +69,7 @@ class Ionic extends Component {
           <div className="label">Depth</div>
         </div>
 
-        <div className={`b-button ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`} id="save-button">
+        <div className={`b-button ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`} id="save-button">
           <img src={Save_Icon} alt="saveicon" />
           <div className="label">Save</div>
         </div>
@@ -75,7 +82,7 @@ class Ionic extends Component {
           <LineChart value={125} />
         </div>
 
-        <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`}>
+        <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`}>
           <CircularProgressbar
             value={20}
             text="Gain"
@@ -106,8 +113,6 @@ class Ionic extends Component {
             })}
           />
         </div>
-
-
       </div>
     )
   }

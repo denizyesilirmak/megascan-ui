@@ -14,7 +14,7 @@ class LineChart extends Component {
   }
 
   componentDidMount() {
-    console.log(this.lines)
+    // console.log(this.lines)
   }
 
   componentDidUpdate() {

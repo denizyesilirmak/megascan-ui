@@ -21,7 +21,9 @@ class Ionic extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cursorIndex: 1000
+      cursorIndex: 1000,
+      sensitivity: 50,
+      gain: 50
     }
   }
 
@@ -36,12 +38,32 @@ class Ionic extends Component {
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tmpCursorIndex = this.state.cursorIndex
+    let tmpSensitivity = this.state.sensitivity
+    let tmpGain = this.state.gain
     switch (socketData.payload) {
+      case 'up':
+        console.log("ionic up")
+        if (this.state.cursorIndex % 4 === 2) {
+          tmpSensitivity += 5
+        }
+        else if (this.state.cursorIndex % 4 === 3) {
+          tmpGain += 5
+        }
+        break;
+      case 'down':
+        console.log("ionic down")
+        if (this.state.cursorIndex % 4 === 2) {
+          tmpSensitivity -= 5
+        }
+        else if (this.state.cursorIndex % 4 === 3) {
+          tmpGain -= 5
+        }
+        break;
       case 'left':
-        tmpCursorIndex--
+        tmpCursorIndex -= 5
         break
       case 'right':
-        tmpCursorIndex++
+        tmpCursorIndex += 5
         break
       case 'back':
         console.log("mainmenu: ok")
@@ -57,7 +79,9 @@ class Ionic extends Component {
         break
     }
     this.setState({
-      cursorIndex: tmpCursorIndex
+      cursorIndex: tmpCursorIndex,
+      sensitivity: tmpSensitivity,
+      gain: tmpGain
     })
   }
 
@@ -84,7 +108,7 @@ class Ionic extends Component {
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`}>
           <CircularProgressbar
-            value={20}
+            value={this.state.gain}
             text="Gain"
             background
             backgroundPadding={3}
@@ -100,7 +124,7 @@ class Ionic extends Component {
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
           <CircularProgressbar
-            value={50}
+            value={this.state.sensitivity}
             text="Sensitivity"
             background
             backgroundPadding={3}

@@ -85,6 +85,10 @@ class Ionic extends Component {
     })
   }
 
+  componentWillMount(){
+    socketHelper.detach(this.handleKeyDown)
+  }
+
   render() {
     return (
       <div ref="ionic" className="ionic component">

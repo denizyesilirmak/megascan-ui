@@ -1,9 +1,12 @@
 *MEGASCAN UI*
-☐ Sensör kontrol videoları, atmega ile haberleşerek navigasyon sağlayacak
+☐ Sensör kontrol videoları, atmega ile haberleşerek navigasyon sağlayacak @critical
 ☐ Anamenüden bir tarama moduna girildiğinde, önce sensör kontrol sistemi açılacak
 ☐ Pin değiştirme menüsü eklenecek
 ☐ Pin değiştirirken eski pin doğrulanacak
-☐ Tarama ekranında kullanılan dial'lara aşağı yukarı ikonlar eklenecek
+☐ Tarama ekranında kullanılan dial'lara aşağı yukarı ikonlar eklenecek @low
+☐ Veritabanı sistemi eklenecek
+☐ Dil, tarih, saat cihaz ilk açıldığında ayarlanacak
+
 
 
 *ATMEGA*

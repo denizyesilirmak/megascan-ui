@@ -14,7 +14,7 @@ class AutoLRLResult extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.setState({
         gold: Math.trunc(Math.random() * 100),
         silver: Math.trunc(Math.random() * 100),
@@ -22,6 +22,10 @@ class AutoLRLResult extends Component {
         diamond: Math.trunc(Math.random() * 100)
       })
     }, 600);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.interval)
   }
 
   render() {

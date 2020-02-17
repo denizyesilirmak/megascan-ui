@@ -30,7 +30,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "controlMagnetometer"
+      activeScreen: "menuScreen"
     }
   }
 

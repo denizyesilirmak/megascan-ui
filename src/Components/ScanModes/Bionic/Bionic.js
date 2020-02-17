@@ -20,7 +20,9 @@ class Bionic extends Component {
     super(props)
     this.state = {
       sensorData: 0,
-      cursorIndex: 4 * 1000
+      cursorIndex: 4 * 1000,
+      sensitivity: 50,
+      gain: 50
     }
   }
 
@@ -37,6 +39,8 @@ class Bionic extends Component {
   handleKeyDown = (socketData) => {
     if (socketData.type === 'button') {
       let tmpCursorIndex = this.state.cursorIndex
+      let tmpSensitivity = this.state.sensitivity
+      let tmpGain = this.state.gain
       switch (socketData.payload) {
         case 'left':
           tmpCursorIndex--
@@ -44,12 +48,22 @@ class Bionic extends Component {
         case 'right':
           tmpCursorIndex++
           break
-        case 'down':
-
-          break
-        case 'up':
-
-          break
+          case 'up':
+            if (this.state.cursorIndex % 4 === 2) {
+              tmpSensitivity += 5
+            }
+            else if (this.state.cursorIndex % 4 === 1) {
+              tmpGain += 5
+            }
+            break;
+          case 'down':
+            if (this.state.cursorIndex % 4 === 2) {
+              tmpSensitivity -= 5
+            }
+            else if (this.state.cursorIndex % 4 === 1) {
+              tmpGain -= 5
+            }
+            break;
         case 'ok':
 
           return
@@ -65,7 +79,9 @@ class Bionic extends Component {
           break
       }
       this.setState({
-        cursorIndex: tmpCursorIndex
+        cursorIndex: tmpCursorIndex,
+        sensitivity: tmpSensitivity,
+        gain: tmpGain
       })
     }
     else if (socketData.type === 'sensor') {
@@ -99,7 +115,7 @@ class Bionic extends Component {
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`}>
           <CircularProgressbar
-            value={20}
+            value={this.state.gain}
             text="Gain"
             background
             backgroundPadding={3}
@@ -115,7 +131,7 @@ class Bionic extends Component {
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
           <CircularProgressbar
-            value={50}
+            value={this.state.sensitivity}
             text="Sensitivity"
             background
             backgroundPadding={3}

@@ -104,7 +104,7 @@ class Mainmenu extends Component {
             socketHelper.detach()
             this.props.navigateTo(this.buttons[this.state.index + 1].screenName)
           }
-        }, 500);
+        }, 300);
         return
       case 'back':
         this.props.navigateTo("lockScreen")

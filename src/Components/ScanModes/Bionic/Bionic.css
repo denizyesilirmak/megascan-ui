@@ -18,7 +18,7 @@
 }
 
 .b-button.selected{
-  border-color: #8a7940;
+  border-color: #d8d8d8;
 }
 
 .bionic .b-button .label{
@@ -90,7 +90,7 @@
 }
 
 .dial.selected{
-  border-color: #8a7940;
+  border-color: #d8d8d8;
 }
 
 .bionic .gain-dial{

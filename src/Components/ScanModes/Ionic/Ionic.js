@@ -42,7 +42,6 @@ class Ionic extends Component {
     let tmpGain = this.state.gain
     switch (socketData.payload) {
       case 'up':
-        console.log("ionic up")
         if (this.state.cursorIndex % 4 === 2) {
           tmpSensitivity += 5
         }
@@ -51,7 +50,6 @@ class Ionic extends Component {
         }
         break;
       case 'down':
-        console.log("ionic down")
         if (this.state.cursorIndex % 4 === 2) {
           tmpSensitivity -= 5
         }

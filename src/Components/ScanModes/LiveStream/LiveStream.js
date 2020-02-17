@@ -132,7 +132,7 @@ class LiveStrem extends Component {
       ctx.fillRect(0, 0, 560, 280);
 
       // ANGLE
-      this.refs.indicatorRef.style.transform = `translateY(${this.clamp(this.state.angle * 1.5 - 145, -130, 130)}px)`
+      // this.refs.indicatorRef.style.transform = `translateY(${this.clamp(this.state.angle * 1.5 - 145, -130, 130)}px)`
     }
   }
 
@@ -151,11 +151,16 @@ class LiveStrem extends Component {
 
             </canvas>
           </div>
-          <div className="stream-orientation">
+
+          <div className="sensor-numeric-value">
+            {this.state.stream[9]}
+          </div>
+
+          {/* <div className="stream-orientation">
             <div className="line" >
               <div ref="indicatorRef" className="indicator-angle"><span>Normal</span></div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="live-stream-bottom">
 

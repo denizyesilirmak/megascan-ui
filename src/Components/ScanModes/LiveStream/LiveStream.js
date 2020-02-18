@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import socketHelper from '../../../SocketHelper'
 import './LiveStream.css'
+import calibrationIcon from '../../../Assets/MenuIcons/calibration.png'
 
 
 const COLORS = {
@@ -18,10 +19,14 @@ class LiveStrem extends Component {
   constructor(props) {
     super(props)
 
+    this.count = 0
     this.instantData = 0
+    this.total = 0
     this.state = {
       stream: [127, 127, 127, 127, 127, 255, 127, 127, 127, 127],
-      angle: 90
+      angle: 90,
+      started: true,
+      calibration: true
     }
   }
 
@@ -39,9 +44,9 @@ class LiveStrem extends Component {
     }, 15);
 
     this.testInterval = setInterval(() => {
-      socketHelper.send('Q' + this.state.stream[9])
-    }, 60);
-
+      if (this.state.started)
+        socketHelper.send('Q' + this.state.stream[9])
+    }, 120);
   }
 
   playpause = () => {
@@ -107,14 +112,26 @@ class LiveStrem extends Component {
     else if (socketData.type === 'sensor') {
       var c = this.refs.streamCanvas
       var ctx = c.getContext("2d");
-      this.instantData = socketData.payload
-      this.oscillator.frequency.value = parseInt(this.instantData)
+      if(this.state.calibration){
+        this.instantData = parseInt(socketData.payload)
+      }
+      else{
+        // this.instantData = parseInt(socketData.payload) - (this.total - 127)
+        if(parseInt(socketData.payload)< this.total){
+          this.instantData = this.map(parseInt(socketData.payload), 0, this.total, 0, 127)
+          // console.log("a")
+        }else{
+          this.instantData = this.map(parseInt(socketData.payload), this.total, 255, 127, 255)
+          // console.log("b")
+        }
+      }
+      this.oscillator.frequency.value = (this.instantData)
+      this.calibration(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))
       tmpStream.shift()
       this.setState({
         stream: tmpStream,
-        angle: socketData.angle.trim()
       })
       var grd = ctx.createLinearGradient(0, 0, 560, 0);
       grd.addColorStop(0, this.getColor(this.state.stream[0]));
@@ -136,15 +153,51 @@ class LiveStrem extends Component {
     }
   }
 
+  map = ( x,  in_min,  in_max,  out_min,  out_max) => {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
 
   clamp = (num, min, max) => {
     return num <= min ? min : num >= max ? max : num;
+  }
+
+  calibration = (sensor) => {
+    this.count++
+    if (this.count <= 15) {
+      // console.log(this.count)
+      this.total += Math.trunc(sensor/14)
+      // console.log("total", this.total)
+      this.refs.calib.style.width = (100/15)*this.count + "%"
+    }
+    else{
+      this.setState({
+        calibration: false
+      })
+    }
+
+  }
+
+  renderCalibrationPopup = () => {
+    return (
+      <div className="live-stream-calibration">
+        <img src={calibrationIcon} alt="cal"></img>
+        <div className="calibration-warning">The device is calibrating the sensor. Keep the sensor perpendicular to the ground. </div>
+        <div className="calibration-preloader-holder">
+          <div ref="calib" className="calibration-preloader-value">
+
+          </div>
+        </div>
+      </div>
+    )
   }
 
 
   render() {
     return (
       <div ref="livestream" className="live-stream-component component">
+        {
+          this.state.calibration ? this.renderCalibrationPopup() : ''
+        }
         <div className="live-stream-top">
           <div className="stream-plot">
             <canvas ref="streamCanvas" width="560" height="280">

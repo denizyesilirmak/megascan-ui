@@ -74,3 +74,39 @@
   margin-left: 30px;
   margin-top: 90px;
 }
+
+.live-stream-calibration{
+  background: rgb(0, 0, 0);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.calibration-warning{
+  color: white;
+  margin-top: 20px;
+}
+
+.calibration-preloader-holder{
+  border: 2px solid white;
+  margin-top: 30px;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.calibration-preloader-value{
+  transition: width .1s;
+  transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  width: 10%;
+  height: 100%;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}

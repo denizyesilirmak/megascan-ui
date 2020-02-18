@@ -18,7 +18,9 @@ import Bionic from './Components/ScanModes/Bionic/Bionic'
 import Ionic from './Components/ScanModes/Ionic/Ionic'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 
+//3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
+import ScanScreen from './Components/ScanScreen/ScanScreen'
 
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/ControlMagnetometer'
@@ -30,7 +32,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "liveStreamScreen"
+      activeScreen: "scanScreen"
     }
   }
 
@@ -70,6 +72,8 @@ class App extends Component {
         return (<ManualScan navigateTo={this.navigateTo} />)
       case "controlMagnetometer":
         return (<ControlMagnetometer navigateTo={this.navigateTo} />)
+      case "scanScreen":
+        return (<ScanScreen navigateTo={this.navigateTo} />)
       default:
         break;
     }

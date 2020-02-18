@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './PinPopup.css'
-import socketHelper from '../../../../SocketHelper'
+// import socketHelper from '../../../../SocketHelper'
 class PinPopup extends Component {
   componentDidMount(){
     // socketHelper.attach(this.handleKeyDown)

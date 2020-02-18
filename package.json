@@ -10,6 +10,7 @@
     "react-qr-svg": "^2.2.1",
     "react-scripts": "3.2.0",
     "socket.io-client": "^2.3.0",
+    "three": "^0.113.2",
     "websocket": "^1.0.31"
   },
   "scripts": {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CM from '../../Assets/Videos/magnetometer.mp4'
+// import CM from '../../Assets/Videos/magnetometer.mp4'
 import HM from '../../Assets/Videos/horizontal.mp4'
 import './SensorControl.css'
 

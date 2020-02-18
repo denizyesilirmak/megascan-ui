@@ -1,0 +1,11 @@
+.scan-screen{
+  background: red;
+}
+
+
+.canvas-container{
+  width: 60%;
+  height: 100px;
+  background: #000;
+  
+}

@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import socketHelper from '../../../SocketHelper'
 import './LiveStream.css'
 import calibrationIcon from '../../../Assets/MenuIcons/calibration.png'
+import SpeedIcon from '../../../Assets/MenuIcons/speed.svg'
+import Left from '../../../Assets/MenuIcons/left-arrow3.png'
+import right from '../../../Assets/MenuIcons/right-arrow3.png'
 
 
 const COLORS = {
@@ -24,9 +27,9 @@ class LiveStrem extends Component {
     this.total = 0
     this.state = {
       stream: [127, 127, 127, 127, 127, 255, 127, 127, 127, 127],
-      angle: 90,
       started: true,
-      calibration: true
+      calibration: true,
+      speed: 0
     }
   }
 
@@ -43,10 +46,8 @@ class LiveStrem extends Component {
       this.refs.livestream.style.opacity = 1
     }, 15);
 
-    this.testInterval = setInterval(() => {
-      if (this.state.started)
-        socketHelper.send('Q' + this.state.stream[9])
-    }, 120);
+    this.testInterval = setInterval(() => { this.requestSensorData() }, 120);
+
   }
 
   playpause = () => {
@@ -79,13 +80,34 @@ class LiveStrem extends Component {
     return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
   }
 
+  requestSensorData = () => {
+    if (this.state.started)
+      socketHelper.send('Q' + this.state.stream[9])
+  }
+
   handleKeyDown = (socketData) => {
+    let tmpSpeed = this.state.speed
     if (socketData.type === 'button') {
       switch (socketData.payload) {
         case 'left':
+          if (tmpSpeed > 0){
+            tmpSpeed--
+            clearInterval(this.testInterval)
+            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed*10)
+            this.setState({
+              speed: tmpSpeed
+            })
+          }
           break
         case 'right':
-
+          if (tmpSpeed < 5){
+            tmpSpeed++
+            clearInterval(this.testInterval)
+            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed*10)
+            this.setState({
+              speed: tmpSpeed
+            })
+          }
           break
         case 'down':
 
@@ -112,15 +134,15 @@ class LiveStrem extends Component {
     else if (socketData.type === 'sensor') {
       var c = this.refs.streamCanvas
       var ctx = c.getContext("2d");
-      if(this.state.calibration){
+      if (this.state.calibration) {
         this.instantData = parseInt(socketData.payload)
       }
-      else{
+      else {
         // this.instantData = parseInt(socketData.payload) - (this.total - 127)
-        if(parseInt(socketData.payload)< this.total){
+        if (parseInt(socketData.payload) < this.total) {
           this.instantData = this.map(parseInt(socketData.payload), 0, this.total, 0, 127)
           // console.log("a")
-        }else{
+        } else {
           this.instantData = this.map(parseInt(socketData.payload), this.total, 255, 127, 255)
           // console.log("b")
         }
@@ -153,7 +175,7 @@ class LiveStrem extends Component {
     }
   }
 
-  map = ( x,  in_min,  in_max,  out_min,  out_max) => {
+  map = (x, in_min, in_max, out_min, out_max) => {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
@@ -165,11 +187,11 @@ class LiveStrem extends Component {
     this.count++
     if (this.count <= 15) {
       // console.log(this.count)
-      this.total += Math.trunc(sensor/14)
+      this.total += Math.trunc(sensor / 14)
       // console.log("total", this.total)
-      this.refs.calib.style.width = (100/15)*this.count + "%"
+      this.refs.calib.style.width = (100 / 15) * this.count + "%"
     }
-    else{
+    else {
       this.setState({
         calibration: false
       })
@@ -216,7 +238,12 @@ class LiveStrem extends Component {
           </div> */}
         </div>
         <div className="live-stream-bottom">
-
+          <div className="speed-holder">
+            <img className="speed-icon" src={SpeedIcon} alt="speed"></img>
+            <img className="arrows" src={Left} alt="speed"></img>
+            <span>{this.state.speed + 1}</span>
+            <img className="arrows" src={right} alt="speed"></img>
+          </div>
         </div>
       </div>
     )

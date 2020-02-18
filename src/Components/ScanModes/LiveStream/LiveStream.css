@@ -13,6 +13,9 @@
 
 .live-stream-bottom {
   height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .stream-plot {
@@ -43,7 +46,6 @@
   position: relative;
   left: -60px;
   top: 123px;
-
 }
 
 .stream-orientation .line .indicator-angle::after {
@@ -62,7 +64,7 @@
   border: 2px solid white;
 }
 
-.sensor-numeric-value{
+.sensor-numeric-value {
   color: white;
   background: #000;
   font-size: 65px;
@@ -75,7 +77,7 @@
   margin-top: 90px;
 }
 
-.live-stream-calibration{
+.live-stream-calibration {
   background: rgb(0, 0, 0);
   position: absolute;
   top: 0px;
@@ -89,12 +91,12 @@
   flex-direction: column;
 }
 
-.calibration-warning{
+.calibration-warning {
   color: white;
   margin-top: 20px;
 }
 
-.calibration-preloader-holder{
+.calibration-preloader-holder {
   border: 2px solid white;
   margin-top: 30px;
   width: 400px;
@@ -103,10 +105,37 @@
   overflow: hidden;
 }
 
-.calibration-preloader-value{
+.calibration-preloader-value {
   transition: width .1s;
   transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
   width: 10%;
   height: 100%;
   background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.speed-holder {
+  color: white;
+  width: 80px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  margin-right: 120px;
+}
+
+.speed-holder .speed-icon {
+  width: 48px;
+  filter: invert(100%);
+  margin-right: 20px;
+  margin-top: 4px;
+}
+
+.speed-holder span {
+  margin: 5px 20px 0px 20px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.speed-holder .arrows {
+  margin-top: 3px;
 }

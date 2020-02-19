@@ -1,11 +1,17 @@
 .scan-screen{
-  background: red;
+  display: flex;
 }
 
 
 .canvas-container{
-  width: 60%;
-  height: 100px;
+  width: 563px;
+  height: 100%;
   background: #000;
-  
+}
+
+.scan-screen-details{
+  background: red;
+  width: 187px;
+  height: 100%;
+  margin-right: 3px;
 }

@@ -46,7 +46,7 @@ class LiveStrem extends Component {
       this.refs.livestream.style.opacity = 1
     }, 15);
 
-    this.testInterval = setInterval(() => { this.requestSensorData() }, 120);
+    this.testInterval = setInterval(() => { this.requestSensorData() }, 100);
 
   }
 

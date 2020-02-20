@@ -1,5 +1,6 @@
 .scan-screen{
   display: flex;
+  background: #000;
 }
 
 
@@ -10,7 +11,7 @@
 }
 
 .scan-screen-details{
-  background: red;
+  /* background: red; */
   width: 187px;
   height: 100%;
   margin-right: 3px;

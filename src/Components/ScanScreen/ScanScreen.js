@@ -1,18 +1,37 @@
 import React, { Component } from 'react'
 import './ScanScreen.css'
-
 import * as THREE from "three";
+import GridTexture from '../../Assets/grid.svg'
+
+const COLORS = {
+  jet: [
+    { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
+    { pct: 67, color: { r: 0x00, g: 0xff, b: 0xff } },
+    { pct: 127, color: { r: 0x00, g: 0xad, b: 0x00 } },
+    { pct: 192, color: { r: 0xff, g: 0xff, b: 0x00 } },
+    { pct: 255, color: { r: 0xff, g: 0x00, b: 0x00 } }
+  ]
+}
 
 class ScanScreen extends Component {
   constructor(props) {
     super(props)
     this.y = 20
     this.x = 10 * 4
+
+    this.state = {
+      currentPoint: {
+        x: null,
+        y: null
+      }
+    }
   }
 
+
+
   componentDidMount() {
-    const createMatrix = (x, y) => Array(y).fill().map(() => Array(x).fill([0, 0, 0, 0]))
-    this.matrix = createMatrix(10, 20)
+    const createMatrix = (x, y) => Array(y).fill().map(() => Array(x).fill([null, null, null, null]))
+    this.matrix = createMatrix(this.x / 4, this.y)
     this.currentPoint = {
       x: null,
       y: null
@@ -20,9 +39,6 @@ class ScanScreen extends Component {
 
     this.width = this.matrix[0].length
     this.height = this.matrix.length
-
-
-
 
     const width = 563;
     const height = this.refs.canvasHolder.clientHeight;
@@ -36,19 +52,7 @@ class ScanScreen extends Component {
     this.geometry = new THREE.PlaneGeometry(1, 1, this.x, this.y);
     this.material = new THREE.MeshBasicMaterial({ wireframe: false, vertexColors: THREE.VertexColors });
 
-    // this.geometry.faces[0].color = new THREE.Color("red")
-    // this.geometry.faces[1].color = new THREE.Color("red")
-
     console.log(this.matrix)
-    // for (let i = 0; i < this.matrix.length; i++) {
-    //   for (let j = 0; j < this.matrix[i].length; j++) {
-    //     for (let k = 0; k < this.matrix[i][j].length; k++) {
-    //       this.colorSquare((j * 4) + k, i)
-    //     }
-    //   }
-    // }
-
-    // this.colorSquare(0,0,1)
 
     setInterval(() => {
       this.zigzag("left")
@@ -58,52 +62,63 @@ class ScanScreen extends Component {
         for (let j = 0; j < this.matrix[i].length; j++) {
           for (let k = 0; k < this.matrix[i][j].length; k++) {
             this.colorSquare((j * 4) + k, i, this.matrix[i][j][k])
-            // this.geometry.verticesNeedUpdate = true;
-            // this.geometry.elementsNeedUpdate = true;
-            // this.geometry.morphTargetsNeedUpdate = true;
-            // this.geometry.uvsNeedUpdate = true;
-            // this.geometry.normalsNeedUpdate = true;
-            // this.geometry.colorsNeedUpdate = true;
-            // this.geometry.tangentsNeedUpdate = true;
           }
         }
       }
 
 
-    }, 10);
-
-
-
+    }, 60);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
-    // this.initGrid()
+    this.initGrid()
     this.animate();
   }
 
   colorSquare = (x, y, c) => {
     let index = ((y) * 2 * this.x) + (x) * 2;
+    if (c === null) {
+      this.geometry.faces[index].color = new THREE.Color(0)
+      this.geometry.faces[index + 1].color = new THREE.Color(0)
+    } else {
       this.geometry.faces[index].color = new THREE.Color(c)
       this.geometry.faces[index + 1].color = new THREE.Color(c)
-
+    }
 
   }
 
+  getColor = (pct) => {
+    for (var i = 1; i < COLORS.jet.length - 1; i++) {
+      if (pct < COLORS.jet[i].pct) {
+        break;
+      }
+    }
+    const lower = COLORS.jet[i - 1];
+    const upper = COLORS.jet[i];
+    const range = upper.pct - lower.pct;
+    const rangePct = (pct - lower.pct) / range;
+    const pctLower = 1 - rangePct;
+    const pctUpper = rangePct;
+    const color = {
+      r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+      g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+      b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+    };
+    return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+  }
+
   animate = () => {
-    this.geometry.verticesNeedUpdate = true;
     this.geometry.elementsNeedUpdate = true;
-    this.geometry.morphTargetsNeedUpdate = true;
-    this.geometry.uvsNeedUpdate = true;
-    this.geometry.normalsNeedUpdate = true;
-    this.geometry.colorsNeedUpdate = true;
-    this.geometry.tangentsNeedUpdate = true;
     this.frameId = window.requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
   }
 
   initGrid = () => {
     const grid_geometry = new THREE.PlaneBufferGeometry(1, 1, this.x / 4, this.y);
-    const grid_material = new THREE.MeshBasicMaterial({ wireframe: true });
+    var floorTexture = new THREE.TextureLoader().load(GridTexture);
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.repeat.set(this.x / 4, this.y);
+    var grid_material = new THREE.MeshBasicMaterial({ map: floorTexture, side: THREE.DoubleSide, transparent: true, wireframe: true });
     const grid_mesh = new THREE.Mesh(grid_geometry, grid_material);
     grid_mesh.position.z = 1
     this.scene.add(grid_mesh);
@@ -160,6 +175,9 @@ class ScanScreen extends Component {
         }
       }
     }
+    this.setState({
+      currentPoint: this.currentPoint
+    })
   }
 
   zigzag = (startPos) => {
@@ -234,13 +252,43 @@ class ScanScreen extends Component {
         }
       }
     }
+    this.setState({
+      currentPoint: this.currentPoint
+    })
   }
 
 
   render() {
     return (
       <div className="scan-screen component">
-        <div className="scan-screen-details"></div>
+        <div className="scan-screen-details">
+          <div className="detail-bar">
+            <div className="bar-name">
+              Current X
+            </div>
+            <div className="bar-value">
+              {this.state.currentPoint.x + 1}
+            </div>
+          </div>
+
+          <div className="detail-bar">
+            <div className="bar-name">
+              Current Y
+            </div>
+            <div className="bar-value">
+              {this.state.currentPoint.y + 1}
+            </div>
+          </div>
+
+          <div className="detail-bar">
+            <div className="bar-name">
+              Value
+            </div>
+            <div className="bar-value">
+              235
+              </div>
+          </div>
+        </div>
         <div className="canvas-container" ref="canvasHolder">  </div>
       </div>
     )

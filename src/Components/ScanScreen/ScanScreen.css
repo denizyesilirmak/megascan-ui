@@ -1,18 +1,40 @@
-.scan-screen{
+.scan-screen {
   display: flex;
   background: #000;
 }
 
-
-.canvas-container{
+.canvas-container {
   width: 563px;
   height: 100%;
   background: #000;
 }
 
-.scan-screen-details{
+.scan-screen-details {
   /* background: red; */
   width: 187px;
   height: 100%;
   margin-right: 3px;
+}
+
+.detail-bar {
+  text-align: center;
+  width: 160px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  margin-top: 15px;
+  border-radius: 3px;
+  color: black;
+  font-size: 18px;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.bar-name{
+  border-bottom: 1px solid black;
+}
+
+.bar-value{
+  font-size: 30px;
 }

@@ -17,8 +17,8 @@ const COLORS = {
 class ScanScreen extends Component {
   constructor(props) {
     super(props)
-    this.y = 10
-    this.x = 10 * 4
+    this.y = 5
+    this.x = 5 * 4
     this.counter = 0
 
     this.state = {
@@ -58,27 +58,9 @@ class ScanScreen extends Component {
     // console.log(this.matrix)
 
     this.dataInterval = setInterval(() => {
-      if (!this.state.newLinePopup && !this.state.finishScanPopup) {
-        this.zigzag("left")
-        this.matrix[this.currentPoint.y][this.currentPoint.x] = [Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255)]
+      this.requestSensorData()
 
-        for (let i = 0; i < this.matrix.length; i++) {
-          for (let j = 0; j < this.matrix[i].length; j++) {
-            for (let k = 0; k < this.matrix[i][j].length; k++) {
-              this.colorSquare((j * 4) + k, i, this.matrix[i][j][k])
-            }
-          }
-        }
-
-        this.counter++
-        if (this.counter === (this.x / 4) * this.y) {
-          console.log(this.matrix)
-          this.setState({
-            finishScanPopup: true
-          })
-        }
-      }
-    }, 800);
+    }, 200);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
@@ -86,31 +68,64 @@ class ScanScreen extends Component {
     this.animate();
   }
 
+  requestSensorData = () => {
+    if (!this.state.newLinePopup && !this.state.finishScanPopup) {
+      socketHelper.send('W')
+    }
+  }
+
 
   handleKeyDown = (socketData) => {
-    if (socketData.type !== 'button') { return }
-    switch (socketData.payload) {
-      case 'left':
-        break
-      case 'right':
-        break
-      case 'ok':
-        if (this.state.newLinePopup === true && this.state.finishScanPopup === false) {
-          this.setState({
-            newLinePopup: false
-          })
+    if (socketData.type === 'button') {
+      switch (socketData.payload) {
+        case 'left':
+          break
+        case 'right':
+          break
+        case 'ok':
+          if (this.state.newLinePopup === true && this.state.finishScanPopup === false) {
+            this.setState({
+              newLinePopup: false
+            })
+          }
+          break
+        case 'back':
+          clearInterval(this.dataInterval)
+          setTimeout(() => {
+            socketHelper.detach()
+            this.props.navigateTo("menuScreen")
+          }, 500);
+          return
+        default:
+          break
+      }
+    } else if (socketData.type === 'multipleSensor') {
+
+      this.zigzag("left")
+      this.matrix[this.currentPoint.y][this.currentPoint.x] = [
+        parseInt(socketData.payload[0]) - parseInt((Math.random() * 20)),
+        parseInt(socketData.payload[0]) - parseInt((Math.random() * 20)),
+        parseInt(socketData.payload[0]) - parseInt((Math.random() * 20)),
+        parseInt(socketData.payload[0]) - parseInt((Math.random() * 20))]
+
+      for (let i = 0; i < this.matrix.length; i++) {
+        for (let j = 0; j < this.matrix[i].length; j++) {
+          for (let k = 0; k < this.matrix[i][j].length; k++) {
+            this.colorSquare((j * 4) + k, i, this.matrix[i][j][k])
+          }
         }
-        break
-      case 'back':
-        clearInterval(this.dataInterval)
-        setTimeout(() => {
-          socketHelper.detach()
-          this.props.navigateTo("menuScreen")
-        }, 500);
-        return
-      default:
-        break
+      }
+
+      this.counter++
+      if (this.counter === (this.x / 4) * this.y) {
+        console.log(this.matrix)
+        this.setState({
+          finishScanPopup: true
+        })
+      }
+
     }
+
   }
 
 
@@ -348,7 +363,7 @@ class ScanScreen extends Component {
             Scan is completed. Do you want to view scan result?
           </div>
           <div className="scan-screen-buttons">
-            <div className="scan-screen-button">
+            <div className="scan-screen-button selected">
               Okey
             </div>
             <div className="scan-screen-button">

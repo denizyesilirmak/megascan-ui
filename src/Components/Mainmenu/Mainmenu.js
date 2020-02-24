@@ -94,13 +94,13 @@ class Mainmenu extends Component {
           tempIndex++
         break
       case 'ok':
-        console.log("mainmenu: ok")
+        // console.log("mainmenu: ok")
         this.refs.mainmenu.style.transform = "scale(2)"
         this.refs.mainmenu.style.opacity = 0
         
         setTimeout(() => {
           if (this.buttons[this.state.index + 1].screenName !== ""){
-            console.log("main menu unmount")
+            // console.log("main menu unmount")
             socketHelper.detach()
             this.props.navigateTo(this.buttons[this.state.index + 1].screenName)
           }

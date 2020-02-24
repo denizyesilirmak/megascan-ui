@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './ScanScreen.css'
 import * as THREE from "three";
 import GridTexture from '../../Assets/grid.svg'
+import socketHelper from '../../SocketHelper'
 
 const COLORS = {
   jet: [
@@ -16,20 +17,22 @@ const COLORS = {
 class ScanScreen extends Component {
   constructor(props) {
     super(props)
-    this.y = 20
+    this.y = 10
     this.x = 10 * 4
+    this.counter = 0
 
     this.state = {
       currentPoint: {
         x: null,
         y: null
-      }
+      },
+      newLinePopup: false,
+      finishScanPopup: false
     }
   }
 
-
-
   componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
     const createMatrix = (x, y) => Array(y).fill().map(() => Array(x).fill([null, null, null, null]))
     this.matrix = createMatrix(this.x / 4, this.y)
     this.currentPoint = {
@@ -52,22 +55,30 @@ class ScanScreen extends Component {
     this.geometry = new THREE.PlaneGeometry(1, 1, this.x, this.y);
     this.material = new THREE.MeshBasicMaterial({ wireframe: false, vertexColors: THREE.VertexColors });
 
-    console.log(this.matrix)
+    // console.log(this.matrix)
 
-    setInterval(() => {
-      this.zigzag("left")
-      this.matrix[this.currentPoint.y][this.currentPoint.x] = [Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255)]
+    this.dataInterval = setInterval(() => {
+      if (!this.state.newLinePopup && !this.state.finishScanPopup) {
+        this.zigzag("left")
+        this.matrix[this.currentPoint.y][this.currentPoint.x] = [Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255), Math.trunc(Math.random() * 255)]
 
-      for (let i = 0; i < this.matrix.length; i++) {
-        for (let j = 0; j < this.matrix[i].length; j++) {
-          for (let k = 0; k < this.matrix[i][j].length; k++) {
-            this.colorSquare((j * 4) + k, i, this.matrix[i][j][k])
+        for (let i = 0; i < this.matrix.length; i++) {
+          for (let j = 0; j < this.matrix[i].length; j++) {
+            for (let k = 0; k < this.matrix[i][j].length; k++) {
+              this.colorSquare((j * 4) + k, i, this.matrix[i][j][k])
+            }
           }
         }
+
+        this.counter++
+        if (this.counter === (this.x / 4) * this.y) {
+          console.log(this.matrix)
+          this.setState({
+            finishScanPopup: true
+          })
+        }
       }
-
-
-    }, 60);
+    }, 800);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
@@ -75,16 +86,43 @@ class ScanScreen extends Component {
     this.animate();
   }
 
+
+  handleKeyDown = (socketData) => {
+    if (socketData.type !== 'button') { return }
+    switch (socketData.payload) {
+      case 'left':
+        break
+      case 'right':
+        break
+      case 'ok':
+        if (this.state.newLinePopup === true && this.state.finishScanPopup === false) {
+          this.setState({
+            newLinePopup: false
+          })
+        }
+        break
+      case 'back':
+        clearInterval(this.dataInterval)
+        setTimeout(() => {
+          socketHelper.detach()
+          this.props.navigateTo("menuScreen")
+        }, 500);
+        return
+      default:
+        break
+    }
+  }
+
+
   colorSquare = (x, y, c) => {
     let index = ((y) * 2 * this.x) + (x) * 2;
     if (c === null) {
       this.geometry.faces[index].color = new THREE.Color(0)
       this.geometry.faces[index + 1].color = new THREE.Color(0)
     } else {
-      this.geometry.faces[index].color = new THREE.Color(c)
-      this.geometry.faces[index + 1].color = new THREE.Color(c)
+      this.geometry.faces[index].color = new THREE.Color(this.getColor(c))
+      this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(c))
     }
-
   }
 
   getColor = (pct) => {
@@ -158,26 +196,37 @@ class ScanScreen extends Component {
         // Y sifir ise X'i arttir, Y'yi resetle
         if (this.currentPoint.y > 0) {
           this.currentPoint.y--
+          if (this.currentPoint.y === 0) {
+            this.setState({
+              newLinePopup: true
+            })
+          }
         } else if (this.currentPoint.y === 0) {
           this.currentPoint.x++
+
           this.currentPoint.y = this.height - 1
         }
       } else if (startPos === 'right') {
         // Sinirdaysa bir sey yapma
-        if (this.currentPoint.x === 0 && this.currentPoint.y === 0) return this.currentPoint
+        if (this.currentPoint.x === 0 && this.currentPoint.y === 0) {
+          return this.currentPoint
+        }
         // Y'yi sifira kadar kucult
         // Y sifir ise X'i azalt, Y'yi resetle
         if (this.currentPoint.y > 0) {
           this.currentPoint.y--
-        } else if (this.currentPoint.y === 0) {
+          if (this.currentPoint.y === 0) {
+            this.setState({
+              newLinePopup: true
+            })
+          }
+        }
+        else if (this.currentPoint.y === 0) {
           this.currentPoint.x--
           this.currentPoint.y = this.height - 1
         }
       }
     }
-    this.setState({
-      currentPoint: this.currentPoint
-    })
   }
 
   zigzag = (startPos) => {
@@ -212,12 +261,24 @@ class ScanScreen extends Component {
         if ((this.currentPoint.y === 0 && dir === 'up') || (this.currentPoint.y === this.height - 1 && dir === 'down')) {
           // Sadece X degisiyor
           this.currentPoint.x++
+
         } else {
           // Sadece Y degisiyor
           if (dir === 'up') {
+
             this.currentPoint.y--
+            if (this.currentPoint.y === 0) {
+              this.setState({
+                newLinePopup: true
+              })
+            }
           } else {
             this.currentPoint.y++
+            if (this.currentPoint.y === this.y - 1) {
+              this.setState({
+                newLinePopup: true
+              })
+            }
           }
         }
       } else if (startPos === 'right') {
@@ -225,23 +286,34 @@ class ScanScreen extends Component {
         // this.Width cift ise:
         // - tek yukari
         // - cift asagi
+
         if (this.width % 2 === 0) {
+
           dir = (this.currentPoint.x % 2 === 0) ? 'down' : 'up'
+
         } else {
+
           // this.Width tek ise:
           // - cift yukari
           // - tek asagi
+
           dir = (this.currentPoint.x % 2 === 0) ? 'up' : 'down'
         }
 
         // Sinirdaysa bir sey yapma
-        if (this.currentPoint.y === 0 && this.currentPoint.x === 0 && dir === 'up') return this.currentPoint
-        if (this.currentPoint.y === this.height - 1 && this.currentPoint.x === 0 && dir === 'down') return this.currentPoint
+        if (this.currentPoint.y === 0 && this.currentPoint.x === 0 && dir === 'up') {
+          return this.currentPoint
+        }
+        if (this.currentPoint.y === this.height - 1 && this.currentPoint.x === 0 && dir === 'down') {
+          return this.currentPoint
+        }
 
         // Yon degisiyorsa X'i arttir
         if ((this.currentPoint.y === 0 && dir === 'up') || (this.currentPoint.y === this.height - 1 && dir === 'down')) {
           // Sadece X degisiyor
+
           this.currentPoint.x--
+
         } else {
           // Sadece Y degisiyor
           if (dir === 'up') {
@@ -252,15 +324,55 @@ class ScanScreen extends Component {
         }
       }
     }
-    this.setState({
-      currentPoint: this.currentPoint
-    })
+  }
+
+
+
+  renderNewLinePopup = () => {
+    return (
+      <div className="new-line-popup-container">
+        <div className="new-line-popup">
+          <div className="new-line-warning">
+            Current line is completed. Please press 'START' button for the next line.
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  renderFinishPopup = () => {
+    return (
+      <div className="new-line-popup-container">
+        <div className="new-line-popup">
+          <div className="new-line-warning">
+            Scan is completed. Do you want to view scan result?
+          </div>
+          <div className="scan-screen-buttons">
+            <div className="scan-screen-button">
+              Okey
+            </div>
+            <div className="scan-screen-button">
+              Cancel
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
 
   render() {
     return (
       <div className="scan-screen component">
+        {
+          this.state.newLinePopup ? this.renderNewLinePopup() : ''
+        }
+
+        {
+          this.state.finishScanPopup ? this.renderFinishPopup() : ''
+        }
+
+
         <div className="scan-screen-details">
           <div className="detail-bar">
             <div className="bar-name">
@@ -288,7 +400,19 @@ class ScanScreen extends Component {
               235
               </div>
           </div>
+
+          <div className="detail-bar">
+            <div className="bar-name">
+              Value
+            </div>
+            <div className="bar-value">
+              235
+              </div>
+          </div>
+
         </div>
+
+
         <div className="canvas-container" ref="canvasHolder">  </div>
       </div>
     )

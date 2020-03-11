@@ -14,18 +14,18 @@ class AutoLRLResult extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        gold: Math.trunc(Math.random() * 100),
-        silver: Math.trunc(Math.random() * 100),
-        iron: Math.trunc(Math.random() * 100),
-        diamond: Math.trunc(Math.random() * 100)
-      })
-    }, 600);
+    // this.interval = setInterval(() => {
+    //   this.setState({
+    //     gold: Math.trunc(Math.random() * 100),
+    //     silver: Math.trunc(Math.random() * 100),
+    //     iron: Math.trunc(Math.random() * 100),
+    //     diamond: Math.trunc(Math.random() * 100)
+    //   })
+    // }, 600);
   }
 
   componentWillUnmount(){
-    clearInterval(this.interval)
+    // clearInterval(this.interval)
   }
 
   render() {

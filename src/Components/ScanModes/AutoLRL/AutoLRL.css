@@ -40,8 +40,10 @@
 }
 
 .auto-lrl-scan rect{
-  transition: .8s all;
+  transition: .5s all;
 }
+
+/* settings */
 
 .auto-lrl-settings-component{
   width: 100%;
@@ -65,11 +67,13 @@
 }
 
 .auto-lrl-settings-component .value{
+  height: 100px;
   color: white;
   font-size: 25px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-direction: column;
 }
 
 .auto-lrl-settings-component .value span:first-of-type{

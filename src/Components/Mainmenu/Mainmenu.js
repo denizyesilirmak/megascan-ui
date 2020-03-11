@@ -62,7 +62,7 @@ class Mainmenu extends Component {
       {
         name: "Live Stream",
         icon: LiveStreamIcon,
-        screenName: "liveStreamScreen"
+        screenName: "controlMagnetometer"
       },
       {
         name: "Settings",

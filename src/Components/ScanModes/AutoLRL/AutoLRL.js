@@ -6,13 +6,24 @@ import AutoLRLScan from './AutoLRLScan'
 import AutoLRLSettings from './AutoLRLSettings'
 import AutoLRLResultScreen from './AutoLRLResult'
 
-class AutoLRL extends Component {
 
+const LIMITS = {
+  MAXDISTANCE:  2500,
+  MINDISTANCE:  100,
+  MAXDEPTH:  100,
+  MINDEPTH:  10
+}
+
+class AutoLRL extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      activeScreen: 2
+      activeScreen: 0,
+      settingsMode: true, //true: distance false: depth
+      distance: LIMITS.MINDISTANCE,
+      depth: LIMITS.MINDEPTH
+
     }
   }
 
@@ -28,10 +39,10 @@ class AutoLRL extends Component {
     let tempActiveScreen = this.state.activeScreen
     switch (socketData.payload) {
       case 'ok':
-        if(tempActiveScreen >= 0 && tempActiveScreen < 3){
-          tempActiveScreen ++
+        if (tempActiveScreen >= 0 && tempActiveScreen < 2) {
+          tempActiveScreen++
         }
-        else if(tempActiveScreen === 3) tempActiveScreen = 0
+        else if (tempActiveScreen === 2) tempActiveScreen = 0
         this.setState({
           activeScreen: tempActiveScreen
         })
@@ -44,6 +55,47 @@ class AutoLRL extends Component {
           this.props.navigateTo("menuScreen")
         }, 500);
         return
+
+      case 'right':
+        if (this.state.activeScreen === 0) {
+          this.setState({ settingsMode: !this.state.settingsMode })
+        }
+        return
+      case 'left':
+        if (this.state.activeScreen === 0) {
+          this.setState({ settingsMode: !this.state.settingsMode })
+        }
+        return
+      case 'up':
+        if (this.state.activeScreen === 0) {
+          if (this.state.settingsMode === true) {
+            //change distance
+            if (this.state.distance < LIMITS.MAXDISTANCE) {
+              this.setState({ distance: this.state.distance + 50 })
+            }
+          } else {
+            //change depth
+            if (this.state.depth < LIMITS.MAXDEPTH) {
+              this.setState({ depth: this.state.depth + 10 })
+            }
+          }
+        }
+        return
+      case 'down':
+        if (this.state.activeScreen === 0) {
+          if (this.state.settingsMode === true) {
+            //change distance
+            if (this.state.distance > LIMITS.MINDISTANCE) {
+              this.setState({ distance: this.state.distance - 50 })
+            }
+          } else {
+            //change depth
+            if (this.state.depth > LIMITS.MINDEPTH) {
+              this.setState({ depth: this.state.depth - 10 })
+            }
+          }
+        }
+        return
       default:
         break
     }
@@ -51,7 +103,7 @@ class AutoLRL extends Component {
 
   renderScreen = (screen) => {
     switch (screen) {
-      case 0: return <AutoLRLSettings />
+      case 0: return <AutoLRLSettings mode={this.state.settingsMode} distance={this.state.distance} depth={this.state.depth} limits={LIMITS} />
       case 1: return <AutoLRLScan />
       case 2: return <AutoLRLResultScreen />
       default:

@@ -159,10 +159,9 @@ class ScanScreen extends Component {
 
 
   colorSquare = (x, y, c) => {
-
     let index = ((y) * 2 * this.x) + (x) * 2;
     if(this.max - this.min> 6){
-      if (c > 0) {
+      if (c < 0) {
         this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max, 127, 255))))
         this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max, 127, 255))))
       } else {
@@ -172,15 +171,13 @@ class ScanScreen extends Component {
     }
     else{
       if (c > 0) {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 - c), 127, this.max, 127, 140))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 - c), 127, this.max, 127, 140))))
+        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max, 127, 140))))
+        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max, 127, 140))))
       } else {
         this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
         this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
       }
     }
-
-
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {

@@ -83,3 +83,7 @@
 .auto-lrl-settings-component .value span:last-of-type{
   margin-right: 10px;
 }
+
+.auto-lrl-settings-component path{
+  transition: all .5s;
+}

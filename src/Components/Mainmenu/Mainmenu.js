@@ -17,10 +17,11 @@ import ManualLRLIcon from '../../Assets/MenuIcons/m-device.png'
 class Mainmenu extends Component {
   constructor(props) {
     super(props)
-
+    document.cookie = "menuIndex: 3";
+    console.log(document.cookie)
 
     this.state = {
-      index: 0
+      index: 1
     }
 
     this.buttons = [

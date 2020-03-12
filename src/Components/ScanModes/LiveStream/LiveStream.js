@@ -147,7 +147,7 @@ class LiveStrem extends Component {
           // console.log("b")
         }
       }
-      this.oscillator.frequency.value = (this.instantData)
+      this.oscillator.frequency.value = (Math.random()*200)
       this.calibration(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))

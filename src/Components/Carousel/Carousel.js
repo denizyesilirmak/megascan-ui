@@ -7,6 +7,11 @@ import RightArrow from '../../Assets/MenuIcons/right-arrow1.png'
 import ButtonIndicator from '../../Assets/MenuIcons/button-indicator.png'
 
 class Carousel extends Component {
+
+  componentDidMount(){
+    this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
+  }
+
   componentDidUpdate () {
     this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
   }

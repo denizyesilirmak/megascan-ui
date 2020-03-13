@@ -15,7 +15,6 @@ import LiveStreamIcon from '../../Assets/MenuIcons/m-live-stream.png'
 import ManualLRLIcon from '../../Assets/MenuIcons/m-device.png'
 
 function getCookie(cname) {
-  console.log("get")
   var name = cname + "=";
   var ca = document.cookie.split(';');
   for (var i = 0; i < ca.length; i++) {
@@ -97,7 +96,7 @@ class Mainmenu extends Component {
   }
 
   componentDidMount() {
-    console.log("mainmenu mounted")
+    // console.log("mainmenu mounted")
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.mainmenu.style.opacity = 1

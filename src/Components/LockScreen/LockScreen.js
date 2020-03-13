@@ -3,8 +3,14 @@ import './LockScreen.css'
 import socketHelper from '../../SocketHelper'
 import LockIcon from '../../Assets/MenuIcons/lock.png'
 
-class LockScreen extends Component {
+const DEFAULTPINS = [
+  "0808",
+  "4444",
+  "9856",
+  "1402"
+]
 
+class LockScreen extends Component {
   constructor(props) {
     super(props)
 
@@ -22,6 +28,14 @@ class LockScreen extends Component {
       this.refs.lockHolder.style.opacity = 1
       this.refs.lockHolder.style.transform = "scale(1)"
     }, 1200);
+  }
+
+  toggleWrongPinPopup() {
+    this.setState({ wrongPinPopup: true, pin: [] })
+    setTimeout(() => {
+      this.setState({pin: []})
+      this.setState({ wrongPinPopup: false })
+    }, 2500);
   }
 
   renderWrongPinPopup() {
@@ -57,17 +71,25 @@ class LockScreen extends Component {
         tempPin.splice(-1, 1)
         break
       case 'ok':
-        if (this.state.pin.length < 4) {
+        if (this.state.pin.length < 4 && !this.state.wrongPinPopup) {
           if (tempCursorY % 4 >= 0 && tempCursorY % 4 < 3) {
             tempPin.push(tempCursorY % 4 * 3 + tempCursorX % 3 + 1)
           }
           else if (tempCursorY % 4 === 3) {
-            tempPin.push('0')
+            tempPin.push(0)
           }
         }
         else if (this.state.pin.length === 4) {
-          this.props.navigateTo("menuScreen")
-          return
+          console.log(this.state.pin.join(''))
+          DEFAULTPINS.forEach(element => {
+            if(element === this.state.pin.join('')){
+              this.props.navigateTo("menuScreen")
+              return
+            }
+          });
+          
+          this.toggleWrongPinPopup();
+          break
         }
         break
       default:
@@ -79,7 +101,7 @@ class LockScreen extends Component {
       cursorY: tempCursorY,
       pin: tempPin
     })
-    console.log(this.state.pin)
+    // console.log(this.state.pin)
   }
 
   render() {
@@ -87,16 +109,16 @@ class LockScreen extends Component {
       <div className="lock-screen">
 
         {
-         (this.state.wrongPinPopup) ? this.renderWrongPinPopup() : ''
+          (this.state.wrongPinPopup) ? this.renderWrongPinPopup() : ''
         }
 
         <img className="lock-icon" alt="lock" src={LockIcon} />
         <div ref="lockHolder" className="lock-holder">
           <div className="pin">
-            <span className="digit">{this.state.pin[0] ? this.state.pin[0] : "-"}</span>
-            <span className="digit">{this.state.pin[1] ? this.state.pin[1] : "-"}</span>
-            <span className="digit">{this.state.pin[2] ? this.state.pin[2] : "-"}</span>
-            <span className="digit">{this.state.pin[3] ? this.state.pin[3] : "-"}</span>
+            <span className="digit">{this.state.pin[0] !== undefined ? this.state.pin[0] : "-"}</span>
+            <span className="digit">{this.state.pin[1] !== undefined ? this.state.pin[1] : "-"}</span>
+            <span className="digit">{this.state.pin[2] !== undefined ? this.state.pin[2] : "-"}</span>
+            <span className="digit">{this.state.pin[3] !== undefined ? this.state.pin[3] : "-"}</span>
           </div>
           <div className="num-pad">
             <div className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>1</div>

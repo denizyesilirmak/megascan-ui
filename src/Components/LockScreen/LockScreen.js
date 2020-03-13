@@ -33,7 +33,7 @@ class LockScreen extends Component {
   toggleWrongPinPopup() {
     this.setState({ wrongPinPopup: true, pin: [] })
     setTimeout(() => {
-      this.setState({pin: []})
+      this.setState({ pin: [] })
       this.setState({ wrongPinPopup: false })
     }, 2500);
   }
@@ -82,12 +82,12 @@ class LockScreen extends Component {
         else if (this.state.pin.length === 4) {
           console.log(this.state.pin.join(''))
           DEFAULTPINS.forEach(element => {
-            if(element === this.state.pin.join('')){
+            if (element === this.state.pin.join('')) {
               this.props.navigateTo("menuScreen")
               return
             }
           });
-          
+
           this.toggleWrongPinPopup();
           break
         }

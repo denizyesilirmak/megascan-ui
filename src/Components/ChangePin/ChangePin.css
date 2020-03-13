@@ -1,0 +1,42 @@
+.change-pin-component {
+  background: #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.change-pin-component .keypad {
+  width: 210px;
+  height: 280px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 25% 25% 25% 25%;
+  justify-items: center;
+  align-items: center;
+  border: 3px solid #806227;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.change-pin-component .keypad .key {
+  width: 80%;
+  height: 80%;
+  background: #504835;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  border-radius: 20px;
+  color: white;
+}
+
+.change-pin-component .key.selected {
+  color: black;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.old-pin-label {
+  color: white;
+  font-size: 24px;
+}

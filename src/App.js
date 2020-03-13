@@ -7,6 +7,7 @@ import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
 import TurnOff from './Components/TurnOff/TurnOff'
 import LockScreen from './Components/LockScreen/LockScreen.js'
+import ChangePinScreen from './Components/ChangePin/ChangePin'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -32,7 +33,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "menuScreen"
+      activeScreen: "changePinScreen"
     }
   }
 
@@ -80,6 +81,8 @@ class App extends Component {
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="groundScanMethodSelectionScreen" />)
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} />)
+      case "changePinScreen":
+        return (<ChangePinScreen navigateTo={this.navigateTo} />)
       default:
         break;
     }

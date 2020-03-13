@@ -14,21 +14,44 @@ import SettingIcon from '../../Assets/MenuIcons/m-settings.png'
 import LiveStreamIcon from '../../Assets/MenuIcons/m-live-stream.png'
 import ManualLRLIcon from '../../Assets/MenuIcons/m-device.png'
 
+function getCookie(cname) {
+  console.log("get")
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (2000 * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 class Mainmenu extends Component {
   constructor(props) {
     super(props)
-    document.cookie = "menuIndex: 3";
-    console.log(document.cookie)
-
+    const lastIndex = getCookie("menuIndex")
     this.state = {
-      index: 1
+      index: Number.isNaN(parseInt(lastIndex)) ? -1 : parseInt(lastIndex)
     }
+
+
 
     this.buttons = [
       {
         name: "Ground Scan",
         icon: GroundScanIcon,
-        screenName: "groundScanMethodSelectionScreen"
+        screenName: "controlGroundScan"
       },
       {
         name: "Geophysical",
@@ -53,17 +76,17 @@ class Mainmenu extends Component {
       {
         name: "Ionic",
         icon: IonicIcon,
-        screenName: "ionicScreen"
+        screenName: "controlIonic"
       },
       {
         name: "Bionic",
         icon: BionicIcon,
-        screenName: "bionicScreen"
+        screenName: "controlBionic"
       },
       {
         name: "Live Stream",
         icon: LiveStreamIcon,
-        screenName: "controlMagnetometer"
+        screenName: "controlLiveStream"
       },
       {
         name: "Settings",
@@ -96,11 +119,12 @@ class Mainmenu extends Component {
         break
       case 'ok':
         // console.log("mainmenu: ok")
+        setCookie("menuIndex", this.state.index)
         this.refs.mainmenu.style.transform = "scale(2)"
         this.refs.mainmenu.style.opacity = 0
-        
+
         setTimeout(() => {
-          if (this.buttons[this.state.index + 1].screenName !== ""){
+          if (this.buttons[this.state.index + 1].screenName !== "") {
             // console.log("main menu unmount")
             socketHelper.detach()
             this.props.navigateTo(this.buttons[this.state.index + 1].screenName)
@@ -119,7 +143,7 @@ class Mainmenu extends Component {
     })
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
 
   }
 

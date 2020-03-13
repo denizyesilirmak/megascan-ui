@@ -70,8 +70,14 @@ class App extends Component {
         return (<LockScreen navigateTo={this.navigateTo} />)
       case "manualLRLScreen":
         return (<ManualScan navigateTo={this.navigateTo} />)
-      case "controlMagnetometer":
-        return (<ControlMagnetometer navigateTo={this.navigateTo} />)
+      case "controlLiveStream":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="liveStreamScreen" />)
+      case "controlBionic":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="bionicScreen" />)
+      case "controlIonic":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="ionicScreen" />)
+      case "controlGroundScan":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="groundScanMethodSelectionScreen" />)
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} />)
       default:

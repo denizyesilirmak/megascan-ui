@@ -9,23 +9,21 @@ class ChangePin extends Component {
       stage: 0,
       cursorX: 3 * 50,
       cursorY: 4 * 90,
-      pin: []
+      oldPinInput: [],
+      newPinInput: [],
+      confirmNewPinInput: []
     }
   }
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-    setInterval(() => {
-      this.setState({
-        stage: this.state.stage + 1
-      })
-    }, 200);
+
   }
 
   handleKeyDown = (socketData) => {
     let tempCursorX = this.state.cursorX
     let tempCursorY = this.state.cursorY
-    let tempPin = this.state.pin
+    let tempPin = this.state.oldPinInput
     switch (socketData.payload) {
       case 'left':
         tempCursorX--
@@ -39,6 +37,23 @@ class ChangePin extends Component {
       case 'down':
         tempCursorY++
         break
+      case 'ok':
+        if(this.state.stage === 0 ){
+          if (this.state.oldPinInput.length < 4 && !this.state.wrongPinPopup) {
+            if (tempCursorY % 4 >= 0 && tempCursorY % 4 < 3) {
+              tempPin.push(tempCursorY % 4 * 3 + tempCursorX % 3 + 1)
+            }
+            else if (tempCursorY % 4 === 3) {
+              tempPin.push(0)
+            }
+          }
+          else if (this.state.oldPinInput.length === 4) {
+            console.log(this.state.oldPinInput.join(''))
+            //bu kısım eski şifrenin giişinin tamamlandığı kısım.
+            break
+          }
+        }
+        break
       case 'back':
         this.props.navigateTo("menuScreen")
         return
@@ -48,7 +63,7 @@ class ChangePin extends Component {
     this.setState({
       cursorX: tempCursorX,
       cursorY: tempCursorY,
-      pin: tempPin
+      oldPinInput: tempPin
     })
   }
 
@@ -64,7 +79,7 @@ class ChangePin extends Component {
           this.state.stage % 3 === 1 ?
             <div className="old-pin-label">Please Enter New Pin Number</div> : null
         }
-                {
+        {
           this.state.stage % 3 === 2 ?
             <div className="old-pin-label">Please Re-Enter New Pin Number</div> : null
         }
@@ -80,7 +95,6 @@ class ChangePin extends Component {
           <div className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>9</div>
           <div></div>
           <div className={`key ${this.state.cursorY % 4 === 3 ? "selected" : ""}`}>0</div>
-          <div></div>
         </div>
       </div>
     )

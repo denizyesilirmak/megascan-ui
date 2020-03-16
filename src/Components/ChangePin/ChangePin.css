@@ -38,5 +38,11 @@
 
 .old-pin-label {
   color: white;
-  font-size: 24px;
+  font-size: 18px;
+}
+
+.pin-number{
+  color: white;
+  font-size: 40px;
+  letter-spacing: 14px;
 }

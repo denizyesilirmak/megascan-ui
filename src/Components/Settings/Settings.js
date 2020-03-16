@@ -248,7 +248,7 @@ class Settings extends Component {
             }
             else if (this.state.subCursor === 1) {
               console.log("pin popup open")
-              this.setState({ activePopup: "pin" })
+              this.props.navigateTo("changePinScreen")
             }
           }
 

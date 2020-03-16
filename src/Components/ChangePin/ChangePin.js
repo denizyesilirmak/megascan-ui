@@ -13,17 +13,18 @@ class ChangePin extends Component {
       newPinInput: [],
       confirmNewPinInput: []
     }
+
+    this.tempPin = []
   }
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-
   }
 
   handleKeyDown = (socketData) => {
     let tempCursorX = this.state.cursorX
     let tempCursorY = this.state.cursorY
-    let tempPin = this.state.oldPinInput
+    
     switch (socketData.payload) {
       case 'left':
         tempCursorX--
@@ -38,33 +39,58 @@ class ChangePin extends Component {
         tempCursorY++
         break
       case 'ok':
-        if(this.state.stage === 0 ){
-          if (this.state.oldPinInput.length < 4 && !this.state.wrongPinPopup) {
+        if (true) {
+          if (this.tempPin.length < 4 && !this.state.wrongPinPopup) {
             if (tempCursorY % 4 >= 0 && tempCursorY % 4 < 3) {
-              tempPin.push(tempCursorY % 4 * 3 + tempCursorX % 3 + 1)
+              this.tempPin.push(tempCursorY % 4 * 3 + tempCursorX % 3 + 1)
             }
             else if (tempCursorY % 4 === 3) {
-              tempPin.push(0)
+              this.tempPin.push(0)
             }
           }
-          else if (this.state.oldPinInput.length === 4) {
+          else if (this.tempPin.length === 4) {
             console.log(this.state.oldPinInput.join(''))
+            this.tempPin = []
+            this.setState({stage: this.state.stage + 1})
             //bu kısım eski şifrenin giişinin tamamlandığı kısım.
             break
           }
         }
         break
       case 'back':
-        this.props.navigateTo("menuScreen")
+        this.props.navigateTo("settingsScreen")
         return
       default:
         break
     }
     this.setState({
       cursorX: tempCursorX,
-      cursorY: tempCursorY,
-      oldPinInput: tempPin
+      cursorY: tempCursorY
     })
+
+    if(this.state.stage === 0){
+      this.setState({oldPinInput: this.tempPin})
+    }
+    else if(this.state.stage === 1){
+      this.setState({newPinInput: this.tempPin})
+    }
+    else if(this.state.stage === 2){
+      this.setState({confirmNewPinInput: this.tempPin})
+    }
+  }
+
+  renderCurrentPin = () => {
+    switch (this.state.stage) {
+      case 0:
+        return <div className="pin-number">{this.state.oldPinInput}</div>
+      case 1:
+        return <div className="pin-number">{this.state.newPinInput}</div>
+      case 2:
+        return <div className="pin-number">{this.state.confirmNewPinInput}</div>
+
+      default:
+        break;
+    }
   }
 
 
@@ -83,6 +109,10 @@ class ChangePin extends Component {
           this.state.stage % 3 === 2 ?
             <div className="old-pin-label">Please Re-Enter New Pin Number</div> : null
         }
+        {
+          this.renderCurrentPin()
+        }
+
         <div className="keypad">
           <div className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>1</div>
           <div className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>2</div>
@@ -101,3 +131,5 @@ class ChangePin extends Component {
   }
 }
 export default ChangePin
+
+//eski şifre onayı

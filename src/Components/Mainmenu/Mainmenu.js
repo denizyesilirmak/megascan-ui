@@ -98,9 +98,13 @@ class Mainmenu extends Component {
   componentDidMount() {
     // console.log("mainmenu mounted")
     socketHelper.attach(this.handleKeyDown)
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.refs.mainmenu.style.opacity = 1
     }, 100);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
   }
 
   handleKeyDown = (socketData) => {
@@ -140,10 +144,6 @@ class Mainmenu extends Component {
     this.setState({
       index: tempIndex
     })
-  }
-
-  componentWillUnmount() {
-
   }
 
   render() {

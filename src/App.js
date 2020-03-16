@@ -33,8 +33,14 @@ class App extends Component {
     super(props)
 
     this.state = {
-      activeScreen: "changePinScreen"
+      lock: false,
+      activeScreen: "changePinScreen",
     }
+  }
+
+  componentDidMount(){
+    if(this.state.lock)
+    this.navigateTo("lockScreen")
   }
 
   navigateTo = (screenName) => {

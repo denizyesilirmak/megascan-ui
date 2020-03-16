@@ -56,18 +56,23 @@ class LockScreen extends Component {
     let tempPin = this.state.pin
     switch (socketData.payload) {
       case 'left':
+        if(!this.state.wrongPinPopup)
         tempCursorX--
         break
       case 'right':
+        if(!this.state.wrongPinPopup)
         tempCursorX++
         break
       case 'up':
+        if(!this.state.wrongPinPopup)
         tempCursorY--
         break
       case 'down':
+        if(!this.state.wrongPinPopup)
         tempCursorY++
         break
       case 'back':
+        if(!this.state.wrongPinPopup)
         tempPin.splice(-1, 1)
         break
       case 'ok':

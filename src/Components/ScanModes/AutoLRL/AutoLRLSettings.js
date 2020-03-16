@@ -35,20 +35,20 @@ class AutoLRLSettings extends Component {
             <svg width="179.99999999999997" height="80" xmlns="http://www.w3.org/2000/svg"> <g>
               <rect id="canvas_background" height="82" width="182" y="-1" x="-1" />
               <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
-                <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
+                <rect fill="url(#gridpattern)" strokeWidth="0" y="0" x="0" height="100%" width="100%" />
               </g>
             </g>
               <g>
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) >= 0 ? "#fcba03" : "#333"} id="svg_6" d="m7.90014,28.81695c0,0 13.82419,9.57576 0.6,22.79996" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 1 ? "#fcba03" : "#333"} id="svg_7" d="m19.70012,25.21267c0,0 18.19492,12.60329 0.7897,30.00852" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 2 ? "#fcba03" : "#333"} id="svg_8" d="m32.5001,22.68968c0,0 21.25443,14.72255 0.92248,35.0545" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 3 ? "#fcba03" : "#333"} id="svg_9" d="m46.90007,20.5854c0,0 22.12859,16.49011 0.96043,39.26306" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 4 ? "#fcba03" : "#333"} id="svg_10" d="m61.50005,17.87114c0,0 25.18809,18.77003 1.09321,44.69159" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 5 ? "#fcba03" : "#333"} id="svg_11" d="m77.90002,14.76912c0,0 28.68468,21.37567 1.24498,50.89563" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 6 ? "#fcba03" : "#333"} id="svg_12" d="m95.1,12.05485c0,0 31.74418,23.6556 1.37776,56.32416" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 7 ? "#fcba03" : "#333"} id="svg_13" d="m112.69996,9.72834c0,0 34.36662,25.60983 1.49158,60.97719" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 8 ? "#fcba03" : "#333"} id="svg_14" d="m132.09993,7.40182c0,0 36.98906,27.56406 1.6054,65.63022" stroke-width="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 9 ? "#fcba03" : "#333"} id="svg_2" d="m151.8999,4.68756c0,0 40.04857,29.84399 1.73819,71.05875" stroke-width="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) >= 0 ? "#fcba03" : "#333"} id="svg_6" d="m7.90014,28.81695c0,0 13.82419,9.57576 0.6,22.79996" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 1 ? "#fcba03" : "#333"} id="svg_7" d="m19.70012,25.21267c0,0 18.19492,12.60329 0.7897,30.00852" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 2 ? "#fcba03" : "#333"} id="svg_8" d="m32.5001,22.68968c0,0 21.25443,14.72255 0.92248,35.0545" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 3 ? "#fcba03" : "#333"} id="svg_9" d="m46.90007,20.5854c0,0 22.12859,16.49011 0.96043,39.26306" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 4 ? "#fcba03" : "#333"} id="svg_10" d="m61.50005,17.87114c0,0 25.18809,18.77003 1.09321,44.69159" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 5 ? "#fcba03" : "#333"} id="svg_11" d="m77.90002,14.76912c0,0 28.68468,21.37567 1.24498,50.89563" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 6 ? "#fcba03" : "#333"} id="svg_12" d="m95.1,12.05485c0,0 31.74418,23.6556 1.37776,56.32416" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 7 ? "#fcba03" : "#333"} id="svg_13" d="m112.69996,9.72834c0,0 34.36662,25.60983 1.49158,60.97719" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 8 ? "#fcba03" : "#333"} id="svg_14" d="m132.09993,7.40182c0,0 36.98906,27.56406 1.6054,65.63022" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 9 ? "#fcba03" : "#333"} id="svg_2" d="m151.8999,4.68756c0,0 40.04857,29.84399 1.73819,71.05875" strokeWidth="5" fill="none" />
               </g>
             </svg>
             <div className={`navigator-button ${this.props.mode ? "selected" : ""}`}>Distance</div>

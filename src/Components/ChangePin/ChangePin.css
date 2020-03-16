@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .change-pin-component .keypad {
@@ -41,8 +41,37 @@
   font-size: 18px;
 }
 
-.pin-number{
+.pin-number {
   color: white;
   font-size: 40px;
-  letter-spacing: 14px;
+  display: flex;
+  width: 200px;
+  height: 55px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pin-number span {
+  background: rgb(46, 46, 46);
+  text-align: center;
+  display: block;
+  width: 40px;
+  height: 45px;
+  border-radius: 5px;
+}
+
+.change-pin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrong-pin-warning {
+  width: 280px;
+  background: red;
+  border-radius: 20px;
+  color: white;
+  padding: 10px;
+  text-align: center;
 }

@@ -8,6 +8,7 @@ import Settings from './Components/Settings/Settings'
 import TurnOff from './Components/TurnOff/TurnOff'
 import LockScreen from './Components/LockScreen/LockScreen.js'
 import ChangePinScreen from './Components/ChangePin/ChangePin'
+import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -34,13 +35,13 @@ class App extends Component {
 
     this.state = {
       lock: false,
-      activeScreen: "changePinScreen",
+      activeScreen: "changeLanguageScreen",
     }
   }
 
-  componentDidMount(){
-    if(this.state.lock)
-    this.navigateTo("lockScreen")
+  componentDidMount() {
+    if (this.state.lock)
+      this.navigateTo("lockScreen")
   }
 
   navigateTo = (screenName) => {
@@ -89,6 +90,8 @@ class App extends Component {
         return (<ScanScreen navigateTo={this.navigateTo} />)
       case "changePinScreen":
         return (<ChangePinScreen navigateTo={this.navigateTo} />)
+      case "changeLanguageScreen":
+        return (<ChangeLanguage navigateTo={this.navigateTo} />)
       default:
         break;
     }

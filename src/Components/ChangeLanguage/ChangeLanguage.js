@@ -64,6 +64,7 @@ class ChangeLanguage extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+
   }
 
   handleKeyDown = (socketData) => {
@@ -84,7 +85,7 @@ class ChangeLanguage extends Component {
         tempActiveIndex = tempActiveIndex + 4
         break
       case 'back':
-        break
+        this.props.navigateTo("settingsScreen")
       default:
         break
     }

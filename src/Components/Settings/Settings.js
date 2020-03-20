@@ -16,10 +16,16 @@ import DatePopup from './SettingsPopups/Date/DatePopup'
 import TimePopup from './SettingsPopups/Time/TimePopup'
 import PinPopup from './SettingsPopups/Pin/PinPopup'
 
+import TickIcon from '../../Assets/tick.png'
+// 2020.07.16-10:10:00
 
 class Settings extends Component {
   constructor(props) {
     super(props)
+
+    //get current date time
+    this.currentDate = new Date();
+    console.log(this.currentDate.getHours())
 
     this.state = {
       activeSettingTab: 0,
@@ -35,13 +41,14 @@ class Settings extends Component {
       keyToneVolume: 50,
       searchVolume: 50,
       brightness: 10,
-      hour: 0,
-      minute: 23,
-      day: 1,
-      month: 1,
-      year: 2003,
-      selectedTimeIndex: 0,
-      selectedDateIndex: 0
+      hour: this.currentDate.getHours(),
+      minute: this.currentDate.getMinutes(),
+      day: this.currentDate.getDate(),
+      month: this.currentDate.getMonth(),
+      year: this.currentDate.getFullYear(),
+      selectedTimeIndex: 2 * 200,
+      selectedDateIndex: 3 * 200,
+      okPopup: false
     }
 
     this.buttons = [
@@ -95,6 +102,37 @@ class Settings extends Component {
     }, 15);
   }
 
+  updateDateBeforePopupOpen = () => {
+    this.currentDate = new Date();
+    this.setState({
+      hour: this.currentDate.getHours(),
+      minute: this.currentDate.getMinutes(),
+      day: this.currentDate.getDate(),
+      month: this.currentDate.getMonth(),
+      year: this.currentDate.getFullYear(),
+    })
+  }
+
+  openOkPopup = () => {
+    this.setState({
+      okPopup: true
+    })
+    setTimeout(() => {
+      this.setState({
+        okPopup: false,
+        activePopup: ""
+      })
+    }, 2200);
+  }
+
+  renderOkPopup = () => {
+    return (
+      <div className="ok-popup">
+        <img src={TickIcon} alt="tick"></img>
+      </div>
+    )
+  }
+
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
@@ -110,13 +148,13 @@ class Settings extends Component {
         }
         else if (this.state.activePopup === "time") {
           this.setState({
-            selectedTimeIndex: this.state.selectedTimeIndex + 1
+            selectedTimeIndex: this.state.selectedTimeIndex - 1
           })
         }
 
         else if (this.state.activePopup === "date") {
           this.setState({
-            selectedDateIndex: this.state.selectedDateIndex + 1
+            selectedDateIndex: this.state.selectedDateIndex - 1
           })
         }
         break
@@ -159,19 +197,19 @@ class Settings extends Component {
           })
         }
 
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day > 0) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day > 1) {
           //change day
           this.setState({
             day: this.state.day - 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 1 && this.state.month > 0) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 1 && this.state.month > 1) {
           //change month
           this.setState({
             month: this.state.month - 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 2 && this.state.year > 1999) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 2 && this.state.year > 1950) {
           //change year
           this.setState({
             year: this.state.year - 1
@@ -197,7 +235,7 @@ class Settings extends Component {
           })
         }
 
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day < 30) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day < 31) {
           //change day
           this.setState({
             day: this.state.day + 1
@@ -209,7 +247,7 @@ class Settings extends Component {
             month: this.state.month + 1
           })
         }
-        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 2 && this.state.year < 2050) {
+        else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 2 && this.state.year < 2200) {
           //change month
           this.setState({
             year: this.state.year + 1
@@ -230,14 +268,30 @@ class Settings extends Component {
 
           else if (this.state.activeSettingTab === 1) {
             //Datetime
-            if (this.state.subCursor === 0) {
+            if (this.state.subCursor === 0 && this.state.activePopup === "") {
               console.log("change date")
+              this.updateDateBeforePopupOpen()
               this.setState({ activePopup: "date" })
             }
-            else if (this.state.subCursor === 1) {
+            else if (this.state.subCursor === 1 && this.state.activePopup === "") {
               console.log("change time")
+              this.updateDateBeforePopupOpen()
               this.setState({ activePopup: "time" })
             }
+            else if (this.state.subCursor === 0 && this.state.activePopup === "date") {
+              console.log("set date")
+              console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+              this.openOkPopup()
+
+            }
+            else if (this.state.subCursor === 1 && this.state.activePopup === "time") {
+              console.log("set time")
+              console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+              this.openOkPopup()
+
+            }
+
+
           }
 
           else if (this.state.activeSettingTab === 4) {
@@ -250,6 +304,15 @@ class Settings extends Component {
               console.log("pin popup open")
               this.props.navigateTo("changePinScreen")
             }
+          }
+
+          else if (this.state.activeSettingTab === 7) {
+            //language
+            if (this.state.subCursor === 0) {
+              console.log("change language")
+              this.props.navigateTo("changeLanguageScreen")
+            }
+
           }
 
 
@@ -331,6 +394,10 @@ class Settings extends Component {
   render() {
     return (
       <div ref="settings" className={`settings-component component `}>
+        {
+          this.state.okPopup ? 
+          this.renderOkPopup() : null
+        }
         {
           this.renderPopup(this.state.activePopup)
         }

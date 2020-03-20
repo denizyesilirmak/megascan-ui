@@ -36,7 +36,7 @@
 }
 
 .language.selected img{
-  animation: jello-horizontal 0.5s both;
+  animation: jello-horizontal 1s both;
 }
 
 @keyframes jello-horizontal {

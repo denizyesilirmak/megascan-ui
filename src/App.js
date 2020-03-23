@@ -9,6 +9,7 @@ import TurnOff from './Components/TurnOff/TurnOff'
 import LockScreen from './Components/LockScreen/LockScreen.js'
 import ChangePinScreen from './Components/ChangePin/ChangePin'
 import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
+import FileList from './Components/FileList/FileList'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -35,7 +36,7 @@ class App extends Component {
 
     this.state = {
       lock: false,
-      activeScreen: "settingsScreen",
+      activeScreen: "fileListScreen",
     }
   }
 
@@ -92,6 +93,8 @@ class App extends Component {
         return (<ChangePinScreen navigateTo={this.navigateTo} />)
       case "changeLanguageScreen":
         return (<ChangeLanguage navigateTo={this.navigateTo} />)
+      case "fileListScreen":
+        return (<FileList navigateTo={this.navigateTo} />)
       default:
         break;
     }

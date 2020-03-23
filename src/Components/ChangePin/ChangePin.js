@@ -15,13 +15,18 @@ class ChangePin extends Component {
       oldPinInput: [],
       newPinInput: [],
       confirmNewPinInput: [],
-      error: true
+      error: false
     }
 
     this.tempPin = []
   }
 
   componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        error: !this.state.error
+      })
+    }, 2000);
     socketHelper.attach(this.handleKeyDown)
   }
 
@@ -117,7 +122,7 @@ class ChangePin extends Component {
   render() {
     return (
       <div className="component change-pin-component">
-        <div className="change-pin-container">
+        <div className="change-pin-container"  style={{transform: this.state.error? 'translateX(-200px)' : null}}>
           {
             this.state.stage === 0 ?
               <div className="old-pin-label">Please Enter Old Pin Number</div> : null

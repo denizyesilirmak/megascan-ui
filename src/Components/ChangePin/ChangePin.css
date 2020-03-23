@@ -66,9 +66,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all .5s;
 }
 
 .wrong-pin-warning {
+  position: absolute;
+  right: 40px;
   width: 280px;
   background: red;
   border-radius: 20px;

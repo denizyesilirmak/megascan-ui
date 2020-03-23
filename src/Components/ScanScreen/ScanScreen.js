@@ -17,8 +17,8 @@ const COLORS = {
 class ScanScreen extends Component {
   constructor(props) {
     super(props)
-    this.y = 20
-    this.x = 10 * 4
+    this.y = 20 //max 20
+    this.x = 10 * 4 // max 10
     this.total = 0
     this.counter = 0
     this.average = 127
@@ -64,7 +64,7 @@ class ScanScreen extends Component {
 
     this.dataInterval = setInterval(() => {
       this.requestSensorData()
-    }, 200);
+    }, 120);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
@@ -125,7 +125,7 @@ class ScanScreen extends Component {
       let localMax = Math.max.apply(null, localSensorArray)
       this.min = localMin < this.min ? localMin : this.min
       this.max = localMax > this.max ? localMax : this.max
-      console.log("max: ", this.max, "min: ", this.min, "avg: ", this.average)
+      // console.log("max: ", this.max, "min: ", this.min, "avg: ", this.average)
 
       this.zigzag("right")
       this.matrix[this.currentPoint.y][this.currentPoint.x] = [
@@ -137,7 +137,11 @@ class ScanScreen extends Component {
       for (let i = 0; i < this.matrix.length; i++) {
         for (let j = 0; j < this.matrix[i].length; j++) {
           for (let k = 0; k < this.matrix[i][j].length; k++) {
-            this.colorSquare((j * 4) + k, i, this.matrix[i][j][k] - this.average)
+            if(this.matrix[i][j][k] === null){
+              this.colorSquare((j * 4) + k, i, null)
+            }else{
+              this.colorSquare((j * 4) + k, i, (this.matrix[i][j][k] - this.average))
+            }
           }
         }
       }
@@ -149,6 +153,7 @@ class ScanScreen extends Component {
       // console.log(this.average)
 
       if (this.counter === (this.x / 4) * this.y) {
+        clearInterval(this.dataInterval)
         console.log(this.matrix)
         this.setState({
           finishScanPopup: true
@@ -160,19 +165,24 @@ class ScanScreen extends Component {
 
   colorSquare = (x, y, c) => {
     let index = ((y) * 2 * this.x) + (x) * 2;
-    if(this.max - this.min> 6){
-      if (c < 0) {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max, 127, 255))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max, 127, 255))))
+    if(c === null){
+      this.geometry.faces[index].color = new THREE.Color("black")
+      this.geometry.faces[index + 1].color = new THREE.Color("black")
+      return
+    }
+    if(this.max - this.min >= 6){
+      if (c >= 0) {
+        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
+        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
       } else {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 0, 127))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 0, 127))))
+        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
       }
     }
     else{
       if (c > 0) {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max, 127, 140))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max, 127, 140))))
+        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max-this.average, 127, 140))))
+        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max-this.average, 127, 140))))
       } else {
         this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
         this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))

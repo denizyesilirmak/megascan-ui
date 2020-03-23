@@ -1,0 +1,33 @@
+.file-list{
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-list .files{
+  overflow: hidden;
+  width: 640px;
+  height: 320px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: repeat(100, 33%);
+  justify-items: center;
+  align-items: center;
+}
+
+.file-list .file{
+  width: 95%;
+  height: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.157);
+}
+
+.file-list .file.selected{
+  color: black;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}

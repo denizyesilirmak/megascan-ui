@@ -1,12 +1,12 @@
-.file-list{
+.file-list {
   background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-.file-list .files{
-  overflow: hidden;
+.file-list .files {
   width: 640px;
   height: 320px;
   display: grid;
@@ -16,7 +16,7 @@
   align-items: center;
 }
 
-.file-list .file{
+.file-list .file {
   width: 95%;
   height: 90%;
   display: flex;
@@ -27,7 +27,53 @@
   background: rgba(255, 255, 255, 0.157);
 }
 
-.file-list .file.selected{
+.file-list .file.selected {
   color: black;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.file-list .file.selected img {
+  transform: scale(1.2);
+}
+
+.file-list-popup {
+  position: absolute;
+  width: 500px;
+  height: 200px;
+  background: black;
+  z-index: 100;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  border: 2px solid #9f7928;
+}
+
+.file-list-popup .question {
+  color: white;
+  font-size: 22px;
+}
+
+.file-list-popup .selected-file-name {
+  color: white;
+  font-size: 40px;
+}
+
+.file-list-popup .buttons {
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.file-list-popup .buttons .button {
+  background: rgb(80, 80, 80);
+  width: 90px;
+  padding: 10px 20px 10px 20px;
+  text-align: center;
+}
+
+.file-list-popup .buttons .button.p-selected {
   background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 }

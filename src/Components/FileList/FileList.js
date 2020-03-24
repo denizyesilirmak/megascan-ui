@@ -35,8 +35,9 @@ class FileList extends Component {
 
     this.state = {
       cursorIndex: 0,
+      popupCursorIndex: 3 * 100,
       fileList: FILES,
-      popup: true
+      popup: false
 
     }
   }
@@ -48,39 +49,67 @@ class FileList extends Component {
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempCursorIndex = this.state.cursorIndex
+    let tempPopupCursorIndex = this.state.popupCursorIndex
     switch (socketData.payload) {
       case 'left':
-        if (tempCursorIndex > 0)
-          tempCursorIndex = tempCursorIndex - 1
+        if (this.state.popup === false) {
+          if (tempCursorIndex > 0)
+            tempCursorIndex = tempCursorIndex - 1
+        } else {
+          tempPopupCursorIndex--
+        }
+
         break
       case 'right':
-        if (tempCursorIndex < this.state.fileList.length - 1)
-          tempCursorIndex = tempCursorIndex + 1
+        if (this.state.popup === false) {
+          if (tempCursorIndex < this.state.fileList.length - 1)
+            tempCursorIndex = tempCursorIndex + 1
+        } else {
+          tempPopupCursorIndex++
+        }
+
         break
       case 'up':
-        if (!(tempCursorIndex < 4 && tempCursorIndex >= 0))
-          tempCursorIndex = tempCursorIndex - 4
+        if (this.state.popup === false) {
+          if (!(tempCursorIndex < 4 && tempCursorIndex >= 0))
+            tempCursorIndex = tempCursorIndex - 4
+        } else {
+
+        }
+
         break
       case 'down':
-        if ((tempCursorIndex + 4) < this.state.fileList.length)
-          tempCursorIndex = tempCursorIndex + 4
+        if (this.state.popup === false) {
+          if ((tempCursorIndex + 4) < this.state.fileList.length)
+            tempCursorIndex = tempCursorIndex + 4
+        } else {
+
+        }
+
         break
       case 'ok':
-        this.setState({
-          popup: true
-        })
+        if (!this.state.popup) {
+          tempPopupCursorIndex = 300
+          this.setState({
+            popup: true,
+          })
+        }
         break
       case 'back':
-        this.setState({
-          popup: false
-        })
+        if (this.state.popup)
+          this.setState({ popup: false })
+        else {
+          //back to mainmenu
+          this.props.navigateTo("menuScreen")
+        }
         return
       default:
         break
     }
 
     this.setState({
-      cursorIndex: tempCursorIndex
+      cursorIndex: tempCursorIndex,
+      popupCursorIndex: tempPopupCursorIndex
     })
   }
 
@@ -96,11 +125,11 @@ class FileList extends Component {
           }
         </div>
         <div className="buttons">
-          <div className="button p-selected">Open</div>
-          <div className="button">Cancel</div>
-          <div className="button">Delete File</div>
+          <div className={`button ${this.state.popupCursorIndex % 3 === 0 ? "p-selected" : null}`}>Open</div>
+          <div className={`button ${this.state.popupCursorIndex % 3 === 1 ? "p-selected" : null}`}>Cancel</div>
+          <div className={`button ${this.state.popupCursorIndex % 3 === 2 ? "p-selected" : null}`}>Delete File</div>
         </div>
-      </div>
+      </div >
     )
   }
 

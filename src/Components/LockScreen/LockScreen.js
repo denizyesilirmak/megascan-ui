@@ -24,7 +24,7 @@ class LockScreen extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-    setTimeout(() => {
+    this.introTimeout = setTimeout(() => {
       this.refs.lockHolder.style.opacity = 1
       this.refs.lockHolder.style.transform = "scale(1)"
     }, 1200);
@@ -32,10 +32,16 @@ class LockScreen extends Component {
 
   toggleWrongPinPopup() {
     this.setState({ wrongPinPopup: true, pin: [] })
-    setTimeout(() => {
+    this.wrongPinTimeout = setTimeout(() => {
       this.setState({ pin: [] })
       this.setState({ wrongPinPopup: false })
     }, 2500);
+  }
+
+  componentWillUnmount() {
+    console.log("timeouts cleared")
+    clearTimeout(this.introTimeout)
+    clearTimeout(this.introTimeout)
   }
 
   renderWrongPinPopup() {
@@ -56,24 +62,24 @@ class LockScreen extends Component {
     let tempPin = this.state.pin
     switch (socketData.payload) {
       case 'left':
-        if(!this.state.wrongPinPopup)
-        tempCursorX--
+        if (!this.state.wrongPinPopup)
+          tempCursorX--
         break
       case 'right':
-        if(!this.state.wrongPinPopup)
-        tempCursorX++
+        if (!this.state.wrongPinPopup)
+          tempCursorX++
         break
       case 'up':
-        if(!this.state.wrongPinPopup)
-        tempCursorY--
+        if (!this.state.wrongPinPopup)
+          tempCursorY--
         break
       case 'down':
-        if(!this.state.wrongPinPopup)
-        tempCursorY++
+        if (!this.state.wrongPinPopup)
+          tempCursorY++
         break
       case 'back':
-        if(!this.state.wrongPinPopup)
-        tempPin.splice(-1, 1)
+        if (!this.state.wrongPinPopup)
+          tempPin.splice(-1, 1)
         break
       case 'ok':
         if (this.state.pin.length < 4 && !this.state.wrongPinPopup) {
@@ -88,17 +94,18 @@ class LockScreen extends Component {
           console.log(this.state.pin.join(''))
           DEFAULTPINS.forEach(element => {
             if (element === this.state.pin.join('')) {
+              clearTimeout(this.introTimeout)
+              clearTimeout(this.introTimeout)
               this.props.navigateTo("menuScreen")
               return
             }
           });
-
           this.toggleWrongPinPopup();
           break
         }
         break
       default:
-        break
+        return
     }
 
     this.setState({

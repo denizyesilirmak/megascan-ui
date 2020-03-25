@@ -92,6 +92,8 @@ class FileList extends Component {
           this.setState({
             popup: true,
           })
+        }else{
+          this.props.navigateTo("scanViewerScreen")
         }
         break
       case 'back':

@@ -220,6 +220,7 @@ class ScanScreen extends Component {
   }
 
   animate = () => {
+    console.log("animate")
     this.geometry.elementsNeedUpdate = true;
     this.frameId = window.requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);

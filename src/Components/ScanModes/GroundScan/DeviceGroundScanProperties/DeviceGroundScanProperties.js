@@ -59,7 +59,7 @@ class DeviceGroundScanProperties extends Component {
     ]
 
     this.state = {
-      activeTabIndex: 4 * 200 + 4,
+      activeTabIndex: 4 * 200 + 0,
       scanModeIndex: 2 * 200,
       scanPathIndex: 2 * 200,
       startPointIndex: 2 * 200,
@@ -278,9 +278,10 @@ class DeviceGroundScanProperties extends Component {
               path: this.state.scanPathIndex % 2 === 0 ? "zigzag" : "parallel",
               lines: this.state.lines,
               steps: this.state.steps,
-              startPoint: this.state.startPointIndex % 2 === 0 ? "left" : "right"  
+              startPoint: this.state.startPointIndex % 2 === 0 ? "left" : "right"
             }
-            console.log("start scan" , scanProperties)
+            console.log("Scan Properties: ", scanProperties)
+            this.props.navigateTo("scanScreen")
           }
 
           return

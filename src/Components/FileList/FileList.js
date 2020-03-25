@@ -28,9 +28,8 @@ class FileList extends Component {
   constructor(props) {
     super(props)
 
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 55; index++) {
       FILES.push(String(index))
-
     }
 
     this.state = {

@@ -13,6 +13,7 @@ import BionicIcon from '../../Assets/MenuIcons/m-bionic.png'
 import SettingIcon from '../../Assets/MenuIcons/m-settings.png'
 import LiveStreamIcon from '../../Assets/MenuIcons/m-live-stream.png'
 import ManualLRLIcon from '../../Assets/MenuIcons/m-device.png'
+import FilesIcon from '../../Assets/MenuIcons/m-files.png'
 
 function getCookie(cname) {
   var name = cname + "=";
@@ -86,6 +87,11 @@ class Mainmenu extends Component {
         name: "Live Stream",
         icon: LiveStreamIcon,
         screenName: "controlLiveStream"
+      },
+      {
+        name: "Files",
+        icon: FilesIcon,
+        screenName: "fileListScreen"
       },
       {
         name: "Settings",

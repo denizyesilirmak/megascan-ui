@@ -36,7 +36,7 @@ class App extends Component {
 
     this.state = {
       lock: false,
-      activeScreen: "fileListScreen",
+      activeScreen: "deviceGroundScanPropertiesScreen",
     }
   }
 

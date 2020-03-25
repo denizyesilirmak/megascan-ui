@@ -140,7 +140,8 @@ class ScanScreen extends Component {
             if(this.matrix[i][j][k] === null){
               this.colorSquare((j * 4) + k, i, null)
             }else{
-              this.colorSquare((j * 4) + k, i, (this.matrix[i][j][k] - this.average))
+              this.colorSquare((j * 4) + k, i, (this.matrix[i][j][k] - this.average) - Math.random() * 4)
+              
             }
           }
         }

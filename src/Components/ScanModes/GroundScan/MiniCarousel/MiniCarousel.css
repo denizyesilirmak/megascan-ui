@@ -42,9 +42,10 @@
 .msb-indicator{
   position: absolute;
   animation: msb-rotating 2s infinite linear;
-  width: 204px;
-  height: 203px;
-  transform-origin: 102px 98px;
+  top: 8px;
+  width: 208px;
+  height: 207px;
+  transform-origin: 104px 100px;
 }
 
 @keyframes msb-rotating{

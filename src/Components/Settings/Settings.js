@@ -60,14 +60,14 @@ class Settings extends Component {
         name: "datetime",
         buttonCount: 2
       },
-      {
-        name: "storage",
-        buttonCount: 1
-      },
-      {
-        name: "connection",
-        buttonCount: 1
-      },
+      // {
+      //   name: "storage",
+      //   buttonCount: 1
+      // },
+      // {
+      //   name: "connection",
+      //   buttonCount: 1
+      // },
       {
         name: "security",
         buttonCount: 2
@@ -294,7 +294,7 @@ class Settings extends Component {
 
           }
 
-          else if (this.state.activeSettingTab === 4) {
+          else if (this.state.activeSettingTab === 2) {
             //security
             if (this.state.subCursor === 0) {
               console.log("pin on off")
@@ -306,7 +306,7 @@ class Settings extends Component {
             }
           }
 
-          else if (this.state.activeSettingTab === 7) {
+          else if (this.state.activeSettingTab === 5) {
             //language
             if (this.state.subCursor === 0) {
               console.log("change language")

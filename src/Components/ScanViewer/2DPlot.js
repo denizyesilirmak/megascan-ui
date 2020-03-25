@@ -39,7 +39,7 @@ class Plot extends Component {
     this.gridWidth = Math.ceil(620 / this.gridWidthLength)
     this.gridHeight = Math.ceil(280 / this.gridHeightLength)
 
-    this.data = this.Interpolate(this.data, 2) //2 Kalacak
+    this.data = this.Interpolate(this.data, 1) //2 Kalacak
 
 
     this.dataWidthLength = this.data[0].length

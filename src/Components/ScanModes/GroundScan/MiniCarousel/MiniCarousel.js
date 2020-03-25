@@ -15,7 +15,7 @@ class MiniCarousel extends Component {
         {
           this.props.buttons.map((e, k) => {
             return (
-              <div key={k} className={`msb ${this.props.selectedButtonIndex === k ? 'msb-selected' : ''}`}>
+              <div key={k} className={`msb ${(this.props.selectedButtonIndex === k && this.props.active) ? 'msb-selected' : ''}`}>
                 <div className="icon-holder">
                   <img alt="ind" className="msb-indicator" src={IconIndicator} style={{ display: this.props.selectedButtonIndex === k ? "block" : "none" }} />
                   <img alt="icon" className="msb-icon" src={e.icon} />

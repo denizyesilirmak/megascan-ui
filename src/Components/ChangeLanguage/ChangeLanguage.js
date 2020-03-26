@@ -84,6 +84,10 @@ class ChangeLanguage extends Component {
       case 'down':
         tempActiveIndex = tempActiveIndex + 4
         break
+      case 'ok':
+        console.log(LANGUAGES[this.state.activeIndex%8].code)
+        this.props.setLanguage(LANGUAGES[this.state.activeIndex%8].code)
+        return
       case 'back':
         this.props.navigateTo("settingsScreen")
         break

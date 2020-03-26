@@ -38,6 +38,7 @@ class App extends Component {
     this.state = {
       lock: false,
       activeScreen: "menuScreen",
+      currentLanguage: "tr"
     }
   }
 
@@ -49,6 +50,13 @@ class App extends Component {
   navigateTo = (screenName) => {
     this.setState({
       activeScreen: screenName
+    })
+  }
+
+  setLanguage = (lang_code) => {
+    console.log("selected language:", lang_code)
+    this.setState({
+      currentLanguage: lang_code
     })
   }
 
@@ -93,7 +101,7 @@ class App extends Component {
       case "changePinScreen":
         return (<ChangePinScreen navigateTo={this.navigateTo} />)
       case "changeLanguageScreen":
-        return (<ChangeLanguage navigateTo={this.navigateTo} />)
+        return (<ChangeLanguage navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
       case "fileListScreen":
         return (<FileList navigateTo={this.navigateTo} />)
       default:
@@ -104,7 +112,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <LanguageContextProvider>
+        <LanguageContextProvider language={this.state.currentLanguage}>
           <Statusbar title={this.state.activeScreen} />
           {
             this.renderScreen()

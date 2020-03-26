@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './AutoLRL.css'
-
+import { LanguageContext } from '../../../Contexts/LanguageContext'
 
 class AutoLRLScan extends Component {
+  static contextType = LanguageContext
   constructor(props) {
     super(props)
     this.state = {
@@ -68,13 +69,14 @@ class AutoLRLScan extends Component {
         </div>
         <div className="auto-lrl-direction">
           {
-            this.state.direction? "Right " : "Left "
+            this.state.direction ? this.context["rightdirection"] : this.context["leftdirection"]
           }
-          Direction
         </div>
 
         <div className="auto-lrl-button">
-          NEXT
+          {
+            this.context["next"]
+          }
         </div>
       </div>
     )

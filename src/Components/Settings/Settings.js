@@ -29,7 +29,7 @@ class Settings extends Component {
 
     //get current date time
     this.currentDate = new Date();
-    console.log(this.currentDate.getHours())
+    // console.log(this.currentDate.getHours())
 
     this.state = {
       activeSettingTab: 0,

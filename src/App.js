@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import LanguageContextProvider from './Contexts/LanguageContext'
 
 //COMPONENTS
 import Statusbar from './Components/Statusbar/Statusbar'
@@ -103,10 +104,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Statusbar title={this.state.activeScreen} />
-        {
-          this.renderScreen()
-        }
+        <LanguageContextProvider>
+          <Statusbar title={this.state.activeScreen} />
+          {
+            this.renderScreen()
+          }
+        </LanguageContextProvider>
       </div>
     )
   }

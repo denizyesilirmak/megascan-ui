@@ -10,18 +10,21 @@ import Clock from './StatusbarElements/Clock'
 
 import Logo from '../../Assets/Logos/1.png'
 
+import { LanguageContext } from '../../Contexts/LanguageContext'
+
 class Statusbar extends Component {
-  componentDidMount () {
+  static contextType = LanguageContext
+  componentDidMount() {
     socketHelper.attachSpecial('battery', msg => {
       console.log('Statusbar diyor ki:', msg)
     })
   }
 
-  render () {
+  render() {
     return (
       <div className='status-bar-component'>
         <img className="device-logo" src={Logo} alt="logo"></img>
-        <div className='title'> {this.props.title} </div>
+        <div className='title'> {this.context[this.props.title]} </div>
         <div className='icons'>
           <Volume />
           <Wifi />

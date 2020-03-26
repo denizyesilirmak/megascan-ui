@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './Carousel.css'
-
 import LeftArrow from '../../Assets/MenuIcons/left-arrow1.png'
 import RightArrow from '../../Assets/MenuIcons/right-arrow1.png'
-
 import ButtonIndicator from '../../Assets/MenuIcons/button-indicator.png'
 
-class Carousel extends Component {
+import { LanguageContext } from '../../Contexts/LanguageContext'
 
+class Carousel extends Component {
+  static contextType = LanguageContext
   componentDidMount(){
     this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
   }
@@ -29,7 +29,7 @@ class Carousel extends Component {
                   <div key={k} className={`carousel-button ${this.props.index + 1 === k ? 'selected' : ''}`}>
                     <img alt='ind' className='indicator' src={ButtonIndicator} style={{ display: (this.props.index + 1 === k) ? 'block' : 'none' }} />
                     <img alt='mi' className='carousel-icon' src={e.icon} />
-                    <div className='carousel-title'>{e.name}</div>
+                    <div className='carousel-title'>{this.context[e.name]}</div>
                   </div>
                 )
               })

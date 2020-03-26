@@ -4,7 +4,10 @@ import './Navigator.css'
 import LeftArrow from '../../../Assets/MenuIcons/left-arrow2.png'
 import RightArrow from '../../../Assets/MenuIcons/right-arrow2.png'
 
+import { LanguageContext } from '../../../Contexts/LanguageContext'
+
 class Navigator extends Component {
+  static contextType = LanguageContext
   // constructor(props) {
   //   super(props)
 
@@ -30,7 +33,7 @@ class Navigator extends Component {
             this.props.buttons.map((e, k) => {
               return (
                 <div key={k} className={`navigator-button ${(this.props.activeSettingTab === k && this.props.active) ? 'selected' : ''}`}>
-                  {e.name}
+                  {this.context[e.name]}
                 </div>
               )
             })

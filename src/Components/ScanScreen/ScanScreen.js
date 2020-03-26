@@ -24,6 +24,7 @@ class ScanScreen extends Component {
     this.average = 127
     this.max = 0
     this.min = 255
+    this.over = false
 
     this.state = {
       currentPoint: {
@@ -70,6 +71,15 @@ class ScanScreen extends Component {
     this.scene.add(this.graphMesh);
     this.initGrid()
     this.animate();
+  }
+
+  componentWillUnmount(){
+    this.over = true
+    console.log("scan screen unmount")
+    this.scene.dispose()
+    this.renderer.dispose()
+    this.geometry.dispose()
+    this.animate = null
   }
 
   // requestSensorData = () => {
@@ -221,6 +231,9 @@ class ScanScreen extends Component {
 
   animate = () => {
     console.log("animate")
+    if(this.over){
+      return
+    }
     this.geometry.elementsNeedUpdate = true;
     this.frameId = window.requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);

@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { QRCode } from "react-qr-svg";
 import './Info.css'
 import GermanyFlag from '../../../../Assets/MenuIcons/germany.svg'
+import { LanguageContext } from '../../../../Contexts/LanguageContext'
 
 class Info extends Component {
-  componentDidMount(){
+  static contextType = LanguageContext
+  componentDidMount() {
     setTimeout(() => {
       this.refs.sc.style.opacity = 1
     }, 150);
@@ -25,28 +27,28 @@ class Info extends Component {
 
           <div className="info-right">
             <div className="info-item">
-              <span>Device Version</span>
+              <span>{this.context["deviceversion"]}</span>
               <span>1.0.9</span>
             </div>
 
             <div className="info-item">
-              <span>Software Version</span>
+              <span>{this.context["softwareversion"]}</span>
               <span>1.0.8</span>
             </div>
 
             <div className="info-item">
-              <span>Model</span>
+              <span>{this.context["model"]}</span>
               <span>1.9.21</span>
             </div>
 
             <div className="info-item">
-              <span>Serial Number</span>
+              <span>{this.context["serialnumber"]}</span>
               <span>7578</span>
             </div>
 
             <div className="info-item" style={{ justifyContent: "center" }}>
               <span>
-                Made in Germany
+                {this.context["madeingermany"]}
               </span>
               <img alt="gf" id="germany-flag" src={GermanyFlag}></img>
             </div>

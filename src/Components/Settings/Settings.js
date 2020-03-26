@@ -17,9 +17,13 @@ import TimePopup from './SettingsPopups/Time/TimePopup'
 import PinPopup from './SettingsPopups/Pin/PinPopup'
 
 import TickIcon from '../../Assets/tick.png'
+
+import { LanguageContext } from '../../Contexts/LanguageContext'
+
 // 2020.07.16-10:10:00
 
 class Settings extends Component {
+  static contextType = LanguageContext
   constructor(props) {
     super(props)
 

@@ -15,6 +15,8 @@ import LiveStreamIcon from '../../Assets/MenuIcons/m-live-stream.png'
 import ManualLRLIcon from '../../Assets/MenuIcons/m-device.png'
 import FilesIcon from '../../Assets/MenuIcons/m-files.png'
 
+import { LanguageContext } from '../../Contexts/LanguageContext'
+
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
@@ -38,6 +40,7 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 class Mainmenu extends Component {
+  static contextType = LanguageContext
   constructor(props) {
     super(props)
     const lastIndex = getCookie("menuIndex")
@@ -49,52 +52,52 @@ class Mainmenu extends Component {
 
     this.buttons = [
       {
-        name: "Ground Scan",
+        name: "groundscan",
         icon: GroundScanIcon,
         screenName: "controlGroundScan"
       },
       {
-        name: "Geophysical",
+        name: "geophysical",
         icon: GeoPhysicalIcon,
         screenName: ""
       },
       {
-        name: "Auto LRL",
+        name: "autolrl",
         icon: AutoLRLIcon,
         screenName: "autoLrlScanScreen"
       },
       {
-        name: "CTRL LRL",
+        name: "ctrllrl",
         icon: CtrlLrlIcon,
         screenName: "ctrlLrlScanScreen"
       },
       {
-        name: "Manual LRL",
+        name: "manuallrl",
         icon: ManualLRLIcon,
         screenName: "manualLRLScreen"
       },
       {
-        name: "Ionic",
+        name: "ionic",
         icon: IonicIcon,
         screenName: "controlIonic"
       },
       {
-        name: "Bionic",
+        name: "bionic",
         icon: BionicIcon,
         screenName: "controlBionic"
       },
       {
-        name: "Live Stream",
+        name: "livestream",
         icon: LiveStreamIcon,
         screenName: "controlLiveStream"
       },
       {
-        name: "Files",
+        name: "files",
         icon: FilesIcon,
         screenName: "fileListScreen"
       },
       {
-        name: "Settings",
+        name: "settings",
         icon: SettingIcon,
         screenName: "settingsScreen"
       }

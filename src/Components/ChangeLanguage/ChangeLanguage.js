@@ -86,6 +86,7 @@ class ChangeLanguage extends Component {
         break
       case 'back':
         this.props.navigateTo("settingsScreen")
+        break
       default:
         break
     }

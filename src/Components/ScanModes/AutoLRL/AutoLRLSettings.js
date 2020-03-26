@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import './AutoLRL.css'
 
-import LeftArrow from '../../../Assets/MenuIcons/left-arrow3.png'
-import RightArrow from '../../../Assets/MenuIcons/right-arrow3.png'
+// import LeftArrow from '../../../Assets/MenuIcons/left-arrow3.png'
+// import RightArrow from '../../../Assets/MenuIcons/right-arrow3.png'
 
 import UpArrow from '../../../Assets/MenuIcons/up-arrow.png'
 import DownArrow from '../../../Assets/MenuIcons/down-arrow.png'
 
-import DistanceIcon from '../../../Assets/MenuIcons/icon-distance.png'
-import DepthIcon from '../../../Assets/MenuIcons/icon-depth.png'
+// import DistanceIcon from '../../../Assets/MenuIcons/icon-distance.png'
+// import DepthIcon from '../../../Assets/MenuIcons/icon-depth.png'
 
 
 

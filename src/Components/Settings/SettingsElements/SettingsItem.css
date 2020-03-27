@@ -70,16 +70,17 @@
   margin-left: auto;
   border-radius: 10px;
   border: 2px solid #ffffff;
+  padding: 0px 5px 0px 5px;
 }
 
 .settings-item .slider-value {
   width: 140px;
-  margin-left: 5px;
+  margin-left: 0px;
   margin-top: 5px;
   height: 30px;
   border-radius: 4px;
   background: rgb(245, 182, 48);
-  transition: 0.3s width;
+  /* transition: 0.3s width; */
 }
 
 .settings-item .slider-container {

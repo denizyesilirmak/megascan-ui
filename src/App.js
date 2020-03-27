@@ -29,6 +29,9 @@ import ScanScreen from './Components/ScanScreen/ScanScreen'
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/ControlMagnetometer'
 
+import dbStorage from './DatabaseHelper'
+dbStorage.init()
+
 // import SoundHelper from './SoundHelper'
 
 class App extends Component {
@@ -36,10 +39,18 @@ class App extends Component {
     super(props)
 
     this.state = {
-      lock: false,
-      activeScreen: "menuScreen",
-      currentLanguage: "tr"
+      ready: false,
+      activeScreen: "menuScreen"
     }
+
+    dbStorage.getAll()
+      .then(settings => {
+        // console.log('Got settings:', settings)
+        this.setState({
+          ready: true,
+          currentLanguage: settings['language'] || 'en',
+        })
+      })
   }
 
   componentDidMount() {
@@ -110,16 +121,21 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <LanguageContextProvider language={this.state.currentLanguage}>
-          <Statusbar title={this.state.activeScreen} />
-          {
-            this.renderScreen()
-          }
-        </LanguageContextProvider>
-      </div>
-    )
+    if (this.state.ready) {
+      return (
+        <div className="App">
+          <LanguageContextProvider language={this.state.currentLanguage}>
+            <Statusbar title={this.state.activeScreen} />
+            {
+              this.renderScreen()
+            }
+          </LanguageContextProvider>
+        </div>
+      )
+    } else {
+      return null
+    }
+
   }
 }
 

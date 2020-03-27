@@ -19,9 +19,9 @@ class Sound extends Component {
   render() {
     return (
       <div ref="sc" className="power-settings">
-        <SettingsItem title={this.context["generalvolume"]} icon={generalVolIcon} mode="slider" selected={this.props.cursorY % 3 === 0 && this.props.selected} />
-        <SettingsItem title={this.context["keytonevolume"]} icon={keyToneVolIcon} mode="slider" selected={this.props.cursorY % 3 === 1 && this.props.selected} />
-        <SettingsItem title={this.context["searchvolume"]} icon={searchVolIcon} mode="slider" selected={this.props.cursorY % 3 === 2 && this.props.selected} />
+        <SettingsItem title={this.context["generalvolume"]} icon={generalVolIcon} mode="slider" selected={this.props.cursorY % 3 === 0 && this.props.selected} value={this.props.generalVolume} />
+        <SettingsItem title={this.context["keytonevolume"]} icon={keyToneVolIcon} mode="slider" selected={this.props.cursorY % 3 === 1 && this.props.selected} value={this.props.keyToneVolume}  />
+        <SettingsItem title={this.context["searchvolume"]} icon={searchVolIcon} mode="slider" selected={this.props.cursorY % 3 === 2 && this.props.selected} value={this.props.searchVolume} />
 
       </div>
     )

@@ -1,8 +1,8 @@
 {
   "en": {
     "menuScreen": "Main Menu",
-    "settingsScreen": "Ayarlar",
-    "turnOff": "Cihazı Kapat",
+    "settingsScreen": "Settings",
+    "turnOff": "Turn Off Device",
     "autoLrlScanScreen": "Auto LRL",
     "ctrlLrlScanScreen": "CTRL LRL",
     "liveStreamScreen": "Canlı Akış",

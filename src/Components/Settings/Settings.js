@@ -161,9 +161,32 @@ class Settings extends Component {
             selectedDateIndex: this.state.selectedDateIndex - 1
           })
         }
+
+        else if (this.state.verticalIndex && this.state.activeSettingTab === 4) {
+          this.setState({
+            brightness: this.clamp(this.state.brightness - 5, 0, 100)
+          })
+        }
+
+        else if (this.state.verticalIndex && this.state.activeSettingTab === 6) {
+          if (this.state.subCursor === 0)
+            this.setState({
+              generalVolume: this.clamp(this.state.generalVolume - 5, 0, 100)
+            })
+          else if (this.state.subCursor === 1)
+            this.setState({
+              keyToneVolume: this.clamp(this.state.keyToneVolume - 5, 0, 100)
+            })
+          else if (this.state.subCursor === 2)
+            this.setState({
+              searchVolume: this.clamp(this.state.searchVolume - 5, 0, 100)
+            })
+        }
+
+
         break
       case 'right':
-        if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
+        if (tempActiveSettingTab < this.buttons.length && !this.state.verticalIndex) {
           this.setState({
             subCursor: 0
           })
@@ -180,6 +203,27 @@ class Settings extends Component {
           this.setState({
             selectedDateIndex: this.state.selectedDateIndex + 1
           })
+        }
+
+        else if (this.state.verticalIndex && this.state.activeSettingTab === 4) {
+          this.setState({
+            brightness: this.clamp(this.state.brightness + 5, 0, 100)
+          })
+        }
+
+        else if (this.state.verticalIndex && this.state.activeSettingTab === 6) {
+          if (this.state.subCursor === 0)
+            this.setState({
+              generalVolume: this.clamp(this.state.generalVolume + 5, 0, 100)
+            })
+          else if (this.state.subCursor === 1)
+            this.setState({
+              keyToneVolume: this.clamp(this.state.keyToneVolume + 5, 0, 100)
+            })
+          else if (this.state.subCursor === 2)
+            this.setState({
+              searchVolume: this.clamp(this.state.searchVolume + 5, 0, 100)
+            })
         }
         break
       case 'down':
@@ -265,7 +309,7 @@ class Settings extends Component {
           if (this.state.activeSettingTab === 0) {
             //POWER
             if (this.state.subCursor === 0) {
-              //Power saver
+              //Power saver -- turn off on power saver
               this.setState({ powersaver: !this.state.powersaver })
             }
           }
@@ -273,23 +317,23 @@ class Settings extends Component {
           else if (this.state.activeSettingTab === 1) {
             //Datetime
             if (this.state.subCursor === 0 && this.state.activePopup === "") {
-              console.log("change date")
+              // console.log("change date")
               this.updateDateBeforePopupOpen()
               this.setState({ activePopup: "date" })
             }
             else if (this.state.subCursor === 1 && this.state.activePopup === "") {
-              console.log("change time")
+              // console.log("change time")
               this.updateDateBeforePopupOpen()
               this.setState({ activePopup: "time" })
             }
             else if (this.state.subCursor === 0 && this.state.activePopup === "date") {
-              console.log("set date")
+              // console.log("set date")
               console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
               this.openOkPopup()
 
             }
             else if (this.state.subCursor === 1 && this.state.activePopup === "time") {
-              console.log("set time")
+              // console.log("set time")
               console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
               this.openOkPopup()
 
@@ -308,6 +352,18 @@ class Settings extends Component {
               console.log("pin popup open")
               this.props.navigateTo("changePinScreen")
             }
+          }
+
+          else if (this.state.activeSettingTab === 4) {
+            //display
+            if (this.state.subCursor === 0) {
+              //sleep mode
+              console.log("sleep mode on on")
+              this.setState({
+                sleepmode: !this.state.sleepmode
+              })
+            }
+
           }
 
           else if (this.state.activeSettingTab === 5) {
@@ -374,7 +430,7 @@ class Settings extends Component {
       case 'language':
         return (<Language selected={this.state.verticalIndex} />)
       case 'sound':
-        return (<Sound selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
+        return (<Sound selected={this.state.verticalIndex} cursorY={this.state.subCursor} generalVolume={this.state.generalVolume} keyToneVolume={this.state.keyToneVolume} searchVolume={this.state.searchVolume} />)
       case 'info':
         return (<Info selected={this.state.verticalIndex} />)
       default:
@@ -395,12 +451,22 @@ class Settings extends Component {
     }
   }
 
+  clamp = (number, lower, upper) => {
+      if (upper !== undefined) {
+        number = number <= upper ? number : upper;
+      }
+      if (lower !== undefined) {
+        number = number >= lower ? number : lower;
+      }
+    return number;
+  }
+
   render() {
     return (
       <div ref="settings" className={`settings-component component `}>
         {
-          this.state.okPopup ? 
-          this.renderOkPopup() : null
+          this.state.okPopup ?
+            this.renderOkPopup() : null
         }
         {
           this.renderPopup(this.state.activePopup)

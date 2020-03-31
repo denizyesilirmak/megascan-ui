@@ -13,7 +13,7 @@ class Reset extends Component {
   componentDidMount(){
     setTimeout(() => {
       this.refs.sc.style.opacity = 1
-    }, 100);
+    }, 10);
   }
   render() {
     return (

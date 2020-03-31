@@ -6,10 +6,10 @@ import { LanguageContext } from '../../../../Contexts/LanguageContext'
 
 class Language extends Component{
   static contextType = LanguageContext
-  componentDidMount(){
+  componentDidMount = () => {
     setTimeout(() => {
       this.refs.sc.style.opacity = 1
-    }, 100);
+    }, 10);
   }
   render(){
     return(

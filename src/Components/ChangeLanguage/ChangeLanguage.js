@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './ChangeLanguage.css'
 import socketHelper from '../../SocketHelper'
+import dbStorage from '../../DatabaseHelper'
 
 import flag_ar from '../../Assets/Flags/ar.png'
 import flag_de from '../../Assets/Flags/de.png'
@@ -62,12 +63,16 @@ class ChangeLanguage extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-
+    const currentLang = (await dbStorage.getItem("lang"))
+    const indexOfCurrentLang = LANGUAGES.findIndex(a => a.code === currentLang)
+    this.setState({
+      activeIndex: 8 * 900 + indexOfCurrentLang
+    })
   }
 
-  handleKeyDown = (socketData) => {
+  handleKeyDown = async (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempActiveIndex = this.state.activeIndex
 
@@ -86,7 +91,9 @@ class ChangeLanguage extends Component {
         break
       case 'ok':
         console.log(LANGUAGES[this.state.activeIndex%8].code)
+
         this.props.setLanguage(LANGUAGES[this.state.activeIndex%8].code)
+        await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex%8].code)
         this.props.navigateTo("menuScreen")
         return
       case 'back':

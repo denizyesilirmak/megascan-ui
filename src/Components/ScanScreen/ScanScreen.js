@@ -17,8 +17,8 @@ const COLORS = {
 class ScanScreen extends Component {
   constructor(props) {
     super(props)
-    this.y = 20 //max 20
-    this.x = 10 * 4 // max 10
+    this.y = 3 //max 20
+    this.x = 3 * 4 // max 10
     this.total = 0
     this.counter = 0
     this.average = 127
@@ -33,7 +33,9 @@ class ScanScreen extends Component {
       },
       newLinePopup: false,
       finishScanPopup: false,
-      finishPopupButtonIndex: true
+      finishPopupButtonIndex: true,
+      pausePopup: false,
+      pausePopupButtonIndex: true
     }
   }
 
@@ -59,13 +61,15 @@ class ScanScreen extends Component {
     this.initializeCamera();
 
     this.geometry = new THREE.PlaneGeometry(1, 1, this.x, this.y);
-    this.material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: false, vertexColors: THREE.VertexColors });
+    this.material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.VertexColors });
 
     // console.log(this.matrix)
 
     this.dataInterval = setInterval(() => {
-      this.requestSensorData()
-    }, 120);
+      if (!this.state.pausePopup) {
+        this.requestSensorData()
+      }
+    }, 220);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
@@ -73,13 +77,8 @@ class ScanScreen extends Component {
     this.animate();
   }
 
-  componentWillUnmount(){
-    this.over = true
-    console.log("scan screen unmount")
-    this.scene.dispose()
-    this.renderer.dispose()
-    this.geometry.dispose()
-    this.animate = null
+  componentWillUnmount() {
+    this.clearMemory()
   }
 
   // requestSensorData = () => {
@@ -88,8 +87,17 @@ class ScanScreen extends Component {
   //   }
   // }
 
+  clearMemory = () => {
+    this.over = true
+    console.log("scan screen unmount")
+    this.scene.dispose()
+    this.renderer.dispose()
+    this.geometry.dispose()
+    this.animate = null
+  }
+
   requestSensorData = () => {
-    if (true&& !this.state.finishScanPopup) {
+    if (true && !this.state.finishScanPopup) {
       socketHelper.send('W')
     }
   }
@@ -104,11 +112,21 @@ class ScanScreen extends Component {
               finishPopupButtonIndex: !this.state.finishPopupButtonIndex
             })
           }
+          else if (this.state.pausePopup) {
+            this.setState({
+              pausePopupButtonIndex: !this.state.pausePopupButtonIndex
+            })
+          }
           break
         case 'right':
           if (this.state.finishScanPopup) {
             this.setState({
               finishPopupButtonIndex: !this.state.finishPopupButtonIndex
+            })
+          }
+          else if (this.state.pausePopup) {
+            this.setState({
+              pausePopupButtonIndex: !this.state.pausePopupButtonIndex
             })
           }
           break
@@ -120,11 +138,14 @@ class ScanScreen extends Component {
           }
           break
         case 'back':
-          clearInterval(this.dataInterval)
-          setTimeout(() => {
-            socketHelper.detach()
-            this.props.navigateTo("menuScreen")
-          }, 500);
+          if (!this.state.finishScanPopup)
+            this.setState({ pausePopup: !this.state.pausePopup })
+
+          // clearInterval(this.dataInterval)
+          // setTimeout(() => {
+          //   socketHelper.detach()
+          //   this.props.navigateTo("menuScreen")
+          // }, 500);
           return
         default:
           break
@@ -147,11 +168,11 @@ class ScanScreen extends Component {
       for (let i = 0; i < this.matrix.length; i++) {
         for (let j = 0; j < this.matrix[i].length; j++) {
           for (let k = 0; k < this.matrix[i][j].length; k++) {
-            if(this.matrix[i][j][k] === null){
+            if (this.matrix[i][j][k] === null) {
               this.colorSquare((j * 4) + k, i, null)
-            }else{
-              this.colorSquare((j * 4) + k, i, (this.matrix[i][j][k] - this.average) - Math.random() * 4)
-              
+            } else {
+              this.colorSquare((j * 4) + k, i, (this.matrix[i][j][k] - this.average))
+
             }
           }
         }
@@ -163,12 +184,14 @@ class ScanScreen extends Component {
       this.average = Math.trunc(this.total / this.counter)
       // console.log(this.average)
 
-      if (this.counter === (this.x / 4) * this.y) {
+      if (this.counter - 1 === (this.x / 4) * this.y) {
+        //tarama bitti
         clearInterval(this.dataInterval)
-        console.log(this.matrix)
+        console.log(JSON.stringify(this.matrix))
         this.setState({
           finishScanPopup: true
         })
+        this.clearMemory()
       }
     }
   }
@@ -176,12 +199,12 @@ class ScanScreen extends Component {
 
   colorSquare = (x, y, c) => {
     let index = ((y) * 2 * this.x) + (x) * 2;
-    if(c === null){
+    if (c === null) {
       this.geometry.faces[index].color = new THREE.Color("black")
       this.geometry.faces[index + 1].color = new THREE.Color("black")
       return
     }
-    if(this.max - this.min >= 6){
+    if (this.max - this.min >= 6) {
       if (c >= 0) {
         this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
         this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
@@ -190,10 +213,10 @@ class ScanScreen extends Component {
         this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
       }
     }
-    else{
+    else {
       if (c > 0) {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max-this.average, 127, 140))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map(( 127 + c), 127, this.max-this.average, 127, 140))))
+        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
+        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
       } else {
         this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
         this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
@@ -207,7 +230,7 @@ class ScanScreen extends Component {
 
 
   getColor = (pct) => {
-    if(pct>255){
+    if (pct > 255) {
       console.log(pct)
     }
     for (var i = 1; i < COLORS.jet.length - 1; i++) {
@@ -230,8 +253,7 @@ class ScanScreen extends Component {
   }
 
   animate = () => {
-    console.log("animate")
-    if(this.over){
+    if (this.over) {
       return
     }
     this.geometry.elementsNeedUpdate = true;
@@ -456,16 +478,40 @@ class ScanScreen extends Component {
     )
   }
 
+  renderPausePopup = () => {
+    return (
+      <div className="new-line-popup-container">
+        <div className="new-line-popup">
+          <div className="new-line-warning">
+            Scan is paused. Do you want to cancel it?
+        </div>
+          <div className="scan-screen-buttons">
+            <div className={`scan-screen-button ${this.state.pausePopupButtonIndex === true ? "selected" : ""}`}>
+              Resume
+          </div>
+            <div className={`scan-screen-button ${this.state.pausePopupButtonIndex === false ? "selected" : ""}`}>
+              Stop
+          </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
 
   render() {
     return (
       <div className="scan-screen component">
         {
-          false? this.renderNewLinePopup() : ''
+          false ? this.renderNewLinePopup() : ''
         }
 
         {
           this.state.finishScanPopup ? this.renderFinishPopup() : ''
+        }
+
+        {
+          this.state.pausePopup ? this.renderPausePopup() : ''
         }
 
 

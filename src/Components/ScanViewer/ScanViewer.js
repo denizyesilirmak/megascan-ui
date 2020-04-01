@@ -10,19 +10,46 @@ import filterIcon from '../../Assets/MenuIcons/icon-filter.png'
 import Plot from './2DPlot'
 
 class ScanViewer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fetch: false
+    }
+  }
+  componentDidMount() {
+    console.log(this.props.fileToOpen)
+    fetch('http://localhost:3030/readfile/' + this.props.fileToOpen)
+      .then(res => res.json())
+      .then(data => {
+        this.normalizedData = data.data.map(element => {
+          return element.reduce((acc, val) => acc.concat(val), []);
+        })
+        setTimeout(() => {
+          this.setState({
+            fetch: true
+          })
+        }, 1000);
+
+      })
+  }
   render() {
     return (
       <div className="scan-viewer-component component">
         <div className="sv-top">
           <div className="sv-scan-container">
-            <Plot/>
+            {
+              this.state.fetch ?
+              <Plot data={this.normalizedData} />
+              :
+              null
+            }
           </div>
           <div className="sv-buttons">
-            <div className="sv-button" style={{backgroundImage: `url(${gridIcon})`}}></div>
-            <div className="sv-button" style={{backgroundImage: `url(${searchIcon})`}}></div>
-            <div className="sv-button" style={{backgroundImage: `url(${filterIcon})`}}></div>
-            <div className="sv-button" style={{backgroundImage: `url(${saveIcon})`}}></div>
-            <div className="sv-button" style={{backgroundImage: `url(${uploadIcon})`}}></div>
+            <div className="sv-button" style={{ backgroundImage: `url(${gridIcon})` }}></div>
+            <div className="sv-button" style={{ backgroundImage: `url(${searchIcon})` }}></div>
+            <div className="sv-button" style={{ backgroundImage: `url(${filterIcon})` }}></div>
+            <div className="sv-button" style={{ backgroundImage: `url(${saveIcon})` }}></div>
+            <div className="sv-button" style={{ backgroundImage: `url(${uploadIcon})` }}></div>
           </div>
         </div>
         <div className="sv-bottom">

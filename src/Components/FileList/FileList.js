@@ -82,7 +82,9 @@ class FileList extends Component {
             popup: true,
           })
         } else {
-          this.props.navigateTo("scanViewerScreen")
+          if (this.state.popupCursorIndex % 3 === 0) {
+            this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex])
+          }
         }
         break
       case 'back':

@@ -153,6 +153,7 @@ class ScanScreen extends Component {
               }).then(res => res.json())
                 .then(data => {
                   console.log(data)
+                  this.props.navigateTo('scanViewerScreen', data.fileName)
                 })
             } else {
               console.log("pressed cancel")

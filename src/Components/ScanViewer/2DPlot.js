@@ -34,6 +34,8 @@ class Plot extends Component {
       [214, 211, 215, 210, 207, 210, 212, 216, 215, 213]
     ]
 
+    this.data = this.props.data
+
     this.gridWidthLength = this.data[0].length
     this.gridHeightLength = this.data.length
     this.gridWidth = Math.ceil(620 / this.gridWidthLength)
@@ -71,13 +73,12 @@ class Plot extends Component {
   }
 
   componentDidMount() {
-
     this.setState({
       reducedData: this.reducedData
     })
-
-
   }
+  
+ 
 
   Interpolate = (data, factor) => {
     var level = factor
@@ -164,7 +165,7 @@ class Plot extends Component {
             }
           </g>
 
-          <g opacity="0.4">
+          {/* <g opacity="0.4">
             {
 
               this.data.map((d, l) => {
@@ -176,11 +177,11 @@ class Plot extends Component {
             {
               this.data[0].map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="1" y2="280" x2={l*this.gridWidth} y1="0" x1={l*this.gridWidth} stroke="#ffffff" />
+                  <line key={l} strokeWidth="1" y2="280" x2={l * this.gridWidth} y1="0" x1={l * this.gridWidth} stroke="#ffffff" />
                 )
               })
             }
-          </g>
+          </g> */}
         </svg>
 
       </div>

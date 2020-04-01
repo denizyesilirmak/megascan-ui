@@ -40,7 +40,8 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      activeScreen: "fileListScreen"
+      activeScreen: "scanScreen",
+      fileToOpen: null
     }
 
     dbStorage.getAll()
@@ -58,9 +59,10 @@ class App extends Component {
       this.navigateTo("lockScreen")
   }
 
-  navigateTo = (screenName) => {
+  navigateTo = (screenName, file) => {
     this.setState({
-      activeScreen: screenName
+      activeScreen: screenName,
+      fileToOpen: file
     })
   }
 
@@ -90,7 +92,7 @@ class App extends Component {
       case "deviceGroundScanPropertiesScreen":
         return (<DeviceGroundScanProperties navigateTo={this.navigateTo} />)
       case "scanViewerScreen":
-        return (<ScanViewer navigateTo={this.navigateTo} />)
+        return (<ScanViewer navigateTo={this.navigateTo} fileToOpen={this.state.fileToOpen} />)
       case "bionicScreen":
         return (<Bionic navigateTo={this.navigateTo} />)
       case "ionicScreen":

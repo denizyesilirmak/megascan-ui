@@ -3,39 +3,16 @@ import './FileList.css'
 import FileIcon from '../../Assets/MenuIcons/icon-file.png'
 import socketHelper from '../../SocketHelper'
 
-var FILES = [
-  '001',
-  '002',
-  '003',
-  '004',
-  '005',
-  '006',
-  '007',
-  '008',
-  '009',
-  '010',
-  '011',
-  '012',
-  '013',
-  '014',
-  '015',
-  '016'
-]
-
 
 
 class FileList extends Component {
   constructor(props) {
     super(props)
 
-    for (let index = 0; index < 55; index++) {
-      FILES.push(String(index))
-    }
-
     this.state = {
       cursorIndex: 0,
       popupCursorIndex: 3 * 100,
-      fileList: FILES,
+      fileList: [],
       popup: false
 
     }
@@ -43,6 +20,18 @@ class FileList extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    this.getFileList()
+  }
+
+  getFileList = () => {
+    fetch('http://localhost:3030/filelist')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success)
+          this.setState({
+            fileList: data.filelist
+          })
+      })
   }
 
   handleKeyDown = (socketData) => {
@@ -92,7 +81,7 @@ class FileList extends Component {
           this.setState({
             popup: true,
           })
-        }else{
+        } else {
           this.props.navigateTo("scanViewerScreen")
         }
         break

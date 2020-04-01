@@ -140,6 +140,24 @@ class ScanScreen extends Component {
               newLinePopup: false
             })
           }
+          else if (this.state.finishScanPopup) {
+            if (this.state.finishPopupButtonIndex === true) {
+              console.log("pressed ok")
+              fetch('http://localhost:3030/savescan', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "data": this.matrix })
+              }).then(res => res.json())
+                .then(data => {
+                  console.log(data)
+                })
+            } else {
+              console.log("pressed cancel")
+            }
+          }
           break
         case 'back':
           if (!this.state.finishScanPopup)
@@ -260,9 +278,6 @@ class ScanScreen extends Component {
 
 
   getColor = (pct) => {
-    if (pct > 255) {
-      console.log(pct)
-    }
     for (var i = 1; i < COLORS.jet.length - 1; i++) {
       if (pct < COLORS.jet[i].pct) {
         break;
@@ -481,7 +496,7 @@ class ScanScreen extends Component {
 
     let tmpcurrentPoint = {
       x: (startPos === "left") ? this.currentPoint.x : this.x / 4 - this.currentPoint.x - 1,
-      y:  this.currentPoint.y 
+      y: this.currentPoint.y
     }
 
     this.setState({
@@ -506,11 +521,11 @@ class ScanScreen extends Component {
       <div className="new-line-popup-container">
         <div className="new-line-popup">
           <div className="new-line-warning">
-            Scan is completed. Do you want to view scan result?
+            Scan is completed. Do you want to save?
           </div>
           <div className="scan-screen-buttons">
             <div className={`scan-screen-button ${this.state.finishPopupButtonIndex === true ? "selected" : ""}`}>
-              Okey
+              Save
             </div>
             <div className={`scan-screen-button ${this.state.finishPopupButtonIndex === false ? "selected" : ""}`}>
               Cancel

@@ -40,7 +40,7 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      activeScreen: "scanScreen"
+      activeScreen: "fileListScreen"
     }
 
     dbStorage.getAll()

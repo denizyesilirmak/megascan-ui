@@ -14,11 +14,14 @@ const COLORS = {
   ]
 }
 
+const TUNNELSCAN = false
+const IntervalSpeed = 50
+
 class ScanScreen extends Component {
   constructor(props) {
     super(props)
-    this.y = 3 //max 20
-    this.x = 3 * 4 // max 10
+    this.y = 20 // max 20
+    this.x = 10 * 4 // max 10
     this.total = 0
     this.counter = 0
     this.average = 127
@@ -31,6 +34,7 @@ class ScanScreen extends Component {
         x: null,
         y: null
       },
+      value: 0,
       newLinePopup: false,
       finishScanPopup: false,
       finishPopupButtonIndex: true,
@@ -69,7 +73,7 @@ class ScanScreen extends Component {
       if (!this.state.pausePopup) {
         this.requestSensorData()
       }
-    }, 220);
+    }, IntervalSpeed);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
@@ -165,6 +169,10 @@ class ScanScreen extends Component {
         localSensorArray[2],
         localSensorArray[3]]
 
+      this.setState({
+        value: ((localSensorArray[0] + localSensorArray[1] + localSensorArray[2] + localSensorArray[3]) / 4).toFixed(1)
+      })
+
       for (let i = 0; i < this.matrix.length; i++) {
         for (let j = 0; j < this.matrix[i].length; j++) {
           for (let k = 0; k < this.matrix[i][j].length; k++) {
@@ -172,7 +180,6 @@ class ScanScreen extends Component {
               this.colorSquare((j * 4) + k, i, null)
             } else {
               this.colorSquare((j * 4) + k, i, (this.matrix[i][j][k] - this.average))
-
             }
           }
         }
@@ -204,25 +211,48 @@ class ScanScreen extends Component {
       this.geometry.faces[index + 1].color = new THREE.Color("black")
       return
     }
-    if (this.max - this.min >= 6) {
-      if (c >= 0) {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
-      } else {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+
+    if (TUNNELSCAN === false) {
+      if (this.max - this.min >= 6) {
+        if (c >= 0) {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
+        } else {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+        }
       }
-    }
-    else {
-      if (c > 0) {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
-      } else {
-        this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
-        this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
+      else {
+        if (c > 0) {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
+        } else {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
+        }
+      }
+    } else {
+      if (this.max - this.min >= 6) {
+        if (c >= 0) {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(127))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(127))
+        } else {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+        }
+      }
+      else {
+        if (c > 0) {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(127))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(127))
+        } else {
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
+        }
       }
     }
   }
+
 
   map = (x, in_min, in_max, out_min, out_max) => {
     return Math.abs(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -337,6 +367,10 @@ class ScanScreen extends Component {
         }
       }
     }
+
+    this.setState({
+      currentPoint: this.currentPoint
+    })
   }
 
   zigzag = (startPos) => {
@@ -444,6 +478,15 @@ class ScanScreen extends Component {
         }
       }
     }
+
+    let tmpcurrentPoint = {
+      x: (startPos === "left") ? this.currentPoint.x : this.x / 4 - this.currentPoint.x - 1,
+      y:  this.currentPoint.y 
+    }
+
+    this.setState({
+      currentPoint: tmpcurrentPoint
+    })
   }
 
   renderNewLinePopup = () => {
@@ -484,6 +527,8 @@ class ScanScreen extends Component {
         <div className="new-line-popup">
           <div className="new-line-warning">
             Scan is paused. Do you want to cancel it?
+            <br />
+            Press BACK button to resume.
         </div>
           <div className="scan-screen-buttons">
             <div className={`scan-screen-button ${this.state.pausePopupButtonIndex === true ? "selected" : ""}`}>
@@ -539,18 +584,18 @@ class ScanScreen extends Component {
               Value
             </div>
             <div className="bar-value">
-              235
-              </div>
+              {this.state.value}
+            </div>
           </div>
 
-          <div className="detail-bar">
+          {/* <div className="detail-bar">
             <div className="bar-name">
               Value
             </div>
             <div className="bar-value">
               235
               </div>
-          </div>
+          </div> */}
 
         </div>
 

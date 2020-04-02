@@ -13,12 +13,12 @@ class ScanViewer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fetch: false
+      fetch: true
     }
   }
   componentDidMount() {
     console.log(this.props.fileToOpen)
-    fetch('http://localhost:3030/readfile/' + this.props.fileToOpen)
+    fetch('http://192.168.1.114:3030/readfile/' + this.props.fileToOpen)
       .then(res => res.json())
       .then(data => {
         this.normalizedData = data.data.map(element => {

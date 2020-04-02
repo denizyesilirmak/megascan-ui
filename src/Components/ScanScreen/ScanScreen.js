@@ -143,7 +143,7 @@ class ScanScreen extends Component {
           else if (this.state.finishScanPopup) {
             if (this.state.finishPopupButtonIndex === true) {
               console.log("pressed ok")
-              fetch('http://localhost:3030/savescan', {
+              fetch('http://192.168.1.114:3030/savescan', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
@@ -237,8 +237,8 @@ class ScanScreen extends Component {
           this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
           this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
         } else {
-          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
-          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((1 * c), 0, this.min, 0, 127))))
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
         }
       }
       else {
@@ -246,8 +246,8 @@ class ScanScreen extends Component {
           this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
           this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
         } else {
-          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
-          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((-1 * c), 0, this.min, 100, 127))))
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
         }
       }
     } else {

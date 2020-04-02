@@ -5,10 +5,10 @@ import './2DPlot.css'
 const COLORS = {
   jet: [
     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
-    { pct: 25, color: { r: 0x00, g: 0xff, b: 0xff } },
-    { pct: 50, color: { r: 0x00, g: 0xad, b: 0x00 } },
-    { pct: 75, color: { r: 0xff, g: 0xff, b: 0x00 } },
-    { pct: 100, color: { r: 0xff, g: 0x00, b: 0x00 } }
+    { pct: 63, color: { r: 0x00, g: 0xff, b: 0xff } },
+    { pct: 127, color: { r: 0x00, g: 0xad, b: 0x00 } },
+    { pct: 192, color: { r: 0xff, g: 0xff, b: 0x00 } },
+    { pct: 255, color: { r: 0xff, g: 0x00, b: 0x00 } }
   ]
 }
 
@@ -34,51 +34,79 @@ class Plot extends Component {
       [214, 211, 215, 210, 207, 210, 212, 216, 215, 213]
     ]
 
-    this.data = this.props.data
+    // this.data = this.props.data
 
     this.gridWidthLength = this.data[0].length
     this.gridHeightLength = this.data.length
     this.gridWidth = Math.ceil(620 / this.gridWidthLength)
     this.gridHeight = Math.ceil(280 / this.gridHeightLength)
 
-    this.data = this.Interpolate(this.data, 1) //2 Kalacak
+
+    this.data = this.Interpolate(this.data, 2) //2 Kalacak
+    this.max = 0
+    this.min = 255
 
 
     this.dataWidthLength = this.data[0].length
     this.dataHeightLength = this.data.length
     this.rectWidth = Math.ceil(620 / this.dataWidthLength)
     this.rectHeight = Math.ceil(280 / this.dataHeightLength)
-    this.total = 0
+    this.average = 0
     this.dataCount = this.data[0].length * this.data.length
 
     this.data.forEach(element => {
       element.forEach(e => {
-        this.total += e / this.dataCount
+        this.average += e / this.dataCount
+        this.max = (e > this.max) ? e : this.max
+        this.min = (e < this.min) ? e : this.min
       })
     })
+
+    console.log(this.max, this.min)
 
     this.reducedData = [];
     for (var i = 0; i < this.data.length; i++) {
       this.reducedData[i] = new Array(this.data[0].length);
     }
 
-    this.data.forEach((element, a) => {
-      element.forEach((e, b) => {
-        this.reducedData[a][b] = parseInt(e - this.total)
-      })
-    })
+
 
 
 
   }
 
+  map = (x, in_min, in_max, out_min, out_max) => {
+    return Math.abs(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
+
   componentDidMount() {
+    this.data.forEach((element, a) => {
+      element.forEach((e, b) => {
+        // this.reducedData[a][b] = parseInt(e - this.average)
+        e = parseInt(e - this.average)
+
+        if (this.max - this.min >= 6) {
+          if (e >= 0) {
+            this.reducedData[a][b] = (Math.trunc(this.map((e), 0, this.max - this.average, 127, 255)))
+          } else {
+            this.reducedData[a][b] = Math.trunc(this.map((this.average - this.min + e), 0, this.average - this.min, 0, 127))
+          }
+        }
+        else {
+          if (e > 0) {
+            this.reducedData[a][b] = (Math.trunc(this.map((127 + e), 127, this.max - this.average, 127, 140)))
+          } else {
+            this.reducedData[a][b] = Math.trunc(this.map((this.average - this.min + e), 0, this.average - this.min, 110, 127))
+          }
+        }
+      })
+    })
     this.setState({
       reducedData: this.reducedData
     })
   }
-  
- 
+
+
 
   Interpolate = (data, factor) => {
     var level = factor
@@ -157,7 +185,7 @@ class Plot extends Component {
                 return (
                   row.map((d, l) => {
                     return (
-                      <rect key={k * l + Math.random()} height={this.rectHeight} width={this.rectWidth} y={k * this.rectHeight} x={l * this.rectWidth} style={{ fill: this.getColor(50 - d) }} />
+                      <rect key={k * l + Math.random()} height={this.rectHeight} width={this.rectWidth} y={k * this.rectHeight} x={l * this.rectWidth} style={{ fill: this.getColor(d) }} />
                     )
                   })
                 )
@@ -165,23 +193,23 @@ class Plot extends Component {
             }
           </g>
 
-          {/* <g opacity="0.4">
+          <g opacity="0.4">
             {
 
               this.data.map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="1" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#ffffff" />
+                  <line key={l} strokeWidth="1" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#00000030" />
                 )
               })
             }
             {
               this.data[0].map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="1" y2="280" x2={l * this.gridWidth} y1="0" x1={l * this.gridWidth} stroke="#ffffff" />
+                  <line key={l} strokeWidth="1" y2="280" x2={l * this.gridWidth} y1="0" x1={l * this.gridWidth} stroke="#00000030" />
                 )
               })
             }
-          </g> */}
+          </g>
         </svg>
 
       </div>

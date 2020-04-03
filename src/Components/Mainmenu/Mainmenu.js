@@ -59,7 +59,7 @@ class Mainmenu extends Component {
       {
         name: "geophysical",
         icon: GeoPhysicalIcon,
-        screenName: ""
+        screenName: "geophysicalScreen"
       },
       {
         name: "autolrl",

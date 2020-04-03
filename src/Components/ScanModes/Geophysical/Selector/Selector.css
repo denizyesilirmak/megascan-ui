@@ -1,0 +1,44 @@
+.geophysical-selector {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.geo-arrow {
+  width: 40px;
+}
+
+.geo-button {
+  width: 175px;
+}
+
+.geo-button-indicator {
+  position: absolute;
+  width: 170px;
+  transform-origin: 85px 83px;
+  animation: rotate 1s linear infinite;
+}
+
+.geo-selected-material{
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background-image: url('../../../../Assets/Sprites/gold.png');
+  animation: moveX 2s steps(30) infinite;
+}
+
+@keyframes moveX{
+  from{background-position-x:0px;}
+  to{background-position-x:-3900px;}
+}
+
+.geo-material-name{
+  color: white;
+  position: absolute;
+  font-size: 24px;
+  bottom: 130px;
+  text-align: center;
+  text-transform: uppercase;
+}

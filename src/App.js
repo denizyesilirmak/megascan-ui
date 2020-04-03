@@ -41,7 +41,7 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      activeScreen: "geophysicalScreen",
+      activeScreen: "menuScreen",
       fileToOpen: null
     }
 

@@ -29,6 +29,7 @@ class AutoLRL extends Component {
   }
 
   async componentDidMount() {
+    //getting last state from db
     this.setState({
       distance: await dbStorage.getItem("autolrl_distance") || LIMITS.MINDISTANCE,
       depth: await dbStorage.getItem("autolrl_depth") || LIMITS.MINDEPTH,

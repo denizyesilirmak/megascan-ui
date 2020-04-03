@@ -13,7 +13,7 @@ class ScanViewer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fetch: true
+      fetch: false
     }
   }
   componentDidMount() {

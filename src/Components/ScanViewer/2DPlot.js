@@ -34,7 +34,7 @@ class Plot extends Component {
       [214, 211, 215, 210, 207, 210, 212, 216, 215, 213]
     ]
 
-    // this.data = this.props.data
+    this.data = this.props.data
 
     this.gridWidthLength = this.data[0].length
     this.gridHeightLength = this.data.length

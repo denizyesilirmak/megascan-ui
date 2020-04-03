@@ -6,12 +6,13 @@ import AutoLRLScan from './AutoLRLScan'
 import AutoLRLSettings from './AutoLRLSettings'
 import AutoLRLResultScreen from './AutoLRLResult'
 
+import dbStorage from '../../../DatabaseHelper'
 
 const LIMITS = {
-  MAXDISTANCE:  2500,
-  MINDISTANCE:  100,
-  MAXDEPTH:  100,
-  MINDEPTH:  10
+  MAXDISTANCE: 2500,
+  MINDISTANCE: 100,
+  MAXDEPTH: 100,
+  MINDEPTH: 10
 }
 
 class AutoLRL extends Component {
@@ -27,20 +28,27 @@ class AutoLRL extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.setState({
+      distance: await dbStorage.getItem("autolrl_distance") || LIMITS.MINDISTANCE,
+      depth: await dbStorage.getItem("autolrl_depth") || LIMITS.MINDEPTH,
+    })
+
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.autoLrl.style.opacity = 1
     }, 15);
   }
 
-  handleKeyDown = (socketData) => {
+  handleKeyDown = async (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempActiveScreen = this.state.activeScreen
     switch (socketData.payload) {
       case 'ok':
         if (tempActiveScreen >= 0 && tempActiveScreen < 2) {
           tempActiveScreen++
+          await dbStorage.setItem("autolrl_distance", this.state.distance)
+          await dbStorage.setItem("autolrl_depth", this.state.depth)
         }
         else if (tempActiveScreen === 2) tempActiveScreen = 0
         this.setState({

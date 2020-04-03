@@ -1,7 +1,47 @@
-.geophysical{
+.geophysical {
   background: #000;
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: 65% 35%;
+  justify-items: center;
+  align-items: center;
 }
 
+.geo-restart {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.restart-button {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.restart-button.selected {
+  color: black !important;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.restart-button.selected img {
+  filter: brightness(0);
+}
+
+.geo-start-button{
+  width: 300px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  border: 2px solid #8a7940;
+}
+
+.geo-start-button.selected{
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}

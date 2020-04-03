@@ -9,6 +9,8 @@ import Silver from '../../../Assets/Sprites/silver.png'
 import Water from '../../../Assets/Sprites/water.png'
 import Iron from '../../../Assets/Sprites/iron.png'
 
+import GeoPhysical from '../../../Assets/MenuIcons/geophysical.png'
+import Restart from '../../../Assets/MenuIcons/restart.png'
 
 const MATERIALS = [
   {
@@ -38,7 +40,8 @@ class Geophysical extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeMaterialIndex: 0
+      activeMaterialIndex: 0,
+      activeCursor: 0
     }
 
   }
@@ -50,14 +53,52 @@ class Geophysical extends Component {
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
+      case 'up':
+        if (this.state.activeCursor === 2) {
+          this.setState({ activeCursor: 0 })
+        }
+        break
+      case 'down':
+        if (this.state.activeCursor === 0) {
+          this.setState({ activeCursor: 2 })
+        }
+        break
       case 'left':
+        if (this.state.activeCursor === 2) {
+          this.setState({ activeCursor: 1 })
+        }
+        else if (this.state.activeCursor === 0) {
+          if (this.state.activeMaterialIndex >= 1) {
+            this.setState({
+              activeMaterialIndex: this.state.activeMaterialIndex - 1
+            })
+          }
+          else if (this.state.activeMaterialIndex === 0) {
+            this.setState({
+              activeMaterialIndex: 4
+            })
+          }
+        }
         break
       case 'right':
-        this.setState({
-          activeMaterialIndex: this.state.activeMaterialIndex + 1
-        })
+        if (this.state.activeCursor === 1) {
+          this.setState({ activeCursor: 2 })
+        }
+        else if (this.state.activeCursor === 0) {
+          if (this.state.activeMaterialIndex < 4) {
+            this.setState({
+              activeMaterialIndex: this.state.activeMaterialIndex + 1
+            })
+          }
+          else if (this.state.activeMaterialIndex === 4) {
+            this.setState({
+              activeMaterialIndex: 0
+            })
+          }
+        }
         break
       case 'back':
+
         this.props.navigateTo("menuScreen")
         return
       default:
@@ -69,9 +110,22 @@ class Geophysical extends Component {
   render() {
     return (
       <div className="component geophysical">
-        <div className="resistivity"></div>
+        <div className="resistivity">
+          <img src={GeoPhysical} alt="geophysical" />
+        </div>
         <div className="materials" >
-          <Selector selected={MATERIALS[this.state.activeMaterialIndex]} />
+          <Selector active={this.state.activeCursor === 0} selected={MATERIALS[this.state.activeMaterialIndex]} />
+        </div>
+        <div className="geo-start-results">
+          <div className={`geo-start-button ${this.state.activeCursor === 1 ? " selected" : ""}`}>
+            Start
+          </div>
+        </div>
+        <div className="geo-restart">
+          <div className={`restart-button ${this.state.activeCursor === 2 ? " selected" : ""}`}>
+            <img src={Restart} alt="restart" />
+            <div className="geo-restart">Restart</div>
+          </div>
         </div>
       </div>
     )

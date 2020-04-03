@@ -22,7 +22,7 @@ class Selector extends Component {
       <div className="geophysical-selector">
         <img className="geo-arrow" src={LeftArrow} alt="left"></img>
         <div className="geo-selected-material" ref="material"></div>
-        <img className="geo-button-indicator" src={ButtonIndicator} alt="indicator"></img>
+        <img className="geo-button-indicator" src={ButtonIndicator} alt="indicator" style={{ display: this.props.active ? "block" : "none" }}></img>
         <img className="geo-button" src={ButtonBorder} alt="right"></img>
         <img className="geo-arrow" src={RightArrow} alt="right"></img>
         <div className="geo-material-name">{this.props.selected.name}</div>

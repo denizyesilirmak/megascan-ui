@@ -18,7 +18,7 @@
   position: absolute;
   width: 170px;
   transform-origin: 85px 83px;
-  animation: rotate 1s linear infinite;
+  animation: rotate 2s linear infinite;
 }
 
 .geo-selected-material{
@@ -42,3 +42,4 @@
   text-align: center;
   text-transform: uppercase;
 }
+

@@ -21,6 +21,7 @@ import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/Device
 import Bionic from './Components/ScanModes/Bionic/Bionic'
 import Ionic from './Components/ScanModes/Ionic/Ionic'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
+import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -40,7 +41,7 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      activeScreen: "menuScreen",
+      activeScreen: "geophysicalScreen",
       fileToOpen: null
     }
 
@@ -117,6 +118,8 @@ class App extends Component {
         return (<ChangeLanguage navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
       case "fileListScreen":
         return (<FileList navigateTo={this.navigateTo} />)
+      case "geophysicalScreen":
+        return (<Geophysical navigateTo={this.navigateTo} />)
       default:
         break;
     }

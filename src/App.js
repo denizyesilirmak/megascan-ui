@@ -43,7 +43,7 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      activeScreen: "pinPointerScreen",
+      activeScreen: "menuScreen",
       fileToOpen: null
     }
 

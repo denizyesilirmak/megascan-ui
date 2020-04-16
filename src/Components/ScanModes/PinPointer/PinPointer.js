@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import "./PinPointer.css"
 import CalibrationIcon from '../../../Assets/MenuIcons/calibration.png'
+import socketHelper from '../../../SocketHelper'
 
 const lines = [
   ["#26ff00", "#26ff00",],
@@ -49,16 +50,42 @@ class PinPointer extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    socketHelper.attach(this.handleKeyDown)
+    this.interval = setInterval(() => {
       this.setState({
         sensorValue: this.map(Math.random() * 255, 0, 255, -120, 120)
       })
-    }, 100);
+    }, 1000);
   }
+
+  handleKeyDown = (socketData) => {
+    if (socketData.type !== 'button') { return }
+    let tempIndex = this.state.yesNo
+    switch (socketData.payload) {
+      case 'left':
+
+        break
+      case 'right':
+        break
+      case 'back':
+        clearInterval(this.interval)
+        this.props.navigateTo("menuScreen")
+        return
+      default:
+        break
+    }
+
+    this.setState({
+      yesNo: tempIndex
+    })
+  }
+
 
   map = (x, in_min, in_max, out_min, out_max) => {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
+
+
 
 
   render() {
@@ -89,19 +116,19 @@ class PinPointer extends Component {
           </g>
         </svg>
 
-            <div className="pinpointer-button-container">
+        <div className="pinpointer-button-container">
 
-              <div className="pinpointer-button selected">
-                <img src={CalibrationIcon} alt="calibraiton"></img>
-                <div className="label">Calibrate</div>
-              </div>
+          <div className="pinpointer-button selected">
+            <img src={CalibrationIcon} alt="calibraiton"></img>
+            <div className="label">Calibrate</div>
+          </div>
 
-              <div className="pinpointer-button">
-                <img src={CalibrationIcon} alt="calibraiton"></img>
-                <div className="label">Sensitivity</div>
-              </div>
+          <div className="pinpointer-button">
+            <img src={CalibrationIcon} alt="calibraiton"></img>
+            <div className="label">Sensitivity</div>
+          </div>
 
-            </div>
+        </div>
 
 
       </div>

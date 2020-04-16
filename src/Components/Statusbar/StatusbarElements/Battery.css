@@ -1,0 +1,16 @@
+.level-holder {
+  background: #000;
+  width: 35px;
+  height: 14px;
+  position: relative;
+  top: 16px;
+  left: 15px;
+}
+
+.battery-juice {
+  height: 100%;
+}
+
+.battery-indicator {
+  padding-bottom: 10px;
+}

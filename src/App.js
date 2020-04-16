@@ -22,6 +22,8 @@ import Bionic from './Components/ScanModes/Bionic/Bionic'
 import Ionic from './Components/ScanModes/Ionic/Ionic'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
+import MobileGroundScan from './Components/MobileGroundScan/MobileGroundScan'
+import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -41,7 +43,7 @@ class App extends Component {
 
     this.state = {
       ready: false,
-      activeScreen: "menuScreen",
+      activeScreen: "pinPointerScreen",
       fileToOpen: null
     }
 
@@ -120,6 +122,10 @@ class App extends Component {
         return (<FileList navigateTo={this.navigateTo} />)
       case "geophysicalScreen":
         return (<Geophysical navigateTo={this.navigateTo} />)
+      case "mobileGroundScan":
+        return (<MobileGroundScan navigateTo={this.navigateTo} />)
+      case "pinPointerScreen":
+        return (<PinPointer navigateTo={this.navigateTo} />)
       default:
         break;
     }

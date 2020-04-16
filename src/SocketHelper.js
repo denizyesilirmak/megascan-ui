@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const SOCKET_SERVER_ADDRESS = 'ws://192.168.1.114:9090'
+const SOCKET_SERVER_ADDRESS = 'ws://localhost:9090'
 const VOID = () => {}
 
 class SocketHelper {
@@ -38,13 +38,14 @@ class SocketHelper {
   }
 
   attach = (fn) => {
+    // console.log("atached")
     this._messageHandlerStack.push(this._currentMessageHandler)
     this._setMessageHandler(fn)
   }
 
   attachSpecial = (event, fn) => {
     this._socket.on(event, msg => {
-      console.log(msg)
+      // console.log(msg)
       fn(msg)
     })
   }
@@ -54,6 +55,7 @@ class SocketHelper {
   }
 
   detach = () => {
+    // console.log("detacted")
     const last = this._getLastMessageHandler()
     if (last !== VOID) {
       this._setMessageHandler(last)

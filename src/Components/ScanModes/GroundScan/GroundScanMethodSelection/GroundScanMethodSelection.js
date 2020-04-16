@@ -51,7 +51,12 @@ class GroundScanMethodSelection extends Component {
 
           break
         case 'ok':
-          this.props.navigateTo("deviceGroundScanPropertiesScreen")
+          if (this.state.buttonIndex % 2 === 0) {
+
+            this.props.navigateTo("deviceGroundScanPropertiesScreen")
+          } else {
+            this.props.navigateTo("mobileGroundScan")
+          }
           return
         case 'back':
           setTimeout(() => {

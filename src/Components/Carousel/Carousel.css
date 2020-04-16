@@ -46,7 +46,7 @@
 }
 
 .slider{
-  transition: 300ms all;
+  transition: 400ms all;
   transition-timing-function: ease-in-out;
   display: flex;
   justify-content: flex-start;

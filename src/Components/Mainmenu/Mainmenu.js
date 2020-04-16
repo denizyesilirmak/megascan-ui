@@ -14,6 +14,7 @@ import SettingIcon from '../../Assets/MenuIcons/mainmenu/settings.png'
 import LiveStreamIcon from '../../Assets/MenuIcons/mainmenu/livestream.png'
 import ManualLRLIcon from '../../Assets/MenuIcons/mainmenu/manuallrl.png'
 import FilesIcon from '../../Assets/MenuIcons/mainmenu/files.png'
+import PinPointerIcon from '../../Assets/MenuIcons/mainmenu/pinpointer.png'
 
 import { LanguageContext } from '../../Contexts/LanguageContext'
 
@@ -92,6 +93,11 @@ class Mainmenu extends Component {
         screenName: "controlLiveStream"
       },
       {
+        name: "pinpointer",
+        icon: PinPointerIcon,
+        screenName: "pinPointerScreen"
+      },
+      {
         name: "files",
         icon: FilesIcon,
         screenName: "fileListScreen"
@@ -128,6 +134,9 @@ class Mainmenu extends Component {
       case 'right':
         if (tempIndex < this.buttons.length - 2)
           tempIndex++
+        break
+      case 'mgs':
+        this.props.navigateTo("mobileGroundScan")
         break
       case 'ok':
         // console.log("mainmenu: ok")

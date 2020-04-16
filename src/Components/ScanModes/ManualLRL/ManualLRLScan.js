@@ -12,19 +12,23 @@ class ManualLRLScan extends Component {
     this.signal = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     this.state = {
-      width: 10
+      width: 10,
+      angle: 0
     }
   }
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
     this.compassInterval = setInterval(() => {
-      this.refs.compass.style.transform = "rotate(" + (Math.trunc(Math.random() * 360)) + "deg)"
-    }, 1500);
+      this.requestSensorData()
+    }, 150);
+  }
+
+  requestSensorData = () => {
+    socketHelper.send('L')
   }
 
   handleKeyDown = (socketData) => {
-    if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
       case 'ok':
 
@@ -38,6 +42,12 @@ class ManualLRLScan extends Component {
         return
       default:
         break
+    }
+
+    if(socketData.type === "lrlantenna"){
+      this.setState({
+        angle: (parseInt(socketData.payload) - 40) * 1.2
+      })
     }
   }
 
@@ -67,7 +77,7 @@ class ManualLRLScan extends Component {
         </div>
 
         <div className="gauge">
-          <img className="gauge-dial" src={DialImage} alt="dial" />
+          <img className="gauge-dial" src={DialImage} alt="dial" style={{transform: `rotate(${this.state.angle}deg)`}} />
         </div>
 
         <svg className="manual-signal" height="40" width="350">

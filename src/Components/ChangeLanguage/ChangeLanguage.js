@@ -94,7 +94,7 @@ class ChangeLanguage extends Component {
 
         this.props.setLanguage(LANGUAGES[this.state.activeIndex%8].code)
         await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex%8].code)
-        this.props.navigateTo("menuScreen")
+        this.props.navigateTo("settingsScreen")
         return
       case 'back':
         this.props.navigateTo("settingsScreen")

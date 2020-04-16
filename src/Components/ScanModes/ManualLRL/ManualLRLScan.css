@@ -16,20 +16,9 @@
   left: 141px;
   top: 28px;
   transform-origin: 15px 130px;
-  animation: gauge 4s infinite linear;
+  transition: all 0.2s;
 }
 
-@keyframes gauge {
-  0% {
-    transform: rotate(-80deg);
-  }
-  50% {
-    transform: rotate(80deg);
-  }
-  100% {
-    transform: rotate(-80deg);
-  }
-}
 
 
 

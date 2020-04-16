@@ -1,0 +1,32 @@
+.mobile-ground-scan {
+  background: black;
+}
+
+.mobile-ground-scan .mgs-props{
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-left:  20px;
+}
+
+.mobile-ground-scan .mgs-prop {
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+  width: 320px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px 0px 20px;
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.mgs-prop .value{
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+  /* -webkit-text-stroke-width: 1px; */
+  /* -webkit-text-stroke-color: white; */
+}

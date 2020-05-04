@@ -14,11 +14,6 @@ import { LanguageContext } from '../../Contexts/LanguageContext'
 
 class Statusbar extends Component {
   static contextType = LanguageContext
-  componentDidMount() {
-    socketHelper.attachSpecial('battery', msg => {
-      console.log('Statusbar diyor ki:', msg)
-    })
-  }
 
   render() {
     return (

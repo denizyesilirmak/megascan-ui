@@ -182,8 +182,9 @@ class Settings extends Component {
         else if (this.state.verticalIndex && this.state.activeSettingTab === 4) {
           if (this.state.subCursor === 1) {
             this.setState({
-              brightness: this.clamp(this.state.brightness - 5, 0, 100)
+              brightness: this.clamp(this.state.brightness - 10, 0, 100)
             })
+            socketHelper.send('br.' + this.state.brightness)
             await dbStorage.setItem("brightness", this.state.brightness)
           }
         }
@@ -207,6 +208,7 @@ class Settings extends Component {
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
+          socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
 
 
@@ -234,8 +236,9 @@ class Settings extends Component {
         else if (this.state.verticalIndex && this.state.activeSettingTab === 4) {
           if (this.state.subCursor === 1) {
             this.setState({
-              brightness: this.clamp(this.state.brightness + 5, 0, 100)
+              brightness: this.clamp(this.state.brightness + 10, 0, 100)
             })
+            socketHelper.send('br.' + this.state.brightness)
             await dbStorage.setItem("brightness", this.state.brightness)
           }
 
@@ -262,7 +265,7 @@ class Settings extends Component {
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
-
+          socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
         break
       case 'down':
@@ -369,12 +372,14 @@ class Settings extends Component {
             else if (this.state.subCursor === 0 && this.state.activePopup === "date") {
               // console.log("set date")
               console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+              socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
               this.openOkPopup()
 
             }
             else if (this.state.subCursor === 1 && this.state.activePopup === "time") {
               // console.log("set time")
               console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+              socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
               this.openOkPopup()
             }
           }

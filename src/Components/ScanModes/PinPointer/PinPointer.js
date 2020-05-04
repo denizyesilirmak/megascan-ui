@@ -28,7 +28,7 @@ const lines = [
   ["#28ff03", "#28ff03",],
   ["#28ff03", "#28ff03",],
 ]
-console.log(lines.length)
+// console.log(lines.length)
 
 const COLORS = {
   jet: [

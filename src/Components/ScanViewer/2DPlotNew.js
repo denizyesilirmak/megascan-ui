@@ -43,6 +43,8 @@ class Plot extends Component {
     this.min = 255
     let count = 0
 
+    this.graphMesh = null
+
     for (let i of this.data) {
       for (let a of i) {
         this.total += a
@@ -108,6 +110,7 @@ class Plot extends Component {
     this.initializeCamera();
     this.drawPlot()
     this.initGrid()
+    this.drawSelectedData()
     this.renderPlot()
 
     // setTimeout(() => {
@@ -168,6 +171,27 @@ class Plot extends Component {
     // this.camera.updateProjectionMatrix();
   }
 
+  drawSelectedData = () => {
+    console.log("selected")
+    var material = new THREE.LineBasicMaterial({
+      color: 0xff0000,
+      linewidth: 3,
+    });
+
+    var points = [];
+    points.push(new THREE.Vector3(0, 0, 1));
+    points.push(new THREE.Vector3((1 / (this.data[0].length) * 4), 0, 1));
+    points.push(new THREE.Vector3((1 / (this.data[0].length) * 4), -(1 / (this.data.length - 1)), 1));
+    points.push(new THREE.Vector3(0, -(1 / (this.data.length - 1)), 1));
+
+
+    var geometry = new THREE.BufferGeometry().setFromPoints(points);
+    var line = new THREE.LineLoop(geometry, material);
+    line.position.x = - 0.5
+    line.position.y =  0.5
+    this.scene.add(line);
+  }
+
   initGrid = () => {
     console.log("init grid")
     var material = new THREE.LineBasicMaterial({
@@ -188,9 +212,9 @@ class Plot extends Component {
       points.push(new THREE.Vector3(-0.5 + i * (1 / (this.data[0].length) * 4), -0.5, 0));
     }
 
-    var geometry = new THREE.BufferGeometry().setFromPoints(points);
-    var line = new THREE.LineSegments(geometry, material);
-    this.scene.add(line);
+    this.gridGeometry = new THREE.BufferGeometry().setFromPoints(points);
+    this.gridMesh = new THREE.LineSegments(this.gridGeometry, material);
+    this.scene.add(this.gridMesh);
   }
 
   filterGreens = () => {

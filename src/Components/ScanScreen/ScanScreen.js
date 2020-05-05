@@ -221,6 +221,7 @@ class ScanScreen extends Component {
       }
     }
   }
+  
 
 
   colorSquare = (x, y, c) => {

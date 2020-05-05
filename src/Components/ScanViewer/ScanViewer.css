@@ -1,8 +1,8 @@
-.scan-viewer-component{
+.scan-viewer-component {
   background: #000;
 }
 
-.sv-top{
+.sv-top {
   width: 100%;
   height: 300px;
   display: flex;
@@ -10,13 +10,50 @@
   justify-content: space-between;
 }
 
-.sv-bottom{
+.sv-bottom {
   width: 100%;
   height: 68px;
-
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.sv-scan-container{
+.sv-bottom-panel {
+  min-width: 80px;
+  height: 50px;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 0px 10px 0px 10px;
+  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.sv-bottom-panel .title {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.sv-bottom-panel .value {
+  margin-bottom: 6px;
+  color: #000;
+  font-size: 22px;
+}
+
+.sv-bottom-panel .line-graph-container{
+  width: 120px;
+  height: 20px;
+  background: #000;
+  margin-top: 15px;
+}
+
+.sv-bottom-panel .line-graph-container .line-value{
+  height: 100%;
+}
+
+.sv-scan-container {
   width: 650px;
   height: 300px;
   display: flex;
@@ -24,7 +61,7 @@
   align-items: center;
 }
 
-.sv-buttons{
+.sv-buttons {
   width: 106px;
   height: 280px;
   display: flex;
@@ -33,8 +70,21 @@
   align-items: center;
 }
 
-.sv-button{
+.sv-button {
   width: 45px;
   height: 45px;
-  background-size: cover;
+  background-size: auto !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  padding: 5px;
+  border-radius: 4px;
+  filter: saturate(0);
+}
+
+.sv-button.selected {
+  filter: saturate(1);
+  transition: border-color .4s;
+  border: 2px solid #FDB931;
+  background: rgb(49, 49, 49);
+  padding: 3px;
 }

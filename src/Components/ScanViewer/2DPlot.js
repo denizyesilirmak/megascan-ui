@@ -17,7 +17,7 @@ class Plot extends Component {
     super(props)
 
     this.state = {
-      reducedData: []
+      waiting: false
     }
 
     this.data = [
@@ -198,14 +198,14 @@ class Plot extends Component {
 
               this.data.map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="1" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#00000030" />
+                  <line key={l} strokeWidth="1" y2={l * this.gridHeight} x2="620" y1={l * this.gridHeight} x1="0" stroke="#00000090" />
                 )
               })
             }
             {
               this.data[0].map((d, l) => {
                 return (
-                  <line key={l} strokeWidth="1" y2="280" x2={l * this.gridWidth} y1="0" x1={l * this.gridWidth} stroke="#00000030" />
+                  <line key={l} strokeWidth="1" y2="280" x2={l * this.gridWidth} y1="0" x1={l * this.gridWidth} stroke="#00000090" />
                 )
               })
             }

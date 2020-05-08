@@ -46,11 +46,19 @@
   width: 120px;
   height: 20px;
   background: #000;
-  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .sv-bottom-panel .line-graph-container .line-value{
   height: 100%;
+}
+
+.sv-bottom-panel span{
+  color: white ;
+  z-index: 100;
+  float: right;
+  font-size: 13px;
+  margin-top: 4px;
 }
 
 .sv-scan-container {
@@ -78,12 +86,9 @@
   background-position: center !important;
   padding: 5px;
   border-radius: 4px;
-  filter: saturate(0);
 }
 
 .sv-button.selected {
-  filter: saturate(1);
-  transition: border-color .4s;
   border: 2px solid #FDB931;
   background: rgb(49, 49, 49);
   padding: 3px;

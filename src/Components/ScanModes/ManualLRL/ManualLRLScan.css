@@ -36,6 +36,8 @@
 .compass-out{
   transition: all 1000ms;
   transition-timing-function: linear;
+  perspective: 200px;
+
 }
 
 .manual-lrl-scan .manual-signal{
@@ -52,4 +54,8 @@
   100%{
     transform: translateX(-30px);
   }
+}
+
+.indicator-angle{
+  transition: transform 1s;
 }

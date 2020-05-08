@@ -29,7 +29,7 @@ class FileList extends Component {
       .then(data => {
         if (data.success)
           this.setState({
-            fileList: data.filelist
+            fileList: data.filelist.reverse()
           })
       })
   }

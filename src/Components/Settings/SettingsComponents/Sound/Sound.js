@@ -14,7 +14,7 @@ class Sound extends Component {
   componentDidMount = () => {
     setTimeout(() => {
       this.refs.sc.style.opacity = 1
-    }, 10);
+    }, 25);
   }
   render() {
     return (

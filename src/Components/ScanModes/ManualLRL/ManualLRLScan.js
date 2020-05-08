@@ -13,7 +13,8 @@ class ManualLRLScan extends Component {
 
     this.state = {
       width: 10,
-      angle: 0
+      angle: 0,
+      heading: 0
     }
   }
 
@@ -46,7 +47,9 @@ class ManualLRLScan extends Component {
 
     if(socketData.type === "lrlantenna"){
       this.setState({
-        angle: (parseInt(socketData.payload) - 40) * 1.2
+        angle: (parseInt(socketData.payload) - 40) * 1.2,
+        heading: socketData.compass,
+        tilt: socketData.angle
       })
     }
   }
@@ -73,7 +76,7 @@ class ManualLRLScan extends Component {
     return (
       <div className="manual-lrl-scan component">
         <div className="compass">
-          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out" />
+          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out"   style={{transform: `rotateZ(${this.state.heading}deg) rotate3D(1,0,0,30deg)`}}/>
         </div>
 
         <div className="gauge">
@@ -86,7 +89,7 @@ class ManualLRLScan extends Component {
 
         <div className="stream-orientation" style={{ position: "absolute", right: "30px" }}>
           <div className="line" >
-            <div ref="indicatorRef" className="indicator-angle"><span>Normal</span></div>
+            <div style={{transform: `translateY(${this.state.tilt}px)`}} className="indicator-angle"><span>Normal</span></div>
           </div>
         </div>
 

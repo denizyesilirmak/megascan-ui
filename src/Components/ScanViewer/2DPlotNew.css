@@ -1,7 +1,7 @@
 .plot {
   width: 620px;
   height: 280px;
-  border: 2px solid white;
+  border: 2px solid red;
   /* border-radius: 10px; */
   overflow: hidden;
 }

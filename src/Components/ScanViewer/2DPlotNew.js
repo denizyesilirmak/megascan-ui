@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import * as THREE from "three";
 import './2DPlotNew.css';
 import SandClock from './signs.svg'
@@ -114,7 +114,6 @@ class Plot extends Component {
     this.renderPlot()
 
     // setTimeout(() => {
-
     //   this.filterGreens()
     // }, 1500);
   }
@@ -174,7 +173,7 @@ class Plot extends Component {
   drawSelectedData = () => {
     console.log("selected")
     var material = new THREE.LineBasicMaterial({
-      color: 0xff0000,
+      color: 0xffffff,
       linewidth: 3,
     });
 
@@ -186,10 +185,10 @@ class Plot extends Component {
 
 
     var geometry = new THREE.BufferGeometry().setFromPoints(points);
-    var line = new THREE.LineLoop(geometry, material);
-    line.position.x = - 0.5
-    line.position.y =  0.5
-    this.scene.add(line);
+    this.selectedBox = new THREE.LineLoop(geometry, material);
+    this.selectedBox.position.x = - 0.5
+    this.selectedBox.position.y = 0.5
+    this.scene.add(this.selectedBox);
   }
 
   initGrid = () => {
@@ -231,6 +230,36 @@ class Plot extends Component {
     this.setState({ waiting: false })
   }
 
+  showHideGrid = (gridStatus) => {
+    this.gridMesh.visible = gridStatus;
+    this.renderPlot();
+  }
+
+  moveSelectedBox = (x, y) => {
+    this.selectedBox.position.x = - 0.5 + x * ((1 / (this.data[0].length) * 4))
+    this.selectedBox.position.y = 0.5 - y * (1 / (this.data.length - 1))
+
+    this.renderPlot()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.grid !== this.props.grid) {
+      console.log("grid change")
+      this.showHideGrid(this.props.grid)
+    }
+    if ((prevProps.selectedBoxPosition.width !== this.props.selectedBoxPosition.width) || (prevProps.selectedBoxPosition.height !== this.props.selectedBoxPosition.height)) {
+      console.log("move")
+      this.moveSelectedBox(this.props.selectedBoxPosition.width, this.props.selectedBoxPosition.height)
+    }
+
+    let c = 0
+    const rerender = setInterval(() => {
+      this.renderer.render(this.scene, this.camera);
+      c++;
+      if (c === 15)
+        clearInterval(rerender )
+    }, 5);
+  }
 
   render() {
     return (

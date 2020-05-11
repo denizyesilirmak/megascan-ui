@@ -4,17 +4,17 @@ import './Power.css'
 import PowerIcon from '../../../../Assets/MenuIcons/battery.svg'
 // import socketHelper from '../../../../SocketHelper'
 
-import { LanguageContext } from '../../../../Contexts/LanguageContext'
+import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class PowerSettings extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
   componentDidMount(){
     this.refs.sc.style.opacity = 1
   }
   render() {
     return (
       <div ref="sc" className="power-settings">
-        <SetttingsItem icon={PowerIcon} title={this.context["powersaver"]} mode="toggle" selected={this.props.selected} on={this.props.on}/>
+        <SetttingsItem icon={PowerIcon} title={this.context.strings["powersaver"]} mode="toggle" selected={this.props.selected} on={this.props.on}/>
       </div>
     )
   }

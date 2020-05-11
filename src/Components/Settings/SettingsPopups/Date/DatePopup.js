@@ -3,18 +3,18 @@ import './DatePopup.css'
 import upArrow from '../../../../Assets/MenuIcons/up-arrow.png'
 import downArrow from '../../../../Assets/MenuIcons/down-arrow.png'
 
-import { LanguageContext } from '../../../../Contexts/LanguageContext'
+import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class DatePopup extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
   render() {
     return (
       <div className="settings-popup">
-        <div className="popup-title">{this.context["changedate"]}</div>
+        <div className="popup-title">{this.context.strings["changedate"]}</div>
         <div className="date-picker">
 
           <div className="date-prop-holder">
-            <div className="date-time-label">{this.context["day"]}</div>
+            <div className="date-time-label">{this.context.strings["day"]}</div>
             <div>
               <div className={`item ${this.props.index === 0 ? "selected" : ""}`}>
                 <img id="up-arrow" src={upArrow} className="arrow" alt="arr" />
@@ -26,7 +26,7 @@ class DatePopup extends Component {
 
 
           <div className="date-prop-holder">
-            <div className="date-time-label">{this.context["month"]}</div>
+            <div className="date-time-label">{this.context.strings["month"]}</div>
             <div></div>
             <div className={`item ${this.props.index === 1 ? "selected" : ""}`}>
               <img id="up-arrow" src={upArrow} className="arrow" alt="arr" />
@@ -36,7 +36,7 @@ class DatePopup extends Component {
           </div>
 
           <div className="date-prop-holder">
-            <div className="date-time-label">{this.context["year"]}</div>
+            <div className="date-time-label">{this.context.strings["year"]}</div>
             <div></div>
             <div className={`item ${this.props.index === 2 ? "selected" : ""}`}>
               <img id="up-arrow" src={upArrow} className="arrow" alt="arr" />
@@ -46,7 +46,7 @@ class DatePopup extends Component {
           </div>
 
           <div className="date-time-info">
-           {this.context["pressoktosave"]}
+           {this.context.strings["pressoktosave"]}
         </div>
         </div>
       </div>

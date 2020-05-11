@@ -10,10 +10,10 @@ import DownArrow from '../../../Assets/MenuIcons/down-arrow.png'
 // import DistanceIcon from '../../../Assets/MenuIcons/icon-distance.png'
 // import DepthIcon from '../../../Assets/MenuIcons/icon-depth.png'
 
-import { LanguageContext } from '../../../Contexts/LanguageContext'
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 class AutoLRLSettings extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
   map = (x, in_min, in_max, out_min, out_max) => {
     return Math.trunc((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
   }
@@ -48,7 +48,7 @@ class AutoLRLSettings extends Component {
                 <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 9 ? "#fcba03" : "#333"} id="svg_2" d="m151.8999,4.68756c0,0 40.04857,29.84399 1.73819,71.05875" strokeWidth="5" fill="none" />
               </g>
             </svg>
-            <div className={`navigator-button ${this.props.mode ? "selected" : ""}`}>{this.context["distance"]}</div>
+            <div className={`navigator-button ${this.props.mode ? "selected" : ""}`}>{this.context.strings["distance"]}</div>
           </div>
 
           <div className="auto-lrl-settings-part">
@@ -74,7 +74,7 @@ class AutoLRLSettings extends Component {
                 <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 5 ? "#fcba03" : "#333"} transform="rotate(90 40.00000000000001,62.56252670288086) " id="svg_6" d="m30.047,26.6891c0,0 43.50192,30.13298 1.88808,71.74685" strokeWidth="4" fill="none" />
               </g>
             </svg>
-            <div className={`navigator-button ${!this.props.mode ? "selected" : ""}`}>{this.context["depth"]}</div>
+            <div className={`navigator-button ${!this.props.mode ? "selected" : ""}`}>{this.context.strings["depth"]}</div>
           </div>
         </div>
         <div className="bottom">

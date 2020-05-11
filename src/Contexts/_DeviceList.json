@@ -1,0 +1,34 @@
+{
+  "infinity": {
+      "groundscan": true,
+      "tunnelscan": true,
+      "geophysical": true,
+      "autolrl": true,
+      "ctrllrl": true,
+      "manuallrl": true,
+      "ionic": true,
+      "bionic": true,
+      "livestream": true,
+      "pinpointer": true,
+      "vlf": true,
+      "pulse": true,
+      "files": true,
+      "settings": true
+    },
+    "goldstar":{
+      "groundscan": true,
+      "tunnelscan": false,
+      "geophysical": false,
+      "autolrl": true,
+      "ctrllrl": true,
+      "manuallrl": true,
+      "ionic": true,
+      "bionic": true,
+      "livestream": true,
+      "pinpointer": true,
+      "vlf": false,
+      "pulse": false,
+      "files": true,
+      "settings": true
+    }
+}

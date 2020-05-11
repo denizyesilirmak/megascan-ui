@@ -4,10 +4,10 @@ import LeftArrow from '../../Assets/MenuIcons/left-arrow1.png'
 import RightArrow from '../../Assets/MenuIcons/right-arrow1.png'
 import ButtonIndicator from '../../Assets/MenuIcons/button-indicator.png'
 
-import { LanguageContext } from '../../Contexts/LanguageContext'
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 class Carousel extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
   componentDidMount(){
     this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
   }
@@ -29,7 +29,7 @@ class Carousel extends Component {
                   <div key={k} className={`carousel-button ${this.props.index + 1 === k ? 'selected' : ''}`}>
                     <img alt='ind' className='indicator' src={ButtonIndicator} style={{ display: (this.props.index + 1 === k) ? 'block' : 'none' }} />
                     <img alt='mi' className='carousel-icon' src={e.icon} />
-                    <div className='carousel-title'>{this.context[e.name]}</div>
+                    <div className='carousel-title'>{this.context.strings[e.name]}</div>
                   </div>
                 )
               })

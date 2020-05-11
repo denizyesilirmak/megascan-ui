@@ -16,7 +16,7 @@ import ManualLRLIcon from '../../Assets/MenuIcons/mainmenu/manuallrl.png'
 import FilesIcon from '../../Assets/MenuIcons/mainmenu/files.png'
 import PinPointerIcon from '../../Assets/MenuIcons/mainmenu/pinpointer.png'
 
-import { LanguageContext } from '../../Contexts/LanguageContext'
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 function getCookie(cname) {
   var name = cname + "=";
@@ -41,15 +41,17 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 class Mainmenu extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     const lastIndex = getCookie("menuIndex")
     this.state = {
-      index: Number.isNaN(parseInt(lastIndex)) ? -1 : parseInt(lastIndex)
+      index: Number.isNaN(parseInt(lastIndex)) ? -1 : parseInt(lastIndex),
+      buttons: []
     }
 
 
+    
 
     this.buttons = [
       {
@@ -109,8 +111,15 @@ class Mainmenu extends Component {
       }
     ]
   }
-
+  
   componentDidMount() {
+    console.log(this.context.systems)
+    this.setState({
+      buttons: this.buttons.filter(e => {
+        return this.context.systems[e.name]
+      })
+    })
+
     // console.log("mainmenu mounted")
     socketHelper.attach(this.handleKeyDown)
     this.timeout = setTimeout(() => {
@@ -132,7 +141,7 @@ class Mainmenu extends Component {
           tempIndex--
         break
       case 'right':
-        if (tempIndex < this.buttons.length - 2)
+        if (tempIndex < this.state.buttons.length - 2)
           tempIndex++
         break
       case 'mgs':
@@ -148,7 +157,7 @@ class Mainmenu extends Component {
           if (this.buttons[this.state.index + 1].screenName !== "") {
             // console.log("main menu unmount")
             socketHelper.detach()
-            this.props.navigateTo(this.buttons[this.state.index + 1].screenName)
+            this.props.navigateTo(this.state.buttons[this.state.index + 1].screenName)
           }
         }, 300);
         return
@@ -167,7 +176,7 @@ class Mainmenu extends Component {
   render() {
     return (
       <div ref="mainmenu" className="mainmenu-component">
-        <Carousel buttons={this.buttons} index={this.state.index} />
+        <Carousel buttons={this.state.buttons} index={this.state.index} />
       </div>
     )
   }

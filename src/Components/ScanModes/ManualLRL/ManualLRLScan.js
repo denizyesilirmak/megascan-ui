@@ -76,7 +76,7 @@ class ManualLRLScan extends Component {
     return (
       <div className="manual-lrl-scan component">
         <div className="compass">
-          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out"   style={{transform: `rotateZ(${this.state.heading}deg) rotate3D(1,0,0,30deg)`}}/>
+          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out"   style={{transform: `rotateZ(${this.state.heading}deg)`}}/>
         </div>
 
         <div className="gauge">

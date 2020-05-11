@@ -1,0 +1,8 @@
+{
+  "infinity": {
+    "background_url": "./Assets/backgrounds/infinity.png"
+  },
+  "goldstar":{
+    "background_url": "./Assets/backgrounds/goldstar.png"
+  }
+}

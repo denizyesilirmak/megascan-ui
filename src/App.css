@@ -5,10 +5,12 @@
 }  
 
 body{
-  background-image: url('./Assets/background.png');
+  
   background-size: cover;
   font-family: RussoOne;
+  /* background-image: url('./Assets/backgrounds/goldstar.png'); */
 }
+
 
 .component{
   margin-left: 22px;

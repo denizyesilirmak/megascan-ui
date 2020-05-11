@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { QRCode } from "react-qr-svg";
 import './Info.css'
 import GermanyFlag from '../../../../Assets/MenuIcons/germany.svg'
-import { LanguageContext } from '../../../../Contexts/LanguageContext'
+import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class Info extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
   componentDidMount = () => {
     setTimeout(() => {
       this.refs.sc.style.opacity = 1
@@ -27,28 +27,28 @@ class Info extends Component {
 
           <div className="info-right">
             <div className="info-item">
-              <span>{this.context["deviceversion"]}</span>
+              <span>{this.context.strings["deviceversion"]}</span>
               <span>1.0.9</span>
             </div>
 
             <div className="info-item">
-              <span>{this.context["softwareversion"]}</span>
+              <span>{this.context.strings["softwareversion"]}</span>
               <span>1.0.8</span>
             </div>
 
             <div className="info-item">
-              <span>{this.context["model"]}</span>
+              <span>{this.context.strings["model"]}</span>
               <span>1.9.21</span>
             </div>
 
             <div className="info-item">
-              <span>{this.context["serialnumber"]}</span>
+              <span>{this.context.strings["serialnumber"]}</span>
               <span>7578</span>
             </div>
 
             <div className="info-item" style={{ justifyContent: "center" }}>
               <span>
-                {this.context["madeingermany"]}
+                {this.context.strings["madeingermany"]}
               </span>
               <img alt="gf" id="germany-flag" src={GermanyFlag}></img>
             </div>

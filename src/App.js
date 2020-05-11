@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import LanguageContextProvider from './Contexts/LanguageContext'
+import DeviceContextProvider from './Contexts/DeviceContext'
+import DeviceInfo from './Contexts/_DeviceInfo.json'
 
 //COMPONENTS
 import Statusbar from './Components/Statusbar/Statusbar'
@@ -29,6 +30,9 @@ import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 import ScanScreen from './Components/ScanScreen/ScanScreen'
 
+//BG
+import BackgroundImage from './Assets/backgrounds/goldstar.png'
+
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/ControlMagnetometer'
 
@@ -37,24 +41,26 @@ dbStorage.init()
 
 // import SoundHelper from './SoundHelper'
 
+
 class App extends Component {
   constructor(props) {
     super(props)
-
+    document.body.style.backgroundImage = "url('backgrounds/goldstar.png')";
+    
     this.state = {
       ready: false,
       activeScreen: "menuScreen",
       fileToOpen: null
     }
-
+    
     dbStorage.getAll()
-      .then(settings => {
-        // console.log('Got settings:', settings)
-        this.setState({
-          ready: true,
-          currentLanguage: settings['language'] || 'en',
-        })
+    .then(settings => {
+      // console.log('Got settings:', settings)
+      this.setState({
+        ready: true,
+        currentLanguage: settings['language'] || 'en',
       })
+    })
   }
 
   componentDidMount() {
@@ -135,12 +141,12 @@ class App extends Component {
     if (this.state.ready) {
       return (
         <div className="App">
-          <LanguageContextProvider language={this.state.currentLanguage}>
+          <DeviceContextProvider language={this.state.currentLanguage}>
             <Statusbar title={this.state.activeScreen} />
             {
               this.renderScreen()
             }
-          </LanguageContextProvider>
+          </DeviceContextProvider>
         </div>
       )
     } else {

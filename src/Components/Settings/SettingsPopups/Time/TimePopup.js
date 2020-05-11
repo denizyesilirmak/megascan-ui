@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import "./TimePopup.css"
 import upArrow from '../../../../Assets/MenuIcons/up-arrow.png'
 import downArrow from '../../../../Assets/MenuIcons/down-arrow.png'
-import { LanguageContext } from '../../../../Contexts/LanguageContext'
+import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class TimePopup extends Component {
-  static contextType = LanguageContext
+  static contextType = DeviceContext
 
   render() {
     return (
       <div className="settings-popup">
-        <div className="popup-title">{this.context["changetime"]}</div>
+        <div className="popup-title">{this.context.strings["changetime"]}</div>
         <div className="date-picker">
 
           <div className={`item ${this.props.index === 0 ? "selected" : ""}`}>
@@ -27,7 +27,7 @@ class TimePopup extends Component {
             <img id="down-arrow" src={downArrow} className="arrow" alt="arr" />
           </div>
           <div className="date-time-info">
-            {this.context["pressoktosave"]}
+            {this.context.strings["pressoktosave"]}
         </div>
         </div>
 

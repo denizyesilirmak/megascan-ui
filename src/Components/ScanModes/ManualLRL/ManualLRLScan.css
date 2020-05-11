@@ -36,8 +36,6 @@
 .compass-out{
   transition: all 1000ms;
   transition-timing-function: linear;
-  perspective: 200px;
-
 }
 
 .manual-lrl-scan .manual-signal{

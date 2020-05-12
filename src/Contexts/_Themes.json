@@ -4,20 +4,23 @@
     "button_bg_selected": "radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)",
     "border_color": "#8a7940",
     "selected_text_color": "#000000",
-    "settings_item_bg": "rgb(24, 18, 2)"
+    "settings_item_bg": "rgb(24, 18, 2)",
+    "settings_shadow": "0px 0px 10px 2px rgba(255,234,0,1)"
   },
   "goldstar":{
     "background_url": "./Assets/backgrounds/goldstar.png",
     "button_bg_selected": "linear-gradient(120deg, #004990, #15b6e5)",
     "border_color": "#0b8cbd",
     "selected_text_color": "#ffffff",
-    "settings_item_bg": "rgb(13, 28, 63)"
+    "settings_item_bg": "rgb(13, 28, 63)",
+    "settings_shadow": "0px 0px 10px 2px rgb(143, 255, 246)"
   },
   "concord": {
     "background_url": "./Assets/backgrounds/infinity.png",
     "button_bg_selected": "linear-gradient(-120deg, #D62121, #C72C2C, #3a1111)",
     "border_color": "rgb(167, 21, 21)",
     "selected_text_color": "rgb(238, 255, 8)",
-    "settings_item_bg": "rgb(24, 18, 2)"
+    "settings_item_bg": "rgb(24, 18, 2)",
+    "settings_shadow": "0px 0px 10px 2px rgba(255,0,0,1)"
   }
 }

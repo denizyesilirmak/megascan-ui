@@ -4,10 +4,18 @@ import Popup from '../../../Assets/MenuIcons/popup.svg'
 import LeftArrowIcon from '../../../Assets/MenuIcons/left-arrow2.png'
 import RightArrowIcon from '../../../Assets/MenuIcons/right-arrow2.png'
 
+import { DeviceContext } from '../../../Contexts/DeviceContext'
+
 class SettingsItem extends Component {
+  static contextType = DeviceContext
   render() {
     return (
-      <div className={`settings-item ${this.props.selected ? 'selected' : ''}`}>
+      <div 
+      style={{
+        background: this.props.selected ? this.context.theme.button_bg_selected : 'rgb(2, 25, 46)'
+      }}
+      className={`settings-item ${this.props.selected ? 'selected' : ''}`
+      }>
         <img className="settings-item-icon" src={this.props.icon} alt="icon"></img>
         <div className="title"> {this.props.title} </div>
         {

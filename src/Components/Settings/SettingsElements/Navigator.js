@@ -3,7 +3,6 @@ import './Navigator.css'
 
 import LeftArrow from '../../../Assets/MenuIcons/left-arrow2.png'
 import RightArrow from '../../../Assets/MenuIcons/right-arrow2.png'
-
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 class Navigator extends Component {
@@ -12,6 +11,12 @@ class Navigator extends Component {
   //   super(props)
 
   // }
+
+
+
+  componentDidMount() {
+    console.log(this.context.theme.button_bg_selected)
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {
@@ -32,7 +37,16 @@ class Navigator extends Component {
           {
             this.props.buttons.map((e, k) => {
               return (
-                <div key={k} className={`navigator-button ${(this.props.activeSettingTab === k && this.props.active) ? 'selected' : ''}`}>
+                <div key={k} 
+                style={
+                  {
+                    background: (this.props.activeSettingTab === k && this.props.active) ? this.context.theme.button_bg_selected : "black",
+                    color: (this.props.activeSettingTab === k && this.props.active) ? this.context.theme.selected_text_color : "white",
+                    borderColor: this.context.theme.border_color,
+                    
+                  }
+                } 
+                className={`navigator-button`}>
                   {this.context.strings[e.name]}
                 </div>
               )
@@ -43,5 +57,6 @@ class Navigator extends Component {
     )
   }
 }
+
 
 export default Navigator

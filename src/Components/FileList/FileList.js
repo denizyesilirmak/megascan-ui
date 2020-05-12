@@ -4,7 +4,6 @@ import FileIcon from '../../Assets/MenuIcons/icon-file.png'
 import socketHelper from '../../SocketHelper'
 
 
-
 class FileList extends Component {
   constructor(props) {
     super(props)

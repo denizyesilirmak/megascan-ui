@@ -30,9 +30,6 @@ import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 import ScanScreen from './Components/ScanScreen/ScanScreen'
 
-//BG
-import BackgroundImage from './Assets/backgrounds/goldstar.png'
-
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/ControlMagnetometer'
 
@@ -45,11 +42,12 @@ dbStorage.init()
 class App extends Component {
   constructor(props) {
     super(props)
-    document.body.style.backgroundImage = "url('backgrounds/goldstar.png')";
+    document.body.style.backgroundImage = "url('backgrounds/"+ DeviceInfo.deviceModelName +".png')";
+    console.log(DeviceInfo.deviceModelName)
     
     this.state = {
       ready: false,
-      activeScreen: "menuScreen",
+      activeScreen: "settingsScreen",
       fileToOpen: null
     }
     

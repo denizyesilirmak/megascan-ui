@@ -21,8 +21,8 @@ class Display extends Component {
   render() {
     return (
       <div ref="sc" className="power-settings">
-        <SettingsItem title={this.context.strings["sleepmode"]} icon={SleepModeIcon} mode="toggle" selected={this.props.cursorY % 2 === 0} on={this.props.on} />
-        <SettingsItem title={this.context.strings["brightness"]} icon={BrightnessIcon} mode="slider" selected={this.props.cursorY % 2 === 1} value={this.props.brightness} />
+        <SettingsItem title={this.context.strings["sleepmode"]} icon={SleepModeIcon} mode="toggle" selected={this.props.cursorY % 2 === 0  && this.props.selected} on={this.props.on} />
+        <SettingsItem title={this.context.strings["brightness"]} icon={BrightnessIcon} mode="slider" selected={this.props.cursorY % 2 === 1  && this.props.selected} value={this.props.brightness} />
       </div>
     )
   }

@@ -30,5 +30,21 @@
       "pulse": false,
       "files": true,
       "settings": true
+    },
+    "concord": {
+      "groundscan": false,
+      "tunnelscan": false,
+      "geophysical": false,
+      "autolrl": true,
+      "ctrllrl": true,
+      "manuallrl": true,
+      "ionic": true,
+      "bionic": true,
+      "livestream": false,
+      "pinpointer": false,
+      "vlf": false,
+      "pulse": false,
+      "files": false,
+      "settings": true
     }
 }

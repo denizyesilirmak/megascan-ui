@@ -10,10 +10,40 @@ export const DeviceContext = createContext()
 const systems = DEVICE_LIST[DEVICE_MODEL]
 const curentTheme = THEMES[DEVICE_MODEL]
 
+const SLEEPMODETIMEOUT = 60000
+
 class DeviceContextProvider extends Component {
+  constructor(props) {
+    super(props)
+    this.sleepMode = false;
+    this.sleepModeTimer = setTimeout(() => {
+      console.log("screen off")
+      this.sleepMode = true;
+    }, SLEEPMODETIMEOUT);
+  }
+
+  buttonInterrupt = () => {
+    console.log("button interrupt")
+    if (this.sleepMode) {
+      this.sleepMode = false;
+      clearTimeout(this.sleepModeTimer)
+      console.log("screen on")
+      this.sleepModeTimer = setTimeout(() => {
+        console.log("screen off")
+        this.sleepMode = true;
+      }, SLEEPMODETIMEOUT);
+    }
+  }
+
   render() {
     return (
-      <DeviceContext.Provider value={{ strings: STRINGS[this.props.language], systems: systems, theme: curentTheme, device: DEVICE_MODEL}}>
+      <DeviceContext.Provider value={{
+        strings: STRINGS[this.props.language],
+        systems: systems,
+        theme: curentTheme,
+        device: DEVICE_MODEL,
+        buttonInterrupt: this.buttonInterrupt
+      }}>
         {this.props.children}
       </DeviceContext.Provider>
     )

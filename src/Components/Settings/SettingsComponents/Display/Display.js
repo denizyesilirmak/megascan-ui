@@ -11,13 +11,19 @@ class Display extends Component {
   static contextType = DeviceContext
   componentDidMount = () => {
     setTimeout(() => {
-      this.refs.sc.style.opacity = 1
+      try {
+        this.refs.sc.style.opacity = 1
+      } catch (error) {
+        console.warn("couldn't catch speed")
+      }
     }, 10);
   }
 
-  componentWillReceiveProps() {
-    
+  componentDidCatch(error, info){
+    console.log("ERROR")
   }
+
+
   render() {
     return (
       <div ref="sc" className="power-settings">

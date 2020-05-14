@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const SOCKET_SERVER_ADDRESS = 'ws://192.168.1.114:9090'
+const SOCKET_SERVER_ADDRESS = 'ws://localhost:9090'
 const VOID = () => {}
 
 class SocketHelper {
@@ -16,6 +16,13 @@ class SocketHelper {
 
       SocketHelper.instance = this
     }
+
+    this._socket.on('connect', () => {
+      if(this._socket.connected){
+        console.clear()
+      }
+    })
+
     return SocketHelper.instance
   }
 

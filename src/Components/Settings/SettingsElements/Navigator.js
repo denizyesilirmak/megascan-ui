@@ -15,7 +15,7 @@ class Navigator extends Component {
 
 
   componentDidMount() {
-    console.log(this.context.theme.button_bg_selected)
+    // console.log(this.context.theme.button_bg_selected)
   }
 
   componentDidUpdate(prevProps) {

@@ -51,7 +51,7 @@ class Mainmenu extends Component {
     }
 
 
-    
+
 
     this.buttons = [
       {
@@ -111,9 +111,9 @@ class Mainmenu extends Component {
       }
     ]
   }
-  
+
   componentDidMount() {
-    console.log(this.context.systems)
+    // console.log(this.context.systems)
     this.setState({
       buttons: this.buttons.filter(e => {
         return this.context.systems[e.name]
@@ -132,45 +132,47 @@ class Mainmenu extends Component {
   }
 
   handleKeyDown = (socketData) => {
-    if (socketData.type !== 'button') { return }
-    let tempIndex = this.state.index
-    switch (socketData.payload) {
-      case 'left':
-        // console.log("mainmenu: left")
-        if (tempIndex >= 0)
-          tempIndex--
-        break
-      case 'right':
-        if (tempIndex < this.state.buttons.length - 2)
-          tempIndex++
-        break
-      case 'mgs':
-        this.props.navigateTo("mobileGroundScan")
-        break
-      case 'ok':
-        // console.log("mainmenu: ok")
-        setCookie("menuIndex", this.state.index)
-        this.refs.mainmenu.style.transform = "scale(2)"
-        this.refs.mainmenu.style.opacity = 0
+    if (socketData.type === 'button') {
+      this.context.buttonInterrupt()
+      let tempIndex = this.state.index
+      switch (socketData.payload) {
+        case 'left':
+          // console.log("mainmenu: left")
+          if (tempIndex >= 0)
+            tempIndex--
+          break
+        case 'right':
+          if (tempIndex < this.state.buttons.length - 2)
+            tempIndex++
+          break
+        case 'mgs':
+          this.props.navigateTo("mobileGroundScan")
+          break
+        case 'ok':
+          // console.log("mainmenu: ok")
+          setCookie("menuIndex", this.state.index)
+          this.refs.mainmenu.style.transform = "scale(2)"
+          this.refs.mainmenu.style.opacity = 0
 
-        setTimeout(() => {
-          if (this.buttons[this.state.index + 1].screenName !== "") {
-            // console.log("main menu unmount")
-            socketHelper.detach()
-            this.props.navigateTo(this.state.buttons[this.state.index + 1].screenName)
-          }
-        }, 300);
-        return
-      case 'back':
-        this.props.navigateTo("lockScreen")
-        return
-      default:
-        break
+          setTimeout(() => {
+            if (this.buttons[this.state.index + 1].screenName !== "") {
+              // console.log("main menu unmount")
+              socketHelper.detach()
+              this.props.navigateTo(this.state.buttons[this.state.index + 1].screenName)
+            }
+          }, 300);
+          return
+        case 'back':
+          this.props.navigateTo("lockScreen")
+          return
+        default:
+          break
+      }
+
+      this.setState({
+        index: tempIndex
+      })
     }
-
-    this.setState({
-      index: tempIndex
-    })
   }
 
   render() {

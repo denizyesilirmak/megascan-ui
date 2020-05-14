@@ -42,8 +42,8 @@ dbStorage.init()
 class App extends Component {
   constructor(props) {
     super(props)
-    document.body.style.backgroundImage = "url('backgrounds/"+ DeviceInfo.deviceModelName +".png')";
-    console.log(DeviceInfo.deviceModelName)
+    document.body.style.backgroundImage = "url('backgrounds/"+ DeviceInfo.deviceModelName +".jpg')";
+    // console.log(DeviceInfo.deviceModelName)
     
     this.state = {
       ready: false,
@@ -65,6 +65,7 @@ class App extends Component {
     if (this.state.lock)
       this.navigateTo("lockScreen")
   }
+
 
   navigateTo = (screenName, file) => {
     this.setState({

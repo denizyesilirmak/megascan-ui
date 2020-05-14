@@ -16,7 +16,7 @@ import { DeviceContext } from '../../Contexts/DeviceContext'
 class Statusbar extends Component {
   static contextType = DeviceContext
   componentDidMount(){
-    console.log("status bar")
+    // console.log("status bar")
   }
 
   getLogo = () =>  {

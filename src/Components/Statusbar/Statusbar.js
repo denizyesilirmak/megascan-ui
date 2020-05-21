@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Statusbar.css'
 
-import socketHelper from '../../SocketHelper'
+// import socketHelper from '../../SocketHelper'
 
 import Volume from './StatusbarElements/Volume'
 import Wifi from './StatusbarElements/Wifi'

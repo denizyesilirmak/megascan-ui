@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component } from 'react'
 import * as THREE from "three";
 import './2DPlotNew.css';
 import SandClock from './signs.svg'
@@ -267,7 +267,7 @@ class Plot extends Component {
         {
           this.state.waiting ?
             <div className="plot-preloader">
-              <img src={SandClock}></img>
+              <img alt= "sc" src={SandClock}></img>
             </div>
             :
             null

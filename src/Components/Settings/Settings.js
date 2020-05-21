@@ -407,6 +407,7 @@ class Settings extends Component {
               this.setState({
                 sleepmode: !this.state.sleepmode
               })
+              this.context.changeSleepModeStatus(this.state.sleepmode)
               await dbStorage.setItem("sleepmode", this.state.sleepmode)
             }
 

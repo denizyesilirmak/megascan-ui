@@ -1,21 +1,28 @@
 @font-face {
   font-family: 'RussoOne';
-  src: url('./Assets/Fonts/Russo_One/RussoOne-Regular.ttf') format('truetype'), 
-   url('./Assets/Fonts/Russo_One/RussoOne-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}  
+  src: url('./Assets/Fonts/Russo_One/RussoOne-Regular.ttf') format('truetype'), url('./Assets/Fonts/Russo_One/RussoOne-Regular.ttf') format('truetype');
+  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
 
-body{
-  
+body {
   background-size: cover;
   font-family: RussoOne;
   /* background-image: url('./Assets/backgrounds/goldstar.png'); */
 }
 
-
-.component{
+.component {
   margin-left: 22px;
   width: 756px;
   height: 367px;
   position: absolute;
   top: 100px;
+}
+
+.sleepmode-overlay {
+  width: 100%;
+  height: 100vh;
+  background: black;
+  z-index: 10000;
+  position: absolute;
+
 }

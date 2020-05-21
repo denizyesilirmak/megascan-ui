@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import './FileList.css'
 import FileIcon from '../../Assets/MenuIcons/icon-file.png'
 import socketHelper from '../../SocketHelper'
-
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 class FileList extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -23,7 +24,7 @@ class FileList extends Component {
   }
 
   getFileList = () => {
-    fetch('http://192.168.1.114:3030/filelist')
+    fetch('http://localhost:9090/filelist')
       .then(res => res.json())
       .then(data => {
         if (data.success)
@@ -45,7 +46,7 @@ class FileList extends Component {
         } else {
           tempPopupCursorIndex--
         }
-
+        this.context.buttonInterrupt()
         break
       case 'right':
         if (this.state.popup === false) {
@@ -54,7 +55,7 @@ class FileList extends Component {
         } else {
           tempPopupCursorIndex++
         }
-
+        this.context.buttonInterrupt()
         break
       case 'up':
         if (this.state.popup === false) {
@@ -63,7 +64,7 @@ class FileList extends Component {
         } else {
 
         }
-
+        this.context.buttonInterrupt()
         break
       case 'down':
         if (this.state.popup === false) {
@@ -72,7 +73,7 @@ class FileList extends Component {
         } else {
 
         }
-
+        this.context.buttonInterrupt()
         break
       case 'ok':
         if (!this.state.popup) {
@@ -85,6 +86,7 @@ class FileList extends Component {
             this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex])
           }
         }
+        this.context.buttonInterrupt()
         break
       case 'back':
         if (this.state.popup)
@@ -93,6 +95,7 @@ class FileList extends Component {
           //back to mainmenu
           this.props.navigateTo("menuScreen")
         }
+        this.context.buttonInterrupt()
         return
       default:
         break

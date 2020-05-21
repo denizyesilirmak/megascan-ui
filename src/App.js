@@ -47,7 +47,7 @@ class App extends Component {
     
     this.state = {
       ready: false,
-      activeScreen: "settingsScreen",
+      activeScreen: "menuScreen",
       fileToOpen: null
     }
     

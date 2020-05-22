@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './Setup.css'
-import ChangeLanguage from '../ChangeLanguage/ChangeLanguage'
+import ChangeLanguage from '../ChangeLanguage/SetupChangeLanguage'
 import DateSelection from '../Settings/SettingsPopups/Date/DatePopup'
 import TimeSelection from '../Settings/SettingsPopups/Time/TimePopup'
+import socketHelper from '../../SocketHelper'
 
 
 /**
@@ -16,7 +17,6 @@ class Setup extends Component {
   constructor(props) {
     super(props)
     this.currentDate = new Date();
-    console.log(this.currentDate)
 
     this.state = {
       currentPage: 0,
@@ -30,7 +30,30 @@ class Setup extends Component {
     }
   }
 
+  componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
+  }
 
+  handleKeyDown = (socketData) => {
+    if (socketData.type !== "button") return
+    switch (socketData.payload) {
+      case 'up':
+
+        break;
+      case 'down':
+
+        break;
+      case 'left':
+
+        break;
+      case 'right':
+
+        break;
+
+      default:
+        break;
+    }
+  }
 
   renderSetupScreen = () => {
     switch (this.state.currentPage) {

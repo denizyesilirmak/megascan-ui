@@ -53,13 +53,17 @@ class App extends Component {
     }
 
     dbStorage.getAll()
-      .then(settings => {
-        // console.log('Got settings:', settings)
-        this.setState({
-          ready: true,
-          currentLanguage: settings['language'] || 'en',
-        })
+    .then(settings => {
+      // console.log('Got settings:', settings)
+      this.setState({
+        ready: true,
+        currentLanguage: settings['language'] || 'en',
+        activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
       })
+    })
+
+
+
   }
 
   componentDidMount() {

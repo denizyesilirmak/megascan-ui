@@ -81,7 +81,7 @@ class DeviceContextProvider extends Component {
         changeSleepModeStatus: this.changeSleepModeStatus
       }}>
 
-            <div className="black-screen" className="sleepmode-overlay" style={{transform: `scaleY(${this.state.sleepModeActive ? 1 : 0})`}} />
+            <div className="sleepmode-overlay black-screen" style={{transform: `scaleY(${this.state.sleepModeActive ? 1 : 0})`}} />
 
 
         {this.props.children}

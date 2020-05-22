@@ -24,7 +24,7 @@ class FileList extends Component {
   }
 
   getFileList = () => {
-    fetch('http://localhost:9090/filelist')
+    fetch('http://localhost:3030/filelist')
       .then(res => res.json())
       .then(data => {
         if (data.success)

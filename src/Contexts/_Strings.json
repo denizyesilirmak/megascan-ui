@@ -1,5 +1,6 @@
 {
   "en": {
+    "setupScreen": "Setup Device",
     "menuScreen": "Main Menu",
     "settingsScreen": "Settings",
     "turnOff": "Turn Off Device",
@@ -59,6 +60,7 @@
     "next": "İleri"
   },
   "tr": {
+    "setupScreen": "İlk Kurulum",
     "menuScreen": "Ana Menü",
     "settingsScreen": "Ayarlar",
     "turnOff": "Cihazı Kapat",

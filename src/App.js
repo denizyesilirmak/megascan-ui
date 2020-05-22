@@ -12,6 +12,7 @@ import LockScreen from './Components/LockScreen/LockScreen.js'
 import ChangePinScreen from './Components/ChangePin/ChangePin'
 import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
 import FileList from './Components/FileList/FileList'
+import Setup from './Components/Setup/Setup'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -42,23 +43,23 @@ dbStorage.init()
 class App extends Component {
   constructor(props) {
     super(props)
-    document.body.style.backgroundImage = "url('backgrounds/"+ DeviceInfo.deviceModelName +".jpg')";
+    document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')";
     // console.log(DeviceInfo.deviceModelName)
-    
+
     this.state = {
       ready: false,
-      activeScreen: "menuScreen",
+      activeScreen: "setupScreen",
       fileToOpen: null
     }
-    
+
     dbStorage.getAll()
-    .then(settings => {
-      // console.log('Got settings:', settings)
-      this.setState({
-        ready: true,
-        currentLanguage: settings['language'] || 'en',
+      .then(settings => {
+        // console.log('Got settings:', settings)
+        this.setState({
+          ready: true,
+          currentLanguage: settings['language'] || 'en',
+        })
       })
-    })
   }
 
   componentDidMount() {
@@ -131,6 +132,8 @@ class App extends Component {
         return (<MobileGroundScan navigateTo={this.navigateTo} />)
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} />)
+      case "setupScreen":
+        return (<Setup navigateTo={this.navigateTo} />)
       default:
         break;
     }

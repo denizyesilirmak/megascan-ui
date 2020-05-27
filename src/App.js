@@ -137,7 +137,7 @@ class App extends Component {
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} />)
       case "setupScreen":
-        return (<Setup navigateTo={this.navigateTo} />)
+        return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)}/>)
       default:
         break;
     }

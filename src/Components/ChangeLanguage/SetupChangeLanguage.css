@@ -1,30 +1,36 @@
 .setup-lan-image {
-  width: 150px;
+  width: 110px;
+  transition: transform 0.5s;
 }
 
 .setup-languages {
   width: 100%;
-  height: 155px;
+  height: 345px;
   display: flex;
   flex-direction: row;
   margin-top: 20px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.setup-change-language {}
 
 .setup-lan-selected {
   position: absolute;
-  width: 148px;
+  width: 110px;
   animation: setup-lan-rotate 2s infinite linear;
 }
 
-@keyframes setup-lan-rotate{
-  0%{
+.setup-lan-name {
+  color: white;
+  text-align: center;
+}
+
+@keyframes setup-lan-rotate {
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }

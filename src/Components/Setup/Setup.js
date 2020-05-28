@@ -3,6 +3,7 @@ import './Setup.css'
 import ChangeLanguage from '../ChangeLanguage/SetupChangeLanguage'
 import DateSelection from '../Settings/SettingsPopups/Date/DatePopup'
 import TimeSelection from '../Settings/SettingsPopups/Time/TimePopup'
+import FinishSetup from './FinishSetup'
 import socketHelper from '../../SocketHelper'
 import dbStorage from '../../DatabaseHelper'
 
@@ -99,7 +100,7 @@ class Setup extends Component {
       hour: this.currentDate.getHours(),
       minute: this.currentDate.getMinutes(),
       day: this.currentDate.getDate(),
-      month: this.currentDate.getMonth(),
+      month: this.currentDate.getMonth() + 1,
       year: this.currentDate.getFullYear(),
       selectedTimeIndex: 2 * 200,
       selectedDateIndex: 3 * 200,
@@ -121,6 +122,40 @@ class Setup extends Component {
             languageCursor: this.state.languageCursor - 6
           })
         }
+        else if (this.state.currentPage === 1) {
+          if (this.state.selectedDateIndex % 3 === 0 && this.state.day < 31) {
+            //change day
+            this.setState({
+              day: this.state.day + 1
+            })
+          }
+          else if (this.state.selectedDateIndex % 3 === 1 && this.state.month < 12) {
+            //change month
+            this.setState({
+              month: this.state.month + 1
+            })
+          }
+          else if (this.state.selectedDateIndex % 3 === 2 && this.state.year < 2200) {
+            //change month
+            this.setState({
+              year: this.state.year + 1
+            })
+          }
+        }
+        else if (this.state.currentPage === 2) {
+          if (this.state.selectedTimeIndex % 2 === 0 && this.state.hour < 23) {
+            //change hour
+            this.setState({
+              hour: this.state.hour + 1
+            })
+          }
+          else if (this.state.selectedTimeIndex % 2 === 1 && this.state.minute < 59) {
+            //change minutes
+            this.setState({
+              minute: this.state.minute + 1
+            })
+          }
+        }
         break;
       case 'down':
         if (this.state.currentPage === 0) {
@@ -128,11 +163,56 @@ class Setup extends Component {
             languageCursor: this.state.languageCursor + 6
           })
         }
+        else if (this.state.currentPage === 1) {
+          if (this.state.selectedDateIndex % 3 === 0 && this.state.day > 1) {
+            //change day
+            this.setState({
+              day: this.state.day - 1
+            })
+          }
+          else if (this.state.selectedDateIndex % 3 === 1 && this.state.month > 1) {
+            //change month
+            this.setState({
+              month: this.state.month - 1
+            })
+          }
+          else if (this.state.selectedDateIndex % 3 === 2 && this.state.year > 1950) {
+            //change year
+            this.setState({
+              year: this.state.year - 1
+            })
+          }
+        }
+        else if (this.state.currentPage === 2) {
+
+          if (this.state.selectedTimeIndex % 2 === 0 && this.state.hour > 0) {
+            //change hour
+            this.setState({
+              hour: this.state.hour - 1
+            })
+          }
+          else if (this.state.selectedTimeIndex % 2 === 1 && this.state.minute > 0) {
+            //change minutes
+            this.setState({
+              minute: this.state.minute - 1
+            })
+          }
+        }
         break;
       case 'left':
         if (this.state.currentPage === 0) {
           this.setState({
             languageCursor: this.state.languageCursor - 1
+          })
+        }
+        else if (this.state.currentPage === 1) {
+          this.setState({
+            selectedDateIndex: this.state.selectedDateIndex - 1
+          })
+        }
+        else if (this.state.currentPage === 2) {
+          this.setState({
+            selectedTimeIndex: this.state.selectedTimeIndex - 1
           })
         }
         break;
@@ -142,12 +222,46 @@ class Setup extends Component {
             languageCursor: this.state.languageCursor + 1
           })
         }
+        else if (this.state.currentPage === 1) {
+          this.setState({
+            selectedDateIndex: this.state.selectedDateIndex + 1
+          })
+        }
+        else if (this.state.currentPage === 2) {
+          this.setState({
+            selectedTimeIndex: this.state.selectedTimeIndex + 1
+          })
+        }
         break;
       case 'ok':
         if (this.state.currentPage === 0) {
-          await dbStorage.setItem("lang", LANGUAGES[this.state.languageCursor%12].code)
-          this.props.setLanguage(LANGUAGES[this.state.languageCursor%12].code)
-          console.log(LANGUAGES[this.state.languageCursor%12].code + " set")
+          await dbStorage.setItem("lang", LANGUAGES[this.state.languageCursor % 12].code)
+          this.props.setLanguage(LANGUAGES[this.state.languageCursor % 12].code)
+          console.log(LANGUAGES[this.state.languageCursor % 12].code + " set")
+          this.setState({
+            currentPage: 1
+          })
+        }
+        else if (this.state.currentPage === 1) {
+          console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+          socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+          this.setState({
+            currentPage: 2
+          })
+        }
+        else if (this.state.currentPage === 2) {
+          console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+          socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+          this.setState({
+            currentPage: 3
+          })
+        }
+        break;
+      case 'back':
+        if (this.state.currentPage === 1 || this.state.currentPage === 2) {
+          this.setState({
+            currentPage: this.state.currentPage - 1
+          })
         }
         break;
 
@@ -161,6 +275,7 @@ class Setup extends Component {
       case 0: return <ChangeLanguage cursor={this.state.languageCursor % 12} languages={LANGUAGES} />
       case 1: return <DateSelection index={this.state.selectedDateIndex % 3} day={this.state.day} month={this.state.month} year={this.state.year} />
       case 2: return <TimeSelection index={this.state.selectedTimeIndex % 2} hour={this.state.hour} minute={this.state.minute} />
+      case 3: return <FinishSetup navigateTo={this.props.navigateTo} />
 
       default:
         break;

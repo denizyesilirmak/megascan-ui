@@ -55,6 +55,7 @@ class App extends Component {
     dbStorage.getAll()
     .then(settings => {
       // console.log('Got settings:', settings)
+      console.log(settings['setupCompleted'])
       this.setState({
         ready: true,
         currentLanguage: settings['language'] || 'en',

@@ -252,6 +252,7 @@ class Setup extends Component {
         else if (this.state.currentPage === 2) {
           console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
           socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+          await dbStorage.setItem('setupCompleted', true)
           this.setState({
             currentPage: 3
           })

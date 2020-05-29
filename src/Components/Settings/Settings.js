@@ -422,7 +422,6 @@ class Settings extends Component {
 
           }
 
-
           else if (this.state.activeSettingTab === 6) {
             //security
             if (this.state.subCursor === 0) {
@@ -520,7 +519,7 @@ class Settings extends Component {
           this.renderPopup(this.state.activePopup)
         }
         <Navigator active={!this.state.verticalIndex} activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
-        <div style={{borderColor:this.context.theme.border_color, boxShadow: this.state.verticalIndex?  this.context.theme.settings_shadow : 'none' }} className="settings-component-container">
+        <div style={{ borderColor: this.context.theme.border_color, boxShadow: this.state.verticalIndex ? this.context.theme.settings_shadow : 'none' }} className="settings-component-container">
           {
             this.renderSettingsComponent()
           }

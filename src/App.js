@@ -13,6 +13,8 @@ import ChangePinScreen from './Components/ChangePin/ChangePin'
 import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
 import FileList from './Components/FileList/FileList'
 import Setup from './Components/Setup/Setup'
+import ResetFactory from './Components/Settings/SettingsPopups/ResetFactory/ResetFactory'
+
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -53,15 +55,15 @@ class App extends Component {
     }
 
     dbStorage.getAll()
-    .then(settings => {
-      // console.log('Got settings:', settings)
-      console.log(settings['setupCompleted'])
-      this.setState({
-        ready: true,
-        currentLanguage: settings['language'] || 'en',
-        activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
+      .then(settings => {
+        // console.log('Got settings:', settings)
+        console.log(settings['setupCompleted'])
+        this.setState({
+          ready: true,
+          currentLanguage: settings['language'] || 'en',
+          activeScreen: settings['setupCompleted'] ? "factoryResetScreen" : "setupScreen"
+        })
       })
-    })
 
 
 
@@ -138,7 +140,9 @@ class App extends Component {
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} />)
       case "setupScreen":
-        return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)}/>)
+        return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
+      case "factoryResetScreen":
+        return (<ResetFactory navigateTo={this.navigateTo} />)
       default:
         break;
     }

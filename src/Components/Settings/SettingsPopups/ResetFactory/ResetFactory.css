@@ -1,0 +1,35 @@
+.reset-factory{
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.reset-question{
+  color: white;
+  font-size: 20px;
+  padding: 0px 20px 0px 20px;
+  text-align: center;
+}
+
+.reset-answers{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.reset-button{
+  border: 2px solid white;
+  color: white;
+  min-width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  border-radius: 20px;
+}
+

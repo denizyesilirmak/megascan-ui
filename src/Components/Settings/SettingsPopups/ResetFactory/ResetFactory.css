@@ -33,3 +33,37 @@
   border-radius: 20px;
 }
 
+.reset-preloader{
+  position: absolute;
+  width: 680px;
+  height: 250px;
+  background: black;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.reseting-text{
+  color: black;
+  font-size: 25px;
+}
+
+.reset-progress-bar-container{
+  width: 600px;
+  height: 50px;
+  border: 2px solid white;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: black;
+  overflow: hidden;
+}
+
+.reset-progress-bar{
+  width: 0%;
+  height: 100%;
+  background: yellowgreen;
+  transition: 3s all;
+}

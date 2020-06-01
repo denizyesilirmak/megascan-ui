@@ -8,7 +8,9 @@ class ResetFactory extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      buttonIndex: 2 * 2500 + 1
+      buttonIndex: 2 * 2500 + 1,
+      progress: 0,
+      popup: false
     }
   }
 
@@ -20,28 +22,58 @@ class ResetFactory extends Component {
     if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
       case 'left':
-        this.setState({
-          buttonIndex: this.state.buttonIndex + 1
-        })
+        if (!this.state.popup) {
+          this.setState({
+            buttonIndex: this.state.buttonIndex + 1
+          })
+        }
         break
       case 'right':
-        this.setState({
-          buttonIndex: this.state.buttonIndex - 1
-        })
+        if (!this.state.popup) {
+          this.setState({
+            buttonIndex: this.state.buttonIndex - 1
+          })
+        }
         break
       case 'back':
-
-        return
+        if (!this.state.popup) {
+          this.props.navigateTo("menuScreen")
+        }
+        break
+      case 'ok':
+        if (!this.state.popup) {
+          this.setState({
+            popup: true,
+          })
+          setTimeout(() => {
+            this.setState({
+              progress: 100
+            })
+          }, 600);
+        }
+        break
       default:
         break
     }
   }
 
 
-
   render() {
     return (
       <div className="reset-factory component">
+
+        {
+          this.state.popup ?
+            <div className="reset-preloader" style={{ background: this.context.theme.button_bg_selected }}>
+              <div className="reseting-text">Resetting to factory settings, please wait...</div>
+              <div className="reset-progress-bar-container" >
+                <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}>
+
+                </div>
+              </div>
+            </div> : null
+        }
+
         <div className="reset-question">
           Restoring factory settings resets all device settings and deletes saved files. Are you sure?
         </div>

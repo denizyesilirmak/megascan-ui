@@ -399,6 +399,19 @@ class Settings extends Component {
             }
           }
 
+          else if (this.state.activeSettingTab === 3) {
+            //reset olayları
+            if(this.state.subCursor === 0){
+              this.props.navigateTo("resetSettingsScreen")
+            }
+            else if(this.state.subCursor === 1){
+              this.props.navigateTo("factoryResetScreen")
+            }
+            else if(this.state.subCursor === 2){
+              this.props.navigateTo("resetStorageScreen")
+            }
+          }
+
           else if (this.state.activeSettingTab === 4) {
             //display
             if (this.state.subCursor === 0) {

@@ -14,7 +14,8 @@ import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
 import FileList from './Components/FileList/FileList'
 import Setup from './Components/Setup/Setup'
 import ResetFactory from './Components/Settings/SettingsPopups/ResetFactory/ResetFactory'
-
+import ResetSettings from './Components/Settings/SettingsPopups/ResetSettings/ResetSettings'
+import ResetStorage from './Components/Settings/SettingsPopups/ResetStorage/ResetStorage'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -61,7 +62,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "factoryResetScreen" : "setupScreen"
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
         })
       })
 
@@ -143,6 +144,10 @@ class App extends Component {
         return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
       case "factoryResetScreen":
         return (<ResetFactory navigateTo={this.navigateTo} />)
+      case "resetSettingsScreen":
+        return (<ResetSettings navigateTo={this.navigateTo} />)
+      case "resetStorageScreen":
+        return (<ResetStorage navigateTo={this.navigateTo} />)
       default:
         break;
     }

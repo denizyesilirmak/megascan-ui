@@ -14,8 +14,13 @@ class ResetFactory extends Component {
     }
   }
 
+
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    setTimeout(() => {
+      this.refs.reset.style.transform = "scale(1)"
+      this.refs.reset.style.opacity = 1
+    }, 150);
   }
 
   handleKeyDown = (socketData) => {
@@ -41,7 +46,7 @@ class ResetFactory extends Component {
         }
         break
       case 'ok':
-        if (!this.state.popup) {
+        if (!this.state.popup && this.state.buttonIndex % 2 === 0) {
           this.setState({
             popup: true,
           })
@@ -50,6 +55,8 @@ class ResetFactory extends Component {
               progress: 100
             })
           }, 600);
+        } else {
+          this.props.navigateTo("settingsScreen")
         }
         break
       default:
@@ -60,7 +67,7 @@ class ResetFactory extends Component {
 
   render() {
     return (
-      <div className="reset-factory component">
+      <div className="reset-factory component" ref="reset">
 
         {
           this.state.popup ?
@@ -77,6 +84,7 @@ class ResetFactory extends Component {
         <div className="reset-question">
           Restoring factory settings resets all device settings and deletes saved files. Are you sure?
         </div>
+
         <div className="reset-answers">
           <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>Yes</div>
           <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>No</div>

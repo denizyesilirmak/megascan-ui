@@ -4,6 +4,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transform: scale(0.8);
+  transition: all 0.7s;
+  opacity: 0;
 }
 
 .reset-question{
@@ -54,7 +57,7 @@
 .reset-progress-bar-container{
   width: 600px;
   height: 50px;
-  border: 2px solid white;
+  border: 3px solid black;
   margin-top: 20px;
   border-radius: 10px;
   background: black;
@@ -64,6 +67,6 @@
 .reset-progress-bar{
   width: 0%;
   height: 100%;
-  background: yellowgreen;
+  background: linear-gradient(0deg, rgba(34,65,12,1) 0%, rgba(141,255,85,1) 86%, rgba(83,255,0,1) 100%);
   transition: 3s all;
 }

@@ -5,7 +5,10 @@
     "border_color": "#8a7940",
     "selected_text_color": "#000000",
     "settings_item_bg": "rgb(24, 18, 2)",
-    "settings_shadow": "0px 0px 10px 2px rgba(255,234,0,1)"
+    "settings_shadow": "0px 0px 10px 2px rgba(255,234,0,1)",
+    "background2": "#bce8fd",
+    "background3": "#124b88",
+    "shadowPopup": "inset 0px 0px 10px 5px #70643c"
   },
   "goldstar":{
     "background_url": "./Assets/backgrounds/goldstar.png",
@@ -13,7 +16,10 @@
     "border_color": "#0b8cbd",
     "selected_text_color": "#ffffff",
     "settings_item_bg": "rgb(13, 28, 63)",
-    "settings_shadow": "0px 0px 10px 2px rgb(143, 255, 246)"
+    "settings_shadow": "0px 0px 10px 2px rgb(143, 255, 246)",
+    "background2": "#bce8fd",
+    "background3": "#00224f",
+    "shadowPopup": "inset 0px 0px 10px 5px #ffffff"
   },
   "concord": {
     "background_url": "./Assets/backgrounds/infinity.png",
@@ -21,6 +27,9 @@
     "border_color": "rgb(167, 21, 21)",
     "selected_text_color": "rgb(238, 255, 8)",
     "settings_item_bg": "rgb(24, 18, 2)",
-    "settings_shadow": "0px 0px 10px 2px rgba(255,0,0,1)"
+    "settings_shadow": "0px 0px 10px 2px rgba(255,0,0,1)",
+    "background2": "#bce8fd",
+    "background3": "#124b88",
+    "shadowPopup": "inset 0px 0px 10px 5px #70643c"
   }
 }

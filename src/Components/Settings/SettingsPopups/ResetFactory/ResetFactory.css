@@ -47,6 +47,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  animation: popupIn 1s 1;
 }
 
 .reseting-text{
@@ -69,4 +70,14 @@
   height: 100%;
   background: linear-gradient(0deg, rgba(34,65,12,1) 0%, rgba(141,255,85,1) 86%, rgba(83,255,0,1) 100%);
   transition: 3s all;
+  transition-delay: 400ms;
+}
+
+@keyframes popupIn{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }

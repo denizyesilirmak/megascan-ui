@@ -51,3 +51,19 @@
   right: 70px;
   top: 190px;
 }
+
+.lrl-move{
+  width: 120px;
+  height: 230px;
+  position: absolute;
+  z-index: 100;
+  background-image: url('../../../../../Assets/MenuIcons/move.png');
+  animation: moveAnimation 1s steps(8) infinite;
+  left: 200px;
+  bottom: 90px;
+}
+
+@keyframes moveAnimation {
+  from {background-position-x: 0px;}
+  to {background-position-x: -960px;}
+}

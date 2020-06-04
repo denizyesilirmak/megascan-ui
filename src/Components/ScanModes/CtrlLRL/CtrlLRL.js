@@ -12,8 +12,8 @@ class CtrlLRL extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeSettingTab: 0,
-      activeSettingTabName: 'soiltype',
+      activeSettingTab: 3,
+      activeSettingTabName: 'distance',
       verticalIndex: 0
     }
 
@@ -106,7 +106,7 @@ class CtrlLRL extends Component {
   render() {
     return (
       <div ref="ctrllrl" className="ctrl-lrl-component component">
-        <Navigator activeSettingTab={this.state.activeSettingTab} buttons={this.buttons} />
+        <Navigator activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex === 0} buttons={this.buttons} />
         <div className={`settings-component-container  ${this.state.verticalIndex === 1 ? 'selected' : ''}`}>
           {
             this.renderCtrlLrlComponent()

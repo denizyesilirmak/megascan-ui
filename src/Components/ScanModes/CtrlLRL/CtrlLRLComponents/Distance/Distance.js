@@ -41,6 +41,11 @@ class Distance extends Component {
       <div className="distance-component">
         <img alt="arr" src={LeftArrow} className="left-arrow"></img>
         <img alt="arr" src={RightArrow} className="right-arrow"></img>
+
+        <div className="lrl-move">
+          
+        </div>
+
         <div className="distance-container">
           <div className="distance-value">{this.state.distance} m</div>
           <svg width="240" height="80" className="distance-indicator">

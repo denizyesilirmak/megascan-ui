@@ -58,7 +58,7 @@
   position: absolute;
   z-index: 100;
   background-image: url('../../../../../Assets/MenuIcons/move.png');
-  animation: moveAnimation 1s steps(8) infinite;
+  animation: moveAnimation 1.3s steps(8) infinite;
   left: 200px;
   bottom: 90px;
 }

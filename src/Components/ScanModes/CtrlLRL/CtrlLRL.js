@@ -12,8 +12,8 @@ class CtrlLRL extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeSettingTab: 3,
-      activeSettingTabName: 'distance',
+      activeSettingTab: 0,
+      activeSettingTabName: 'soiltype',
       verticalIndex: 0
     }
 

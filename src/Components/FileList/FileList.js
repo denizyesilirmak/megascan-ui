@@ -85,6 +85,13 @@ class FileList extends Component {
           if (this.state.popupCursorIndex % 3 === 0) {
             this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex])
           }
+          else if (this.state.popupCursorIndex % 3 === 1) {
+            this.setState({popup: false})
+          }
+          else if (this.state.popupCursorIndex % 3 === 2) {
+            console.log("delete file: " + this.state.fileList[this.state.cursorIndex])
+
+          }
         }
         this.context.buttonInterrupt()
         break
@@ -109,7 +116,7 @@ class FileList extends Component {
 
   renderPopup = () => {
     return (
-      <div className="file-list-popup" style={{borderColor: this.context.theme.background3}}>
+      <div className="file-list-popup" style={{ borderColor: this.context.theme.background3 }}>
         <div className="question">
           Selected File:
         </div>
@@ -120,13 +127,13 @@ class FileList extends Component {
         </div>
         <div className="buttons">
           <div className={`button`}
-          style={{background: this.state.popupCursorIndex % 3 === 0 ? this.context.theme.button_bg_selected : null}}
+            style={{ background: this.state.popupCursorIndex % 3 === 0 ? this.context.theme.button_bg_selected : null }}
           >Open</div>
           <div className={`button`}
-          style={{background: this.state.popupCursorIndex % 3 === 1 ? this.context.theme.button_bg_selected : null}}
+            style={{ background: this.state.popupCursorIndex % 3 === 1 ? this.context.theme.button_bg_selected : null }}
           >Cancel</div>
           <div className={`button`}
-          style={{background: this.state.popupCursorIndex % 3 === 2 ? this.context.theme.button_bg_selected : null}}
+            style={{ background: this.state.popupCursorIndex % 3 === 2 ? this.context.theme.button_bg_selected : null }}
           >Delete File</div>
         </div>
       </div >
@@ -144,7 +151,7 @@ class FileList extends Component {
           {
             this.state.fileList.map((e, i) => {
               return (
-                <div key={i} className='file' style={{background: this.state.cursorIndex === i ? this.context.theme.button_bg_selected : null}}>
+                <div key={i} className='file' style={{ background: this.state.cursorIndex === i ? this.context.theme.button_bg_selected : null }}>
                   <img src={FileIcon} alt="file" />
                   <span>{e}</span>
                 </div>

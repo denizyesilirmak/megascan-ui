@@ -26,7 +26,7 @@ class GroundScanMethodSelection extends Component {
     ]
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
   }
 

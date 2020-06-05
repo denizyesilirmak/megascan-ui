@@ -17,10 +17,14 @@ import downArrow from '../../../../Assets/MenuIcons/down-arrow.png'
 
 import MiniCarousel from '../MiniCarousel/MiniCarousel'
 
+import dbStorage from '../../../../DatabaseHelper'
+import { DeviceContext } from '../../../../Contexts/DeviceContext'
+
 const MAXSTEPS = 20
 const MAXLINES = 10
 
 class DeviceGroundScanProperties extends Component {
+  static contextType = DeviceContext
 
   constructor(props) {
     super(props)
@@ -59,11 +63,11 @@ class DeviceGroundScanProperties extends Component {
     ]
 
     this.state = {
-      activeTabIndex: 4 * 200 + 0,
-      scanModeIndex: 2 * 200,
-      scanPathIndex: 2 * 200,
-      startPointIndex: 2 * 200,
-      scanStepIndex: 2 * 200,
+      activeTabIndex: 4 * 2000 + 0,
+      scanModeIndex: 2 * 2000,
+      scanPathIndex: 2 * 2000,
+      startPointIndex: 2 * 2000,
+      scanStepIndex: 2 * 2000,
       verticalTabIndex: true, //true top, false bottom
       lines: 10,
       steps: 10
@@ -72,7 +76,29 @@ class DeviceGroundScanProperties extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    dbStorage.getAll()
+      .then(e => {
+        this.setState({
+          scanModeIndex: e.gs_modeIndex || 2 * 2000,
+          scanPathIndex: e.gs_pathIndex || 2 * 2000,
+          startPointIndex: e.gs_pointIndex || 2 * 2000,
+          lines: e.gs_lines || 10,
+          steps: e.gs_steps || 10
+        })
+      })
   }
+
+
+  savePropertiesState = async () => {
+    dbStorage.setItem({
+      gs_modeIndex: this.state.scanModeIndex,
+      gs_pathIndex: this.state.scanPathIndex,
+      gs_pointIndex: this.state.startPointIndex,
+      gs_lines: this.state.lines,
+      gs_steps: this.state.steps
+    })
+  }
+
 
   renderTabContent = () => {
     switch (this.state.activeTabIndex % 5) {
@@ -119,8 +145,8 @@ class DeviceGroundScanProperties extends Component {
             <div className="summary-tab">
               <div className="summary-table">
 
-                <div className="summary-prop">
-                  <div className="summary-label">
+                <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
+                  <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
                     Mode
                   </div>
                   <div className="summary-value">
@@ -128,8 +154,8 @@ class DeviceGroundScanProperties extends Component {
                   </div>
                 </div>
 
-                <div className="summary-prop">
-                  <div className="summary-label">
+                <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
+                  <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
                     Path
                   </div>
                   <div className="summary-value">
@@ -137,8 +163,8 @@ class DeviceGroundScanProperties extends Component {
                   </div>
                 </div>
 
-                <div className="summary-prop">
-                  <div className="summary-label">
+                <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
+                  <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
                     Size
                   </div>
                   <div className="summary-value">
@@ -146,8 +172,8 @@ class DeviceGroundScanProperties extends Component {
                   </div>
                 </div>
 
-                <div className="summary-prop">
-                  <div className="summary-label">
+                <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
+                  <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
                     Start Point
                   </div>
                   <div className="summary-value">
@@ -280,6 +306,7 @@ class DeviceGroundScanProperties extends Component {
               steps: this.state.steps,
               startPoint: this.state.startPointIndex % 2 === 0 ? "left" : "right"
             }
+            this.savePropertiesState()
             console.log("Scan Properties: ", scanProperties)
             this.props.navigateTo("scanScreen")
           }
@@ -306,13 +333,51 @@ class DeviceGroundScanProperties extends Component {
     return (
       <div ref="dgsp" className="device-ground-scan-properties component">
         <div className="dgsp-tabs">
-          <img alt="left" className="" src={TabLeftArrow} />
-          <div className={`dgsp-tab ${(this.state.activeTabIndex % 5 === 0 && this.state.verticalTabIndex) ? "selected" : ""}`}>Mode</div>
-          <div className={`dgsp-tab ${(this.state.activeTabIndex % 5 === 1 && this.state.verticalTabIndex) ? "selected" : ""}`}>Path</div>
-          <div className={`dgsp-tab ${(this.state.activeTabIndex % 5 === 2 && this.state.verticalTabIndex) ? "selected" : ""}`}>Size</div>
-          <div className={`dgsp-tab ${(this.state.activeTabIndex % 5 === 3 && this.state.verticalTabIndex) ? "selected" : ""}`}>Start Point</div>
-          <div className={`dgsp-tab ${(this.state.activeTabIndex % 5 === 4 && this.state.verticalTabIndex) ? "selected" : ""}`}>Scan</div>
-          <img alt="left" className="" src={TabRightArrow} />
+          <img alt="left" src={TabLeftArrow} />
+          <div className={`dgsp-tab`}
+            style={{
+              background: this.state.activeTabIndex % 5 === 0 ? this.context.theme.background2 : "black",
+              color: this.state.activeTabIndex % 5 === 0 ? "black" : "white",
+              borderColor: this.context.theme.background3
+            }}
+          >
+            Mode
+            </div>
+          <div className={`dgsp-tab`}
+            style={{
+              background: this.state.activeTabIndex % 5 === 1 ? this.context.theme.background2 : "black",
+              color: this.state.activeTabIndex % 5 === 1 ? "black" : "white",
+              borderColor: this.context.theme.background3
+            }}
+          >
+            Path
+            </div>
+          <div className={`dgsp-tab`}
+            style={{
+              background: this.state.activeTabIndex % 5 === 2 ? this.context.theme.background2 : "black",
+              color: this.state.activeTabIndex % 5 === 2 ? "black" : "white",
+              borderColor: this.context.theme.background3
+            }}
+          >
+            Size
+            </div>
+          <div className={`dgsp-tab`}
+            style={{
+              background: this.state.activeTabIndex % 5 === 3 ? this.context.theme.background2 : "black",
+              color: this.state.activeTabIndex % 5 === 3 ? "black" : "white",
+              borderColor: this.context.theme.background3
+            }}
+          >
+            Start Point
+            </div>
+          <div className={`dgsp-tab`}
+            style={{
+              background: this.state.activeTabIndex % 5 === 4 ? this.context.theme.background2 : "black",
+              color: this.state.activeTabIndex % 5 === 4 ? "black" : "white",
+              borderColor: this.context.theme.background3
+            }}
+          >Scan</div>
+          <img alt="left" src={TabRightArrow} />
         </div>
         {
           this.renderTabContent()

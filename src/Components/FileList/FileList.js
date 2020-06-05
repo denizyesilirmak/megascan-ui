@@ -109,7 +109,7 @@ class FileList extends Component {
 
   renderPopup = () => {
     return (
-      <div className="file-list-popup">
+      <div className="file-list-popup" style={{borderColor: this.context.theme.background3}}>
         <div className="question">
           Selected File:
         </div>
@@ -119,9 +119,15 @@ class FileList extends Component {
           }
         </div>
         <div className="buttons">
-          <div className={`button ${this.state.popupCursorIndex % 3 === 0 ? "p-selected" : null}`}>Open</div>
-          <div className={`button ${this.state.popupCursorIndex % 3 === 1 ? "p-selected" : null}`}>Cancel</div>
-          <div className={`button ${this.state.popupCursorIndex % 3 === 2 ? "p-selected" : null}`}>Delete File</div>
+          <div className={`button`}
+          style={{background: this.state.popupCursorIndex % 3 === 0 ? this.context.theme.button_bg_selected : null}}
+          >Open</div>
+          <div className={`button`}
+          style={{background: this.state.popupCursorIndex % 3 === 1 ? this.context.theme.button_bg_selected : null}}
+          >Cancel</div>
+          <div className={`button`}
+          style={{background: this.state.popupCursorIndex % 3 === 2 ? this.context.theme.button_bg_selected : null}}
+          >Delete File</div>
         </div>
       </div >
     )
@@ -138,7 +144,7 @@ class FileList extends Component {
           {
             this.state.fileList.map((e, i) => {
               return (
-                <div key={i} className={`file ${this.state.cursorIndex === i ? 'selected' : null}`}>
+                <div key={i} className='file' style={{background: this.state.cursorIndex === i ? this.context.theme.button_bg_selected : null}}>
                   <img src={FileIcon} alt="file" />
                   <span>{e}</span>
                 </div>

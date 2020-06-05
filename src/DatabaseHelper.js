@@ -67,19 +67,29 @@ export default {
       }
     })
   },
-  setItem (key, value) {
+  setItem (keyOrObj, value) {
     return new Promise((resolve, reject) => {
       const reqOpen = indexedDB.open('db')
       reqOpen.onsuccess = () => {
         const db = reqOpen.result
         const transaction = db.transaction('mega', 'readwrite')
         const store = transaction.objectStore('mega')
-        const reqPut = store.put(value, key)
-        reqPut.onsuccess = () => {
+
+        // Multiple values
+        if (typeof keyOrObj === 'object') {
+          for (let key in keyOrObj) {
+            const val = keyOrObj[key]
+            store.put(val, key)
+          }
+        } else if (typeof keyOrObj === 'string') {
+          store.put(value, keyOrObj)
+        }
+
+        transaction.oncomplete = () => {
           resolve()
         }
-        reqPut.onerror = () => {
-          reject(reqPut.error)
+        transaction.onerror = (err) => {
+          reject('DB TRANSACTION ERROR:', err)
         }
       }
       reqOpen.onerror = () => {

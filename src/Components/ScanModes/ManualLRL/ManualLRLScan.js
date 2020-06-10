@@ -47,7 +47,7 @@ class ManualLRLScan extends Component {
 
     if(socketData.type === "lrlantenna"){
       this.setState({
-        angle: (parseInt(socketData.payload) - 40) * 1.2,
+        angle: (parseInt(socketData.payload) - 90),
         heading: socketData.compass,
         tilt: socketData.angle
       })

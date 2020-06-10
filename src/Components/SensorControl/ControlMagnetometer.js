@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 // import CM from '../../Assets/Videos/magnetometer.mp4'
-import LiveStremVideo from '../../Assets/Videos/controlLiveStream.mp4'
-import BionicVideo from '../../Assets/Videos/controlIonicBionic.mp4'
-import GroundScanVideo from '../../Assets/Videos/controlGroundScan.mp4'
+import LiveStremVideo from '../../Assets/Videos/_controlLiveStream.mp4'
+import BionicVideo from '../../Assets/Videos/_controlIonicBionic.mp4'
+import GroundScanVideo from '../../Assets/Videos/_controlGroundScan.mp4'
 // import Resistivity from '../../Assets/Videos/controlResistivity.mp4'
 // import PulseVideo from '../../Assets/Videos/controlPulse.mp4'
 // import VlfVideo from '../../Assets/Videos/controlVlf.mp4'
@@ -63,7 +63,7 @@ class ControlMagnetometer extends Component {
   render() {
     return (
       <div className="sensor-control">
-        <video ref="video" preload="true" style={{ width: "100%", height: "100vh", backgroundSize: "contain" }} src={this.state.src} muted autoPlay></video>
+        <video className="control-video" ref="video" preload="true" style={{ width: "100%", height: "100vh", backgroundSize: "contain" }} src={this.state.src} muted autoPlay></video>
       </div>
     )
   }

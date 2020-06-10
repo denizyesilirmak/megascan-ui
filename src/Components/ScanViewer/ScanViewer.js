@@ -9,8 +9,10 @@ import filterIcon from '../../Assets/MenuIcons/icon-filter.png'
 import SocketHelper from '../../SocketHelper'
 
 import Plot from './2DPlotNew'
+import { DeviceContext } from '../../Contexts/DeviceContext' 
 
 class ScanViewer extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.state = {
@@ -159,14 +161,14 @@ class ScanViewer extends Component {
         </div>
         <div className="sv-bottom">
 
-          <div className="sv-bottom-panel">
+          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
             <div className="title">Average</div>
             <div className="value">{this.state.average}</div>
           </div>
 
           {
             this.state.analyseMode ?
-              <div className="sv-bottom-panel animation">
+              <div className="sv-bottom-panel animation" style={{background: this.context.theme.button_bg_selected}}>
                 <div className="title">Depth</div>
                 <div className="value">0</div>
               </div>
@@ -175,7 +177,7 @@ class ScanViewer extends Component {
           }
 
 
-          <div className="sv-bottom-panel">
+          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
               <span>{this.state.red}%</span>
             <div className="line-graph-container">
               <div className="line-value" style={{ width: this.state.red + "%", background: "red" }}>
@@ -184,7 +186,7 @@ class ScanViewer extends Component {
             </div>
           </div>
 
-          <div className="sv-bottom-panel">
+          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
               <span>{this.state.green}%</span>
             <div className="line-graph-container">
               <div className="line-value" style={{ width: this.state.green + "%", background: "green" }}>
@@ -193,7 +195,7 @@ class ScanViewer extends Component {
             </div>
           </div>
 
-          <div className="sv-bottom-panel">
+          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
               <span>{this.state.blue}%</span>
             <div className="line-graph-container">
               <div className="line-value" style={{ width: this.state.blue + "%", background: "blue" }}>

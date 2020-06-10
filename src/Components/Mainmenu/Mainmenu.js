@@ -153,6 +153,7 @@ class Mainmenu extends Component {
           setCookie("menuIndex", this.state.index)
           this.refs.mainmenu.style.transform = "scale(2)"
           this.refs.mainmenu.style.opacity = 0
+          socketHelper.detach()
 
           setTimeout(() => {
             if (this.buttons[this.state.index + 1].screenName !== "") {

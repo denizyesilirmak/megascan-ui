@@ -11,16 +11,20 @@ import flag_fa from '../../Assets/Flags/fa.png'
 import flag_fr from '../../Assets/Flags/fr.png'
 import flag_it from '../../Assets/Flags/it.png'
 import flag_tr from '../../Assets/Flags/tr.png'
+import flag_iw from '../../Assets/Flags/iw.png'
+import flag_ur from '../../Assets/Flags/ur.png'
+import flag_zh from '../../Assets/Flags/zh.png'
+import flag_ru from '../../Assets/Flags/ru.png'
 
 const LANGUAGES = [
   {
     code: "ar",
-    name: "Arabic",
+    name: "العربية",
     flag: flag_ar
   },
   {
     code: "de",
-    name: "German",
+    name: "Deutsch",
     flag: flag_de
   },
   {
@@ -30,28 +34,48 @@ const LANGUAGES = [
   },
   {
     code: "es",
-    name: "Spanish",
+    name: "Español",
     flag: flag_es
   },
   {
     code: "fa",
-    name: "Persian",
+    name: "فارسی",
     flag: flag_fa
   },
   {
     code: "fr",
-    name: "French",
+    name: "Français",
     flag: flag_fr
   },
   {
     code: "it",
-    name: "Italian",
+    name: "Italiano",
     flag: flag_it
   },
   {
     code: "tr",
-    name: "Turkish",
+    name: "Türkçe",
     flag: flag_tr
+  },
+  {
+    code: "iw",
+    name: "עברית",
+    flag: flag_iw
+  },
+  {
+    code: "ur",
+    name: "	اُردُو",
+    flag: flag_ur
+  },
+  {
+    code: "zh",
+    name: "Chinese",
+    flag: flag_zh
+  },
+  {
+    code: "ru",
+    name: "	Русский язык",
+    flag: flag_ru
   }
 ]
 
@@ -59,7 +83,7 @@ class ChangeLanguage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: 8 * 900
+      activeIndex: 12 * 900
     }
   }
 
@@ -68,7 +92,7 @@ class ChangeLanguage extends Component {
     const currentLang = (await dbStorage.getItem("lang"))
     const indexOfCurrentLang = LANGUAGES.findIndex(a => a.code === currentLang)
     this.setState({
-      activeIndex: 8 * 900 + indexOfCurrentLang
+      activeIndex: 12 * 900 + indexOfCurrentLang
     })
   }
 
@@ -84,16 +108,16 @@ class ChangeLanguage extends Component {
         tempActiveIndex++
         break
       case 'up':
-        tempActiveIndex = tempActiveIndex - 4
+        tempActiveIndex = tempActiveIndex - 6
         break
       case 'down':
-        tempActiveIndex = tempActiveIndex + 4
+        tempActiveIndex = tempActiveIndex + 6
         break
       case 'ok':
-        console.log(LANGUAGES[this.state.activeIndex%8].code)
+        console.log(LANGUAGES[this.state.activeIndex%12].code)
 
-        this.props.setLanguage(LANGUAGES[this.state.activeIndex%8].code)
-        await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex%8].code)
+        this.props.setLanguage(LANGUAGES[this.state.activeIndex%12].code)
+        await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex%12].code)
         this.props.navigateTo("settingsScreen")
         return
       case 'back':
@@ -115,8 +139,9 @@ class ChangeLanguage extends Component {
         <div className="languages">
           {
             LANGUAGES.map((e, i) => {
+              // console.log(e)
               return (
-                <div key={i} className={`language ${this.state.activeIndex % 8 === i ? "selected" : ''}`}>
+                <div key={i} className={`language ${this.state.activeIndex % 12 === i ? "selected" : ''}`}>
                   <img src={e.flag} alt="language"></img>
                   <div className="language-title">{e.name}</div>
                 </div>

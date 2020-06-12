@@ -93,7 +93,7 @@ class PinPointer extends Component {
       <div className="pin-pointer component">
         <svg className="pin-pointer-grid" width="700" height="260">
           <g>
-            <rect fill="none" x="0.49995" y="0.43749" width="699" height="259" id="svg_2" stroke="#ffffff80" />
+            <rect fill="#000" x="0.49995" y="0.43749" width="699" height="259" id="svg_2" stroke="#ffffff80" />
             <line fill="none" stroke="#ffffff60" x1="0" y1="128" x2="700" y2="128" id="svg_3" />
             <line fill="none" stroke="#ffffff60" x1="0" y1="65" x2="700" y2="65" id="svg_4" />
             <line fill="none" stroke="#ffffff60" x1="0" y1="195" x2="700" y2="195" id="svg_5" />

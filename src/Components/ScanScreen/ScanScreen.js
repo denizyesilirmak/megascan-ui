@@ -15,7 +15,7 @@ const COLORS = {
 }
 
 const TUNNELSCAN = false
-const IntervalSpeed = 50
+const IntervalSpeed = 800
 
 class ScanScreen extends Component {
   constructor(props) {
@@ -143,7 +143,7 @@ class ScanScreen extends Component {
           else if (this.state.finishScanPopup) {
             if (this.state.finishPopupButtonIndex === true) {
               console.log("pressed ok")
-              fetch('http://192.168.1.114:3030/savescan', {
+              fetch('http://192.168.1.116:3030/savescan', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',

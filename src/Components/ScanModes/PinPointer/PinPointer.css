@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #000;
+  background: #00000000;
 }
 
 .pin-pointer-lines{
   position: absolute;
+  /* background: #000; */
 }
 
 .pinpointer-button-container{

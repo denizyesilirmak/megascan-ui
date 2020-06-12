@@ -8,8 +8,8 @@ import Wifi from './StatusbarElements/Wifi'
 import Battery from './StatusbarElements/Battery'
 import Clock from './StatusbarElements/Clock'
 
-import Infinity from '../../Assets/Logos/infinity.png'
-import Goldstar from '../../Assets/Logos/goldstar.png'
+import Infinity_D from '../../Assets/Logos/infinity.png'
+import Goldstar_D from '../../Assets/Logos/goldstar.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
@@ -21,8 +21,8 @@ class Statusbar extends Component {
 
   getLogo = () =>  {
     switch (this.context.device) {
-      case "infinity": return Infinity
-      case "goldstar": return Goldstar
+      case "infinity": return Infinity_D
+      case "goldstar": return Goldstar_D
 
     
       default:

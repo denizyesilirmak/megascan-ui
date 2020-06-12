@@ -1,5 +1,4 @@
 .live-stream-component {
-  background: black;
   display: flex;
   flex-direction: column;
   opacity: 0;

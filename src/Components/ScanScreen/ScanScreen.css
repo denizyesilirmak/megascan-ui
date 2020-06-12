@@ -1,6 +1,6 @@
 .scan-screen {
   display: flex;
-  background: #000;
+  /* background: #000; */
 }
 
 .canvas-container {

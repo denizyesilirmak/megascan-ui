@@ -29,7 +29,6 @@ class ScanViewer extends Component {
     }
     this.widthLimit = 0
     this.heightLimit = 0
-
   }
 
 

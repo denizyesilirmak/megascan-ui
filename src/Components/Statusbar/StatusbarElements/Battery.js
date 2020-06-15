@@ -21,7 +21,7 @@ class Battery extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      level: 80
+      level: 100
     }
   }
 
@@ -57,15 +57,19 @@ class Battery extends React.Component {
 
   render() {
     return (
-      <div className="battery-indicator">
-        <div className="level-holder">
+      <React.Fragment>
+        <div className="battery-percentage">{this.state.level}%</div>
+        <div className="battery-indicator">
+          <div className="level-holder">
 
-          <div className="battery-juice" style={{ width: this.state.level + "%", backgroundColor: batteryColors[Math.trunc(this.state.level / 10)] }}>
+            <div className="battery-juice" style={{ width: this.state.level + "%", backgroundColor: batteryColors[Math.trunc(this.state.level / 10)] }}>
 
+            </div>
           </div>
-        </div>
-        <img style={{ marginRight: 13, marginLeft: 13 }} alt="battery" src={battery_icon}></img>
-      </div >
+          <img style={{ marginRight: 13, marginLeft: 13 }} alt="battery" src={battery_icon}></img>
+        </div >
+      </React.Fragment>
+
     );
   }
 }

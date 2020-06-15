@@ -23,16 +23,19 @@
   align-items: center;
   color: black;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.457);
+  background: rgba(255, 255, 255, 0.157);
 }
 
 .file-list .file span {
   width: 50px;
   text-align: center;
+  background: #ffffff;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
 }
 
 .file-list .file.selected {
-  color: black;
+  color: white !important;
   background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 }
 

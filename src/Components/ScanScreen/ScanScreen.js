@@ -22,8 +22,11 @@ class ScanScreen extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
-    this.y = 20 // max 20
-    this.x = 10 * 4 // max 10
+    console.log(this.props.scanProps)
+    this.y = this.props.scanProps.steps // max 20
+    this.x = this.props.scanProps.lines * 4 // max 10
+    this.direction = this.props.scanProps.startPoint
+    this.pattern = this.props.scanProps.path
     this.total = 0
     this.counter = 0
     this.average = 127
@@ -183,7 +186,12 @@ class ScanScreen extends Component {
       this.max = localMax > this.max ? localMax : this.max
       // console.log("max: ", this.max, "min: ", this.min, "avg: ", this.average)
 
-      this.zigzag("right")
+      if (this.pattern === "zigzag") {
+        this.zigzag(this.direction)
+      }
+      else if (this.pattern === "parallel") {
+        this.parallel(this.direction)
+      }
       this.matrix[this.currentPoint.y][this.currentPoint.x] = [
         localSensorArray[0],
         localSensorArray[1],
@@ -511,7 +519,7 @@ class ScanScreen extends Component {
   renderNewLinePopup = () => {
     return (
       <div className="new-line-popup-container">
-        <div className="new-line-popup" style={{background: this.context.theme.button_bg_selected}}>
+        <div className="new-line-popup" style={{ background: this.context.theme.button_bg_selected }}>
           <div className="new-line-warning">
             Current line is completed. Please press 'START' button for the next line.
           </div>
@@ -580,7 +588,7 @@ class ScanScreen extends Component {
 
 
         <div className="scan-screen-details">
-          <div className="detail-bar"  style={{background: this.context.theme.button_bg_selected}}>
+          <div className="detail-bar" style={{ background: this.context.theme.button_bg_selected }}>
             <div className="bar-name">
               Current X
             </div>
@@ -589,7 +597,7 @@ class ScanScreen extends Component {
             </div>
           </div>
 
-          <div className="detail-bar"  style={{background: this.context.theme.button_bg_selected}}>
+          <div className="detail-bar" style={{ background: this.context.theme.button_bg_selected }}>
             <div className="bar-name">
               Current Y
             </div>
@@ -598,7 +606,7 @@ class ScanScreen extends Component {
             </div>
           </div>
 
-          <div className="detail-bar" style={{background: this.context.theme.button_bg_selected}} >
+          <div className="detail-bar" style={{ background: this.context.theme.button_bg_selected }} >
             <div className="bar-name">
               Value
             </div>

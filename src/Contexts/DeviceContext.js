@@ -16,6 +16,7 @@ const SLEEPMODETIMEOUT = 5000
 class DeviceContextProvider extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       sleepModeActive: false
     }
@@ -35,7 +36,7 @@ class DeviceContextProvider extends Component {
       if (this.sleepModeStatus === true) {
         console.log("screen off")
         this.sleepMode = true;
-        this.setState({sleepModeActive: true})
+        this.setState({ sleepModeActive: true })
       }
     }, SLEEPMODETIMEOUT);
   }
@@ -49,7 +50,7 @@ class DeviceContextProvider extends Component {
       if (this.sleepModeStatus === true) {
         console.log("screen off")
         this.sleepMode = true;
-        this.setState({sleepModeActive: true})
+        this.setState({ sleepModeActive: true })
       }
     }, SLEEPMODETIMEOUT);
   }
@@ -59,18 +60,19 @@ class DeviceContextProvider extends Component {
     // console.log("button interrupt")
     if (this.sleepMode) {
       this.sleepMode = false;
-      this.setState({sleepModeActive: false})
+      this.setState({ sleepModeActive: false })
       clearTimeout(this.sleepModeTimer)
       console.log("screen on")
       this.sleepModeTimer = setTimeout(() => {
         if (this.sleepModeStatus === true) {
           console.log("screen off")
           this.sleepMode = true;
-          this.setState({sleepModeActive: true})
+          this.setState({ sleepModeActive: true })
         }
       }, SLEEPMODETIMEOUT);
     }
   }
+
 
   render() {
     return (
@@ -80,10 +82,11 @@ class DeviceContextProvider extends Component {
         theme: curentTheme,
         device: DEVICE_MODEL,
         buttonInterrupt: this.buttonInterrupt,
-        changeSleepModeStatus: this.changeSleepModeStatus
+        changeSleepModeStatus: this.changeSleepModeStatus,
+        setScanProperties: this.setScanProperties,
       }}>
 
-            <div className="sleepmode-overlay black-screen" style={{transform: `scaleY(${this.state.sleepModeActive ? 1 : 0})`}} />
+        <div className="sleepmode-overlay black-screen" style={{ transform: `scaleY(${this.state.sleepModeActive ? 1 : 0})` }} />
 
 
         {this.props.children}

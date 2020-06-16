@@ -46,6 +46,7 @@ dbStorage.init()
 class App extends Component {
   constructor(props) {
     super(props)
+    this.tmpScanPropObj = { mode: "manual", path: "zigzag", lines: 10, steps: 10, startPoint: "right" }
     document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')";
     // console.log(DeviceInfo.deviceModelName)
 
@@ -62,7 +63,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
+          activeScreen: settings['setupCompleted'] ? "deviceGroundScanPropertiesScreen" : "setupScreen"
         })
       })
 
@@ -75,11 +76,15 @@ class App extends Component {
       this.navigateTo("lockScreen")
   }
 
-  componentDidCatch(error, info){
+  componentDidCatch(error, info) {
     console.log("ERROR HATASI")
-    window.location.reload()
+    // window.location.reload()
   }
 
+  setScanProperties = (scanPropObj) => {
+    console.log(scanPropObj)
+    this.tmpScanPropObj = scanPropObj
+  }
 
   navigateTo = (screenName, file) => {
     this.setState({
@@ -112,7 +117,7 @@ class App extends Component {
       case "groundScanMethodSelectionScreen":
         return (<GroundScanMethodSelection navigateTo={this.navigateTo} />)
       case "deviceGroundScanPropertiesScreen":
-        return (<DeviceGroundScanProperties navigateTo={this.navigateTo} />)
+        return (<DeviceGroundScanProperties navigateTo={this.navigateTo} setScanProperties={this.setScanProperties} />)
       case "scanViewerScreen":
         return (<ScanViewer navigateTo={this.navigateTo} fileToOpen={this.state.fileToOpen} />)
       case "bionicScreen":
@@ -132,7 +137,7 @@ class App extends Component {
       case "controlGroundScan":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="groundScanMethodSelectionScreen" />)
       case "scanScreen":
-        return (<ScanScreen navigateTo={this.navigateTo} />)
+        return (<ScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
       case "changePinScreen":
         return (<ChangePinScreen navigateTo={this.navigateTo} />)
       case "changeLanguageScreen":

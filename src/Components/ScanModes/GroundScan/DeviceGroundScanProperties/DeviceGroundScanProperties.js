@@ -307,7 +307,8 @@ class DeviceGroundScanProperties extends Component {
               startPoint: this.state.startPointIndex % 2 === 0 ? "left" : "right"
             }
             this.savePropertiesState()
-            console.log("Scan Properties: ", scanProperties)
+            // console.log("Scan Properties: ", scanProperties)
+            this.props.setScanProperties(scanProperties)
             this.props.navigateTo("scanScreen")
           }
 

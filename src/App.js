@@ -46,7 +46,7 @@ dbStorage.init()
 class App extends Component {
   constructor(props) {
     super(props)
-    this.tmpScanPropObj = { mode: "manual", path: "zigzag", lines: 10, steps: 10, startPoint: "right" }
+    this.tmpScanPropObj = { mode: "manual", path: "zigzag", lines: 10, steps: 10, startPoint: "right" } // not if this is needed.
     document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')";
     // console.log(DeviceInfo.deviceModelName)
 
@@ -63,7 +63,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "deviceGroundScanPropertiesScreen" : "setupScreen"
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
         })
       })
 
@@ -77,12 +77,14 @@ class App extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.log("ERROR HATASI")
-    // window.location.reload()
+    // console.log("ERROR HATASI")
+    setTimeout(() => {
+      window.location.reload()
+    }, 1500);
   }
 
   setScanProperties = (scanPropObj) => {
-    console.log(scanPropObj)
+    // console.log(scanPropObj)
     this.tmpScanPropObj = scanPropObj
   }
 

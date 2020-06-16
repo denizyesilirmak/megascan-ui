@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import './ScanViewer.css'
 
 import gridIcon from '../../Assets/MenuIcons/icon-grid.png'
-import saveIcon from '../../Assets/MenuIcons/icon-save-solid.png'
+// import saveIcon from '../../Assets/MenuIcons/icon-save-solid.png'
 import searchIcon from '../../Assets/MenuIcons/icon-search.png'
-import uploadIcon from '../../Assets/MenuIcons/icon-upload.png'
+// import uploadIcon from '../../Assets/MenuIcons/icon-upload.png'
 import filterIcon from '../../Assets/MenuIcons/icon-filter.png'
 import SocketHelper from '../../SocketHelper'
 

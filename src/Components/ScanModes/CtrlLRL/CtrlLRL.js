@@ -7,8 +7,10 @@ import SoilType from './CtrlLRLComponents/SoilType/SoilType'
 import Frequency from './CtrlLRLComponents/Frequency/Frequency'
 import Distance from './CtrlLRLComponents/Distance/Distance'
 
-class CtrlLRL extends Component {
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
+class CtrlLRL extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.state = {
@@ -67,8 +69,8 @@ class CtrlLRL extends Component {
 
         return
       case 'back':
-        this.refs.ctrllrl.style.opacity = 0
         this.refs.ctrllrl.style.transform = "translateY(200px)"
+        this.refs.ctrllrl.style.opacity = 0
         setTimeout(() => {
           this.props.navigateTo("menuScreen")
         }, 500);
@@ -89,11 +91,11 @@ class CtrlLRL extends Component {
   renderCtrlLrlComponent = () => {
     switch (this.state.activeSettingTabName) {
       case "soiltype":
-        return <SoilType/>
+        return <SoilType />
       case "frequency":
-        return <Frequency/>
+        return <Frequency />
       case "distance":
-        return <Distance/>
+        return <Distance />
       case "depth":
         break
       case "search":
@@ -107,7 +109,9 @@ class CtrlLRL extends Component {
     return (
       <div ref="ctrllrl" className="ctrl-lrl-component component">
         <Navigator activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex === 0} buttons={this.buttons} />
-        <div className={`settings-component-container  ${this.state.verticalIndex === 1 ? 'selected' : ''}`}>
+        <div className={`settings-component-container`}
+          style={{ borderColor: this.context.theme.border_color, boxShadow: this.state.verticalIndex ? this.context.theme.settings_shadow : 'none'  }}
+        >
           {
             this.renderCtrlLrlComponent()
           }

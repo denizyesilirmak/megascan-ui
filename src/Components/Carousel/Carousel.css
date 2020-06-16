@@ -22,7 +22,7 @@
   color: white;
   text-align: center;
   position: relative;
-  transition: 0.5s all;
+  transition: 0.4s all;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   /* transition-delay: 300ms; */
   margin: 0px 20px 0px 20px;
@@ -46,7 +46,7 @@
 }
 
 .slider{
-  transition: 400ms all;
+  transition: 0.3s all;
   transition-timing-function: ease-in-out;
   display: flex;
   justify-content: flex-start;

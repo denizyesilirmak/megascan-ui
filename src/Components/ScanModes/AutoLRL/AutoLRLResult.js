@@ -14,18 +14,18 @@ class AutoLRLResult extends Component {
   }
 
   componentDidMount() {
-    let timeout = setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.setState({
-        gold: Math.ceil(Math.random()*100),
-        silver: Math.ceil(Math.random()*100),
-        iron: Math.ceil(Math.random()*100),
-        diamond: Math.ceil(Math.random()*100)
+        gold: Math.ceil(Math.random() * 100),
+        silver: Math.ceil(Math.random() * 100),
+        iron: Math.ceil(Math.random() * 100),
+        diamond: Math.ceil(Math.random() * 100)
       })
     }, 100);
   }
 
-  componentWillUnmount(){
-    // clearInterval(this.interval)
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
   }
 
   render() {

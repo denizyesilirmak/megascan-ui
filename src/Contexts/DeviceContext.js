@@ -40,6 +40,8 @@ class DeviceContextProvider extends Component {
     }, SLEEPMODETIMEOUT);
   }
 
+
+
   changeSleepModeStatus = (status) => {
     this.sleepModeStatus = status
     this.sleepModeTimer = setTimeout(() => {

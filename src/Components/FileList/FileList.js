@@ -92,12 +92,12 @@ class FileList extends Component {
         this.context.buttonInterrupt()
         break
       case 'ok':
-        if (!this.state.popup) {
+        if (!this.state.popup && !this.state.deletePopup) {
           tempPopupCursorIndex = 300
           this.setState({
             popup: true,
           })
-        } else {
+        } else if (this.state.popup) {
           if (this.state.popupCursorIndex % 3 === 0) {
             this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex])
           }
@@ -112,12 +112,23 @@ class FileList extends Component {
             })
 
           }
+        } else if (this.state.deletePopup) {
+          if (this.state.deletePopupCursorIndex % 2 === 0) {
+            console.log("delete file now")
+          }
+          else if (this.state.deletePopupCursorIndex % 2 === 1) {
+            console.log("back from delete popup")
+            this.setState({ deletePopup: false, popup: true })
+          }
+
         }
         this.context.buttonInterrupt()
         break
       case 'back':
         if (this.state.popup)
           this.setState({ popup: false })
+        else if (this.state.deletePopup)
+          this.setState({ deletePopup: false, popup: true })
         else {
           //back to mainmenu
           this.props.navigateTo("menuScreen")
@@ -155,8 +166,8 @@ class FileList extends Component {
             style={{ background: this.state.popupCursorIndex % 3 === 1 ? this.context.theme.button_bg_selected : null }}
           >Cancel</div>
           <div className={`button`}
-            style={{ background: this.state.popupCursorIndex % 3 === 2 ? this.context.theme.button_bg_selected : null }}
-          >Delete File</div>
+            style={{ background: this.state.popupCursorIndex % 3 === 2 ? "#ff4900": null }}
+          >Delete</div>
         </div>
       </div >
     )
@@ -169,14 +180,14 @@ class FileList extends Component {
           <img style={{ marginTop: 10, width: 60 }} src={DeleteFileIcon} alt="delete"></img>
         </div>
         <div className="selected-file-name" style={{ textAlign: "center" }}>
-          <span style={{ fontSize: 18 }}>File will delete: </span> <br />
+          <span style={{ fontSize: 18 }}>File will be deleted: </span> <br />
           {
             this.state.fileList[this.state.cursorIndex]
           }
         </div>
         <div className="buttons" style={{ justifyContent: "center" }}>
           <div className={`button`}
-            style={{ background: this.state.deletePopupCursorIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}
+            style={{ background: this.state.deletePopupCursorIndex % 2 === 0 ? "#ff4900" : null }}
           >Delete</div>
           <div className={`button`}
             style={{ background: this.state.deletePopupCursorIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}

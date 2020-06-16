@@ -62,7 +62,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "fileListScreen" : "setupScreen"
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
         })
       })
 
@@ -73,6 +73,11 @@ class App extends Component {
   componentDidMount() {
     if (this.state.lock)
       this.navigateTo("lockScreen")
+  }
+
+  componentDidCatch(error, info){
+    console.log("ERROR HATASI")
+    window.location.reload()
   }
 
 

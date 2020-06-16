@@ -63,7 +63,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen"
+          activeScreen: settings['setupCompleted'] ? "deviceGroundScanPropertiesScreen" : "setupScreen"
         })
       })
 

@@ -16,7 +16,7 @@ const COLORS = {
 }
 
 const TUNNELSCAN = false
-const IntervalSpeed = 800
+const IntervalSpeed = 150
 
 class ScanScreen extends Component {
   static contextType = DeviceContext
@@ -253,20 +253,20 @@ class ScanScreen extends Component {
     if (TUNNELSCAN === false) {
       if (this.max - this.min >= 6) {
         if (c >= 0) {
-          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
-          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, this.max - this.average, 127, 255))))
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, Math.trunc(this.max - this.average), 127, 255))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((c), 0, Math.trunc(this.max - this.average), 127, 255))))
         } else {
-          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
-          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, Math.trunc(this.average - this.min), 0, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((Math.trunc(this.average - this.min) + c), 0, Math.trunc(this.average - this.min), 0, 127))))
         }
       }
       else {
         if (c > 0) {
-          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
-          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, this.max - this.average, 127, 140))))
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, Math.trunc(this.max - this.average), 127, 140))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((127 + c), 127, Math.trunc(this.max - this.average), 127, 140))))
         } else {
-          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
-          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((this.average - this.min + c), 0, this.average - this.min, 0, 127))))
+          this.geometry.faces[index].color = new THREE.Color(this.getColor(Math.trunc(this.map((Math.trunc(this.average - this.min) + c), 0, Math.trunc(this.average - this.min), 0, 127))))
+          this.geometry.faces[index + 1].color = new THREE.Color(this.getColor(Math.trunc(this.map((Math.trunc(this.average - this.min) + c), 0, Math.trunc(this.average - this.min), 0, 127))))
         }
       }
     } else {
@@ -293,7 +293,13 @@ class ScanScreen extends Component {
 
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return Math.abs(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    let m = (Math.abs(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+  
+    if(isNaN(m)){
+      return 127
+    }else{
+      return m;
+    }
   }
 
 

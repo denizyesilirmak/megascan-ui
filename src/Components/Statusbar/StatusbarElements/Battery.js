@@ -32,9 +32,9 @@ class Battery extends React.Component {
 
   handleBattery = (sd) => {
     if (sd.type === "battery") {
-      this.setState({
-        level: Math.trunc(sd.payload)
-      })
+      // this.setState({
+      //   level: Math.trunc(sd.payload)
+      // })
     }
   }
 
@@ -58,7 +58,7 @@ class Battery extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="battery-percentage">{this.state.level}%</div>
+        <div className="battery-percentage">{Math.trunc(this.state.level)}%</div>
         <div className="battery-indicator">
           <div className="level-holder">
 

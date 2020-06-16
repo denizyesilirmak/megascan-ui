@@ -6,22 +6,22 @@ class AutoLRLResult extends Component {
     super(props)
 
     this.state = {
-      gold: 30,
-      silver: 40,
-      iron: 90,
-      diamond: 4
+      gold: 0,
+      silver: 0,
+      iron: 0,
+      diamond: 0
     }
   }
 
   componentDidMount() {
-    // this.interval = setInterval(() => {
-    //   this.setState({
-    //     gold: Math.trunc(Math.random() * 100),
-    //     silver: Math.trunc(Math.random() * 100),
-    //     iron: Math.trunc(Math.random() * 100),
-    //     diamond: Math.trunc(Math.random() * 100)
-    //   })
-    // }, 600);
+    let timeout = setTimeout(() => {
+      this.setState({
+        gold: Math.ceil(Math.random()*100),
+        silver: Math.ceil(Math.random()*100),
+        iron: Math.ceil(Math.random()*100),
+        diamond: Math.ceil(Math.random()*100)
+      })
+    }, 100);
   }
 
   componentWillUnmount(){
@@ -36,7 +36,7 @@ class AutoLRLResult extends Component {
         <div className="prop">
           <div className="label">GOLD:</div>
           <div className="value-back">
-            <div className="value" style={{ width: this.state.gold + "%", background: "gold" }} />
+            <div className="value" style={{ width: this.state.gold + "%", backgroundImage: "linear-gradient(0deg, rgba(255,146,30,1) 21%, rgba(255,224,13,1) 73%, rgba(252,199,0,1) 89%)" }} />
           </div>
           <div className="percentage">{this.state.gold}%</div>
         </div>
@@ -44,7 +44,7 @@ class AutoLRLResult extends Component {
         <div className="prop">
           <div className="label">SILVER:</div>
           <div className="value-back">
-            <div className="value" style={{ width: this.state.silver + "%", background: "silver" }} />
+            <div className="value" style={{ width: this.state.silver + "%", background: "linear-gradient(0deg, rgba(148,148,148,1) 21%, rgba(247,247,247,1) 73%, rgba(207,207,207,1) 89%)" }} />
           </div>
           <div className="percentage">{this.state.silver}%</div>
         </div>
@@ -52,7 +52,7 @@ class AutoLRLResult extends Component {
         <div className="prop">
           <div className="label">IRON:</div>
           <div className="value-back">
-            <div className="value" style={{ width: this.state.iron + "%", background: "lightGrey" }} />
+            <div className="value" style={{ width: this.state.iron + "%", background: "linear-gradient(0deg, rgba(116,111,93,1) 21%, rgba(247,247,247,1) 73%, rgba(172,172,172,1) 89%)" }} />
           </div>
           <div className="percentage">{this.state.iron}%</div>
         </div>
@@ -60,7 +60,7 @@ class AutoLRLResult extends Component {
         <div className="prop">
           <div className="label">DIAMOND:</div>
           <div className="value-back">
-            <div className="value" style={{ width: this.state.diamond + "%", background: "lightBlue" }} />
+            <div className="value" style={{ width: this.state.diamond + "%", background: "linear-gradient(0deg, rgba(54,83,135,1) 21%, rgba(26,238,255,1) 73%, rgba(208,248,255,1) 89%)" }} />
           </div>
           <div className="percentage">{this.state.diamond}%</div>
         </div>

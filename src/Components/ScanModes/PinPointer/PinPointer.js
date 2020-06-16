@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./PinPointer.css"
 import CalibrationIcon from '../../../Assets/MenuIcons/calibration.png'
 import socketHelper from '../../../SocketHelper'
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const lines = [
   ["#26ff00", "#26ff00",],
@@ -41,6 +42,7 @@ const lines = [
 // }
 
 class PinPointer extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -118,12 +120,12 @@ class PinPointer extends Component {
 
         <div className="pinpointer-button-container">
 
-          <div className="pinpointer-button selected">
+          <div className="pinpointer-button" style={{borderColor: this.context.theme.border_color}}>
             <img src={CalibrationIcon} alt="calibraiton"></img>
             <div className="label">Calibrate</div>
           </div>
 
-          <div className="pinpointer-button">
+          <div className="pinpointer-button" style={{borderColor: this.context.theme.border_color}}>
             <img src={CalibrationIcon} alt="calibraiton"></img>
             <div className="label">Sensitivity</div>
           </div>

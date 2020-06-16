@@ -3,6 +3,7 @@ import './ScanScreen.css'
 import * as THREE from "three";
 import GridTexture from '../../Assets/grid.svg'
 import socketHelper from '../../SocketHelper'
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 const COLORS = {
   jet: [
@@ -18,6 +19,7 @@ const TUNNELSCAN = false
 const IntervalSpeed = 800
 
 class ScanScreen extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.y = 20 // max 20
@@ -101,7 +103,7 @@ class ScanScreen extends Component {
   }
 
   requestSensorData = () => {
-    if (true && !this.state.finishScanPopup) {
+    if (true && !this.state.finishScanPopup && !this.state.newLinePopup) {
       socketHelper.send('W')
     }
   }
@@ -221,7 +223,7 @@ class ScanScreen extends Component {
       }
     }
   }
-  
+
 
 
   colorSquare = (x, y, c) => {
@@ -509,7 +511,7 @@ class ScanScreen extends Component {
   renderNewLinePopup = () => {
     return (
       <div className="new-line-popup-container">
-        <div className="new-line-popup">
+        <div className="new-line-popup" style={{background: this.context.theme.button_bg_selected}}>
           <div className="new-line-warning">
             Current line is completed. Please press 'START' button for the next line.
           </div>
@@ -565,7 +567,7 @@ class ScanScreen extends Component {
     return (
       <div className="scan-screen component">
         {
-          false ? this.renderNewLinePopup() : ''
+          this.state.newLinePopup ? this.renderNewLinePopup() : ''
         }
 
         {
@@ -578,7 +580,7 @@ class ScanScreen extends Component {
 
 
         <div className="scan-screen-details">
-          <div className="detail-bar">
+          <div className="detail-bar"  style={{background: this.context.theme.button_bg_selected}}>
             <div className="bar-name">
               Current X
             </div>
@@ -587,7 +589,7 @@ class ScanScreen extends Component {
             </div>
           </div>
 
-          <div className="detail-bar">
+          <div className="detail-bar"  style={{background: this.context.theme.button_bg_selected}}>
             <div className="bar-name">
               Current Y
             </div>
@@ -596,7 +598,7 @@ class ScanScreen extends Component {
             </div>
           </div>
 
-          <div className="detail-bar">
+          <div className="detail-bar" style={{background: this.context.theme.button_bg_selected}} >
             <div className="bar-name">
               Value
             </div>

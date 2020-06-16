@@ -36,19 +36,19 @@ class AutoLRLSettings extends Component {
               </g>
             </g>
               <g>
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) >= 0 ? "#fcba03" : "#333"} id="svg_6" d="m7.90014,28.81695c0,0 13.82419,9.57576 0.6,22.79996" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 1 ? "#fcba03" : "#333"} id="svg_7" d="m19.70012,25.21267c0,0 18.19492,12.60329 0.7897,30.00852" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 2 ? "#fcba03" : "#333"} id="svg_8" d="m32.5001,22.68968c0,0 21.25443,14.72255 0.92248,35.0545" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 3 ? "#fcba03" : "#333"} id="svg_9" d="m46.90007,20.5854c0,0 22.12859,16.49011 0.96043,39.26306" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 4 ? "#fcba03" : "#333"} id="svg_10" d="m61.50005,17.87114c0,0 25.18809,18.77003 1.09321,44.69159" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 5 ? "#fcba03" : "#333"} id="svg_11" d="m77.90002,14.76912c0,0 28.68468,21.37567 1.24498,50.89563" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 6 ? "#fcba03" : "#333"} id="svg_12" d="m95.1,12.05485c0,0 31.74418,23.6556 1.37776,56.32416" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 7 ? "#fcba03" : "#333"} id="svg_13" d="m112.69996,9.72834c0,0 34.36662,25.60983 1.49158,60.97719" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 8 ? "#fcba03" : "#333"} id="svg_14" d="m132.09993,7.40182c0,0 36.98906,27.56406 1.6054,65.63022" strokeWidth="5" fill="none" />
-                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 9 ? "#fcba03" : "#333"} id="svg_2" d="m151.8999,4.68756c0,0 40.04857,29.84399 1.73819,71.05875" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) >= 0 ? this.context.theme.border_color : "#111"} id="svg_6" d="m7.90014,28.81695c0,0 13.82419,9.57576 0.6,22.79996" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 1 ? this.context.theme.border_color : "#111"} id="svg_7" d="m19.70012,25.21267c0,0 18.19492,12.60329 0.7897,30.00852" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 2 ? this.context.theme.border_color : "#111"} id="svg_8" d="m32.5001,22.68968c0,0 21.25443,14.72255 0.92248,35.0545" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 3 ? this.context.theme.border_color : "#111"} id="svg_9" d="m46.90007,20.5854c0,0 22.12859,16.49011 0.96043,39.26306" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 4 ? this.context.theme.border_color : "#111"} id="svg_10" d="m61.50005,17.87114c0,0 25.18809,18.77003 1.09321,44.69159" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 5 ? this.context.theme.border_color : "#111"} id="svg_11" d="m77.90002,14.76912c0,0 28.68468,21.37567 1.24498,50.89563" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 6 ? this.context.theme.border_color : "#111"} id="svg_12" d="m95.1,12.05485c0,0 31.74418,23.6556 1.37776,56.32416" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 7 ? this.context.theme.border_color : "#111"} id="svg_13" d="m112.69996,9.72834c0,0 34.36662,25.60983 1.49158,60.97719" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 8 ? this.context.theme.border_color : "#111"} id="svg_14" d="m132.09993,7.40182c0,0 36.98906,27.56406 1.6054,65.63022" strokeWidth="5" fill="none" />
+                <path stroke={this.map(this.props.distance, this.props.limits.MINDISTANCE, this.props.limits.MAXDISTANCE, 0, 10) > 9 ? this.context.theme.border_color : "#111"} id="svg_2" d="m151.8999,4.68756c0,0 40.04857,29.84399 1.73819,71.05875" strokeWidth="5" fill="none" />
               </g>
             </svg>
-            <div className={`navigator-button ${this.props.mode ? "selected" : ""}`}>{this.context.strings["distance"]}</div>
+            <div className={`navigator-button`} style={{background: this.props.mode ? this.context.theme.button_bg_selected : "black", borderColor: this.context.theme.border_color}}>{this.context.strings["distance"]}</div>
           </div>
 
           <div className="auto-lrl-settings-part">
@@ -66,15 +66,15 @@ class AutoLRLSettings extends Component {
                 </g>
               </g>
               <g>
-                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 0 ? "#fcba03" : "#333"} transform="rotate(90 40.00000762939453,7.871353149414067) " id="svg_15" d="m36.8371,-3.52863c0,0 13.82419,9.57576 0.6,22.79996" strokeWidth="4" fill="none" />
-                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 1 ? "#fcba03" : "#333"} transform="rotate(90 40.00000000000001,17.87132072448731) " id="svg_16" d="m35.23217,0.68671c0,0 20.83892,14.43473 0.90445,34.36922" strokeWidth="4" fill="none" />
-                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 2 ? "#fcba03" : "#333"} transform="rotate(90 40.00000000000001,27.377464294433597) " id="svg_17" d="m33.38032,3.51827c0,0 28.93285,20.04126 1.25575,47.71838" strokeWidth="4" fill="none" />
-                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 3 ? "#fcba03" : "#333"} transform="rotate(90 40,38.3650817875938) " id="svg_18" d="m31.77539,8.72126c0,0 35.94759,24.90024 1.5602,59.28765" strokeWidth="4" fill="none" />
-                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 4 ? "#fcba03" : "#333"} transform="rotate(90 40,49.84651947021485) " id="svg_19" d="m30.41737,15.80183c0,0 41.88314,28.59688 1.81782,68.08938" strokeWidth="4" fill="none" />
-                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 5 ? "#fcba03" : "#333"} transform="rotate(90 40.00000000000001,62.56252670288086) " id="svg_6" d="m30.047,26.6891c0,0 43.50192,30.13298 1.88808,71.74685" strokeWidth="4" fill="none" />
+                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 0 ? this.context.theme.border_color : "#111"} transform="rotate(90 40.00000762939453,7.871353149414067) " id="svg_15" d="m36.8371,-3.52863c0,0 13.82419,9.57576 0.6,22.79996" strokeWidth="4" fill="none" />
+                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 1 ? this.context.theme.border_color : "#111"} transform="rotate(90 40.00000000000001,17.87132072448731) " id="svg_16" d="m35.23217,0.68671c0,0 20.83892,14.43473 0.90445,34.36922" strokeWidth="4" fill="none" />
+                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 2 ? this.context.theme.border_color : "#111"} transform="rotate(90 40.00000000000001,27.377464294433597) " id="svg_17" d="m33.38032,3.51827c0,0 28.93285,20.04126 1.25575,47.71838" strokeWidth="4" fill="none" />
+                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 3 ? this.context.theme.border_color : "#111"} transform="rotate(90 40,38.3650817875938) " id="svg_18" d="m31.77539,8.72126c0,0 35.94759,24.90024 1.5602,59.28765" strokeWidth="4" fill="none" />
+                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 4 ? this.context.theme.border_color : "#111"} transform="rotate(90 40,49.84651947021485) " id="svg_19" d="m30.41737,15.80183c0,0 41.88314,28.59688 1.81782,68.08938" strokeWidth="4" fill="none" />
+                <path stroke={this.map(this.props.depth, this.props.limits.MINDEPTH, this.props.limits.MAXDEPTH, 0, 5) >= 5 ? this.context.theme.border_color : "#111"} transform="rotate(90 40.00000000000001,62.56252670288086) " id="svg_6" d="m30.047,26.6891c0,0 43.50192,30.13298 1.88808,71.74685" strokeWidth="4" fill="none" />
               </g>
             </svg>
-            <div className={`navigator-button ${!this.props.mode ? "selected" : ""}`}>{this.context.strings["depth"]}</div>
+            <div className={`navigator-button`} style={{background: !this.props.mode ? this.context.theme.button_bg_selected : "black", borderColor: this.context.theme.border_color}}>{this.context.strings["depth"]}</div>
           </div>
         </div>
         <div className="bottom">

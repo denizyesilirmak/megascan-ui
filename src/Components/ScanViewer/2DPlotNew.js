@@ -113,9 +113,9 @@ class Plot extends Component {
     this.drawSelectedData()
     this.renderPlot()
 
-    // setTimeout(() => {
-    //   this.filterGreens()
-    // }, 1500);
+  //   setTimeout(() => {
+  //     this.filterGreens()
+  //  }, 1500);
   }
 
   drawPlot = () => {

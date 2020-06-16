@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './FileList.css'
 import FileIcon from '../../Assets/MenuIcons/icon-file.png'
+import DeleteFileIcon from '../../Assets/MenuIcons/deleteFile.png'
 import socketHelper from '../../SocketHelper'
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
@@ -12,8 +13,10 @@ class FileList extends Component {
     this.state = {
       cursorIndex: 0,
       popupCursorIndex: 3 * 100,
+      deletePopupCursorIndex: 2 * 100,
       fileList: [],
-      popup: false
+      popup: false,
+      deletePopup: false
 
     }
   }
@@ -38,39 +41,52 @@ class FileList extends Component {
     if (socketData.type !== 'button') { return }
     let tempCursorIndex = this.state.cursorIndex
     let tempPopupCursorIndex = this.state.popupCursorIndex
+    let tempDeletePopupCursorIndex = this.state.deletePopupCursorIndex
     switch (socketData.payload) {
       case 'left':
-        if (this.state.popup === false) {
+        if (this.state.popup === false && this.state.deletePopup === false) {
           if (tempCursorIndex > 0)
             tempCursorIndex = tempCursorIndex - 1
-        } else {
+        } else if (this.state.popup) {
           tempPopupCursorIndex--
+        }
+        else if (this.state.deletePopup) {
+          tempDeletePopupCursorIndex--
         }
         this.context.buttonInterrupt()
         break
       case 'right':
-        if (this.state.popup === false) {
+        if (this.state.popup === false && this.state.deletePopup === false) {
           if (tempCursorIndex < this.state.fileList.length - 1)
             tempCursorIndex = tempCursorIndex + 1
-        } else {
+        } else if (this.state.popup) {
           tempPopupCursorIndex++
+        }
+        else if (this.state.deletePopup) {
+          tempDeletePopupCursorIndex++
         }
         this.context.buttonInterrupt()
         break
       case 'up':
-        if (this.state.popup === false) {
+        if (this.state.popup === false && this.state.deletePopup === false) {
           if (!(tempCursorIndex < 4 && tempCursorIndex >= 0))
             tempCursorIndex = tempCursorIndex - 4
-        } else {
+        } else if (this.state.popup) {
+
+        }
+        else if (this.state.deletePopup) {
 
         }
         this.context.buttonInterrupt()
         break
       case 'down':
-        if (this.state.popup === false) {
+        if (this.state.popup === false && this.state.deletePopup === false) {
           if ((tempCursorIndex + 4) < this.state.fileList.length)
             tempCursorIndex = tempCursorIndex + 4
-        } else {
+        } else if (this.state.popup) {
+
+        }
+        else if (this.state.deletePopup) {
 
         }
         this.context.buttonInterrupt()
@@ -86,10 +102,14 @@ class FileList extends Component {
             this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex])
           }
           else if (this.state.popupCursorIndex % 3 === 1) {
-            this.setState({popup: false})
+            this.setState({ popup: false })
           }
           else if (this.state.popupCursorIndex % 3 === 2) {
             console.log("delete file: " + this.state.fileList[this.state.cursorIndex])
+            this.setState({
+              popup: false,
+              deletePopup: true
+            })
 
           }
         }
@@ -110,13 +130,15 @@ class FileList extends Component {
 
     this.setState({
       cursorIndex: tempCursorIndex,
-      popupCursorIndex: tempPopupCursorIndex
+      popupCursorIndex: tempPopupCursorIndex,
+      deletePopupCursorIndex: tempDeletePopupCursorIndex
     })
   }
 
   renderPopup = () => {
     return (
       <div className="file-list-popup" style={{ borderColor: this.context.theme.background3 }}>
+
         <div className="question">
           Selected File:
         </div>
@@ -140,11 +162,39 @@ class FileList extends Component {
     )
   }
 
+  renderDeletePopup = () => {
+    return (
+      <div className="file-list-popup" style={{ borderColor: this.context.theme.background3, height: 260 }}>
+        <div className="question">
+          <img style={{ marginTop: 10, width: 60 }} src={DeleteFileIcon} alt="delete"></img>
+        </div>
+        <div className="selected-file-name" style={{ textAlign: "center" }}>
+          <span style={{ fontSize: 18 }}>File will delete: </span> <br />
+          {
+            this.state.fileList[this.state.cursorIndex]
+          }
+        </div>
+        <div className="buttons" style={{ justifyContent: "center" }}>
+          <div className={`button`}
+            style={{ background: this.state.deletePopupCursorIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}
+          >Delete</div>
+          <div className={`button`}
+            style={{ background: this.state.deletePopupCursorIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}
+          >Cancel</div>
+        </div>
+      </div >
+    )
+  }
+
   render() {
     return (
       <div className="file-list component">
         {
           this.state.popup ? this.renderPopup() : null
+        }
+
+        {
+          this.state.deletePopup ? this.renderDeletePopup() : null
         }
 
         <div className="files" style={{ transform: `translateY(${Math.trunc(this.state.cursorIndex / 12) * -317}px)` }}>

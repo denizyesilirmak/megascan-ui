@@ -92,7 +92,7 @@ class ScanViewer extends Component {
         }
         break;
       case "down":
-        if (this.state.selectedButtonIndex < 4 && this.state.analyseMode === false) {
+        if (this.state.selectedButtonIndex < 2 && this.state.analyseMode === false) {
           this.setState({
             selectedButtonIndex: this.state.selectedButtonIndex + 1
           })
@@ -154,8 +154,8 @@ class ScanViewer extends Component {
             <div className={`sv-button ${this.state.selectedButtonIndex === 0 ? "selected" : null}`} style={{ backgroundImage: `url(${gridIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div>
             <div className={`sv-button ${this.state.selectedButtonIndex === 1 ? "selected" : null}`} style={{ backgroundImage: `url(${searchIcon})`}}></div>
             <div className={`sv-button ${this.state.selectedButtonIndex === 2 ? "selected" : null}`} style={{ backgroundImage: `url(${filterIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div>
-            <div className={`sv-button ${this.state.selectedButtonIndex === 3 ? "selected" : null}`} style={{ backgroundImage: `url(${saveIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div>
-            <div className={`sv-button ${this.state.selectedButtonIndex === 4 ? "selected" : null}`} style={{ backgroundImage: `url(${uploadIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div>
+            {/* <div className={`sv-button ${this.state.selectedButtonIndex === 3 ? "selected" : null}`} style={{ backgroundImage: `url(${saveIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div> */}
+            {/* <div className={`sv-button ${this.state.selectedButtonIndex === 4 ? "selected" : null}`} style={{ backgroundImage: `url(${uploadIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div> */}
           </div>
         </div>
         <div className="sv-bottom">

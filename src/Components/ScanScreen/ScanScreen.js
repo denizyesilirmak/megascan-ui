@@ -164,6 +164,14 @@ class ScanScreen extends Component {
               console.log("pressed cancel")
             }
           }
+          else if(this.state.pausePopup){
+            if(this.state.pausePopupButtonIndex){
+              console.log("resume")
+              this.setState({pausePopup: false})
+            }else{
+              console.log("stop")
+            }
+          }
           break
         case 'back':
           if (!this.state.finishScanPopup)

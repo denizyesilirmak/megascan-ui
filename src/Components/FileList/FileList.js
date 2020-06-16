@@ -110,11 +110,12 @@ class FileList extends Component {
               popup: false,
               deletePopup: true
             })
-
           }
         } else if (this.state.deletePopup) {
           if (this.state.deletePopupCursorIndex % 2 === 0) {
             console.log("delete file now")
+
+            this.setState({ deletePopup: false, popup: false })
           }
           else if (this.state.deletePopupCursorIndex % 2 === 1) {
             console.log("back from delete popup")

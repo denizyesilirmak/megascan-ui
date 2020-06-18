@@ -194,6 +194,7 @@ class Settings extends Component {
             this.setState({
               generalVolume: this.clamp(this.state.generalVolume - 5, 0, 100)
             })
+            this.props.setVolume(this.state.generalVolume)
             await dbStorage.setItem("generalVolume", this.state.generalVolume)
           }
           else if (this.state.subCursor === 1) {
@@ -249,6 +250,7 @@ class Settings extends Component {
             this.setState({
               generalVolume: this.clamp(this.state.generalVolume + 5, 0, 100)
             })
+            this.props.setVolume(this.state.generalVolume)
             await dbStorage.setItem("generalVolume", this.state.generalVolume)
           }
 

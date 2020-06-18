@@ -36,7 +36,7 @@ class Statusbar extends Component {
         <img className="device-logo" src={this.getLogo()} alt="logo"></img>
         <div className='title'> {this.context.strings[this.props.title] } </div>
         <div className='icons'>
-          <Volume />
+          <Volume generalVolume={this.props.generalVolume} />
           <Wifi />
           <Battery />
           <Clock />

@@ -1,0 +1,69 @@
+.depth-component{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.depth-container{
+  width: 350px;
+  height: 230px;
+  background-image: url(../../../../../Assets/MenuIcons/ctrl-lrl-distance.png);
+  background-size: cover;
+}
+
+.depth-indicator{
+  position: relative;
+  left: 110px;
+  top: 4px;
+}
+
+.depth-value{
+  color: white;
+  font-size: 20px;
+  position: fixed;
+  background: rgb(44, 44, 44);
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  top: 290px;
+  left: 353px;
+  font-size: 25px;
+  text-align: center;
+  width: 90px;
+  height: 30px;
+  border: 2px solid white;
+}
+
+.depth-container path{
+  transition: opacity 0.4s;
+}
+
+.depth-component .left-arrow{
+  left: 70px;
+  top: 190px;
+}
+
+
+
+.depth-component .right-arrow{
+  right: 70px;
+  top: 190px;
+}
+
+.lrl-move{
+  width: 120px;
+  height: 230px;
+  position: absolute;
+  z-index: 100;
+  background-image: url('../../../../../Assets/MenuIcons/move.png');
+  animation: moveAnimation 1.3s steps(8) infinite;
+  left: 200px;
+  bottom: 90px;
+}
+
+@keyframes moveAnimation {
+  from {background-position-x: 0px;}
+  to {background-position-x: -960px;}
+}

@@ -42,7 +42,6 @@ dbStorage.init()
 
 // import SoundHelper from './SoundHelper'
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -53,7 +52,7 @@ class App extends Component {
     this.state = {
       ready: false,
       activeScreen: "setupScreen",
-      fileToOpen: null
+      fileToOpen: null,
     }
 
     dbStorage.getAll()
@@ -63,7 +62,8 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "deviceGroundScanPropertiesScreen" : "setupScreen"
+          activeScreen: settings['setupCompleted'] ? "fileListScreen" : "setupScreen",
+          generalVolume: settings['generalVolume'] || 100
         })
       })
 
@@ -102,12 +102,18 @@ class App extends Component {
     })
   }
 
+  setVolume = (volume) => {
+    this.setState({
+      generalVolume: volume
+    })
+  }
+
   renderScreen = () => {
     switch (this.state.activeScreen) {
       case "menuScreen":
         return (<MainMenu navigateTo={this.navigateTo} />)
       case "settingsScreen":
-        return (<Settings navigateTo={this.navigateTo} />)
+        return (<Settings navigateTo={this.navigateTo} setVolume={this.setVolume} />)
       case "turnOff":
         return (<TurnOff navigateTo={this.navigateTo} />)
       case "autoLrlScanScreen":
@@ -170,7 +176,7 @@ class App extends Component {
       return (
         <div className="App">
           <DeviceContextProvider language={this.state.currentLanguage}>
-            <Statusbar title={this.state.activeScreen} />
+            <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume}/>
             {
               this.renderScreen()
             }

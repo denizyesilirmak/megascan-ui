@@ -9,7 +9,7 @@ import filterIcon from '../../Assets/MenuIcons/icon-filter.png'
 import SocketHelper from '../../SocketHelper'
 
 import Plot from './2DPlotNew'
-import { DeviceContext } from '../../Contexts/DeviceContext' 
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 class ScanViewer extends Component {
   static contextType = DeviceContext
@@ -26,6 +26,8 @@ class ScanViewer extends Component {
       analyseMode: false,
       width: 0,
       height: 0,
+      filter: false,
+      depth: 0
     }
     this.widthLimit = 0
     this.heightLimit = 0
@@ -36,7 +38,7 @@ class ScanViewer extends Component {
     SocketHelper.attach(this.handleKeyDown)
     console.log(this.props.fileToOpen)
     fetch('http://localhost:3030/readfile/' + this.props.fileToOpen)
-    // fetch('http://192.168.1.114:3030/readfile/' + "057")
+      // fetch('http://192.168.1.114:3030/readfile/' + "057")
 
       .then(res => res.json())
       .then(data => {
@@ -115,17 +117,28 @@ class ScanViewer extends Component {
             analyseMode: !this.state.analyseMode
           })
         }
+        else if (this.state.selectedButtonIndex === 2) {
+          this.setState({
+            filter: !this.state.filter
+          })
+        }
         break;
       case "back":
-        if(this.state.analyseMode === true){
-          this.setState({analyseMode: false})
-        }else{
+        if (this.state.analyseMode === true) {
+          this.setState({ analyseMode: false })
+        } else {
           this.props.navigateTo("menuScreen")
         }
         break;
       default:
         break;
     }
+    if(this.state.analyseMode){
+      this.setState({
+        depth: this.normalizedData[this.state.height][this.state.width * 4 + 1]
+      })
+    }
+    // console.log(this.normalizedData[this.state.height][this.state.width * 4 + 1])
   }
 
   getColorInfo = (red, green, blue, average, width, height) => {
@@ -145,39 +158,39 @@ class ScanViewer extends Component {
           <div className="sv-scan-container">
             {
               this.state.fetch ?
-                <Plot data={this.normalizedData} getColorInfo={this.getColorInfo} grid={this.state.grid} selectedBoxPosition={{ width: this.state.width, height: this.state.height }} />
+                <Plot data={this.normalizedData} filter={this.state.filter} getColorInfo={this.getColorInfo} grid={this.state.grid} selectedBoxPosition={{ width: this.state.width, height: this.state.height }} />
                 :
                 null
             }
           </div>
           <div className="sv-buttons">
-            <div className={`sv-button ${this.state.selectedButtonIndex === 0 ? "selected" : null}`} style={{ backgroundImage: `url(${gridIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div>
-            <div className={`sv-button ${this.state.selectedButtonIndex === 1 ? "selected" : null}`} style={{ backgroundImage: `url(${searchIcon})`}}></div>
-            <div className={`sv-button ${this.state.selectedButtonIndex === 2 ? "selected" : null}`} style={{ backgroundImage: `url(${filterIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div>
+            <div className={`sv-button ${this.state.selectedButtonIndex === 0 ? "selected" : null}`} style={{ backgroundImage: `url(${gridIcon})`, opacity: this.state.analyseMode ? 0.3 : 1, borderColor: this.state.selectedButtonIndex === 0 ? this.context.theme.border_color : null }}></div>
+            <div className={`sv-button ${this.state.selectedButtonIndex === 1 ? "selected" : null}`} style={{ backgroundImage: `url(${searchIcon})`, borderColor: this.state.selectedButtonIndex === 1 ? this.context.theme.border_color : null }}></div>
+            <div className={`sv-button ${this.state.selectedButtonIndex === 2 ? "selected" : null}`} style={{ backgroundImage: `url(${filterIcon})`, opacity: this.state.analyseMode ? 0.3 : 1, borderColor: this.state.selectedButtonIndex === 2 ? this.context.theme.border_color : null }}></div>
             {/* <div className={`sv-button ${this.state.selectedButtonIndex === 3 ? "selected" : null}`} style={{ backgroundImage: `url(${saveIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div> */}
             {/* <div className={`sv-button ${this.state.selectedButtonIndex === 4 ? "selected" : null}`} style={{ backgroundImage: `url(${uploadIcon})`, opacity: this.state.analyseMode? 0.3 : 1 }}></div> */}
           </div>
         </div>
         <div className="sv-bottom">
 
-          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
+          <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
             <div className="title">Average</div>
             <div className="value">{this.state.average}</div>
           </div>
 
           {
             this.state.analyseMode ?
-              <div className="sv-bottom-panel animation" style={{background: this.context.theme.button_bg_selected}}>
+              <div className="sv-bottom-panel animation" style={{ background: this.context.theme.button_bg_selected }}>
                 <div className="title">Depth</div>
-                <div className="value">0</div>
+                <div className="value">{this.state.depth}</div>
               </div>
               :
               null
           }
 
 
-          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
-              <span>{this.state.red}%</span>
+          <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
+            <span>{this.state.red}%</span>
             <div className="line-graph-container">
               <div className="line-value" style={{ width: this.state.red + "%", background: "red" }}>
 
@@ -185,8 +198,8 @@ class ScanViewer extends Component {
             </div>
           </div>
 
-          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
-              <span>{this.state.green}%</span>
+          <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
+            <span>{this.state.green}%</span>
             <div className="line-graph-container">
               <div className="line-value" style={{ width: this.state.green + "%", background: "green" }}>
 
@@ -194,8 +207,8 @@ class ScanViewer extends Component {
             </div>
           </div>
 
-          <div className="sv-bottom-panel" style={{background: this.context.theme.button_bg_selected}}>
-              <span>{this.state.blue}%</span>
+          <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
+            <span>{this.state.blue}%</span>
             <div className="line-graph-container">
               <div className="line-value" style={{ width: this.state.blue + "%", background: "blue" }}>
 

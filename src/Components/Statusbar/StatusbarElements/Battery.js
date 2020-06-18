@@ -58,8 +58,8 @@ class Battery extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="battery-percentage">{Math.trunc(this.state.level)}%</div>
         <div className="battery-indicator">
+        <div className="battery-percentage">{Math.trunc(this.state.level)}%</div>
           <div className="level-holder">
 
             <div className="battery-juice" style={{ width: this.state.level + "%", backgroundColor: batteryColors[Math.trunc(this.state.level / 10)] }}>

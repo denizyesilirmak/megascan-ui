@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as THREE from "three";
 import './2DPlotNew.css';
 import SandClock from './signs.svg'
+// import { RGIntegerFormat } from 'three';/*  */
 const Interpolation = require('./Interpolation.js');
 
 const COLORS = {
@@ -113,9 +114,6 @@ class Plot extends Component {
     this.drawSelectedData()
     this.renderPlot()
 
-  //   setTimeout(() => {
-  //     this.filterGreens()
-  //  }, 1500);
   }
 
   drawPlot = () => {
@@ -225,7 +223,6 @@ class Plot extends Component {
       }
       // if (e.color.g > 0.67)
     })
-    console.log("bitti")
     this.renderPlot();
     this.setState({ waiting: false })
   }
@@ -243,12 +240,8 @@ class Plot extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.grid !== this.props.grid) {
-      console.log("grid change")
-      this.showHideGrid(this.props.grid)
-    }
+
     if ((prevProps.selectedBoxPosition.width !== this.props.selectedBoxPosition.width) || (prevProps.selectedBoxPosition.height !== this.props.selectedBoxPosition.height)) {
-      console.log("move")
       this.moveSelectedBox(this.props.selectedBoxPosition.width, this.props.selectedBoxPosition.height)
     }
 
@@ -259,6 +252,18 @@ class Plot extends Component {
       if (c === 15)
         clearInterval(rerender )
     }, 5);
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps){
+    if(nextProps.filter === true){
+      this.filterGreens()
+    }
+    else if(nextProps.filter === false){
+      this.drawPlot()
+    }
+    if (nextProps.grid !== this.props.grid) {
+      this.showHideGrid(this.props.grid)
+    }
   }
 
   render() {

@@ -4,6 +4,7 @@ import './GroundScanMethodSelection.css'
 import MiniCarousel from '../MiniCarousel/MiniCarousel'
 
 import DeviceIcon from '../../../../Assets/MenuIcons/m-device.png'
+import TabletIcon from '../../../../Assets/MenuIcons/tablet.png'
 
 class GroundScanMethodSelection extends Component {
 
@@ -21,7 +22,7 @@ class GroundScanMethodSelection extends Component {
       },
       {
         name: "tablet",
-        icon: DeviceIcon
+        icon: TabletIcon
       }
     ]
   }
@@ -61,7 +62,7 @@ class GroundScanMethodSelection extends Component {
         case 'back':
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
-          }, 500);
+          }, 250);
           return
         default:
           break

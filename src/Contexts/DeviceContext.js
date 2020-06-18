@@ -16,7 +16,6 @@ const SLEEPMODETIMEOUT = 5000
 class DeviceContextProvider extends Component {
   constructor(props) {
     super(props)
-    
     this.state = {
       sleepModeActive: false
     }
@@ -72,6 +71,7 @@ class DeviceContextProvider extends Component {
       }, SLEEPMODETIMEOUT);
     }
   }
+
 
 
   render() {

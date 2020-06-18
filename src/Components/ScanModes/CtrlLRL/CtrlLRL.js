@@ -6,6 +6,7 @@ import Navigator from '../../Settings/SettingsElements/Navigator'
 import SoilType from './CtrlLRLComponents/SoilType/SoilType'
 import Frequency from './CtrlLRLComponents/Frequency/Frequency'
 import Distance from './CtrlLRLComponents/Distance/Distance'
+import Depth from './CtrlLRLComponents/Depth/Depth'
 
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
@@ -15,7 +16,7 @@ class CtrlLRL extends Component {
     super(props)
     this.state = {
       activeSettingTab: 0,
-      activeSettingTabName: 'soiltype',
+      activeSettingTabName: 'depth',
       verticalIndex: 0
     }
 
@@ -97,6 +98,7 @@ class CtrlLRL extends Component {
       case "distance":
         return <Distance />
       case "depth":
+        return <Depth />
         break
       case "search":
         break

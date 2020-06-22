@@ -1,13 +1,13 @@
 *MEGASCAN UI*
-☐ Sensör kontrol videoları, atmega ile haberleşerek navigasyon sağlayacak @critical
-☐ Anamenüden bir tarama moduna girildiğinde, önce sensör kontrol sistemi açılacak
-☐ Pin değiştirme menüsü eklenecek
+✔ Sensör kontrol videoları, atmega ile haberleşerek navigasyon sağlayacak @critical @done(20-06-22 16:55)
+✔ Anamenüden bir tarama moduna girildiğinde, önce sensör kontrol sistemi açılacak @done(20-06-22 16:55)
+✔ Pin değiştirme menüsü eklenecek @done(20-06-22 16:55)
 ☐ Pin değiştirirken eski pin doğrulanacak
 ☐ Tarama ekranında kullanılan dial'lara aşağı yukarı ikonlar eklenecek @low
-☐ Veritabanı sistemi eklenecek
+✔ Veritabanı sistemi eklenecek @done(20-06-22 16:55)
 ☐ Dil, tarih, saat cihaz ilk açıldığında ayarlanacak
 ✔ LiveStrem'den eğim göstergesi kaldırılacak @done(20-02-17 11:44)
-☐ Dil desteği eklenecek
+✔ Dil desteği eklenecek @done(20-06-22 16:55)
 
 
 
@@ -51,3 +51,5 @@
 ☐ RESISTIVITY R
   value R => R.600 
 
+
+Archive:

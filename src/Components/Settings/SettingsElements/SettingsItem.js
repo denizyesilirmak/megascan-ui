@@ -34,11 +34,11 @@ class SettingsItem extends Component {
         {
           this.props.mode === "slider" ?
             <div className="slider-container">
-              <img id="left-arrow" alt="la" src={LeftArrowIcon} />
+              <img id="left-arrow" alt="la" src={LeftArrowIcon} style={{filter: this.context.theme.arrorHueRotation}} />
               <div className="slider">
                 <div className="slider-value" style={{ width: `${this.props.value}%` }} />
               </div>
-              <img id="right-arrow" alt="la" src={RightArrowIcon} />
+              <img id="right-arrow" alt="la" src={RightArrowIcon} style={{filter: this.context.theme.arrorHueRotation}} />
             </div>
 
             : ''

@@ -3,24 +3,26 @@ import './ChangeLanguage.css'
 import socketHelper from '../../SocketHelper'
 import dbStorage from '../../DatabaseHelper'
 
-import flag_ar from '../../Assets/Flags/ar.png'
-import flag_de from '../../Assets/Flags/de.png'
-import flag_en from '../../Assets/Flags/en.png'
-import flag_es from '../../Assets/Flags/es.png'
-import flag_fa from '../../Assets/Flags/fa.png'
-import flag_fr from '../../Assets/Flags/fr.png'
-import flag_it from '../../Assets/Flags/it.png'
-import flag_tr from '../../Assets/Flags/tr.png'
-import flag_iw from '../../Assets/Flags/iw.png'
-import flag_ur from '../../Assets/Flags/ur.png'
-import flag_zh from '../../Assets/Flags/zh.png'
-import flag_ru from '../../Assets/Flags/ru.png'
+import flag_ar from '../../Assets/Flags/new/ar.png'
+import flag_de from '../../Assets/Flags/new/de.png'
+import flag_en from '../../Assets/Flags/new/en.png'
+import flag_es from '../../Assets/Flags/new/es.png'
+import flag_fa from '../../Assets/Flags/new/fa.png'
+import flag_fr from '../../Assets/Flags/new/fr.png'
+import flag_it from '../../Assets/Flags/new/it.png'
+import flag_tr from '../../Assets/Flags/new/tr.png'
+import flag_iw from '../../Assets/Flags/new/iw.png'
+import flag_ur from '../../Assets/Flags/new/ur.png'
+import flag_zh from '../../Assets/Flags/new/zh.png'
+import flag_ru from '../../Assets/Flags/new/ru.png'
+
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 const LANGUAGES = [
   {
-    code: "ar",
-    name: "العربية",
-    flag: flag_ar
+    code: "en",
+    name: "English",
+    flag: flag_en
   },
   {
     code: "de",
@@ -28,19 +30,9 @@ const LANGUAGES = [
     flag: flag_de
   },
   {
-    code: "en",
-    name: "English",
-    flag: flag_en
-  },
-  {
     code: "es",
     name: "Español",
     flag: flag_es
-  },
-  {
-    code: "fa",
-    name: "فارسی",
-    flag: flag_fa
   },
   {
     code: "fr",
@@ -53,9 +45,19 @@ const LANGUAGES = [
     flag: flag_it
   },
   {
+    code: "ru",
+    name: "	Русский язык",
+    flag: flag_ru
+  },
+  {
     code: "tr",
     name: "Türkçe",
     flag: flag_tr
+  },
+  {
+    code: "zh",
+    name: "Chinese",
+    flag: flag_zh
   },
   {
     code: "iw",
@@ -68,18 +70,20 @@ const LANGUAGES = [
     flag: flag_ur
   },
   {
-    code: "zh",
-    name: "Chinese",
-    flag: flag_zh
+    code: "ar",
+    name: "العربية",
+    flag: flag_ar
   },
   {
-    code: "ru",
-    name: "	Русский язык",
-    flag: flag_ru
+    code: "fa",
+    name: "فارسی",
+    flag: flag_fa
   }
 ]
 
 class ChangeLanguage extends Component {
+  static contextType = DeviceContext
+
   constructor(props) {
     super(props)
     this.state = {
@@ -94,6 +98,8 @@ class ChangeLanguage extends Component {
     this.setState({
       activeIndex: 12 * 900 + indexOfCurrentLang
     })
+
+    console.log("sa")
   }
 
   handleKeyDown = async (socketData) => {
@@ -114,14 +120,23 @@ class ChangeLanguage extends Component {
         tempActiveIndex = tempActiveIndex + 6
         break
       case 'ok':
-        console.log(LANGUAGES[this.state.activeIndex%12].code)
+        console.log(LANGUAGES[this.state.activeIndex % 12].code)
 
-        this.props.setLanguage(LANGUAGES[this.state.activeIndex%12].code)
-        await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex%12].code)
-        this.props.navigateTo("settingsScreen")
+        this.props.setLanguage(LANGUAGES[this.state.activeIndex % 12].code)
+        await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex % 12].code)
+        try {
+          this.props.navigateTo("settingsScreen")
+        } catch (error) {
+          console.log(error)
+        }
         return
       case 'back':
-        this.props.navigateTo("settingsScreen")
+        try {
+          socketHelper.detach()
+          this.props.navigateTo("settingsScreen")
+        } catch (error) {
+          console.log(error)
+        }
         break
       default:
         break
@@ -141,7 +156,7 @@ class ChangeLanguage extends Component {
             LANGUAGES.map((e, i) => {
               // console.log(e)
               return (
-                <div key={i} className={`language ${this.state.activeIndex % 12 === i ? "selected" : ''}`}>
+                <div key={i} style={{ background: this.state.activeIndex % 12 === i ? this.context.theme.button_bg_selected : null }} className={`language ${this.state.activeIndex % 12 === i ? "selected" : ''}`}>
                   <img src={e.flag} alt="language"></img>
                   <div className="language-title">{e.name}</div>
                 </div>

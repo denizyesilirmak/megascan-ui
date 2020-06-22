@@ -22,9 +22,9 @@ import flag_ru from '../../Assets/Flags/ru.png'
 
 const LANGUAGES = [
   {
-    code: "ar",
-    name: "العربية",
-    flag: flag_ar
+    code: "en",
+    name: "English",
+    flag: flag_en
   },
   {
     code: "de",
@@ -32,19 +32,9 @@ const LANGUAGES = [
     flag: flag_de
   },
   {
-    code: "en",
-    name: "English",
-    flag: flag_en
-  },
-  {
     code: "es",
     name: "Español",
     flag: flag_es
-  },
-  {
-    code: "fa",
-    name: "فارسی",
-    flag: flag_fa
   },
   {
     code: "fr",
@@ -57,9 +47,19 @@ const LANGUAGES = [
     flag: flag_it
   },
   {
+    code: "ru",
+    name: "	Русский язык",
+    flag: flag_ru
+  },
+  {
     code: "tr",
     name: "Türkçe",
     flag: flag_tr
+  },
+  {
+    code: "zh",
+    name: "Chinese",
+    flag: flag_zh
   },
   {
     code: "iw",
@@ -72,14 +72,14 @@ const LANGUAGES = [
     flag: flag_ur
   },
   {
-    code: "zh",
-    name: "Chinese",
-    flag: flag_zh
+    code: "ar",
+    name: "العربية",
+    flag: flag_ar
   },
   {
-    code: "ru",
-    name: "	Русский язык",
-    flag: flag_ru
+    code: "fa",
+    name: "فارسی",
+    flag: flag_fa
   }
 ]
 

@@ -19,8 +19,8 @@ class Carousel extends Component {
   render () {
     return (
       <div className='carousel-component'>
-        <img src={LeftArrow} className={`left-arrow ${(this.props.index !== -1) ? 'show' : 'hide'}`} alt='la' />
-        <img src={RightArrow} className={`right-arrow ${(this.props.index !== this.props.buttons.length - 2) ? 'show' : 'hide'}`} alt='la' />
+        <img src={LeftArrow} style={{filter: this.context.theme.arrorHueRotation}} className={`left-arrow ${(this.props.index !== -1) ? 'show' : 'hide'}`} alt='la' />
+        <img src={RightArrow} style={{filter: this.context.theme.arrorHueRotation}} className={`right-arrow ${(this.props.index !== this.props.buttons.length - 2) ? 'show' : 'hide'}`} alt='la' />
         <div className='carousel-buttons'>
           <div className='slider' ref='slider'>
             {

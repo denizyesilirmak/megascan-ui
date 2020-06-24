@@ -21,20 +21,29 @@ class Battery extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      level: 100
+      level: 0
     }
   }
 
 
   componentDidMount() {
     socketHelper.attachSpecial("battery", this.handleBattery)
+    let animation_direction = true
+    this.animation_interval = setInterval(() => {
+      this.setState({
+        level: animation_direction ? 100: 0
+      })      
+      animation_direction = animation_direction ? false : true
+    }, 200);
   }
 
   handleBattery = (sd) => {
+    // console.log(sd)
+    clearInterval(this.animation_interval)
     if (sd.type === "battery") {
-      // this.setState({
-      //   level: Math.trunc(sd.payload)
-      // })
+      this.setState({
+        level: Math.trunc(sd.payload)
+      })
     }
   }
 
@@ -61,9 +70,7 @@ class Battery extends React.Component {
         <div className="battery-indicator">
         <div className="battery-percentage">{Math.trunc(this.state.level)}%</div>
           <div className="level-holder">
-
             <div className="battery-juice" style={{ width: this.state.level + "%", backgroundColor: batteryColors[Math.trunc(this.state.level / 10)] }}>
-
             </div>
           </div>
           <img style={{ marginRight: 13, marginLeft: 13 }} alt="battery" src={battery_icon}></img>

@@ -22,20 +22,7 @@ class Plot extends Component {
     this.state = {
       waiting: false
     }
-    // // console.log(this.props.data)
-    // this.data = [
-    //   [212, 210, 203, 202, 207, 206, 206, 215, 209, 210],
-    //   [210, 204, 209, 212, 214, 211, 214, 212, 210, 215],
-    //   [209, 212, 210, 251, 148, 255, 226, 210, 213, 210],
-    //   [214, 212, 220, 255, 243, 255, 208, 216, 215, 211],
-    //   [213, 207, 211, 229, 243, 232, 189, 219, 214, 217],
-    //   [211, 199, 201, 197, 205, 164, 185, 213, 216, 210],
-    //   [212, 214, 195, 193, 218, 205, 198, 210, 209, 212],
-    //   [211, 203, 211, 205, 194, 188, 200, 213, 208, 214],
-    //   [209, 203, 203, 210, 209, 207, 215, 205, 208, 216],
-    //   [207, 207, 211, 205, 206, 209, 212, 210, 215, 214],
-    //   [214, 211, 215, 210, 207, 210, 212, 216, 215, 213]
-    // ]
+
 
     this.data = this.props.data
     this.total = 0
@@ -113,7 +100,6 @@ class Plot extends Component {
     this.initGrid()
     this.drawSelectedData()
     this.renderPlot()
-
   }
 
   drawPlot = () => {
@@ -181,7 +167,6 @@ class Plot extends Component {
     points.push(new THREE.Vector3((1 / (this.data[0].length) * 4), -(1 / (this.data.length - 1)), 1));
     points.push(new THREE.Vector3(0, -(1 / (this.data.length - 1)), 1));
 
-
     var geometry = new THREE.BufferGeometry().setFromPoints(points);
     this.selectedBox = new THREE.LineLoop(geometry, material);
     this.selectedBox.position.x = - 0.5
@@ -240,12 +225,14 @@ class Plot extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("2d plot update component")
 
     if ((prevProps.selectedBoxPosition.width !== this.props.selectedBoxPosition.width) || (prevProps.selectedBoxPosition.height !== this.props.selectedBoxPosition.height)) {
       this.moveSelectedBox(this.props.selectedBoxPosition.width, this.props.selectedBoxPosition.height)
     }
 
     let c = 0
+    
     const rerender = setInterval(() => {
       this.renderer.render(this.scene, this.camera);
       c++;

@@ -23,7 +23,7 @@ class MiniCarousel extends Component {
                   <img alt="icon" className="msb-icon" src={e.icon} />
                 </div>
                 <div className="msb-title">
-                  {e.name}
+                  {this.context.strings[e.name]}
                 </div>
               </div>
             )

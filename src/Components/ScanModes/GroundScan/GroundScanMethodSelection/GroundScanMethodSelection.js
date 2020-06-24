@@ -5,16 +5,17 @@ import MiniCarousel from '../MiniCarousel/MiniCarousel'
 
 import DeviceIcon from '../../../../Assets/MenuIcons/m-device.png'
 import TabletIcon from '../../../../Assets/MenuIcons/tablet.png'
+import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class GroundScanMethodSelection extends Component {
-
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
     this.state = {
       buttonIndex: 800 * 2
     }
-
+    
     this.buttons = [
       {
         name: "device",
@@ -28,6 +29,7 @@ class GroundScanMethodSelection extends Component {
   }
 
   async componentDidMount() {
+    
     socketHelper.attach(this.handleKeyDown)
   }
 

@@ -13,7 +13,7 @@
     "geophysical": "Geophysical",
     "autolrl": "Auto LRL",
     "ctrllrl": "CTRL LRL",
-    "manuallrl": "Manuel LRL",
+    "manuallrl": "Manual LRL",
     "pinpointer": "Pin Pointer",
     "ionic": "Ionic",
     "bionic": "Bionic",
@@ -60,7 +60,16 @@
     "search": "Scan",
     "leftdirection": "Left Direction",
     "rightdirection": "Right Direction",
-    "next": "Next"
+    "next": "Next",
+    "device": "Device",
+    "tablet": "Tablet",
+    "manual": "Manual",
+    "automatic": "Automatic",
+    "alternative": "Alternative",
+    "onedirection": "One Direction",
+    "left": "Left",
+    "right": "Right"
+
   },
   "tr": {
     "setupScreen": "İlk Kurulum",

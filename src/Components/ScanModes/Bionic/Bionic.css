@@ -55,7 +55,7 @@
 .rotating-indicator-container .rotator{
   width: 200px;
   height: 200px;
-  animation: spin-full linear infinite;
+  /* animation: spin-full linear infinite; */
   animation-duration: 4s;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .bionic rect{
-  transition: all 0.2s;
+  transition: all 0.1s;
 }
 
 .dial{
@@ -101,4 +101,13 @@
 .bionic .sens-dial{
   position: absolute;
   right: 80px;
+}
+
+.dial span{
+  position: absolute;
+  color: black;
+  font-size: 25px;
+  text-align: center;
+  left: 65px;
+  top: 100px
 }

@@ -92,7 +92,7 @@ class Plot extends Component {
     const height = this.refs.canvasHolder.clientHeight;
     this.scene = new THREE.Scene();
     this.camera = new THREE.OrthographicCamera(-0.50, 0.50, 0.50, -0.50, -10, 10);
-    this.renderer = new THREE.WebGLRenderer({ antialias: false });
+    this.renderer = new THREE.WebGLRenderer({ antialias: false, precision: "lowp" });
     this.renderer.setSize(width, height);
     this.refs.canvasHolder.appendChild(this.renderer.domElement);
     this.initializeCamera();
@@ -104,7 +104,7 @@ class Plot extends Component {
 
   drawPlot = () => {
     this.setState({ waiting: true })
-    const interpolatedMatrix = (Interpolation(this.normalizedArr, 2))
+    const interpolatedMatrix = (Interpolation(this.normalizedArr, 1))
     this.plotGeometry = new THREE.PlaneGeometry(1, 1, interpolatedMatrix[0].length - 1, interpolatedMatrix.length - 1);
     let sutun = 0
     let satir = 0
@@ -121,6 +121,7 @@ class Plot extends Component {
     this.material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.VertexColors });
     this.graphMesh = new THREE.Mesh(this.plotGeometry, this.material);
     this.scene.add(this.graphMesh);
+    this.renderer.render(this.scene, this.camera);
     this.setState({ waiting: false })
   }
 
@@ -208,7 +209,8 @@ class Plot extends Component {
       }
       // if (e.color.g > 0.67)
     })
-    this.renderPlot();
+    this.renderer.render(this.scene, this.camera);
+    console.log("filter processing")
     this.setState({ waiting: false })
   }
 
@@ -220,50 +222,48 @@ class Plot extends Component {
   moveSelectedBox = (x, y) => {
     this.selectedBox.position.x = - 0.5 + x * ((1 / (this.data[0].length) * 4))
     this.selectedBox.position.y = 0.5 - y * (1 / (this.data.length - 1))
-
-    this.renderPlot()
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("2d plot update component")
-
     if ((prevProps.selectedBoxPosition.width !== this.props.selectedBoxPosition.width) || (prevProps.selectedBoxPosition.height !== this.props.selectedBoxPosition.height)) {
       this.moveSelectedBox(this.props.selectedBoxPosition.width, this.props.selectedBoxPosition.height)
-    }
-
-    let c = 0
-    
-    const rerender = setInterval(() => {
       this.renderer.render(this.scene, this.camera);
-      c++;
-      if (c === 15)
-        clearInterval(rerender )
-    }, 5);
+      return
+    }
+
+    if ((prevProps.filter !== this.props.filter) && this.props.filter === true) {
+      console.log("filter on")
+      this.filterGreens()
+      return
+    }
+    else if ((prevProps.filter !== this.props.filter) && this.props.filter === false) {
+      console.log("filter off")
+      this.drawPlot()
+      this.renderer.render(this.scene, this.camera);
+      return
+    }
+
+
+    if (prevProps.grid !== this.props.grid) {
+      this.showHideGrid(prevProps.grid)
+      this.renderer.render(this.scene, this.camera);
+      return
+    }
+
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps){
-    if(nextProps.filter === true){
-      this.filterGreens()
-    }
-    else if(nextProps.filter === false){
-      this.drawPlot()
-    }
-    if (nextProps.grid !== this.props.grid) {
-      this.showHideGrid(this.props.grid)
-    }
-  }
 
   render() {
     return (
       <div className="plot">
-        {
+        {/* {
           this.state.waiting ?
             <div className="plot-preloader">
               <img alt= "sc" src={SandClock}></img>
             </div>
             :
             null
-        }
+        } */}
 
         <div className="canvas-container-sv" ref="canvasHolder">  </div>
       </div>

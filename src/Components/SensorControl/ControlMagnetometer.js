@@ -18,11 +18,11 @@ class ControlMagnetometer extends Component {
   }
 
   componentDidMount() {
-/*     setTimeout(() => {
-      //this.refs.video.playbackRate = 4; 
-      
+    setTimeout(() => {
+      this.refs.video.playbackRate = 4;
+
       // this.refs.video.pause();
-    }, 300); */
+    }, 300);
     switch (this.props.target) {
       case "liveStreamScreen":
         this.setState({ src: LiveStremVideo })

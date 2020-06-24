@@ -32,7 +32,7 @@ class Bionic extends Component {
       this.refs.bionic.style.opacity = 1
     }, 20);
     this.testInterval = setInterval(() => {
-      socketHelper.send('Q')
+      socketHelper.send('J')
     }, 60);
   }
 
@@ -48,22 +48,22 @@ class Bionic extends Component {
         case 'right':
           tmpCursorIndex++
           break
-          case 'up':
-            if (this.state.cursorIndex % 4 === 2) {
-              tmpSensitivity += 5
-            }
-            else if (this.state.cursorIndex % 4 === 1) {
-              tmpGain += 5
-            }
-            break;
-          case 'down':
-            if (this.state.cursorIndex % 4 === 2) {
-              tmpSensitivity -= 5
-            }
-            else if (this.state.cursorIndex % 4 === 1) {
-              tmpGain -= 5
-            }
-            break;
+        case 'up':
+          if (this.state.cursorIndex % 4 === 2) {
+            tmpSensitivity += 5
+          }
+          else if (this.state.cursorIndex % 4 === 1) {
+            tmpGain += 5
+          }
+          break;
+        case 'down':
+          if (this.state.cursorIndex % 4 === 2) {
+            tmpSensitivity -= 5
+          }
+          else if (this.state.cursorIndex % 4 === 1) {
+            tmpGain -= 5
+          }
+          break;
         case 'ok':
 
           return
@@ -84,9 +84,9 @@ class Bionic extends Component {
         gain: tmpGain
       })
     }
-    else if (socketData.type === 'sensor') {
+    else if (socketData.type === 'bionic') {
       this.setState({
-        sensorData: socketData.payload
+        sensorData: parseInt(socketData.payload)
       })
     }
   }
@@ -106,7 +106,7 @@ class Bionic extends Component {
         </div>
 
         <div className="rotating-indicator-container">
-          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator" />
+          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator"  style={{transform: `rotate(${this.state.sensorData * 1.4 - 20}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)`}}/>
         </div>
 
         <div className="line-chart">
@@ -114,6 +114,7 @@ class Bionic extends Component {
         </div>
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`}>
+          <span>{this.state.gain}</span>
           <CircularProgressbar
             value={this.state.gain}
             text="Gain"
@@ -130,6 +131,7 @@ class Bionic extends Component {
         </div>
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
+          <span>{this.state.sensitivity}</span>
           <CircularProgressbar
             value={this.state.sensitivity}
             text="Sensitivity"

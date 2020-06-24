@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import "./TurnOff.css"
 import socketHelper from '../../SocketHelper'
 import TurnOffIcon from "../../Assets/MenuIcons/reset.png"
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 class TurnOff extends Component{
+  static contextType = DeviceContext
   constructor(props){
     super(props)
 
@@ -53,8 +55,8 @@ class TurnOff extends Component{
           Do you want to turn off the device?
         </div>
         <div className="turn-off-buttons">
-          <div className={`button ${this.state.yesNo ? "selected" : ""}`}>YES</div>
-          <div className={`button ${!this.state.yesNo ? "selected" : ""}`}>NO</div>
+          <div style={{background: this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color}} className={`button ${this.state.yesNo ? "selected" : ""}`}>YES</div>
+          <div style={{background: !this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color}} className={`button ${!this.state.yesNo ? "selected" : ""}`}>NO</div>
         </div>
 
       </div>

@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #000;
+  /* background: #000; */
   color: white;
   transition: 1s all;
 }
@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
   font-size: 25px;
-  background: rgb(27, 27, 27);
+  background: rgb(15, 15, 15);
   border-radius: 15px;
   margin-top: 15px;
 }
@@ -53,12 +53,6 @@
   border-left: none;
 }
 
-.button.selected {
-  background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-  color: black;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgb(114, 90, 26);
-}
 
 .turn-off-icon{
   margin-bottom: 20px;

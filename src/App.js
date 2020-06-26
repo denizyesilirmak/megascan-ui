@@ -60,7 +60,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "bionicScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 100
         })
       })

@@ -9,7 +9,7 @@ class TimePopup extends Component {
 
   render() {
     return (
-      <div className="settings-popup" style={{ background: this.context.theme.background3}}>
+      <div className="settings-popup" style={{ background: this.context.theme.background3, borderColor: this.context.theme.border_color}}>
         <div className="popup-title" style={{ background: this.context.theme.background2 }}>{this.context.strings["changetime"]}</div>
         <div className="date-picker">
 

@@ -9,7 +9,7 @@ class DatePopup extends Component {
   static contextType = DeviceContext
   render() {
     return (
-      <div className="settings-popup" style={{ background: this.context.theme.background3}}>
+      <div className="settings-popup" style={{ background: this.context.theme.background3, borderColor: this.context.theme.border_color}}>
         <div className="popup-title" style={{ background: this.context.theme.background2 }}>{this.context.strings["changedate"]}</div>
         <div className="date-picker">
 

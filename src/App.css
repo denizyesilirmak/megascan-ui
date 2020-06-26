@@ -4,9 +4,15 @@
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+@font-face {
+  font-family: 'Morris';
+  src: url('./Assets/Fonts/Morris/Morris-Sans-W01-Medium.ttf') format('truetype'), url('./Assets/Fonts/Morris/Morris-Sans-W01-Medium.ttf') format('truetype');
+  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
 body {
   background-size: cover;
-  font-family: RussoOne;
+  font-family: Morris;
   /* background-image: url('./Assets/backgrounds/goldstar.png'); */
 }
 
@@ -25,5 +31,8 @@ body {
   background: black;
   z-index: 10000;
   position: absolute;
+}
 
+.lang-tr{
+  font-family: RussoOne;
 }

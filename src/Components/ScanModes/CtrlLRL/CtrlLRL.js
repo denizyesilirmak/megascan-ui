@@ -99,7 +99,6 @@ class CtrlLRL extends Component {
         return <Distance />
       case "depth":
         return <Depth />
-        break
       case "search":
         break
       default:

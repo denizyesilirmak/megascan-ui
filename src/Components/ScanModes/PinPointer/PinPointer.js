@@ -29,17 +29,7 @@ const lines = [
   ["#28ff03", "#28ff03",],
   ["#28ff03", "#28ff03",],
 ]
-// console.log(lines.length)
 
-// const COLORS = {
-//   jet: [
-//     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
-//     { pct: 63, color: { r: 0x00, g: 0xff, b: 0xff } },
-//     { pct: 127, color: { r: 0x00, g: 0xad, b: 0x00 } },
-//     { pct: 190, color: { r: 0xff, g: 0xff, b: 0x00 } },
-//     { pct: 255, color: { r: 0xff, g: 0x00, b: 0x00 } }
-//   ]
-// }
 
 class PinPointer extends Component {
   static contextType = DeviceContext
@@ -47,39 +37,47 @@ class PinPointer extends Component {
     super(props)
 
     this.state = {
-      sensorValue: 127
+      sensorValue: 0,
+      calibration: 127
     }
   }
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
     this.interval = setInterval(() => {
-      this.setState({
-        sensorValue: this.map(Math.random() * 255, 0, 255, -120, 120)
-      })
-    }, 1000);
+      socketHelper.send('J')
+    }, 60);
+
+
   }
 
   handleKeyDown = (socketData) => {
-    if (socketData.type !== 'button') { return }
-    let tempIndex = this.state.yesNo
-    switch (socketData.payload) {
-      case 'left':
+    if (socketData.type === 'button') {
+      let tempIndex = this.state.yesNo
+      switch (socketData.payload) {
+        case 'left':
 
-        break
-      case 'right':
-        break
-      case 'back':
-        clearInterval(this.interval)
-        this.props.navigateTo("menuScreen")
-        return
-      default:
-        break
+          break
+        case 'right':
+          break
+        case 'back':
+          clearInterval(this.interval)
+          this.props.navigateTo("menuScreen")
+          return
+        default:
+          break
+      }
+
+      this.setState({
+        yesNo: tempIndex
+      })
+    }
+    else if(socketData.type === "bionic"){
+      this.setState({
+        sensorValue: this.state.calibration - parseInt(socketData.payload)
+      })
     }
 
-    this.setState({
-      yesNo: tempIndex
-    })
   }
 
 
@@ -120,12 +118,12 @@ class PinPointer extends Component {
 
         <div className="pinpointer-button-container">
 
-          <div className="pinpointer-button" style={{borderColor: this.context.theme.border_color}}>
+          <div className="pinpointer-button" style={{ borderColor: this.context.theme.border_color }}>
             <img src={CalibrationIcon} alt="calibraiton"></img>
             <div className="label">Calibrate</div>
           </div>
 
-          <div className="pinpointer-button" style={{borderColor: this.context.theme.border_color}}>
+          <div className="pinpointer-button" style={{ borderColor: this.context.theme.border_color }}>
             <img src={CalibrationIcon} alt="calibraiton"></img>
             <div className="label">Sensitivity</div>
           </div>

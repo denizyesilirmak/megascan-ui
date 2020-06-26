@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import "./TurnOff.css"
 import socketHelper from '../../SocketHelper'
-import TurnOffIcon from "../../Assets/MenuIcons/reset.png"
+import TurnOffIcon from "../../Assets/MenuIcons/turn-off.png"
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
 class TurnOff extends Component{

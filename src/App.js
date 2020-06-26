@@ -57,12 +57,10 @@ class App extends Component {
 
     dbStorage.getAll()
       .then(settings => {
-        // console.log('Got settings:', settings)
-        console.log(settings['setupCompleted'])
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "turnOff" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 100
         })
       })
@@ -106,6 +104,13 @@ class App extends Component {
     this.setState({
       generalVolume: volume
     })
+  }
+
+  fontFallback = () => {
+    switch(this.state.currentLanguage){
+      case 'tr': return 'lang-tr'
+      default: return ''
+    }
   }
 
   renderScreen = () => {
@@ -174,7 +179,7 @@ class App extends Component {
   render() {
     if (this.state.ready) {
       return (
-        <div className="App">
+        <div className={`App ${this.fontFallback()}`}>
           <DeviceContextProvider language={this.state.currentLanguage}>
             <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume}/>
             {

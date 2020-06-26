@@ -9,16 +9,18 @@
 }
 
 .status-bar-component .title{
-  width: 40%;
+  width: 280px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 20px;
+  font-size: 1.2rem;
   text-align: center;
   white-space: pre;
   text-transform: uppercase;
+  overflow: hidden;
+
 } 
 
 .status-bar-component .icons{

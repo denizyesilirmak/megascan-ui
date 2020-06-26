@@ -24,9 +24,9 @@ class AutoLRLSettings extends Component {
         <div className="top">
           <div className="auto-lrl-settings-part">
             <div className="value">
-              <img alt="arrow" src={UpArrow} />
+              <img alt="arrow" src={UpArrow} style={{filter: this.context.theme.arrorHueRotation}}/>
               <span><span>{this.props.distance}</span><span> M</span></span>
-              <img alt="arrow" src={DownArrow} />
+              <img alt="arrow" src={DownArrow} style={{filter: this.context.theme.arrorHueRotation}}/>
             </div>
             {/* <img alt="icon" src={DistanceIcon} /> */}
             <svg width="179.99999999999997" height="80" xmlns="http://www.w3.org/2000/svg"> <g>
@@ -53,9 +53,9 @@ class AutoLRLSettings extends Component {
 
           <div className="auto-lrl-settings-part">
             <div className="value">
-              <img alt="arrow" src={UpArrow} />
+              <img alt="arrow" src={UpArrow} style={{filter: this.context.theme.arrorHueRotation}}/>
               <span><span>{this.props.depth}</span><span> M</span></span>
-              <img alt="arrow" src={DownArrow} />
+              <img alt="arrow" src={DownArrow} style={{filter: this.context.theme.arrorHueRotation}}/>
             </div>
             {/* <img alt="icon" src={DepthIcon} /> */}
             <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg">

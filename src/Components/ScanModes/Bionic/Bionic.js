@@ -125,7 +125,9 @@ class Bionic extends Component {
               textColor: "#000",
               pathColor: "#000",
               trailColor: "transparent",
-              textSize: 11
+              textSize: 11,
+              pathTransitionDuration: 0.1,
+              
             })}
           />
         </div>
@@ -142,7 +144,8 @@ class Bionic extends Component {
               textColor: "#000",
               pathColor: "#000",
               trailColor: "transparent",
-              textSize: 11
+              textSize: 11,
+              pathTransitionDuration: 0.1,
             })}
           />
         </div>

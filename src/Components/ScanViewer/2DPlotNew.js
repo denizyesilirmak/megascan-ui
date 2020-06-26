@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as THREE from "three";
 import './2DPlotNew.css';
-import SandClock from './signs.svg'
+// import SandClock from './signs.svg'
 // import { RGIntegerFormat } from 'three';/*  */
 const Interpolation = require('./Interpolation.js');
 

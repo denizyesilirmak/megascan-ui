@@ -3,6 +3,8 @@ import "./PinPointer.css"
 import CalibrationIcon from '../../../Assets/MenuIcons/calibration.png'
 import socketHelper from '../../../SocketHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
+import Sensitivity from './Sensitivity'
+import dbStorage from '../../../DatabaseHelper'
 
 const lines = [
   ["#26ff00", "#26ff00",],
@@ -38,29 +40,54 @@ class PinPointer extends Component {
 
     this.state = {
       sensorValue: 0,
-      calibration: 127
+      calibration: 127,
+      selectedButton: 2 * 100,
+      sensitivity: 5
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.setState({
+      sensitivity: await dbStorage.getItem('sensitivity_pinpointer') || 5
+    })
+
     socketHelper.attach(this.handleKeyDown)
     this.interval = setInterval(() => {
       socketHelper.send('J')
     }, 60);
 
 
+
   }
 
-  handleKeyDown = (socketData) => {
+  handleKeyDown = async (socketData) => {
     if (socketData.type === 'button') {
-      let tempIndex = this.state.yesNo
+      let tmpSelectedButton = this.state.selectedButton
       switch (socketData.payload) {
         case 'left':
-
+          tmpSelectedButton--
           break
         case 'right':
+          tmpSelectedButton++
           break
+        case 'up':
+          if (this.state.selectedButton % 2 === 1) {
+            if (this.state.sensitivity < 10)
+              this.setState({
+                sensitivity: this.state.sensitivity + 1
+              })
+          }
+          break;
+        case 'down':
+          if (this.state.selectedButton % 2 === 1) {
+            if (this.state.sensitivity > 0)
+              this.setState({
+                sensitivity: this.state.sensitivity - 1
+              })
+          }
+          break;
         case 'back':
+          await dbStorage.setItem('sensitivity_pinpointer', this.state.sensitivity)
           clearInterval(this.interval)
           this.props.navigateTo("menuScreen")
           return
@@ -68,11 +95,13 @@ class PinPointer extends Component {
           break
       }
 
+
+
       this.setState({
-        yesNo: tempIndex
+        selectedButton: tmpSelectedButton
       })
     }
-    else if(socketData.type === "bionic"){
+    else if (socketData.type === "bionic") {
       this.setState({
         sensorValue: this.state.calibration - parseInt(socketData.payload)
       })
@@ -105,11 +134,11 @@ class PinPointer extends Component {
 
         <svg className="pin-pointer-lines" width="700" height="260">
           <g>
-            <rect fill="none" x="0.49995" y="0.43749" width="699" height="259" id="svg_2" stroke="#ff000080" />
+            <rect fill="none" x="0.49995" y="0.43749" width="699" height="259" id="svg_2" stroke="#ffffff80" />
             {
               lines.map((e, i) => {
                 return (
-                  <line key={i} className="pin-pointer-line" fill="none" stroke={this.state.sensorValue > 0 ? e[0] : e[1]} x1={7 + (i * 30)} y1="128" x2={7 + (i * 30)} y2={128 - (this.state.sensorValue * Math.sin(i / 7.1))} id="svg_8" strokeWidth="12" strokeLinecap="butt" />
+                  <line key={i} className="pin-pointer-line" fill="none" stroke={this.state.sensorValue / (11 - this.state.sensitivity) > 0 ? e[0] : e[1]} x1={7 + (i * 30)} y1="128" x2={7 + (i * 30)} y2={128 - (this.state.sensorValue / (11 - this.state.sensitivity) * Math.sin(i / 7.1))} id="svg_8" strokeWidth="12" strokeLinecap="butt" />
                 )
               })
             }
@@ -118,15 +147,15 @@ class PinPointer extends Component {
 
         <div className="pinpointer-button-container">
 
-          <div className="pinpointer-button" style={{ borderColor: this.context.theme.border_color }}>
+          <div className="pinpointer-button" style={{ background: this.state.selectedButton % 2 === 0 ? this.context.theme.button_bg_selected : null }}>
             <img src={CalibrationIcon} alt="calibraiton"></img>
-            <div className="label">Calibrate</div>
+            <div className="label">CALIBRATION</div>
           </div>
 
-          <div className="pinpointer-button" style={{ borderColor: this.context.theme.border_color }}>
-            <img src={CalibrationIcon} alt="calibraiton"></img>
-            <div className="label">Sensitivity</div>
-          </div>
+          <Sensitivity
+            value={this.state.sensitivity}
+            selected={this.state.selectedButton % 2 === 1}
+          />
 
         </div>
 

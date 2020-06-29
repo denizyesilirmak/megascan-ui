@@ -533,7 +533,7 @@ class ScanScreen extends Component {
   renderNewLinePopup = () => {
     return (
       <div className="new-line-popup-container">
-        <div className="new-line-popup" style={{ background: this.context.theme.button_bg_selected }}>
+        <div className="new-line-popup" style={{ borderColor: this.context.theme.border_color }}>
           <div className="new-line-warning">
             Current line is completed. Please press 'START' button for the next line.
           </div>
@@ -602,7 +602,7 @@ class ScanScreen extends Component {
 
 
         <div className="scan-screen-details">
-          <div className="detail-bar" style={{ background: this.context.theme.button_bg_selected }}>
+          <div className="detail-bar" style={{ borderColor: this.context.theme.border_color }}>
             <div className="bar-name">
               Current X
             </div>
@@ -611,7 +611,7 @@ class ScanScreen extends Component {
             </div>
           </div>
 
-          <div className="detail-bar" style={{ background: this.context.theme.button_bg_selected }}>
+          <div className="detail-bar" style={{ borderColor: this.context.theme.border_color }}>
             <div className="bar-name">
               Current Y
             </div>
@@ -620,7 +620,7 @@ class ScanScreen extends Component {
             </div>
           </div>
 
-          <div className="detail-bar" style={{ background: this.context.theme.button_bg_selected }} >
+          <div className="detail-bar" style={{ borderColor: this.context.theme.border_color }} >
             <div className="bar-name">
               Value
             </div>

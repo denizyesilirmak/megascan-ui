@@ -1,0 +1,13 @@
+.sensitivity{
+  color: white;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 15px 0px 15px;
+  border-radius: 10px;
+}
+
+.sensitivity span{
+  margin-right: 5px;
+}

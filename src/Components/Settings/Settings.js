@@ -533,7 +533,7 @@ class Settings extends Component {
         {
           this.renderPopup(this.state.activePopup)
         }
-        <Navigator active={!this.state.verticalIndex} activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
+        <Navigator last={7} active={!this.state.verticalIndex} activeSettingTab={this.state.activeSettingTab} buttons={this.buttons}></Navigator>
         <div style={{ borderColor: this.context.theme.border_color, boxShadow: this.state.verticalIndex ? this.context.theme.settings_shadow : 'none' }} className="settings-component-container">
           {
             this.renderSettingsComponent()

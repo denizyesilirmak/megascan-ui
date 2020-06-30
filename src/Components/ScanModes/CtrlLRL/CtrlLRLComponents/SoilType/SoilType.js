@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './SoilType.css'
 import { DeviceContext } from '../../../../../Contexts/DeviceContext'
+
 class SoilType extends Component {
   static contextType = DeviceContext
   render() {

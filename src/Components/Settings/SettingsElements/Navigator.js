@@ -31,7 +31,7 @@ class Navigator extends Component {
     return (
       <div className="navigator-component">
         <img style={{filter: this.context.theme.arrorHueRotation}} alt="left" className={`navigator-left-arrow ${this.props.activeSettingTab !== 0 ? 'show' : 'hide'}`} src={LeftArrow}></img>
-        <img style={{filter: this.context.theme.arrorHueRotation}} alt="right" className={`navigator-right-arrow ${this.props.activeSettingTab !== 7 ? 'show' : 'hide'}`} src={RightArrow}></img>
+        <img style={{filter: this.context.theme.arrorHueRotation}} alt="right" className={`navigator-right-arrow ${this.props.activeSettingTab !== this.props.last ? 'show' : 'hide'}`} src={RightArrow}></img>
 
         <div className="navigator-buttons" ref="naviSlider">
           {

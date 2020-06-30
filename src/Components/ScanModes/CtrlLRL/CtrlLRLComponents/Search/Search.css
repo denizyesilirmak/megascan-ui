@@ -1,0 +1,14 @@
+.search-start-component {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-start-button {
+  font-size: 32px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  color: white;
+}

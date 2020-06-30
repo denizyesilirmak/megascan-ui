@@ -62,7 +62,7 @@ class App extends Component {
       .then(settings => {
         this.setState({
           ready: true,
-          currentLanguage: settings['language'] || 'en',
+          currentLanguage: settings['lang'] || 'en',
           activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 100
         })

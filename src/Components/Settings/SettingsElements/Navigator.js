@@ -8,6 +8,10 @@ import { DeviceContext } from '../../../Contexts/DeviceContext'
 class Navigator extends Component {
   static contextType = DeviceContext
 
+  componentDidMount(){
+    this.refs.naviSlider.style.transform = `translateX(${-1 * this.props.activeSettingTab * 220}px)`
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {
       this.refs.naviSlider.style.transform = `translateX(${-1 * this.props.activeSettingTab * 220}px)`

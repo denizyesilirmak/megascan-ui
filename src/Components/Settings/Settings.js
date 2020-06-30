@@ -24,38 +24,38 @@ import dbStorage from '../../DatabaseHelper'
 
 
 // 2020.07.16-10:10:00
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (2000 * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 
 class Settings extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
+    this.lastIndex = getCookie("settingsIndex")
 
     //get current date time
     this.currentDate = new Date();
     // console.log(this.currentDate.getHours())
-
-    this.state = {
-      activeSettingTab: 0,
-      activeSettingTabName: 'power',
-      verticalIndex: false,
-      subCursor: 0,
-      activePopup: "",
-      powersaver: false,
-      pinlock: false,
-      sleepmode: false,
-      generalVolume: 50,
-      keyToneVolume: 50,
-      searchVolume: 50,
-      brightness: 10,
-      hour: this.currentDate.getHours(),
-      minute: this.currentDate.getMinutes(),
-      day: this.currentDate.getDate(),
-      month: this.currentDate.getMonth(),
-      year: this.currentDate.getFullYear(),
-      selectedTimeIndex: 2 * 200,
-      selectedDateIndex: 3 * 200,
-      okPopup: false
-    }
 
     this.buttons = [
       {
@@ -99,6 +99,31 @@ class Settings extends Component {
         buttonCount: 1
       },
     ]
+
+    this.state = {
+      activeSettingTab: 0,
+      activeSettingTabName: "power",
+      verticalIndex: false,
+      subCursor: 0,
+      activePopup: "",
+      powersaver: false,
+      pinlock: false,
+      sleepmode: false,
+      generalVolume: 50,
+      keyToneVolume: 50,
+      searchVolume: 50,
+      brightness: 10,
+      hour: this.currentDate.getHours(),
+      minute: this.currentDate.getMinutes(),
+      day: this.currentDate.getDate(),
+      month: this.currentDate.getMonth(),
+      year: this.currentDate.getFullYear(),
+      selectedTimeIndex: 2 * 200,
+      selectedDateIndex: 3 * 200,
+      okPopup: false
+    }
+
+
   }
 
   async componentDidMount() {
@@ -113,7 +138,7 @@ class Settings extends Component {
           keyToneVolume: settings.keyToneVolume || 50,
           searchVolume: settings.searchVolume || 50,
           sleepmode: settings.sleepmode || false,
-          brightness: settings.brightness || 50
+          brightness: settings.brightness || 50,
 
         })
       })
@@ -403,13 +428,13 @@ class Settings extends Component {
 
           else if (this.state.activeSettingTab === 3) {
             //reset olayları
-            if(this.state.subCursor === 0){
+            if (this.state.subCursor === 0) {
               this.props.navigateTo("resetSettingsScreen")
             }
-            else if(this.state.subCursor === 1){
+            else if (this.state.subCursor === 1) {
               this.props.navigateTo("factoryResetScreen")
             }
-            else if(this.state.subCursor === 2){
+            else if (this.state.subCursor === 2) {
               this.props.navigateTo("resetStorageScreen")
             }
           }
@@ -432,6 +457,7 @@ class Settings extends Component {
             //language
             if (this.state.subCursor === 0) {
               console.log("change language")
+              setCookie("settingsIndex", this.state.activeSettingTab)
               this.props.navigateTo("changeLanguageScreen")
             }
 
@@ -478,22 +504,22 @@ class Settings extends Component {
   }
 
   renderSettingsComponent = () => {
-    switch (this.state.activeSettingTabName) {
-      case 'power':
+    switch (this.state.activeSettingTab) {
+      case 0:
         return (<Power selected={this.state.verticalIndex} on={this.state.powersaver} />)
-      case 'datetime':
+      case 1:
         return (<DateTime selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
-      case 'security':
+      case 2:
         return (<Security selected={this.state.verticalIndex} cursorY={this.state.subCursor} on={this.state.pinlock} />)
-      case 'reset':
+      case 3:
         return (<Reset selected={this.state.verticalIndex} cursorY={this.state.subCursor} />)
-      case 'display':
+      case 4:
         return (<Display selected={this.state.verticalIndex} cursorY={this.state.subCursor} brightness={this.state.brightness} on={this.state.sleepmode} />)
-      case 'language':
+      case 5:
         return (<Language selected={this.state.verticalIndex} />)
-      case 'sound':
+      case 6:
         return (<Sound selected={this.state.verticalIndex} cursorY={this.state.subCursor} generalVolume={this.state.generalVolume} keyToneVolume={this.state.keyToneVolume} searchVolume={this.state.searchVolume} />)
-      case 'info':
+      case 7:
         return (<Info selected={this.state.verticalIndex} />)
       default:
         break;

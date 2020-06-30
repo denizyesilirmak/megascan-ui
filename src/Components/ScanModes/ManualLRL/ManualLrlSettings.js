@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import socketHelper from '../../../SocketHelper'
-import './CtrlLRL.css'
+import '../CtrlLRL/CtrlLRL.css'
 import Navigator from '../../Settings/SettingsElements/Navigator'
 
-import SoilType from './CtrlLRLComponents/SoilType/SoilType'
-import Frequency from './CtrlLRLComponents/Frequency/Frequency'
-import Distance from './CtrlLRLComponents/Distance/Distance'
-import Depth from './CtrlLRLComponents/Depth/Depth'
-import Search from './CtrlLRLComponents/Search/Search'
+
+import Distance from '../CtrlLRL/CtrlLRLComponents/Distance/Distance'
+import Depth from '../CtrlLRL/CtrlLRLComponents/Depth/Depth'
+import Target from './ManualLRLComponents/Target/Target'
 
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
@@ -19,9 +18,7 @@ const DEPTHMAX = 10
 const DEPTHMIN = 0
 const DEPTHSTEP = 1
 
-const FREQUENCYMAX = 5000
-const FREQUENCYMIN = 250
-const FREQUENCYSTEP = 250
+
 
 class CtrlLRL extends Component {
   static contextType = DeviceContext
@@ -31,28 +28,21 @@ class CtrlLRL extends Component {
       activeSettingTab: 0,
       activeSettingTabName: 'soiltype',
       verticalIndex: true,
-
-      selectedSoilType: 6 * 300,
-      frequency: 500,
       depth: 10,
-      distance: 1000
+      distance: 1000,
+      targets: 6
+
     }
 
     this.buttons = [
       {
-        name: "soiltype"
-      },
-      {
-        name: "frequency"
+        name: "target"
       },
       {
         name: "distance"
       },
       {
         name: "depth"
-      },
-      {
-        name: "search"
       }
     ]
 
@@ -66,10 +56,10 @@ class CtrlLRL extends Component {
   }
 
   clamp = (value, min, max) => {
-    if(value <= min){
+    if (value <= min) {
       return min
     }
-    if(value >= max){
+    if (value >= max) {
       return max
     }
     else return value
@@ -88,12 +78,9 @@ class CtrlLRL extends Component {
             this.setState({ selectedSoilType: this.state.selectedSoilType - 1 })
           }
           else if (tempActiveSettingTab === 1) {
-            this.setState({ frequency: this.clamp(this.state.frequency - FREQUENCYSTEP, FREQUENCYMIN, FREQUENCYMAX) })
-          }
-          else if (tempActiveSettingTab === 2) {
             this.setState({ distance: this.clamp(this.state.distance - DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
           }
-          else if (tempActiveSettingTab === 3) {
+          else if (tempActiveSettingTab === 2) {
             this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
         }
@@ -106,13 +93,10 @@ class CtrlLRL extends Component {
             this.setState({ selectedSoilType: this.state.selectedSoilType + 1 })
           }
           else if (tempActiveSettingTab === 1) {
-            this.setState({ frequency: this.clamp(this.state.frequency + FREQUENCYSTEP, FREQUENCYMIN, FREQUENCYMAX) })
-          }
-          else if (tempActiveSettingTab === 2) {
             this.setState({ distance: this.clamp(this.state.distance + DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
           }
-          else if (tempActiveSettingTab === 3) {
-            this.setState({ depth:  this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX)})
+          else if (tempActiveSettingTab === 2) {
+            this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
         }
         break
@@ -135,13 +119,13 @@ class CtrlLRL extends Component {
 
         break
       case 'ok':
-        if(!tempVerticalIndex){
-          if(tempActiveSettingTab === 4){
+        if (!tempVerticalIndex) {
+          if (tempActiveSettingTab === 4) {
             this.props.navigateTo('ctrlLrlSearchScreen')
             return
           }
         }
-          tempVerticalIndex = !tempVerticalIndex
+        tempVerticalIndex = !tempVerticalIndex
         break
       case 'back':
         if (tempVerticalIndex) {
@@ -169,16 +153,11 @@ class CtrlLRL extends Component {
   renderCtrlLrlComponent = () => {
     switch (this.state.activeSettingTab) {
       case 0:
-        return <SoilType index={this.state.selectedSoilType} />
+        return <Target index={this.state.targets} />
       case 1:
-        return <Frequency hertz={this.state.frequency} />
+        return <Distance value={this.state.distance} />
       case 2:
-        return <Distance value={this.state.distance}/>
-      case 3:
         return <Depth value={this.state.depth} />
-      case 4:
-        return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 4} value={this.state.depth} />
-        break
       default:
         break;
     }
@@ -187,7 +166,7 @@ class CtrlLRL extends Component {
   render() {
     return (
       <div ref="ctrllrl" className="ctrl-lrl-component component">
-        <Navigator last={4} activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex} buttons={this.buttons} />
+        <Navigator arrowsAlwaysOn={true} last={4} activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex} buttons={this.buttons} />
         <div className={`settings-component-container`}
           style={{ borderColor: this.context.theme.border_color, boxShadow: !this.state.verticalIndex ? this.context.theme.settings_shadow : 'none' }}
         >

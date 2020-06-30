@@ -7,16 +7,6 @@ import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 class Navigator extends Component {
   static contextType = DeviceContext
-  // constructor(props) {
-  //   super(props)
-
-  // }
-
-
-
-  componentDidMount() {
-    // console.log(this.context.theme.button_bg_selected)
-  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.activeSettingTab % 3 === 2 && this.props.activeSettingTab % 3 === 0) {
@@ -30,8 +20,8 @@ class Navigator extends Component {
   render() {
     return (
       <div className="navigator-component">
-        <img style={{filter: this.context.theme.arrorHueRotation}} alt="left" className={`navigator-left-arrow ${this.props.activeSettingTab !== 0 ? 'show' : 'hide'}`} src={LeftArrow}></img>
-        <img style={{filter: this.context.theme.arrorHueRotation}} alt="right" className={`navigator-right-arrow ${this.props.activeSettingTab !== this.props.last ? 'show' : 'hide'}`} src={RightArrow}></img>
+        <img style={{filter: this.context.theme.arrorHueRotation}} alt="left" className={`navigator-left-arrow ${(this.props.activeSettingTab !== 0) || this.props.arrowsAlwaysOn ? 'show' : 'hide'}`} src={LeftArrow}></img>
+        <img style={{filter: this.context.theme.arrorHueRotation}} alt="right" className={`navigator-right-arrow ${(this.props.activeSettingTab !== this.props.last) || this.props.arrowsAlwaysOn ? 'show' : 'hide'}`} src={RightArrow}></img>
 
         <div className="navigator-buttons" ref="naviSlider">
           {

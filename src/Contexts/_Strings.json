@@ -68,7 +68,10 @@
     "alternative": "Alternative",
     "onedirection": "One Direction",
     "left": "Left",
-    "right": "Right"
+    "right": "Right",
+    "ctrlLrlSearchScreen": "CTRL LRL",
+    "pinPointerScreen": "Pin Pointer",
+    "target": "Target"
 
   },
   "tr": {

@@ -20,6 +20,8 @@ import ResetStorage from './Components/Settings/SettingsPopups/ResetStorage/Rese
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
+import CtrlScan from './Components/ScanModes/CtrlLRL/CtrlLRLComponents/CtrlScan/CtrlScan'
+
 import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
 import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundScanMethodSelection/GroundScanMethodSelection'
 import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
@@ -29,6 +31,7 @@ import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
 import MobileGroundScan from './Components/MobileGroundScan/MobileGroundScan'
 import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
+import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSettings'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -60,7 +63,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['language'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "ctrlLrlScanScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "manualLRLSettingsScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 100
         })
       })
@@ -107,7 +110,7 @@ class App extends Component {
   }
 
   fontFallback = () => {
-    switch(this.state.currentLanguage){
+    switch (this.state.currentLanguage) {
       case 'tr': return 'lang-tr'
       default: return ''
     }
@@ -141,6 +144,8 @@ class App extends Component {
         return (<LockScreen navigateTo={this.navigateTo} />)
       case "manualLRLScreen":
         return (<ManualScan navigateTo={this.navigateTo} />)
+      case "manualLRLSettingsScreen":
+        return (<ManualLRLSettings navigateTo={this.navigateTo} />)
       case "controlLiveStream":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="liveStreamScreen" />)
       case "controlBionic":
@@ -171,6 +176,8 @@ class App extends Component {
         return (<ResetSettings navigateTo={this.navigateTo} />)
       case "resetStorageScreen":
         return (<ResetStorage navigateTo={this.navigateTo} />)
+      case "ctrlLrlSearchScreen":
+        return (<CtrlScan navigateTo={this.navigateTo} />)
       default:
         break;
     }
@@ -181,7 +188,7 @@ class App extends Component {
       return (
         <div className={`App ${this.fontFallback()}`}>
           <DeviceContextProvider language={this.state.currentLanguage}>
-            <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume}/>
+            <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume} />
             {
               this.renderScreen()
             }

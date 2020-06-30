@@ -77,7 +77,7 @@ class Mainmenu extends Component {
       {
         name: "manuallrl",
         icon: ManualLRLIcon,
-        screenName: "manualLRLScreen"
+        screenName: "manualLRLSettingsScreen"
       },
       {
         name: "ionic",

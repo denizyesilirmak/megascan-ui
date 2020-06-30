@@ -26,11 +26,11 @@ class CtrlLRL extends Component {
     super(props)
     this.state = {
       activeSettingTab: 0,
-      activeSettingTabName: 'soiltype',
+      activeSettingTabName: 'target',
       verticalIndex: true,
       depth: 10,
       distance: 1000,
-      targets: 6
+      targets: 500 * 3
 
     }
 
@@ -75,7 +75,7 @@ class CtrlLRL extends Component {
           tempActiveSettingTab--
         else if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 0) {
-            this.setState({ selectedSoilType: this.state.selectedSoilType - 1 })
+            this.setState({ targets: this.state.targets - 1 })
           }
           else if (tempActiveSettingTab === 1) {
             this.setState({ distance: this.clamp(this.state.distance - DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
@@ -90,7 +90,7 @@ class CtrlLRL extends Component {
           tempActiveSettingTab++
         else if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 0) {
-            this.setState({ selectedSoilType: this.state.selectedSoilType + 1 })
+            this.setState({ targets: this.state.targets + 1 })
           }
           else if (tempActiveSettingTab === 1) {
             this.setState({ distance: this.clamp(this.state.distance + DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
@@ -153,7 +153,7 @@ class CtrlLRL extends Component {
   renderCtrlLrlComponent = () => {
     switch (this.state.activeSettingTab) {
       case 0:
-        return <Target index={this.state.targets} />
+        return <Target index={this.state.targets % 3} />
       case 1:
         return <Distance value={this.state.distance} />
       case 2:

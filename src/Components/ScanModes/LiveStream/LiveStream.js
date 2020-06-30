@@ -44,7 +44,7 @@ class LiveStrem extends Component {
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.livestream.style.opacity = 1
-    }, 15);
+    }, 60);
 
     this.testInterval = setInterval(() => { this.requestSensorData() }, 16);
 

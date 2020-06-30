@@ -1,6 +1,5 @@
 .sensor-control{
   position: absolute;
-  background: #000;
   z-index: 2;
   top: 0px;
   left: 0px;
@@ -8,4 +7,9 @@
   right: 0px;
   display: flex;
   justify-content: center;
+}
+
+.sensor-control video{
+  border: 2px solid white;
+  border-radius: 20px;
 }

@@ -16,8 +16,10 @@ class CtrlLRL extends Component {
     super(props)
     this.state = {
       activeSettingTab: 0,
-      activeSettingTabName: 'depth',
-      verticalIndex: 0
+      activeSettingTabName: 'soiltype',
+      verticalIndex: true,
+
+      selectedSoilType: 6 * 300
     }
 
     this.buttons = [
@@ -53,28 +55,52 @@ class CtrlLRL extends Component {
     let tempVerticalIndex = this.state.verticalIndex
     switch (socketData.payload) {
       case 'left':
-        if (tempActiveSettingTab > 0)
+        if (tempActiveSettingTab > 0 && tempVerticalIndex)
           tempActiveSettingTab--
+        else if (!tempVerticalIndex) {
+          if (this.state.activeSettingTab === 0) {
+            this.setState({ selectedSoilType: this.state.selectedSoilType - 1 })
+          }
+        }
         break
       case 'right':
-        if (tempActiveSettingTab < this.buttons.length - 1)
+        if (tempActiveSettingTab < this.buttons.length - 1 && tempVerticalIndex)
           tempActiveSettingTab++
+        else if (!tempVerticalIndex) {
+          if (this.state.activeSettingTab === 0) {
+            this.setState({ selectedSoilType: this.state.selectedSoilType + 1 })
+          }
+        }
         break
       case 'down':
-        tempVerticalIndex++
+        if (tempVerticalIndex)
+          tempVerticalIndex++
+        else if (!tempVerticalIndex) {
+          if (this.state.activeSettingTab === 0) {
+            this.setState({ selectedSoilType: this.state.selectedSoilType + 2 })
+          }
+        }
         break
       case 'up':
-        tempVerticalIndex++
+        if (!tempVerticalIndex) {
+          if (this.state.activeSettingTab === 0) {
+            this.setState({ selectedSoilType: this.state.selectedSoilType - 2 })
+          }
+        }
+
         break
       case 'ok':
 
         return
       case 'back':
-        this.refs.ctrllrl.style.transform = "translateY(200px)"
-        this.refs.ctrllrl.style.opacity = 0
-        setTimeout(() => {
-          this.props.navigateTo("menuScreen")
-        }, 500);
+        if (tempVerticalIndex) {
+          // çocuk yukarıda main menuye gidelim.
+          this.props.navigateTo("menuScreen");
+          return
+        } else {
+          //çocuk aşağıda, geri gitmiyoruz, çocuğu yukarı çıkarızyoruz.
+          
+        }
         return
       default:
         break
@@ -90,16 +116,16 @@ class CtrlLRL extends Component {
   }
 
   renderCtrlLrlComponent = () => {
-    switch (this.state.activeSettingTabName) {
-      case "soiltype":
-        return <SoilType />
-      case "frequency":
+    switch (this.state.activeSettingTab) {
+      case 0:
+        return <SoilType index={this.state.selectedSoilType} />
+      case 1:
         return <Frequency />
-      case "distance":
+      case 2:
         return <Distance />
-      case "depth":
+      case 3:
         return <Depth />
-      case "search":
+      case 4:
         break
       default:
         break;
@@ -109,9 +135,9 @@ class CtrlLRL extends Component {
   render() {
     return (
       <div ref="ctrllrl" className="ctrl-lrl-component component">
-        <Navigator activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex === 0} buttons={this.buttons} />
+        <Navigator activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex} buttons={this.buttons} />
         <div className={`settings-component-container`}
-          style={{ borderColor: this.context.theme.border_color, boxShadow: this.state.verticalIndex ? this.context.theme.settings_shadow : 'none'  }}
+          style={{ borderColor: this.context.theme.border_color, boxShadow: !this.state.verticalIndex ? this.context.theme.settings_shadow : 'none' }}
         >
           {
             this.renderCtrlLrlComponent()

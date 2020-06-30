@@ -63,7 +63,7 @@ class ControlMagnetometer extends Component {
   render() {
     return (
       <div className="sensor-control">
-        <video className="control-video" ref="video" preload="true" style={{ width: "100%", height: "100vh", backgroundSize: "contain" }} src={this.state.src} muted autoPlay></video>
+        <video className="control-video" ref="video" preload="true" style={{ height: "72vh", backgroundSize: "contain", marginTop: 100 }} src={this.state.src} muted autoPlay></video>
       </div>
     )
   }

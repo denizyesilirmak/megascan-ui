@@ -26,6 +26,10 @@ class FileList extends Component {
     this.getFileList()
   }
 
+  componentWillUnmount(){
+    socketHelper.detach(this.handleKeyDown)
+  }
+
   getFileList = () => {
     fetch('http://localhost:3030/filelist')
       .then(res => res.json())
@@ -124,7 +128,7 @@ class FileList extends Component {
 
         }
         this.context.buttonInterrupt()
-        break
+        return
       case 'back':
         if (this.state.popup)
           this.setState({ popup: false })

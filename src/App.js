@@ -63,13 +63,10 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "ctrlLrlSearchScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 100
         })
       })
-
-
-
   }
 
   componentDidMount() {

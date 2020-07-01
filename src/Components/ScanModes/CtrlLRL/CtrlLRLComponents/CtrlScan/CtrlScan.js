@@ -23,6 +23,12 @@ class CTRLLRLScan extends Component {
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
     }, 150);
+
+    setInterval(() => {
+      this.setState({
+        angle: Math.random() * 180 - 90
+      })
+    }, 1000);
   }
 
   requestSensorData = () => {
@@ -45,7 +51,7 @@ class CTRLLRLScan extends Component {
         break
     }
 
-    if(socketData.type === "lrlantenna"){
+    if (socketData.type === "lrlantenna") {
       this.setState({
         angle: (parseInt(socketData.payload) - 90),
         heading: socketData.compass,
@@ -75,12 +81,13 @@ class CTRLLRLScan extends Component {
   render() {
     return (
       <div className="manual-lrl-scan component">
+
         <div className="compass">
-          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out"   style={{transform: `rotateZ(${this.state.heading}deg)`}}/>
+          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out" style={{ transform: `rotateZ(${this.state.heading}deg)` }} />
         </div>
 
         <div className="gauge">
-          <img className="gauge-dial" src={DialImage} alt="dial" style={{transform: `rotate(${this.state.angle}deg)`}} />
+          <img className="gauge-dial" src={DialImage} alt="dial" style={{ transform: `rotate(${this.state.angle}deg)` }} />
         </div>
 
         <svg className="manual-signal" height="40" width="350">
@@ -89,7 +96,7 @@ class CTRLLRLScan extends Component {
 
         <div className="stream-orientation" style={{ position: "absolute", right: "30px" }}>
           <div className="line" >
-            <div style={{transform: `translateY(${this.state.tilt}px)`}} className="indicator-angle"><span>Normal</span></div>
+            <div style={{ transform: `translateY(${this.state.tilt}px)` }} className="indicator-angle"><span>Normal</span></div>
           </div>
         </div>
 
@@ -100,4 +107,5 @@ class CTRLLRLScan extends Component {
     )
   }
 }
+
 export default CTRLLRLScan

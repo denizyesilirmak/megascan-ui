@@ -1,25 +1,24 @@
 .manual-lrl-scan {
-  background-color: black;
+  /* background-color: black; */
 }
 
 .manual-lrl-scan .gauge {
-  width: 309px;
-  height: 182px;
-  background-image: url(../../../Assets/MenuIcons/gauge.png);
+  width: 450px;
+  height: 292px;
+  background-image: url(../../../Assets/MenuIcons/gauge2.png);
   position: absolute;
-  top: 20px;
-  left: 220px;
+  top: 0px;
+  left: 150px;
+  background-size: cover;
 }
 
 .manual-lrl-scan .gauge .gauge-dial {
   position: relative;
-  left: 141px;
-  top: 28px;
-  transform-origin: 15px 130px;
+  left: 213px;
+  top: 108px;
+  transform-origin: 20px 130px;
   transition: all 0.2s;
 }
-
-
 
 
 .compass {
@@ -40,7 +39,7 @@
 
 .manual-lrl-scan .manual-signal{
   position: absolute;
-  top: 230px;
+  top: 290px;
   left: 200px;
 }
 

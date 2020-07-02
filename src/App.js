@@ -56,15 +56,30 @@ class App extends Component {
       ready: false,
       activeScreen: "setupScreen",
       fileToOpen: null,
+      serial: ''
     }
+
+    fetch('http://192.168.1.116:9090/serial')
+    .then(data => data.text())
+    .then(data => {
+      if(data.length === 7)
+      this.setState({
+        serial: data
+      })
+      else{
+        console.error("Cannot get serial number")
+      }
+        
+    })
 
     dbStorage.getAll()
       .then(settings => {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "ctrlLrlSearchScreen" : "setupScreen",
-          generalVolume: settings['generalVolume'] || 100
+          activeScreen: settings['setupCompleted'] ? "changePinScreen" : "setupScreen",
+          generalVolume: settings['generalVolume'] || 100,
+          pin: settings['pincode'] || this.state.serial.slice(-4)
         })
       })
   }
@@ -72,6 +87,8 @@ class App extends Component {
   componentDidMount() {
     if (this.state.lock)
       this.navigateTo("lockScreen")
+
+
   }
 
   componentDidCatch(error, info) {
@@ -154,7 +171,7 @@ class App extends Component {
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
       case "changePinScreen":
-        return (<ChangePinScreen navigateTo={this.navigateTo} />)
+        return (<ChangePinScreen navigateTo={this.navigateTo} currentPin={this.state.pin} />)
       case "changeLanguageScreen":
         return (<ChangeLanguage navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
       case "fileListScreen":

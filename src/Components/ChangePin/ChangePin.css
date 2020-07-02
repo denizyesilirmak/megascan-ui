@@ -8,7 +8,7 @@
 
 .change-pin-component .keypad {
   width: 210px;
-  height: 280px;
+  height: 250px;
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 25% 25% 25% 25%;
@@ -21,7 +21,7 @@
 
 .change-pin-component .keypad .key {
   width: 80%;
-  height: 80%;
+  height: 90%;
   background: #504835;
   display: flex;
   justify-content: center;
@@ -78,4 +78,53 @@
   color: white;
   padding: 10px;
   text-align: center;
+}
+
+.change-pin-success{
+  position: absolute;
+  width: 500px;
+  height: 250px;
+  background: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid;
+  border-radius: 20px;
+  z-index: 10000;
+  flex-direction: column;
+  padding: 10px 30px 10px 30px;
+  animation: changePinDone 500ms linear 2500ms 1 backwards;
+}
+
+.change-pin-success-tick{
+  width: 100px;
+  height: 100px;
+  animation: tickAnimation 600ms 500ms 1 backwards;
+}
+
+.change-pin-success-text{
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@keyframes tickAnimation{
+  0%{
+    transform: scale(0.5);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+@keyframes changePinDone{
+  0%{
+    transform: scale(1);
+
+  }
+  100%{
+    transform: scale(3);
+
+  }
 }

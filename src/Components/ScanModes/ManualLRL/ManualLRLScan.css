@@ -1,5 +1,5 @@
 .manual-lrl-scan {
-  /* background-color: black; */
+  background-color: black;
 }
 
 .manual-lrl-scan .gauge {
@@ -19,7 +19,6 @@
   transform-origin: 20px 130px;
   transition: all 0.2s;
 }
-
 
 .compass {
   width: 110px;

@@ -35,7 +35,7 @@
     "background2": "#bce8fd",
     "background3": "#124b88",
     "shadowPopup": "inset 0px 0px 10px 5px #70643c",
-    "arrorHueRotation": "hue-rotate(160deg)",
+    "arrorHueRotation": "hue-rotate(320deg)",
     "navigatorItemNumber": 9
   }
 }

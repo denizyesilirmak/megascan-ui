@@ -6,6 +6,7 @@ import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class Info extends Component {
   static contextType = DeviceContext
+
   componentDidMount = () => {
     setTimeout(() => {
       try {
@@ -17,7 +18,7 @@ class Info extends Component {
     }, 15);
   }
 
-  componentDidCatch(error, info){
+  componentDidCatch(error, info) {
     console.log("ERROR")
   }
 
@@ -53,7 +54,7 @@ class Info extends Component {
 
             <div className="info-item">
               <span>{this.context.strings["serialnumber"]}</span>
-              <span>7578</span>
+              <span>{this.props.serial}</span>
             </div>
 
             <div className="info-item" style={{ justifyContent: "center" }}>

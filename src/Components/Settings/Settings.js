@@ -129,6 +129,19 @@ class Settings extends Component {
   async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
 
+    fetch('http://localhost:9090/serial')
+      .then(data => data.text())
+      .then(data => {
+        if (data.length < 10)
+          this.setState({
+            serial: data
+          })
+        else
+          this.setState({
+            serial: 'XXXXXXX'
+          })
+      })
+
     dbStorage.getAll()
       .then(settings => {
         this.setState({
@@ -520,7 +533,7 @@ class Settings extends Component {
       case 6:
         return (<Sound selected={this.state.verticalIndex} cursorY={this.state.subCursor} generalVolume={this.state.generalVolume} keyToneVolume={this.state.keyToneVolume} searchVolume={this.state.searchVolume} />)
       case 7:
-        return (<Info selected={this.state.verticalIndex} />)
+        return (<Info selected={this.state.verticalIndex} serial={this.state.serial} />)
       default:
         break;
     }

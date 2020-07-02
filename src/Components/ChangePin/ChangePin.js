@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import './ChangePin.css'
 import socketHelper from '../../SocketHelper'
+import { DeviceContext } from '../../Contexts/DeviceContext'
+import Keypad from './Keypad'
+import Tick from '../../Assets/tick.png'
 
 class ChangePin extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -15,18 +19,20 @@ class ChangePin extends Component {
       oldPinInput: [],
       newPinInput: [],
       confirmNewPinInput: [],
-      error: false
+      error: false,
+      success: false
     }
 
     this.tempPin = []
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        error: !this.state.error
-      })
-    }, 2000);
+    console.log(this.props.currentPin)
+    // setInterval(() => {
+    //   this.setState({
+    //     error: !this.state.error
+    //   })
+    // }, 2000);
     socketHelper.attach(this.handleKeyDown)
   }
 
@@ -59,10 +65,11 @@ class ChangePin extends Component {
           }
           else if (this.tempPin.length === 4) {
             if (this.state.stage === 0) {
-              if (this.curentPin !== this.state.oldPinInput.join('')) {
+              if (this.props.currentPin !== this.state.oldPinInput.join('')) {
                 console.log(this.state.oldPinInput.join(''), this.curentPin)
                 console.log("wrong pin, cannot continue")
-                this.setState({error: true})
+                this.tempPin = []
+                this.setState({ error: true, oldPinInput: [] })
                 return
               }
             }
@@ -89,10 +96,22 @@ class ChangePin extends Component {
       this.setState({ oldPinInput: this.tempPin })
     }
     else if (this.state.stage === 1) {
-      this.setState({ newPinInput: this.tempPin })
+      this.setState({ newPinInput: this.tempPin, error: false })
     }
     else if (this.state.stage === 2) {
       this.setState({ confirmNewPinInput: this.tempPin })
+    }
+    else if (this.state.stage === 3) {
+      console.log("stage3")
+      if(this.state.newPinInput.join('') === this.state.confirmNewPinInput.join('')){
+        console.log("yeni şifreler eşleşti")
+        this.setState({
+          success: true
+        })
+      }
+      setTimeout(() => {
+        this.props.navigateTo('settingsScreen')
+      }, 3000);
     }
   }
 
@@ -119,10 +138,21 @@ class ChangePin extends Component {
     )
   }
 
+  renderSuccess = () => {
+    return (
+      <div className="change-pin-success" style={{borderColor: this.context.theme.border_color}}>
+        <img className="change-pin-success-tick" src={Tick} alt="tick"></img>
+        <div className="change-pin-success-text">
+          Password has been successfuly changed. Please don't forget your password.
+        </div>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="component change-pin-component">
-        <div className="change-pin-container"  style={{transform: this.state.error? 'translateX(-200px)' : null}}>
+        <div className="change-pin-container" style={{ transform: this.state.error ? 'translateX(-200px)' : null }}>
           {
             this.state.stage === 0 ?
               <div className="old-pin-label">Please Enter Old Pin Number</div> : null
@@ -139,23 +169,16 @@ class ChangePin extends Component {
             this.renderCurrentPin()
           }
 
-          <div className="keypad">
-            <div className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>1</div>
-            <div className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>2</div>
-            <div className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>3</div>
-            <div className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>4</div>
-            <div className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>5</div>
-            <div className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>6</div>
-            <div className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>7</div>
-            <div className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>8</div>
-            <div className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>9</div>
-            <div></div>
-            <div className={`key ${this.state.cursorY % 4 === 3 ? "selected" : ""}`}>0</div>
-          </div>
+          <Keypad cursorX={this.state.cursorX} cursorY={this.state.cursorY} />
         </div>
         {
-          this.state.error ? 
-          this.renderError() : null
+          this.state.error ?
+            this.renderError() : null
+        }
+
+        {
+          this.state.success ? 
+            this.renderSuccess() : null
         }
 
       </div>

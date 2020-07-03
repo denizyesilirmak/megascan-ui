@@ -8,6 +8,8 @@ import Distance from '../CtrlLRL/CtrlLRLComponents/Distance/Distance'
 import Depth from '../CtrlLRL/CtrlLRLComponents/Depth/Depth'
 import Target from './ManualLRLComponents/Target/Target'
 
+import DatabaseHelper from '../../../DatabaseHelper'
+
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const DISTANCEMAX = 2500
@@ -17,7 +19,6 @@ const DISTANCESTEP = 250
 const DEPTHMAX = 10
 const DEPTHMIN = 0
 const DEPTHSTEP = 1
-
 
 
 class CtrlLRL extends Component {
@@ -30,9 +31,17 @@ class CtrlLRL extends Component {
       verticalIndex: true,
       depth: 10,
       distance: 1000,
-      targets: 500 * 3
-
+      targets: 5000 * 3
     }
+
+    DatabaseHelper.getAll()
+    .then(lastState => {
+      this.setState({
+        targets: lastState.manuallrl_targets || 6 * 3000,
+        distance: lastState.manuallrl_distance || 500,
+        depth: lastState.manuallrl_depth || 10
+      })
+    })
 
     this.buttons = [
       {
@@ -63,6 +72,14 @@ class CtrlLRL extends Component {
       return max
     }
     else return value
+  }
+
+  saveToDb = () => {
+    DatabaseHelper.setItem({
+      "manuallrl_targets": this.state.targets,
+      "manuallrl_distance": this.state.distance,
+      "manuallrl_depth": this.state.depth
+    })
   }
 
   handleKeyDown = (socketData) => {
@@ -120,7 +137,8 @@ class CtrlLRL extends Component {
         break
       case 'ok':
         if (!tempVerticalIndex) {
-          if (tempActiveSettingTab === 4) {
+          if (tempActiveSettingTab === 2) {
+            this.saveToDb()
             this.props.navigateTo('ctrlLrlSearchScreen')
             return
           }

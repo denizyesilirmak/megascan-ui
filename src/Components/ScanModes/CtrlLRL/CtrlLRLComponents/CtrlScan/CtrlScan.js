@@ -24,11 +24,11 @@ class CTRLLRLScan extends Component {
       this.requestSensorData()
     }, 150);
 
-    // setInterval(() => {
-    //   this.setState({
-    //     angle: Math.random() * 180 - 90
-    //   })
-    // }, 1000);
+    setInterval(() => {
+      this.setState({
+        angle: Math.random() * 180 - 90
+      })
+    }, 1000);
   }
 
   requestSensorData = () => {

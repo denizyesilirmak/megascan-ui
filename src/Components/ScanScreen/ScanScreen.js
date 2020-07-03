@@ -73,12 +73,14 @@ class ScanScreen extends Component {
     this.material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false, vertexColors: THREE.VertexColors });
 
     // console.log(this.matrix)
+    setTimeout(() => {
+      this.dataInterval = setInterval(() => {
+        if (!this.state.pausePopup) {
+          this.requestSensorData()
+        }
+      }, IntervalSpeed);
+    }, 2000);
 
-    this.dataInterval = setInterval(() => {
-      if (!this.state.pausePopup) {
-        this.requestSensorData()
-      }
-    }, IntervalSpeed);
 
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);

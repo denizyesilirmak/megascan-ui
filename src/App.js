@@ -69,7 +69,6 @@ class App extends Component {
       else{
         console.error("Cannot get serial number")
       }
-        
     })
 
     dbStorage.getAll()
@@ -77,7 +76,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "changePinScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 100,
           pin: settings['pincode'] || this.state.serial.slice(-4)
         })
@@ -155,7 +154,7 @@ class App extends Component {
       case "ionicScreen":
         return (<Ionic navigateTo={this.navigateTo} />)
       case "lockScreen":
-        return (<LockScreen navigateTo={this.navigateTo} />)
+        return (<LockScreen navigateTo={this.navigateTo} currentPin={this.state.pin}/>)
       case "manualLRLScreen":
         return (<ManualScan navigateTo={this.navigateTo} />)
       case "manualLRLSettingsScreen":

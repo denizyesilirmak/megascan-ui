@@ -16,6 +16,9 @@ class LockScreen extends Component {
   constructor(props) {
     super(props)
 
+    console.log(this.props.currentPin)
+    DEFAULTPINS.push(this.props.currentPin)
+
     this.state = {
       cursorX: 3 * 50,
       cursorY: 4 * 90,
@@ -29,6 +32,7 @@ class LockScreen extends Component {
     this.introTimeout = setTimeout(() => {
       this.refs.lockHolder.style.opacity = 1
       this.refs.lockHolder.style.transform = "scale(1)"
+      clearTimeout(this.introTimeout)
     }, 1200);
   }
 
@@ -37,11 +41,11 @@ class LockScreen extends Component {
     this.wrongPinTimeout = setTimeout(() => {
       this.setState({ pin: [] })
       this.setState({ wrongPinPopup: false })
+      clearTimeout(this.wrongPinTimeout)
     }, 2500);
   }
 
   componentWillUnmount() {
-    console.log("timeouts cleared")
     clearTimeout(this.introTimeout)
     clearTimeout(this.introTimeout)
   }
@@ -55,7 +59,6 @@ class LockScreen extends Component {
       </div>
     )
   }
-
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
@@ -98,6 +101,7 @@ class LockScreen extends Component {
             if (element === this.state.pin.join('')) {
               clearTimeout(this.introTimeout)
               clearTimeout(this.introTimeout)
+              socketHelper.detach()
               this.props.navigateTo("menuScreen")
               return
             }

@@ -79,7 +79,7 @@ class Plot extends Component {
     })
     console.log(count)
     console.log(red, green, blue)
-    this.props.getColorInfo(red / count, green / count, blue / count, this.average)
+    this.props.getColorInfo(red / count, green / count, blue / count, this.average, this.min, this.max)
 
   }
 

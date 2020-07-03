@@ -9,6 +9,8 @@ import Distance from './CtrlLRLComponents/Distance/Distance'
 import Depth from './CtrlLRLComponents/Depth/Depth'
 import Search from './CtrlLRLComponents/Search/Search'
 
+import DatabaseHelper from '../../../DatabaseHelper'
+
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const DISTANCEMAX = 2500
@@ -32,11 +34,22 @@ class CtrlLRL extends Component {
       activeSettingTabName: 'soiltype',
       verticalIndex: true,
 
-      selectedSoilType: 6 * 300,
+      selectedSoilType: 6 * 3000,
       frequency: 500,
       depth: 10,
       distance: 1000
     }
+
+
+    DatabaseHelper.getAll()
+      .then(lastState => {
+        this.setState({
+          selectedSoilType: lastState.ctrllrl_soiltype || 6 * 3000,
+          frequency: lastState.ctrllrl_frequency || 500,
+          depth: lastState.ctrllrl_depth || 10,
+          distance: lastState.ctrllrl_distance || 1000
+        })
+      })
 
     this.buttons = [
       {
@@ -55,7 +68,6 @@ class CtrlLRL extends Component {
         name: "search"
       }
     ]
-
   }
 
   componentDidMount() {
@@ -74,6 +86,19 @@ class CtrlLRL extends Component {
     }
     else return value
   }
+
+  saveToDb = () => {
+    DatabaseHelper.setItem({
+      "ctrllrl_soiltype": this.state.selectedSoilType,
+      "ctrllrl_frequency": this.state.frequency,
+      "ctrllrl_distance": this.state.distance,
+      "ctrllrl_depth": this.state.depth
+    })
+  }
+
+
+
+
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
@@ -137,6 +162,7 @@ class CtrlLRL extends Component {
       case 'ok':
         if(!tempVerticalIndex){
           if(tempActiveSettingTab === 4){
+            this.saveToDb()
             this.props.navigateTo('ctrlLrlSearchScreen')
             return
           }

@@ -27,7 +27,9 @@ class ScanViewer extends Component {
       width: 0,
       height: 0,
       filter: false,
-      depth: 0
+      depth: 0,
+      min: 0,
+      max: 0
     }
     this.widthLimit = 0
     this.heightLimit = 0
@@ -135,19 +137,30 @@ class ScanViewer extends Component {
     }
     if(this.state.analyseMode){
       this.setState({
-        depth: this.normalizedData[this.state.height][this.state.width * 4 + 1]
+        depth: this.calculateDepth(this.normalizedData[this.state.height][this.state.width * 4 + 1], this.state.max, this.state.min, this.state.average)
       })
     }
     // console.log(this.normalizedData[this.state.height][this.state.width * 4 + 1])
   }
 
-  getColorInfo = (red, green, blue, average, width, height) => {
+  getColorInfo = (red, green, blue, average, min, max) => {
+    console.log(min, max)
     this.setState({
       red: Math.trunc(red * 100),
       green: Math.trunc(green * 100),
       blue: Math.trunc(blue * 100),
-      average
+      average,
+      min,
+      max
     })
+  }
+
+  calculateDepth = (point, max, min, average) =>  {
+    if (isNaN(Math.abs(parseInt(point) - Math.floor(average)) / (max - min) * 3.5)) {
+      return 0
+    } else {
+      return Math.abs(parseInt(point) - Math.floor(average)) / (max - min) * 3.5
+    }
   }
 
 
@@ -182,7 +195,7 @@ class ScanViewer extends Component {
             this.state.analyseMode ?
               <div className="sv-bottom-panel animation" style={{ background: this.context.theme.button_bg_selected }}>
                 <div className="title">Depth</div>
-                <div className="value">{this.state.depth}</div>
+                <div className="value">{this.state.depth.toFixed(2)}</div>
               </div>
               :
               null

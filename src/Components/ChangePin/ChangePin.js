@@ -82,7 +82,15 @@ class ChangePin extends Component {
         }
         break
       case 'back':
-        this.props.navigateTo("settingsScreen")
+        if (this.state.stage === 0) {
+          if(this.tempPin.length === 0){
+            this.props.navigateTo('settingsScreen')
+          }
+          this.tempPin = []
+          this.setState({ oldPinInput: [] })
+        }else{
+          this.props.navigateTo("settingsScreen")
+        }
         return
       default:
         break
@@ -103,7 +111,7 @@ class ChangePin extends Component {
     }
     else if (this.state.stage === 3) {
       console.log("stage3")
-      if(this.state.newPinInput.join('') === this.state.confirmNewPinInput.join('')){
+      if (this.state.newPinInput.join('') === this.state.confirmNewPinInput.join('')) {
         console.log("yeni şifreler eşleşti")
         this.setState({
           success: true
@@ -140,7 +148,7 @@ class ChangePin extends Component {
 
   renderSuccess = () => {
     return (
-      <div className="change-pin-success" style={{borderColor: this.context.theme.border_color}}>
+      <div className="change-pin-success" style={{ borderColor: this.context.theme.border_color }}>
         <img className="change-pin-success-tick" src={Tick} alt="tick"></img>
         <div className="change-pin-success-text">
           Password has been successfuly changed. Please don't forget your password.
@@ -177,7 +185,7 @@ class ChangePin extends Component {
         }
 
         {
-          this.state.success ? 
+          this.state.success ?
             this.renderSuccess() : null
         }
 

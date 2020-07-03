@@ -200,7 +200,7 @@ class App extends Component {
     if (this.state.ready) {
       return (
         <div className={`App ${this.fontFallback()}`}>
-          <DeviceContextProvider language={this.state.currentLanguage}>
+          <DeviceContextProvider language={this.state.currentLanguage} activeScreen={this.state.activeScreen}>
             <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume} />
             {
               this.renderScreen()

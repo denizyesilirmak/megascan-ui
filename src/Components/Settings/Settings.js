@@ -487,6 +487,7 @@ class Settings extends Component {
         this.context.buttonInterrupt()
         return
       case 'back':
+        this.context.buttonInterrupt()
         if (this.state.verticalIndex === true && this.state.activePopup === "") {
           this.setState({ verticalIndex: false })
         } else if (this.state.activePopup === "") {
@@ -501,7 +502,6 @@ class Settings extends Component {
         if (this.state.activePopup !== "") {
           this.setState({ activePopup: "" })
         }
-        this.context.buttonInterrupt()
         return
       default:
         break

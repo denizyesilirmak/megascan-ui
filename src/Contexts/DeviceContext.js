@@ -11,7 +11,7 @@ export const DeviceContext = createContext()
 const systems = DEVICE_LIST[DEVICE_MODEL]
 const curentTheme = THEMES[DEVICE_MODEL]
 
-const SLEEPMODETIMEOUT = 5000
+const SLEEPMODETIMEOUT = 90000
 
 class DeviceContextProvider extends Component {
   constructor(props) {
@@ -20,11 +20,11 @@ class DeviceContextProvider extends Component {
       sleepModeActive: false
     }
   }
-
   getSleepModeStatus = async () => {
     //gets sleep mode status current state on device boot
     this.sleepModeStatus = await dbStorage.getItem("sleepmode") || false
     console.log(this.sleepModeStatus)
+
   }
 
   componentDidMount() {
@@ -34,8 +34,11 @@ class DeviceContextProvider extends Component {
       //turn off screen after SLEEPMODETIMEOUT ms
       if (this.sleepModeStatus === true) {
         console.log("screen off")
-        this.sleepMode = true;
-        this.setState({ sleepModeActive: true })
+        if (this.props.activeScreen !== "settingsScreen") {
+          console.log("selamın aleyküm:mount")
+          this.sleepMode = true;
+          this.setState({ sleepModeActive: true })
+        }
       }
     }, SLEEPMODETIMEOUT);
   }
@@ -47,26 +50,26 @@ class DeviceContextProvider extends Component {
     this.sleepModeTimer = setTimeout(() => {
       //turn off screen after SLEEPMODETIMEOUT ms
       if (this.sleepModeStatus === true) {
-        console.log("screen off")
-        this.sleepMode = true;
-        this.setState({ sleepModeActive: true })
+        if (this.props.activeScreen !== "settingsScreen") {
+          this.sleepMode = true;
+          this.setState({ sleepModeActive: true })
+        }
       }
     }, SLEEPMODETIMEOUT);
   }
 
   buttonInterrupt = () => {
-    //listen for button interrupts, reset sleep mode timer.
-    // console.log("button interrupt")
-    if (this.sleepMode) {
+    //listen for button interrupts, reset sleep mode timer. //BURAYA OPTİMİZASYON LAZIM GALİBA :S
+    if (true) {
       this.sleepMode = false;
       this.setState({ sleepModeActive: false })
       clearTimeout(this.sleepModeTimer)
-      console.log("screen on")
       this.sleepModeTimer = setTimeout(() => {
         if (this.sleepModeStatus === true) {
-          console.log("screen off")
-          this.sleepMode = true;
+
+          if(this.props.activeScreen !== "settingsScreen")
           this.setState({ sleepModeActive: true })
+          this.sleepMode = true;
         }
       }, SLEEPMODETIMEOUT);
     }
@@ -87,8 +90,6 @@ class DeviceContextProvider extends Component {
       }}>
 
         <div className="sleepmode-overlay black-screen" style={{ transform: `scaleY(${this.state.sleepModeActive ? 1 : 0})` }} />
-
-
         {this.props.children}
       </DeviceContext.Provider>
     )

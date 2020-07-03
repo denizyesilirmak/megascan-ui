@@ -41,9 +41,9 @@ class ControlMagnetometer extends Component {
         break;
     }
     this.refs.video.onended = () => {
-      this.refs.video.style.display = "none"
+      // this.refs.video.style.display = "none"
       setTimeout(() => {
-        this.props.navigateTo(this.props.target)
+        // this.props.navigateTo(this.props.target)
       }, 100);
     }
 
@@ -63,7 +63,7 @@ class ControlMagnetometer extends Component {
   render() {
     return (
       <div className="sensor-control">
-        <video className="control-video" ref="video" preload="true" style={{ height: "72vh", backgroundSize: "contain", marginTop: 100 }} src={this.state.src} muted autoPlay></video>
+        <video className="control-video" loop ref="video" preload="true" style={{ height: "72vh", backgroundSize: "contain", marginTop: 100 }} src={this.state.src} muted autoPlay></video>
       </div>
     )
   }

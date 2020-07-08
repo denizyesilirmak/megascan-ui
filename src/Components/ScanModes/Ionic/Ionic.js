@@ -4,10 +4,14 @@ import Depth_Icon from '../../../Assets/MenuIcons/icon-depth-2.png'
 import Save_Icon from '../../../Assets/MenuIcons/icon-save-outline.png'
 import IonicVideo from '../../../Assets/ionic.mp4'
 import IonicIcon from '../../../Assets/MenuIcons/ionic-icon.png'
+import LeftArrow from '../../../Assets/MenuIcons/left-arrow3.png'
+import RightArrow from '../../../Assets/MenuIcons/right-arrow3.png'
 
 import LineChart from '../Bionic/LineChat'
 
 import socketHelper from '../../../SocketHelper'
+
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 import {
   CircularProgressbar,
@@ -15,15 +19,21 @@ import {
 } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 
+const DEPTHMAX = 10
+const DEPTHMIN = 0
+const DEPTHSTEP = 1
 
 
 class Ionic extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.state = {
       cursorIndex: 1000,
       sensitivity: 50,
-      gain: 50
+      gain: 50,
+      depth: 10,
+      depthPopup: false
     }
   }
 
@@ -35,6 +45,16 @@ class Ionic extends Component {
     }, 20);
   }
 
+  clamp = (value, min, max) => {
+    if (value <= min) {
+      return min
+    }
+    if (value >= max) {
+      return max
+    }
+    else return value
+  }
+
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tmpCursorIndex = this.state.cursorIndex
@@ -42,36 +62,62 @@ class Ionic extends Component {
     let tmpGain = this.state.gain
     switch (socketData.payload) {
       case 'up':
-        if (this.state.cursorIndex % 4 === 2) {
-          tmpSensitivity += 5
-        }
-        else if (this.state.cursorIndex % 4 === 3) {
-          tmpGain += 5
+        if (!this.state.depthPopup) {
+          if (this.state.cursorIndex % 4 === 2) {
+            tmpSensitivity += 5
+          }
+          else if (this.state.cursorIndex % 4 === 3) {
+            tmpGain += 5
+          }
         }
         break;
       case 'down':
-        if (this.state.cursorIndex % 4 === 2) {
-          tmpSensitivity -= 5
-        }
-        else if (this.state.cursorIndex % 4 === 3) {
-          tmpGain -= 5
+        if (!this.state.depthPopup) {
+          if (this.state.cursorIndex % 4 === 2) {
+            tmpSensitivity -= 5
+          }
+          else if (this.state.cursorIndex % 4 === 3) {
+            tmpGain -= 5
+          }
         }
         break;
       case 'left':
-        tmpCursorIndex -= 5
+        if (!this.state.depthPopup) {
+          tmpCursorIndex -= 5
+        } {
+          this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
+        }
         break
       case 'right':
-        tmpCursorIndex += 5
+        if (!this.state.depthPopup) {
+          tmpCursorIndex += 5
+        } {
+          this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
+        }
+        break
+      case 'ok':
+        if (this.state.cursorIndex % 4 === 0) {
+          this.setState({
+            depthPopup: !this.state.depthPopup
+          })
+        }
         break
       case 'back':
-        console.log("mainmenu: ok")
-        this.refs.ionic.style.transform = "translateY(400px)"
-        this.refs.ionic.style.opacity = 0
+        if (!this.state.depthPopup) {
+          console.log("mainmenu: ok")
+          this.refs.ionic.style.transform = "translateY(400px)"
+          this.refs.ionic.style.opacity = 0
 
-        setTimeout(() => {
-          socketHelper.detach()
-          this.props.navigateTo("menuScreen")
-        }, 500);
+          setTimeout(() => {
+            socketHelper.detach()
+            this.props.navigateTo("menuScreen")
+          }, 500);
+        } else {
+          this.setState({
+            depthPopup: false
+          })
+        }
+
         return
       default:
         break
@@ -83,13 +129,30 @@ class Ionic extends Component {
     })
   }
 
-  componentWillMount(){
+  componentWillMount() {
     socketHelper.detach(this.handleKeyDown)
   }
 
   render() {
     return (
       <div ref="ionic" className="ionic component">
+        {
+          this.state.depthPopup ?
+            <div className="depth-popup">
+              <img src={Depth_Icon} alt="depthicon" style={{ marginBottom: 10 }} />
+              <span style={{ marginBottom: 20 }}>Ionic Depth Selection</span>
+
+              <div className="frequency-selector" style={{ marginBottom: 0 }}>
+                <img src={LeftArrow} alt="left" style={{ filter: this.context.theme.arrorHueRotation }} />
+                <div className="frequency-value">{this.state.depth} m</div>
+                <img src={RightArrow} alt="right" style={{ filter: this.context.theme.arrorHueRotation }} />
+              </div>
+            </div>
+            :
+            null
+        }
+
+
         <div className={`b-button ${(this.state.cursorIndex % 4 === 0) ? "selected" : ""}`} id="depth-button">
           <img src={Depth_Icon} alt="depthicon" />
           <div className="label">Depth</div>
@@ -109,6 +172,7 @@ class Ionic extends Component {
         </div>
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`}>
+          <span>{this.state.gain}</span>
           <CircularProgressbar
             value={this.state.gain}
             text="Gain"
@@ -119,12 +183,13 @@ class Ionic extends Component {
               textColor: "#000",
               pathColor: "#000",
               trailColor: "transparent",
-              textSize: 11
+              textSize: 10,
             })}
           />
         </div>
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
+          <span>{this.state.sensitivity}</span>
           <CircularProgressbar
             value={this.state.sensitivity}
             text="Sensitivity"
@@ -135,7 +200,7 @@ class Ionic extends Component {
               textColor: "#000",
               pathColor: "#000",
               trailColor: "transparent",
-              textSize: 11
+              textSize: 10,
             })}
           />
         </div>

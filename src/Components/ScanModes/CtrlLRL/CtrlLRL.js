@@ -21,7 +21,7 @@ const DEPTHMAX = 10
 const DEPTHMIN = 0
 const DEPTHSTEP = 1
 
-const FREQUENCYMAX = 5000
+const FREQUENCYMAX = 18000
 const FREQUENCYMIN = 250
 const FREQUENCYSTEP = 250
 
@@ -204,7 +204,6 @@ class CtrlLRL extends Component {
         return <Depth value={this.state.depth} />
       case 4:
         return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 4} value={this.state.depth} />
-        break
       default:
         break;
     }

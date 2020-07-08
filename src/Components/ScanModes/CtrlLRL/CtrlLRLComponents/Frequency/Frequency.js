@@ -11,7 +11,7 @@ class Frequency extends Component {
       <div className="frequency-component">
         <div className="frequency-selector">
           <img src={LeftArrow} alt="left" style={{ filter: this.context.theme.arrorHueRotation }} />
-          <div className="frequency-value">{this.props.hertz} MHz</div>
+          <div className="frequency-value">{this.props.hertz} Hz</div>
           <img src={RightArrow} alt="right" style={{ filter: this.context.theme.arrorHueRotation }} />
         </div>
         <img alt="" className="frequency-icon" src={FrequencyIcon} />

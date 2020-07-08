@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import SetttingsItem from '../../SettingsElements/SettingsItem'
 
-import DateIcon from '../../../../Assets/MenuIcons/date.svg'
-import TimeIcon from '../../../../Assets/MenuIcons/time.svg'
+import DateIcon from '../../../../Assets/SettingsIcons/date.png'
+import TimeIcon from '../../../../Assets/SettingsIcons/time.png'
 import './DateTime.css'
 
 import { DeviceContext } from '../../../../Contexts/DeviceContext'

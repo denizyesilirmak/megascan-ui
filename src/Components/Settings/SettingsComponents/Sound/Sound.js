@@ -3,9 +3,9 @@ import './Sound.css'
 
 import SettingsItem from '../../SettingsElements/SettingsItem'
 
-import generalVolIcon from '../../../../Assets/MenuIcons/icon-general-sound.png'
-import keyToneVolIcon from '../../../../Assets/MenuIcons/icon-keytone.png'
-import searchVolIcon from '../../../../Assets/MenuIcons/icon-search-volume.png'
+import generalVolIcon from '../../../../Assets/SettingsIcons/sound.png'
+import keyToneVolIcon from '../../../../Assets/SettingsIcons/key-tone.png'
+import searchVolIcon from '../../../../Assets/SettingsIcons/search-volume.png'
 
 import { DeviceContext } from '../../../../Contexts/DeviceContext' 
 

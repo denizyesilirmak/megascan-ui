@@ -78,3 +78,21 @@
   align-items: center;
   color: white;
 }
+
+.ionic .ionic-value{
+  color: #ffffff;
+  font-size: 25px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background: #1bc122;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 45px;
+  top: 75px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}

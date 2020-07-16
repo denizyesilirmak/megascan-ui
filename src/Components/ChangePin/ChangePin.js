@@ -27,7 +27,7 @@ class ChangePin extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.currentPin)
+    console.log(this.props.currentPin) //old pin
     // setInterval(() => {
     //   this.setState({
     //     error: !this.state.error

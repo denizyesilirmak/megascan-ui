@@ -33,7 +33,8 @@ class Ionic extends Component {
       sensitivity: 50,
       gain: 50,
       depth: 10,
-      depthPopup: false
+      depthPopup: false,
+      sensorData: 0
     }
   }
 
@@ -43,6 +44,9 @@ class Ionic extends Component {
     setTimeout(() => {
       this.refs.ionic.style.opacity = 1
     }, 20);
+    this.testInterval = setInterval(() => {
+      socketHelper.send('J')
+    }, 120);
   }
 
   clamp = (value, min, max) => {
@@ -56,77 +60,84 @@ class Ionic extends Component {
   }
 
   handleKeyDown = (socketData) => {
-    if (socketData.type !== 'button') { return }
-    let tmpCursorIndex = this.state.cursorIndex
-    let tmpSensitivity = this.state.sensitivity
-    let tmpGain = this.state.gain
-    switch (socketData.payload) {
-      case 'up':
-        if (!this.state.depthPopup) {
-          if (this.state.cursorIndex % 4 === 2) {
-            tmpSensitivity += 5
-          }
-          else if (this.state.cursorIndex % 4 === 3) {
-            tmpGain += 5
-          }
-        }
-        break;
-      case 'down':
-        if (!this.state.depthPopup) {
-          if (this.state.cursorIndex % 4 === 2) {
-            tmpSensitivity -= 5
-          }
-          else if (this.state.cursorIndex % 4 === 3) {
-            tmpGain -= 5
-          }
-        }
-        break;
-      case 'left':
-        if (!this.state.depthPopup) {
-          tmpCursorIndex -= 5
-        } {
-          this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
-        }
-        break
-      case 'right':
-        if (!this.state.depthPopup) {
-          tmpCursorIndex += 5
-        } {
-          this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
-        }
-        break
-      case 'ok':
-        if (this.state.cursorIndex % 4 === 0) {
-          this.setState({
-            depthPopup: !this.state.depthPopup
-          })
-        }
-        break
-      case 'back':
-        if (!this.state.depthPopup) {
-          console.log("mainmenu: ok")
-          this.refs.ionic.style.transform = "translateY(400px)"
-          this.refs.ionic.style.opacity = 0
+    if (socketData.type === 'button') {
 
-          setTimeout(() => {
-            socketHelper.detach()
-            this.props.navigateTo("menuScreen")
-          }, 500);
-        } else {
-          this.setState({
-            depthPopup: false
-          })
-        }
+      let tmpCursorIndex = this.state.cursorIndex
+      let tmpSensitivity = this.state.sensitivity
+      let tmpGain = this.state.gain
+      switch (socketData.payload) {
+        case 'up':
+          if (!this.state.depthPopup) {
+            if (this.state.cursorIndex % 4 === 2) {
+              tmpSensitivity += 5
+            }
+            else if (this.state.cursorIndex % 4 === 3) {
+              tmpGain += 5
+            }
+          }
+          break;
+        case 'down':
+          if (!this.state.depthPopup) {
+            if (this.state.cursorIndex % 4 === 2) {
+              tmpSensitivity -= 5
+            }
+            else if (this.state.cursorIndex % 4 === 3) {
+              tmpGain -= 5
+            }
+          }
+          break;
+        case 'left':
+          if (!this.state.depthPopup) {
+            tmpCursorIndex -= 5
+          } {
+            this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
+          }
+          break
+        case 'right':
+          if (!this.state.depthPopup) {
+            tmpCursorIndex += 5
+          } {
+            this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
+          }
+          break
+        case 'ok':
+          if (this.state.cursorIndex % 4 === 0) {
+            this.setState({
+              depthPopup: !this.state.depthPopup
+            })
+          }
+          break
+        case 'back':
+          if (!this.state.depthPopup) {
+            console.log("mainmenu: ok")
+            this.refs.ionic.style.transform = "translateY(400px)"
+            this.refs.ionic.style.opacity = 0
 
-        return
-      default:
-        break
+            setTimeout(() => {
+              socketHelper.detach()
+              this.props.navigateTo("menuScreen")
+            }, 500);
+          } else {
+            this.setState({
+              depthPopup: false
+            })
+          }
+
+          return
+        default:
+          break
+      }
+      this.setState({
+        cursorIndex: tmpCursorIndex,
+        sensitivity: tmpSensitivity,
+        gain: tmpGain
+      })
     }
-    this.setState({
-      cursorIndex: tmpCursorIndex,
-      sensitivity: tmpSensitivity,
-      gain: tmpGain
-    })
+    else if (socketData.type === 'bionic') {
+      this.setState({
+        sensorData: parseInt(socketData.payload)
+      })
+    }
   }
 
   componentWillMount() {
@@ -153,22 +164,39 @@ class Ionic extends Component {
         }
 
 
-        <div className={`b-button ${(this.state.cursorIndex % 4 === 0) ? "selected" : ""}`} id="depth-button">
+        {/* <div className={`b-button ${(this.state.cursorIndex % 4 === 0) ? "selected" : ""}`} id="depth-button">
           <img src={Depth_Icon} alt="depthicon" />
           <div className="label">Depth</div>
-        </div>
-
+        </div> */}
+        {/* 
         <div className={`b-button ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`} id="save-button">
           <img src={Save_Icon} alt="saveicon" />
           <div className="label">Save</div>
+        </div> */}
+
+        {/* <img className="ionic-icon" src={IonicIcon} alt="ionic" /> */}
+
+        <div className="ionic-value">
+          {this.state.sensorData}
         </div>
 
-        <img className="ionic-icon" src={IonicIcon} alt="ionic" />
+        <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg" className="ionic-icon">
+          <g>
+            <ellipse stroke="#ffffff" ry="70" rx="70" id="svg_4" cy="75" cx="75" strokeWidth="6" fill="none" />
+            <line strokeLinecap="null" strokeLinejoin="null" id="svg_6" y2="75" x2="150" y1="75" x1="0" strokeOpacity="null" strokeWidth="8" stroke="#fff" fill="none" />
+            <line strokeLinecap="null" strokeLinejoin="null" id="svg_9" y2="150" x2="75" y1="0" x1="75" fillOpacity="null" strokeOpacity="null" strokeWidth="8" stroke="#fff" fill="none" />
+            <ellipse
+             style={{ transition: "0.3s all" }} 
+             stroke={'#' + (this.state.sensorData<10 ? '0' : '') + (this.state.sensorData).toString(16) + (255 -this.state.sensorData<10 ? '0' : '') + (255 - this.state.sensorData).toString(16) +'00' } 
+             ry={(255 - this.state.sensorData) / 3 + 5} 
+             rx={(255 - this.state.sensorData) / 3 + 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#1bc12260" />
+          </g>
+        </svg>
 
         <video className="ionic-video" src={IonicVideo} autoPlay muted loop />
 
         <div className="ionic-chart">
-          <LineChart value={125} />
+          <LineChart value={this.state.sensorData} />
         </div>
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`}>

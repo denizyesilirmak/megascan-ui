@@ -34,11 +34,12 @@
 .sv-bottom-panel .title {
   margin-top: 4px;
   font-size: 14px;
+  color: #ffffff;
 }
 
 .sv-bottom-panel .value {
   margin-bottom: 6px;
-  color: #000;
+  color: #ffffff;
   font-size: 22px;
 }
 

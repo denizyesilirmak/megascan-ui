@@ -68,47 +68,43 @@ class Ionic extends Component {
       switch (socketData.payload) {
         case 'up':
           if (!this.state.depthPopup) {
-            if (this.state.cursorIndex % 4 === 2) {
+            if (this.state.cursorIndex % 2 === 0) {
               tmpSensitivity += 5
             }
-            else if (this.state.cursorIndex % 4 === 3) {
+            else if (this.state.cursorIndex % 2 === 1) {
               tmpGain += 5
             }
           }
           break;
         case 'down':
           if (!this.state.depthPopup) {
-            if (this.state.cursorIndex % 4 === 2) {
+            if (this.state.cursorIndex % 2 === 0) {
               tmpSensitivity -= 5
             }
-            else if (this.state.cursorIndex % 4 === 3) {
+            else if (this.state.cursorIndex % 2 === 1) {
               tmpGain -= 5
             }
           }
           break;
         case 'left':
           if (!this.state.depthPopup) {
-            tmpCursorIndex -= 5
+            tmpCursorIndex -= 1
           } {
             this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
           break
         case 'right':
           if (!this.state.depthPopup) {
-            tmpCursorIndex += 5
+            tmpCursorIndex += 1
           } {
             this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
           break
         case 'ok':
-          if (this.state.cursorIndex % 4 === 0) {
-            this.setState({
-              depthPopup: !this.state.depthPopup
-            })
-          }
           break
         case 'back':
           if (!this.state.depthPopup) {
+            clearInterval(this.testInterval);
             console.log("mainmenu: ok")
             this.refs.ionic.style.transform = "translateY(400px)"
             this.refs.ionic.style.opacity = 0
@@ -188,8 +184,8 @@ class Ionic extends Component {
             <ellipse
              style={{ transition: "0.3s all" }} 
              stroke={'#' + (this.state.sensorData<10 ? '0' : '') + (this.state.sensorData).toString(16) + (255 -this.state.sensorData<10 ? '0' : '') + (255 - this.state.sensorData).toString(16) +'00' } 
-             ry={(255 - this.state.sensorData) / 3 + 5} 
-             rx={(255 - this.state.sensorData) / 3 + 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#1bc12260" />
+             ry={(255 - this.state.sensorData) / 4 + 5} 
+             rx={(255 - this.state.sensorData) / 4 + 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#1bc12260" />
           </g>
         </svg>
 
@@ -199,7 +195,7 @@ class Ionic extends Component {
           <LineChart value={this.state.sensorData} />
         </div>
 
-        <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`}>
+        <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
           <span>{this.state.gain}</span>
           <CircularProgressbar
             value={this.state.gain}
@@ -216,7 +212,7 @@ class Ionic extends Component {
           />
         </div>
 
-        <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
+        <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
           <span>{this.state.sensitivity}</span>
           <CircularProgressbar
             value={this.state.sensitivity}

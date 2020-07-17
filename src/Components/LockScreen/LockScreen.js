@@ -46,6 +46,7 @@ class LockScreen extends Component {
   }
 
   componentWillUnmount() {
+    socketHelper.detach()
     clearTimeout(this.introTimeout)
     clearTimeout(this.introTimeout)
   }

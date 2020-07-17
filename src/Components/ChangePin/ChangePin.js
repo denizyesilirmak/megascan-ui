@@ -37,6 +37,8 @@ class ChangePin extends Component {
   }
 
   handleKeyDown = (socketData) => {
+    if (socketData.type !== "button") { return }
+
     let tempCursorX = this.state.cursorX
     let tempCursorY = this.state.cursorY
 
@@ -83,12 +85,12 @@ class ChangePin extends Component {
         break
       case 'back':
         if (this.state.stage === 0) {
-          if(this.tempPin.length === 0){
+          if (this.tempPin.length === 0) {
             this.props.navigateTo('settingsScreen')
           }
           this.tempPin = []
           this.setState({ oldPinInput: [] })
-        }else{
+        } else {
           this.props.navigateTo("settingsScreen")
         }
         return

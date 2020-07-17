@@ -11,8 +11,13 @@ class DateTime extends Component {
   static contextType = DeviceContext
   componentDidMount = () => {
     setTimeout(() => {
-      this.refs.sc.style.opacity = 1
-    }, 10);
+      try {
+        this.refs.sc.style.opacity = 1
+      } catch (error) {
+        console.warn("couldn't catch speed")
+
+      }
+    }, 15);
   }
   render() {
     return (

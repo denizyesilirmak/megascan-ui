@@ -73,12 +73,12 @@ class App extends Component {
 
     dbStorage.getAll()
       .then(settings => {
-        console.log(settings)
+        console.log(typeof settings['generalVolume'])
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
           activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
-          generalVolume: settings['generalVolume'] || 100, // volume 0 gives false
+          generalVolume: typeof settings['generalVolume']  === undefined ? 0 : 50,
           pin: settings['pincode'] || this.state.serial.slice(-4)
         })
       })

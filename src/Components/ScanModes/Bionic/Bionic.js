@@ -8,16 +8,16 @@ import 'react-circular-progressbar/dist/styles.css';
 
 import socketHelper from '../../../SocketHelper'
 
-import Depth_Icon from '../../../Assets/MenuIcons/icon-depth-2.png'
-import Save_Icon from '../../../Assets/MenuIcons/icon-save-outline.png'
 import Bionic_Rotator from '../../../Assets/MenuIcons/bionic-rotator.png'
-
+import LeftRight from '../../../Assets/MenuIcons/leftright.svg'
 import LineChart from './LineChat'
 
+import dbStorage from '../../../DatabaseHelper'
 
 class Bionic extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       sensorData: 0,
       cursorIndex: 4 * 1000,
@@ -26,14 +26,21 @@ class Bionic extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+   
     setTimeout(() => {
       this.refs.bionic.style.opacity = 1
     }, 20);
     this.testInterval = setInterval(() => {
       socketHelper.send('J')
     }, 60);
+
+
+    this.setState({
+      sensitivity: await dbStorage.getItem("bionic_sensitivity") || 50,
+      gain: await dbStorage.getItem("bionic_gain") || 50,
+    })
   }
 
   handleKeyDown = (socketData) => {
@@ -49,19 +56,23 @@ class Bionic extends Component {
           tmpCursorIndex++
           break
         case 'up':
-          if (this.state.cursorIndex % 4 === 2) {
-            tmpSensitivity += 5
+          if (this.state.cursorIndex % 2 === 1) {
+            if (tmpSensitivity < 100)
+              tmpSensitivity += 5
           }
-          else if (this.state.cursorIndex % 4 === 1) {
-            tmpGain += 5
+          else if (this.state.cursorIndex % 2 === 0) {
+            if (tmpGain < 100)
+              tmpGain += 5
           }
           break;
         case 'down':
-          if (this.state.cursorIndex % 4 === 2) {
-            tmpSensitivity -= 5
+          if (this.state.cursorIndex % 2 === 1) {
+            if (tmpSensitivity > 0)
+              tmpSensitivity -= 5
           }
-          else if (this.state.cursorIndex % 4 === 1) {
-            tmpGain -= 5
+          else if (this.state.cursorIndex % 2 === 0) {
+            if (tmpGain > 0)
+              tmpGain -= 5
           }
           break;
         case 'ok':
@@ -71,6 +82,8 @@ class Bionic extends Component {
           clearInterval(this.testInterval);
           this.refs.bionic.style.opacity = 0
           this.refs.bionic.style.transform = "translateY(400px)"
+          this.saveToDb()
+
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
           }, 500);
@@ -91,30 +104,29 @@ class Bionic extends Component {
     }
   }
 
+
+  saveToDb = () => {
+    dbStorage.setItem("bionic_sensitivity", this.state.sensitivity)
+    dbStorage.setItem("bionic_gain", this.state.gain)
+  }
+
   render() {
     return (
       <div ref="bionic" className="bionic component">
 
-        <div className={`b-button ${(this.state.cursorIndex % 4 === 0) ? "selected" : ""}`} id="depth-button">
-          <img src={Depth_Icon} alt="depthicon" />
-          <div className="label">Depth</div>
-        </div>
 
-        <div className={`b-button ${(this.state.cursorIndex % 4 === 3) ? "selected" : ""}`} id="save-button">
-          <img src={Save_Icon} alt="saveicon" />
-          <div className="label">Save</div>
-        </div>
 
         <div className="rotating-indicator-container">
-          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator"  style={{transform: `rotate(${this.state.sensorData * 1.4 - 20}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)`}}/>
+          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator" style={{ transform: `rotate(${this.state.sensorData * 1.4 - 20}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)` }} />
         </div>
 
         <div className="line-chart">
           <LineChart value={this.state.sensorData} />
         </div>
 
-        <div className={`dial gain-dial ${(this.state.cursorIndex % 4 === 1) ? "selected" : ""}`}>
+        <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
           <span>{this.state.gain}</span>
+          <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.gain}
             text="Gain"
@@ -127,13 +139,14 @@ class Bionic extends Component {
               trailColor: "transparent",
               textSize: 11,
               pathTransitionDuration: 0.1,
-              
+
             })}
           />
         </div>
 
-        <div className={`dial sens-dial ${(this.state.cursorIndex % 4 === 2) ? "selected" : ""}`}>
+        <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
           <span>{this.state.sensitivity}</span>
+          <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.sensitivity}
             text="Sensitivity"

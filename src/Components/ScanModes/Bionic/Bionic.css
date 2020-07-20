@@ -112,3 +112,12 @@
   top: 100px;
   width: 100px;
 }
+
+
+.bionic .left-right-icon{
+  width: 30px;
+  position: absolute;
+  left: 70px;
+  top: 36px;
+  transform: rotate(90deg);
+}

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './Ionic.css'
 import Depth_Icon from '../../../Assets/MenuIcons/icon-depth-2.png'
-import Save_Icon from '../../../Assets/MenuIcons/icon-save-outline.png'
 import IonicVideo from '../../../Assets/ionic.mp4'
-import IonicIcon from '../../../Assets/MenuIcons/ionic-icon.png'
 import LeftArrow from '../../../Assets/MenuIcons/left-arrow3.png'
 import RightArrow from '../../../Assets/MenuIcons/right-arrow3.png'
+
+import LeftRight from '../../../Assets/MenuIcons/leftright.svg'
 
 import LineChart from '../Bionic/LineChat'
 
@@ -66,37 +66,41 @@ class Ionic extends Component {
       let tmpSensitivity = this.state.sensitivity
       let tmpGain = this.state.gain
       switch (socketData.payload) {
-        case 'up':
-          if (!this.state.depthPopup) {
-            if (this.state.cursorIndex % 2 === 0) {
-              tmpSensitivity += 5
-            }
-            else if (this.state.cursorIndex % 2 === 1) {
-              tmpGain += 5
-            }
-          }
-          break;
-        case 'down':
-          if (!this.state.depthPopup) {
-            if (this.state.cursorIndex % 2 === 0) {
-              tmpSensitivity -= 5
-            }
-            else if (this.state.cursorIndex % 2 === 1) {
-              tmpGain -= 5
-            }
-          }
-          break;
         case 'left':
           if (!this.state.depthPopup) {
+            if (this.state.cursorIndex % 2 === 0) {
+              if (tmpSensitivity < 100)
+                tmpSensitivity += 5
+            }
+            else if (this.state.cursorIndex % 2 === 1) {
+              if (tmpGain < 100)
+                tmpGain += 5
+            }
+          }
+          break;
+        case 'right':
+          if (!this.state.depthPopup) {
+            if (this.state.cursorIndex % 2 === 0) {
+              if (tmpSensitivity > 0)
+                tmpSensitivity -= 5
+            }
+            else if (this.state.cursorIndex % 2 === 1) {
+              if (tmpGain > 0)
+                tmpGain -= 5
+            }
+          }
+          break;
+        case 'up':
+          if (!this.state.depthPopup) {
             tmpCursorIndex -= 1
-          } {
+          } else {
             this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
           break
-        case 'right':
+        case 'down':
           if (!this.state.depthPopup) {
             tmpCursorIndex += 1
-          } {
+          } else {
             this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
           break
@@ -136,7 +140,7 @@ class Ionic extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     socketHelper.detach(this.handleKeyDown)
   }
 
@@ -182,10 +186,10 @@ class Ionic extends Component {
             <line strokeLinecap="null" strokeLinejoin="null" id="svg_6" y2="75" x2="150" y1="75" x1="0" strokeOpacity="null" strokeWidth="8" stroke="#fff" fill="none" />
             <line strokeLinecap="null" strokeLinejoin="null" id="svg_9" y2="150" x2="75" y1="0" x1="75" fillOpacity="null" strokeOpacity="null" strokeWidth="8" stroke="#fff" fill="none" />
             <ellipse
-             style={{ transition: "0.3s all" }} 
-             stroke={'#' + (this.state.sensorData<10 ? '0' : '') + (this.state.sensorData).toString(16) + (255 -this.state.sensorData<10 ? '0' : '') + (255 - this.state.sensorData).toString(16) +'00' } 
-             ry={(255 - this.state.sensorData) / 4 + 5} 
-             rx={(255 - this.state.sensorData) / 4 + 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#1bc12260" />
+              style={{ transition: "0.3s all" }}
+              stroke={'#' + (this.state.sensorData < 10 ? '0' : '') + (this.state.sensorData).toString(16) + (255 - this.state.sensorData < 10 ? '0' : '') + (255 - this.state.sensorData).toString(16) + '00'}
+              ry={(this.state.sensorData) / 4 + 5}
+              rx={(this.state.sensorData) / 4 + 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#ff000060" />
           </g>
         </svg>
 
@@ -195,8 +199,9 @@ class Ionic extends Component {
           <LineChart value={this.state.sensorData} />
         </div>
 
-        <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
+        <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
           <span>{this.state.gain}</span>
+          <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.gain}
             text="Gain"
@@ -208,12 +213,14 @@ class Ionic extends Component {
               pathColor: "#000",
               trailColor: "transparent",
               textSize: 10,
+              pathTransitionDuration: 0.2,
             })}
           />
         </div>
 
-        <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
+        <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
           <span>{this.state.sensitivity}</span>
+          <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.sensitivity}
             text="Sensitivity"
@@ -225,6 +232,7 @@ class Ionic extends Component {
               pathColor: "#000",
               trailColor: "transparent",
               textSize: 10,
+              pathTransitionDuration: 0.2,
             })}
           />
         </div>

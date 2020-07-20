@@ -113,9 +113,6 @@ class Bionic extends Component {
   render() {
     return (
       <div ref="bionic" className="bionic component">
-
-
-
         <div className="rotating-indicator-container">
           <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator" style={{ transform: `rotate(${this.state.sensorData * 1.4 - 20}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)` }} />
         </div>
@@ -162,8 +159,6 @@ class Bionic extends Component {
             })}
           />
         </div>
-
-
       </div>
     )
   }

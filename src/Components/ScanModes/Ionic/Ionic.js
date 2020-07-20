@@ -13,6 +13,8 @@ import socketHelper from '../../../SocketHelper'
 
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
+import dbStorage from '../../../DatabaseHelper'
+
 import {
   CircularProgressbar,
   buildStyles
@@ -38,15 +40,19 @@ class Ionic extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-    console.log("connected")
     setTimeout(() => {
       this.refs.ionic.style.opacity = 1
     }, 20);
     this.testInterval = setInterval(() => {
       socketHelper.send('J')
     }, 120);
+
+    this.setState({
+      sensitivity: await dbStorage.getItem("ionic_sensitivity") || 50,
+      gain: await dbStorage.getItem("ionic_gain") || 50
+    })
   }
 
   clamp = (value, min, max) => {
@@ -107,21 +113,19 @@ class Ionic extends Component {
         case 'ok':
           break
         case 'back':
-          if (!this.state.depthPopup) {
-            clearInterval(this.testInterval);
-            console.log("mainmenu: ok")
-            this.refs.ionic.style.transform = "translateY(400px)"
-            this.refs.ionic.style.opacity = 0
+          this.saveToDb()
 
-            setTimeout(() => {
-              socketHelper.detach()
-              this.props.navigateTo("menuScreen")
-            }, 500);
-          } else {
-            this.setState({
-              depthPopup: false
-            })
-          }
+          clearInterval(this.testInterval);
+          console.log("mainmenu: ok")
+          this.refs.ionic.style.transform = "translateY(400px)"
+          this.refs.ionic.style.opacity = 0
+
+
+          setTimeout(() => {
+            socketHelper.detach()
+            this.props.navigateTo("menuScreen")
+          }, 500);
+
 
           return
         default:
@@ -143,6 +147,13 @@ class Ionic extends Component {
   componentWillUnmount() {
     socketHelper.detach(this.handleKeyDown)
   }
+
+  saveToDb = () => {
+    console.log("ionic save to db")
+    dbStorage.setItem("ionic_sensitivity", this.state.sensitivity)
+    dbStorage.setItem("ionic_gain", this.state.gain)
+  }
+
 
   render() {
     return (

@@ -73,11 +73,12 @@ class App extends Component {
 
     dbStorage.getAll()
       .then(settings => {
+        console.log(settings)
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "bionicScreen" : "setupScreen",
-          generalVolume: settings['generalVolume'] || 100,
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
+          generalVolume: settings['generalVolume'] || 100, // volume 0 gives false
           pin: settings['pincode'] || this.state.serial.slice(-4)
         })
       })

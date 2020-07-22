@@ -78,7 +78,7 @@ class App extends Component {
           ready: true,
           currentLanguage: settings['lang'] || 'en',
           activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
-          generalVolume: typeof settings['generalVolume']  === undefined ? 0 : 50,
+          generalVolume: settings['generalVolume'] || 50, // volume 0 gives false
           pin: settings['pincode'] || this.state.serial.slice(-4)
         })
       })
@@ -206,6 +206,7 @@ class App extends Component {
             {
               this.renderScreen()
             }
+
           </DeviceContextProvider>
         </div>
       )

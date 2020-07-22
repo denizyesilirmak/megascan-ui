@@ -14,14 +14,12 @@ class MobileGroundScan extends Component {
   componentDidMount() {
     socketHelper.attachSpecial("mobile", this.mobile)
     socketHelper.attach(this.handleKeyDown)
+    console.log("aa")
   }
 
   mobile = (a) => {
-    // console.log(a)
-    this.setState({
-      line: a.line,
-      step: a.step
-    })
+    console.log("mobile channel")
+
   }
 
   handleKeyDown = (socketData) => {

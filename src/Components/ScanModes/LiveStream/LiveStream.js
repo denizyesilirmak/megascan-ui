@@ -50,6 +50,10 @@ class LiveStrem extends Component {
 
   }
 
+  componentWillUnmount(){
+    this.oscillator.stop()
+  }
+
   playpause = () => {
     if (!this.connected) {
       this.oscillator.connect(this.context.destination);
@@ -147,7 +151,7 @@ class LiveStrem extends Component {
           // console.log("b")
         }
       }
-      this.oscillator.frequency.value = (this.instantData*2)
+      this.oscillator.frequency.value = (this.instantData)
       this.calibration(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))

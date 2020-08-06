@@ -51,8 +51,21 @@ class PinPointer extends Component {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     this.audio_context = new AudioContext();
     this.oscillator = this.audio_context.createOscillator();
+    this.oscillator.frequency.setValueAtTime(0, this.audio_context.currentTime); 
     this.oscillator.start(0)
-    this.oscillator.type = "sawtooth"
+    this.oscillator.type = "sine"
+
+    this.oscillatorsecond = this.audio_context.createOscillator();
+    this.oscillatorsecond.frequency.setValueAtTime(0, this.audio_context.currentTime); 
+    this.oscillatorsecond.start(0)
+    this.oscillatorsecond.type = "sine"
+
+
+    // volume = this.audio_context.createGain()
+    // this.oscillator.connect(this.volume)
+    // this.volume.connect(this.audio_context.desination)
+    // this.volume.gain.value = 1
+
     this.connected = false;
     this.playpause()
     this.setState({
@@ -68,9 +81,11 @@ class PinPointer extends Component {
   playpause = () => {
     if (!this.connected) {
       this.oscillator.connect(this.audio_context.destination);
+      this.oscillatorsecond.connect(this.audio_context.destination);
     }
     else {
       this.oscillator.disconnect();
+      this.oscillatorsecond.disconnect();
     }
     this.connected = !this.connected;
   };
@@ -103,13 +118,13 @@ class PinPointer extends Component {
           }
           break;
         case 'ok':
-          if(this.state.selectedButton % 3 === 0){
+          if (this.state.selectedButton % 3 === 0) {
             this.setState({
               calibration: this.state.rawSensorValue
             })
           }
 
-          if(this.state.selectedButton % 3 === 1){
+          if (this.state.selectedButton % 3 === 1) {
             this.setState({
               calibration: 127
             })
@@ -124,17 +139,31 @@ class PinPointer extends Component {
           break
       }
 
-
-
       this.setState({
         selectedButton: tmpSelectedButton
       })
     }
     else if (socketData.type === "bionic") {
-      this.oscillator.frequency.value = (tmpCalibration - parseInt(socketData.payload) + 1000 )
+      // this.oscillator.frequency.value = (tmpCalibration - parseInt(socketData.payload) + 1000 )
+
+      if ((this.state.calibration - parseInt(socketData.payload) > 0)) {
+        this.oscillator.type = "sine"
+      } else {
+        this.oscillator.type = "sawtooth"
+      }
+
+      if(Math.abs(this.state.calibration - parseInt(socketData.payload)) > 5 ){
+        this.oscillator.frequency.linearRampToValueAtTime((this.state.calibration - parseInt(socketData.payload)) * 4, this.audio_context.currentTime + 0.04);
+        this.oscillatorsecond.frequency.linearRampToValueAtTime(((this.state.calibration - parseInt(socketData.payload)) * -8), this.audio_context.currentTime + 0.2);
+      }else{
+        this.oscillator.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
+        this.oscillatorsecond.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
+      }
+
+
       this.setState({
         sensorValue: this.state.calibration - parseInt(socketData.payload),
-        rawSensorValue:  parseInt(socketData.payload),
+        rawSensorValue: parseInt(socketData.payload),
       })
     }
 
@@ -145,7 +174,9 @@ class PinPointer extends Component {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
+    this.oscillator.stop()
+    this.oscillatorsecond.stop()
     clearInterval(this.interval)
   }
 

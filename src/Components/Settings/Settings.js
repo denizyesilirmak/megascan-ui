@@ -147,9 +147,9 @@ class Settings extends Component {
         this.setState({
           powersaver: settings.powersaver || false,
           pinlock: settings.pinlock || false,
-          generalVolume: settings.generalVolume || 50,
-          keyToneVolume: settings.keyToneVolume || 50,
-          searchVolume: settings.searchVolume || 50,
+          generalVolume: settings.generalVolume || 0,
+          keyToneVolume: settings.keyToneVolume || 0,
+          searchVolume: settings.searchVolume || 0,
           sleepmode: settings.sleepmode || false,
           brightness: settings.brightness || 50,
 
@@ -232,7 +232,7 @@ class Settings extends Component {
             this.setState({
               generalVolume: this.clamp(this.state.generalVolume - 5, 0, 100)
             })
-            this.props.setVolume(this.state.generalVolume)
+            this.props.setVolume(this.state.generalVolume, this.state.searchVolume)
             await dbStorage.setItem("generalVolume", this.state.generalVolume)
           }
           else if (this.state.subCursor === 1) {
@@ -288,7 +288,7 @@ class Settings extends Component {
             this.setState({
               generalVolume: this.clamp(this.state.generalVolume + 5, 0, 100)
             })
-            this.props.setVolume(this.state.generalVolume)
+            this.props.setVolume(this.state.generalVolume, this.state.searchVolume)
             await dbStorage.setItem("generalVolume", this.state.generalVolume)
           }
 

@@ -78,7 +78,8 @@ class App extends Component {
           ready: true,
           currentLanguage: settings['lang'] || 'en',
           activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
-          generalVolume: settings['generalVolume'] || 50, // volume 0 gives false
+          generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
+          searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4)
         })
       })
@@ -117,9 +118,10 @@ class App extends Component {
     })
   }
 
-  setVolume = (volume) => {
+  setVolume = (generalVolume, searchVolume) => {
     this.setState({
-      generalVolume: volume
+      generalVolume: generalVolume,
+      searchVolume: searchVolume
     })
   }
 
@@ -181,7 +183,7 @@ class App extends Component {
       case "mobileGroundScan":
         return (<MobileGroundScan navigateTo={this.navigateTo} />)
       case "pinPointerScreen":
-        return (<PinPointer navigateTo={this.navigateTo} />)
+        return (<PinPointer navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "setupScreen":
         return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
       case "factoryResetScreen":

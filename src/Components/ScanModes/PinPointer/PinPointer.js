@@ -48,23 +48,35 @@ class PinPointer extends Component {
   }
 
   async componentDidMount() {
+    console.log("general volume: ", this.props.generalVolume)
+    console.log("search volume: ", this.props.searchVolume)
+    this.totalVolume = this.props.searchVolume * this.props.generalVolume / 10000 - 1
+    console.log(this.totalVolume)
+
+
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.audio_context = new AudioContext();
-    this.oscillator = this.audio_context.createOscillator();
-    this.oscillator.frequency.setValueAtTime(0, this.audio_context.currentTime); 
+    this.audio_context = new AudioContext()
+    this.gainnode = this.audio_context.createGain()
+    this.gainnode.connect(this.audio_context.destination)
+
+
+
+    this.oscillator = this.audio_context.createOscillator()
+    this.oscillator.connect(this.gainnode)
+    this.oscillator.frequency.setValueAtTime(0, this.audio_context.currentTime)
     this.oscillator.start(0)
     this.oscillator.type = "sine"
 
-    this.oscillatorsecond = this.audio_context.createOscillator();
-    this.oscillatorsecond.frequency.setValueAtTime(0, this.audio_context.currentTime); 
+    this.oscillatorsecond = this.audio_context.createOscillator()
+    this.oscillatorsecond.connect(this.gainnode)
+    this.oscillatorsecond.frequency.setValueAtTime(0, this.audio_context.currentTime)
     this.oscillatorsecond.start(0)
     this.oscillatorsecond.type = "sine"
 
 
-    // volume = this.audio_context.createGain()
-    // this.oscillator.connect(this.volume)
-    // this.volume.connect(this.audio_context.desination)
-    // this.volume.gain.value = 1
+    this.gainnode.gain.value = this.totalVolume
+
+
 
     this.connected = false;
     this.playpause()
@@ -152,10 +164,10 @@ class PinPointer extends Component {
         this.oscillator.type = "sawtooth"
       }
 
-      if(Math.abs(this.state.calibration - parseInt(socketData.payload)) > 5 ){
-        this.oscillator.frequency.linearRampToValueAtTime((this.state.calibration - parseInt(socketData.payload)) * 4, this.audio_context.currentTime + 0.04);
-        this.oscillatorsecond.frequency.linearRampToValueAtTime(((this.state.calibration - parseInt(socketData.payload)) * -8), this.audio_context.currentTime + 0.2);
-      }else{
+      if (Math.abs(this.state.calibration - parseInt(socketData.payload)) > 6) {  // sound treshold
+        this.oscillator.frequency.linearRampToValueAtTime(((this.state.calibration - parseInt(socketData.payload)) * 1) * this.state.sensitivity, this.audio_context.currentTime + 0.04);
+        this.oscillatorsecond.frequency.linearRampToValueAtTime((((this.state.calibration - parseInt(socketData.payload)) * -2)) * this.state.sensitivity, this.audio_context.currentTime + 0.2);
+      } else {
         this.oscillator.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
         this.oscillatorsecond.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
       }
@@ -173,6 +185,8 @@ class PinPointer extends Component {
   map = (x, in_min, in_max, out_min, out_max) => {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
+
+
 
   componentWillUnmount() {
     this.oscillator.stop()
@@ -204,7 +218,7 @@ class PinPointer extends Component {
             {
               lines.map((e, i) => {
                 return (
-                  <line key={i} className="pin-pointer-line" fill="none" stroke={this.state.sensorValue / (11 - this.state.sensitivity) > 0 ? e[0] : e[1]} x1={7 + (i * 30)} y1="128" x2={7 + (i * 30)} y2={128 - (this.state.sensorValue / (11 - this.state.sensitivity) * Math.sin(i / 7.1))} id="svg_8" strokeWidth="12" strokeLinecap="butt" />
+                  <line key={i} className="pin-pointer-line" fill="none" stroke={this.state.sensorValue / (11 - this.state.sensitivity) > 0 ? e[0] : e[1]} x1={7 + (i * 30)} y1="128" x2={7 + (i * 30)} y2={(128 - (this.state.sensorValue / (11 - this.state.sensitivity) * Math.sin(i / 7.1)))} id="svg_8" strokeWidth="12" strokeLinecap="butt" />
                 )
               })
             }

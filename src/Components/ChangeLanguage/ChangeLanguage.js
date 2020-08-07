@@ -102,6 +102,10 @@ class ChangeLanguage extends Component {
     console.log("sa")
   }
 
+  componentWillUnmount(){
+    socketHelper.detach()
+  }
+
   handleKeyDown = async (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempActiveIndex = this.state.activeIndex

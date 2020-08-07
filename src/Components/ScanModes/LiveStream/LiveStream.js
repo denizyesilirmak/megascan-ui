@@ -34,6 +34,7 @@ class LiveStrem extends Component {
   }
 
   componentDidMount() {
+    socketHelper.attach(this.handleKeyDown)
     console.log("general volume: ", this.props.generalVolume)
     console.log("search volume: ", this.props.searchVolume)
     this.totalVolume = this.props.searchVolume * this.props.generalVolume / 10000 - 1
@@ -41,7 +42,9 @@ class LiveStrem extends Component {
 
 
 
-    socketHelper.attach(this.handleKeyDown)
+
+
+
     setTimeout(() => {
       this.refs.livestream.style.opacity = 1
     }, 60);
@@ -49,12 +52,39 @@ class LiveStrem extends Component {
     this.testInterval = setInterval(() => { this.requestSensorData() }, 150);
 
 
+    this.audio_context = new (window.AudioContext || window.webkitAudioContex)();
+    this.gainnode = this.audio_context.createGain()
+    this.gainnode.connect(this.audio_context.destination)
 
+    this.oscillator = this.audio_context.createOscillator()
+    this.oscillator.connect(this.gainnode)
+    this.oscillator.frequency.setValueAtTime(0, this.audio_context.currentTime)
+    this.oscillator.start(0)
+    this.oscillator.type = "sine"
 
+    this.oscillatorsecond = this.audio_context.createOscillator()
+    this.oscillatorsecond.connect(this.gainnode)
+    this.oscillatorsecond.frequency.setValueAtTime(0, this.audio_context.currentTime)
+    this.oscillatorsecond.start(0)
+    this.oscillatorsecond.type = "sawtooth"
 
+    this.gainnode.gain.value = this.totalVolume
 
-
+    this.connected = false;
+    this.playpause()
   }
+
+  playpause = () => {
+    if (!this.connected) {
+      this.oscillator.connect(this.audio_context.destination);
+      this.oscillatorsecond.connect(this.audio_context.destination);
+    }
+    else {
+      this.oscillator.disconnect();
+      this.oscillatorsecond.disconnect();
+    }
+    this.connected = !this.connected;
+  };
 
   componentWillUnmount() {
 
@@ -147,6 +177,17 @@ class LiveStrem extends Component {
           this.instantData = this.map(parseInt(socketData.payload), this.total, 255, 127, 255)
           // console.log("b")
         }
+      }
+
+      if (this.state.stream[9] > 132) {
+        this.oscillator.frequency.linearRampToValueAtTime(900 + this.state.stream[9], this.audio_context.currentTime + 0.1);
+        this.oscillatorsecond.frequency.linearRampToValueAtTime(100 + this.state.stream[9], this.audio_context.currentTime + 0.1);
+      } else if (this.state.stream[9] < 120) {
+        this.oscillator.frequency.linearRampToValueAtTime(700 - this.state.stream[9], this.audio_context.currentTime + 0.1);
+        this.oscillatorsecond.frequency.linearRampToValueAtTime(900 + this.state.stream[9], this.audio_context.currentTime + 0.1);
+      } else {
+        this.oscillator.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
+        this.oscillatorsecond.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.1);
       }
 
 

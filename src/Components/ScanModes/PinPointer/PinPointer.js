@@ -54,8 +54,8 @@ class PinPointer extends Component {
     console.log(this.totalVolume)
 
 
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.audio_context = new AudioContext()
+    // window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    this.audio_context = new (window.webkitAudioContext)();
     this.gainnode = this.audio_context.createGain()
     this.gainnode.connect(this.audio_context.destination)
 
@@ -103,7 +103,7 @@ class PinPointer extends Component {
   };
 
   handleKeyDown = async (socketData) => {
-    let tmpCalibration = this.state.calibration
+    // let tmpCalibration = this.state.calibration
     if (socketData.type === 'button') {
       let tmpSelectedButton = this.state.selectedButton
       switch (socketData.payload) {

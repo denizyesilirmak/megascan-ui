@@ -77,7 +77,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "liveStreamScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4)
@@ -145,7 +145,7 @@ class App extends Component {
       case "ctrlLrlScanScreen":
         return (<CtrlLRL navigateTo={this.navigateTo} />)
       case "liveStreamScreen":
-        return (<LiveStream navigateTo={this.navigateTo} />)
+        return (<LiveStream navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume}  />)
       case "groundScanMethodSelectionScreen":
         return (<GroundScanMethodSelection navigateTo={this.navigateTo} />)
       case "deviceGroundScanPropertiesScreen":

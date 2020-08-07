@@ -26,7 +26,7 @@ class LiveStrem extends Component {
     this.instantData = 0
     this.total = 0
     this.state = {
-      stream: [127, 127, 127, 127, 127, 255, 127, 127, 127, 127],
+      stream: [127, 127, 127, 127, 127, 127, 127, 127, 127, 127],
       started: true,
       calibration: true,
       speed: 0
@@ -34,35 +34,32 @@ class LiveStrem extends Component {
   }
 
   componentDidMount() {
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.context = new AudioContext();
-    this.oscillator = this.context.createOscillator();
-    this.oscillator.start(0)
-    this.connected = false;
-    this.playpause()
+    console.log("general volume: ", this.props.generalVolume)
+    console.log("search volume: ", this.props.searchVolume)
+    this.totalVolume = this.props.searchVolume * this.props.generalVolume / 10000 - 1
+    console.log(this.totalVolume)
+
+
 
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
       this.refs.livestream.style.opacity = 1
     }, 60);
 
-    this.testInterval = setInterval(() => { this.requestSensorData() }, 100);
+    this.testInterval = setInterval(() => { this.requestSensorData() }, 150);
+
+
+
+
+
+
 
   }
 
-  componentWillUnmount(){
-    this.oscillator.stop()
+  componentWillUnmount() {
+
   }
 
-  playpause = () => {
-    if (!this.connected) {
-      this.oscillator.connect(this.context.destination);
-    }
-    else {
-      this.oscillator.disconnect();
-    }
-    this.connected = !this.connected;
-  };
 
   getColor = (pct) => {
     for (var i = 1; i < COLORS.jet.length - 1; i++) {
@@ -94,20 +91,20 @@ class LiveStrem extends Component {
     if (socketData.type === 'button') {
       switch (socketData.payload) {
         case 'left':
-          if (tmpSpeed > 0){
+          if (tmpSpeed > 0) {
             tmpSpeed--
             clearInterval(this.testInterval)
-            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed*10)
+            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed * 10)
             this.setState({
               speed: tmpSpeed
             })
           }
           break
         case 'right':
-          if (tmpSpeed < 5){
+          if (tmpSpeed < 5) {
             tmpSpeed++
             clearInterval(this.testInterval)
-            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed*10)
+            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed * 10)
             this.setState({
               speed: tmpSpeed
             })
@@ -123,7 +120,7 @@ class LiveStrem extends Component {
 
           return
         case 'back':
-          this.playpause()
+          // this.playpause()
           clearInterval(this.testInterval)
           this.refs.livestream.style.opacity = 0
           this.refs.livestream.style.transform = "translateY(200px)"
@@ -151,7 +148,8 @@ class LiveStrem extends Component {
           // console.log("b")
         }
       }
-      this.oscillator.frequency.value = (this.instantData)
+
+
       this.calibration(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))

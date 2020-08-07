@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Security.css'
 import SecurityIcon from '../../../../Assets/SettingsIcons/change-pin.png'
-import PinIcon from '../../../../Assets/MenuIcons/pin.svg'
+// import PinIcon from '../../../../Assets/MenuIcons/pin.svg'
 import SetttingsItem from '../../SettingsElements/SettingsItem'
 import { DeviceContext } from '../../../../Contexts/DeviceContext'
 

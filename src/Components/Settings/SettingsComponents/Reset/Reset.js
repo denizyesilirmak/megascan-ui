@@ -3,8 +3,8 @@ import './Reset.css'
 import SetttingsItem from '../../SettingsElements/SettingsItem'
 
 import ResetIcon from '../../../../Assets/SettingsIcons/reset.png'
-import FactoryReset from '../../../../Assets/MenuIcons/factory-reset.png'
-import ClearMemoryIcon from '../../../../Assets/MenuIcons/clear-memory.png'
+// import FactoryReset from '../../../../Assets/MenuIcons/factory-reset.png'
+// import ClearMemoryIcon from '../../../../Assets/MenuIcons/clear-memory.png'
 
 import { DeviceContext } from '../../../../Contexts/DeviceContext'
 

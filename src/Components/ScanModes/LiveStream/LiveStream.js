@@ -49,7 +49,7 @@ class LiveStrem extends Component {
       this.refs.livestream.style.opacity = 1
     }, 60);
 
-    this.testInterval = setInterval(() => { this.requestSensorData() }, 150);
+    this.testInterval = setInterval(() => { this.requestSensorData() }, 10);
 
 
     this.audio_context = new (window.AudioContext || window.webkitAudioContex)();

@@ -77,7 +77,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "fileListScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4)
@@ -88,8 +88,6 @@ class App extends Component {
   componentDidMount() {
     if (this.state.lock)
       this.navigateTo("lockScreen")
-
-
   }
 
   componentDidCatch(error, info) {
@@ -128,6 +126,7 @@ class App extends Component {
   fontFallback = () => {
     switch (this.state.currentLanguage) {
       case 'tr': return 'lang-tr'
+      case 'iw': return 'lang-iw'
       default: return ''
     }
   }
@@ -208,7 +207,6 @@ class App extends Component {
             {
               this.renderScreen()
             }
-
           </DeviceContextProvider>
         </div>
       )

@@ -66,14 +66,6 @@ class Settings extends Component {
         name: "datetime",
         buttonCount: 2
       },
-      // {
-      //   name: "storage",
-      //   buttonCount: 1
-      // },
-      // {
-      //   name: "connection",
-      //   buttonCount: 1
-      // },
       {
         name: "security",
         buttonCount: 2
@@ -122,8 +114,6 @@ class Settings extends Component {
       selectedDateIndex: 3 * 200,
       okPopup: false
     }
-
-
   }
 
   async componentDidMount() {

@@ -47,6 +47,24 @@ class PinPointer extends Component {
     }
   }
 
+  beep = (to) => {
+    this.oscillator = this.audio_context.createOscillator();
+    this.oscillator.connect(this.audio_context.destination);
+    let currentTime = this.audio_context.currentTime;
+    if (Math.abs(this.state.sensorValue) > 10) {
+      this.oscillator.frequency.value = this.state.sensorValue * 3;
+      this.oscillator.start(currentTime);
+      this.oscillator.stop(currentTime + 0.1);
+    }else{
+      // oscillator.frequency.value = 300;
+      // oscillator.start(currentTime);
+      // oscillator.stop(currentTime + 0.1);
+    }
+    this.timeout  = setTimeout(() => {
+      this.beep()
+    }, Math.pow((255 - this.state.sensorValue), 0.9) * 2);
+  }
+
   async componentDidMount() {
     console.log("general volume: ", this.props.generalVolume)
     console.log("search volume: ", this.props.searchVolume)
@@ -55,31 +73,20 @@ class PinPointer extends Component {
 
 
     // window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.audio_context = new (window.webkitAudioContext)();
+    this.audio_context = new (window.AudioContext || window.webkitAudioContex)({
+      latencyHint: 'interactive',
+      sampleRate: 3000,
+    });
+
     this.gainnode = this.audio_context.createGain()
     this.gainnode.connect(this.audio_context.destination)
 
 
-
-    this.oscillator = this.audio_context.createOscillator()
-    this.oscillator.connect(this.gainnode)
-    this.oscillator.frequency.setValueAtTime(0, this.audio_context.currentTime)
-    this.oscillator.start(0)
-    this.oscillator.type = "sine"
-
-    this.oscillatorsecond = this.audio_context.createOscillator()
-    this.oscillatorsecond.connect(this.gainnode)
-    this.oscillatorsecond.frequency.setValueAtTime(0, this.audio_context.currentTime)
-    this.oscillatorsecond.start(0)
-    this.oscillatorsecond.type = "sine"
-
-
     this.gainnode.gain.value = this.totalVolume
 
+    this.beep(1000)
 
 
-    this.connected = false;
-    this.playpause()
     this.setState({
       sensitivity: await dbStorage.getItem('sensitivity_pinpointer') || 5
     })
@@ -90,17 +97,7 @@ class PinPointer extends Component {
     }, 60);
   }
 
-  playpause = () => {
-    if (!this.connected) {
-      this.oscillator.connect(this.audio_context.destination);
-      this.oscillatorsecond.connect(this.audio_context.destination);
-    }
-    else {
-      this.oscillator.disconnect();
-      this.oscillatorsecond.disconnect();
-    }
-    this.connected = !this.connected;
-  };
+
 
   handleKeyDown = async (socketData) => {
     // let tmpCalibration = this.state.calibration
@@ -156,23 +153,6 @@ class PinPointer extends Component {
       })
     }
     else if (socketData.type === "bionic") {
-      // this.oscillator.frequency.value = (tmpCalibration - parseInt(socketData.payload) + 1000 )
-
-      if ((this.state.calibration - parseInt(socketData.payload) > 0)) {
-        this.oscillator.type = "sine"
-      } else {
-        this.oscillator.type = "sawtooth"
-      }
-
-      if (Math.abs(this.state.calibration - parseInt(socketData.payload)) > 6) {  // sound treshold
-        this.oscillator.frequency.linearRampToValueAtTime(((this.state.calibration - parseInt(socketData.payload)) * 1) * this.state.sensitivity, this.audio_context.currentTime + 0.04);
-        this.oscillatorsecond.frequency.linearRampToValueAtTime((((this.state.calibration - parseInt(socketData.payload)) * -2)) * this.state.sensitivity, this.audio_context.currentTime + 0.2);
-      } else {
-        this.oscillator.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
-        this.oscillatorsecond.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
-      }
-
-
       this.setState({
         sensorValue: this.state.calibration - parseInt(socketData.payload),
         rawSensorValue: parseInt(socketData.payload),
@@ -190,7 +170,7 @@ class PinPointer extends Component {
 
   componentWillUnmount() {
     this.oscillator.stop()
-    this.oscillatorsecond.stop()
+    clearTimeout(this.timeout)
     clearInterval(this.interval)
   }
 

@@ -26,7 +26,7 @@ class FileList extends Component {
     this.getFileList()
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     socketHelper.detach(this.handleKeyDown)
   }
 
@@ -119,6 +119,7 @@ class FileList extends Component {
           if (this.state.deletePopupCursorIndex % 2 === 0) {
             console.log("delete file now")
 
+            this.deleteFile(this.state.fileList[this.state.cursorIndex])
             this.setState({ deletePopup: false, popup: false })
           }
           else if (this.state.deletePopupCursorIndex % 2 === 1) {
@@ -171,7 +172,7 @@ class FileList extends Component {
             style={{ background: this.state.popupCursorIndex % 3 === 1 ? this.context.theme.button_bg_selected : null }}
           >Cancel</div>
           <div className={`button`}
-            style={{ background: this.state.popupCursorIndex % 3 === 2 ? "#ff4900": null }}
+            style={{ background: this.state.popupCursorIndex % 3 === 2 ? "#ff4900" : null }}
           >Delete</div>
         </div>
       </div >
@@ -200,6 +201,15 @@ class FileList extends Component {
         </div>
       </div >
     )
+  }
+
+  deleteFile = (filename) => {
+    console.log("deleting: ", filename)
+    fetch(`http://localhost:3030/deletefile/${filename}`)
+    .then(() => {
+      console.log('deleted: ', filename)
+      this.getFileList()
+    })
   }
 
   render() {

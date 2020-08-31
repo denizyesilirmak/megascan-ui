@@ -129,7 +129,7 @@ class ScanViewer extends Component {
         if (this.state.analyseMode === true) {
           this.setState({ analyseMode: false })
         } else {
-          this.props.navigateTo("menuScreen")
+          this.props.navigateTo("fileListScreen")
         }
         break;
       default:

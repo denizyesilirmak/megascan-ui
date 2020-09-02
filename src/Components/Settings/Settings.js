@@ -210,7 +210,7 @@ class Settings extends Component {
         else if (this.state.verticalIndex && this.state.activeSettingTab === 4) {
           if (this.state.subCursor === 1) {
             this.setState({
-              brightness: this.clamp(this.state.brightness - 10, 0, 100)
+              brightness: this.clamp(this.state.brightness - 10, 10, 100)
             })
             socketHelper.send('br.' + this.state.brightness)
             await dbStorage.setItem("brightness", this.state.brightness)
@@ -265,7 +265,7 @@ class Settings extends Component {
         else if (this.state.verticalIndex && this.state.activeSettingTab === 4) {
           if (this.state.subCursor === 1) {
             this.setState({
-              brightness: this.clamp(this.state.brightness + 10, 0, 100)
+              brightness: this.clamp(this.state.brightness + 10, 10, 100)
             })
             socketHelper.send('br.' + this.state.brightness)
             await dbStorage.setItem("brightness", this.state.brightness)

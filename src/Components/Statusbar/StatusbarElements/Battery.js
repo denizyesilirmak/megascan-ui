@@ -28,13 +28,9 @@ class Battery extends React.Component {
 
   componentDidMount() {
     socketHelper.attachSpecial("battery", this.handleBattery)
-    let animation_direction = true
-    this.animation_interval = setInterval(() => {
-      this.setState({
-        level: animation_direction ? 100: 0
-      })      
-      animation_direction = animation_direction ? false : true
-    }, 200);
+    setTimeout(() => {
+      socketHelper.send('P')
+    }, 1500);
   }
 
   handleBattery = (sd) => {

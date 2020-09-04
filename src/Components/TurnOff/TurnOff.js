@@ -4,9 +4,9 @@ import socketHelper from '../../SocketHelper'
 import TurnOffIcon from "../../Assets/MenuIcons/turn-off.png"
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-class TurnOff extends Component{
+class TurnOff extends Component {
   static contextType = DeviceContext
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -14,14 +14,31 @@ class TurnOff extends Component{
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    setTimeout(() => {
+      this.refs.turnOff.style.opacity = 1
+      this.refs.turnOff.style.transform = 'scale(1)'
+    }, 15);
   }
 
   handleKeyDown = (socketData) => {
     if (socketData.type !== 'button') { return }
     let tempIndex = this.state.yesNo
     switch (socketData.payload) {
+      case 'ok':
+        if (this.state.yesNo % 2 === 1) {
+          socketHelper.send('T')
+        }
+        else if (this.state.yesNo % 2 === 0) {
+          this.refs.turnOff.style.transform = "translateY(400px)"
+          this.refs.turnOff.style.opacity = 0
+          setTimeout(() => {
+            socketHelper.detach()
+            this.props.navigateTo("menuScreen")
+          }, 500);
+        }
+        return
       case 'left':
         tempIndex = !tempIndex
         break
@@ -32,10 +49,10 @@ class TurnOff extends Component{
         console.log("mainmenu: ok")
         this.refs.turnOff.style.transform = "translateY(400px)"
         this.refs.turnOff.style.opacity = 0
-        
+
         setTimeout(() => {
-            socketHelper.detach()
-            this.props.navigateTo("menuScreen")
+          socketHelper.detach()
+          this.props.navigateTo("menuScreen")
         }, 500);
         return
       default:
@@ -47,16 +64,16 @@ class TurnOff extends Component{
     })
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div ref="turnOff" className="turn-off component">
-        <img alt="turn-off" className="turn-off-icon" src={TurnOffIcon}/>
+        <img alt="turn-off" className="turn-off-icon" src={TurnOffIcon} />
         <div className="question">
           Do you want to turn off the device?
         </div>
         <div className="turn-off-buttons">
-          <div style={{background: this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color}} className={`button ${this.state.yesNo ? "selected" : ""}`}>YES</div>
-          <div style={{background: !this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color}} className={`button ${!this.state.yesNo ? "selected" : ""}`}>NO</div>
+          <div style={{ background: this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${this.state.yesNo ? "selected" : ""}`}>YES</div>
+          <div style={{ background: !this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${!this.state.yesNo ? "selected" : ""}`}>NO</div>
         </div>
 
       </div>

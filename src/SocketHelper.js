@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const SOCKET_SERVER_ADDRESS = 'ws://192.168.1.116:9090'
+const SOCKET_SERVER_ADDRESS = 'ws://localhost:9090'
 const VOID = () => {}
 
 class SocketHelper {
@@ -52,7 +52,7 @@ class SocketHelper {
 
   attachSpecial = (event, fn) => {
     this._socket.on(event, msg => {
-      // console.log(msg)
+      console.log('special', msg)
       fn(msg)
     })
   }

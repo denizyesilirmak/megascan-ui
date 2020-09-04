@@ -147,7 +147,10 @@ class Mainmenu extends Component {
           break
         case 'mgs':
           this.props.navigateTo("mobileGroundScan")
-          break
+          return
+        case 'turnoff':
+          this.props.navigateTo("turnOff")
+          return
         case 'ok':
           socketHelper.detach()
           // console.log("mainmenu: ok")
@@ -164,7 +167,7 @@ class Mainmenu extends Component {
           }, 300);
           return
         case 'back':
-          this.props.navigateTo("lockScreen")
+          // this.props.navigateTo("lockScreen")
           return
         default:
           break

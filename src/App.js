@@ -59,7 +59,7 @@ class App extends Component {
       serial: ''
     }
 
-    fetch('http://192.168.1.116:9090/serial')
+    fetch('http://localhost:9090/serial')
     .then(data => data.text())
     .then(data => {
       if(data.length === 7)

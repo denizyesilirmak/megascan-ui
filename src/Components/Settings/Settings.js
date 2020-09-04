@@ -176,7 +176,7 @@ class Settings extends Component {
 
   renderOkPopup = () => {
     return (
-      <div className="ok-popup">
+      <div className="ok-popup" style={{background: this.context.theme.button_bg_selected}}>
         <img src={TickIcon} alt="tick"></img>
       </div>
     )

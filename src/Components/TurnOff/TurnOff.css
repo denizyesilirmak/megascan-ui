@@ -5,7 +5,10 @@
   align-items: center;
   /* background: #000; */
   color: white;
-  transition: 1s all;
+  transition: 0.8s all;
+  background: black;
+  opacity: 0;
+  transform: scale(0.1);
 }
 
 .turn-off .question {
@@ -37,7 +40,7 @@
   font-size: 30px;
   border: 2px solid #8a7940;
   margin-top: 20px;
-  transition: .5s all;
+  background: black;
 }
 
 .button:first-child {
@@ -52,7 +55,19 @@
   border-left: none;
 }
 
-
-.turn-off-icon{
+.turn-off-icon {
   margin-bottom: 20px;
+  animation: icon-anim 2s ease-in-out 1s infinite;
+}
+
+@keyframes icon-anim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

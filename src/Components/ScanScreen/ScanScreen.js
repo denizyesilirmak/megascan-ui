@@ -150,7 +150,7 @@ class ScanScreen extends Component {
           else if (this.state.finishScanPopup) {
             if (this.state.finishPopupButtonIndex === true) {
               console.log("pressed ok")
-              fetch('http://localhost:3030/savescan', {
+              fetch('http://localhost:9090/savescan', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',

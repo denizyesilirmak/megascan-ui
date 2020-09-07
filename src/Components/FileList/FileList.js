@@ -31,7 +31,7 @@ class FileList extends Component {
   }
 
   getFileList = () => {
-    fetch('http://localhost:3030/filelist')
+    fetch('http://localhost:9090/filelist')
       .then(res => res.json())
       .then(data => {
         if (data.success)
@@ -205,7 +205,7 @@ class FileList extends Component {
 
   deleteFile = (filename) => {
     console.log("deleting: ", filename)
-    fetch(`http://localhost:3030/deletefile/${filename}`)
+    fetch(`http://localhost:9090/deletefile/${filename}`)
     .then(() => {
       console.log('deleted: ', filename)
       this.getFileList()

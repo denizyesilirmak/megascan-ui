@@ -52,7 +52,7 @@ class SocketHelper {
 
   attachSpecial = (event, fn) => {
     this._socket.on(event, msg => {
-      console.log('special', msg)
+      // console.log('special', msg)
       fn(msg)
     })
   }

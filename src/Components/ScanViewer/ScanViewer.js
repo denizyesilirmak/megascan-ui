@@ -39,8 +39,8 @@ class ScanViewer extends Component {
   componentDidMount() {
     SocketHelper.attach(this.handleKeyDown)
     console.log(this.props.fileToOpen)
-    fetch('http://localhost:3030/readfile/' + this.props.fileToOpen)
-      // fetch('http://192.168.1.114:3030/readfile/' + "057")
+    fetch('http://localhost:9090/readfile/' + this.props.fileToOpen)
+      // fetch('http://192.168.1.114:9090/readfile/' + "057")
 
       .then(res => res.json())
       .then(data => {

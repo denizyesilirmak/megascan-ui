@@ -23,7 +23,7 @@ class DeviceContextProvider extends Component {
   getSleepModeStatus = async () => {
     //gets sleep mode status current state on device boot
     this.sleepModeStatus = await dbStorage.getItem("sleepmode") || false
-    console.log(this.sleepModeStatus)
+    // console.log(this.sleepModeStatus)
 
   }
 

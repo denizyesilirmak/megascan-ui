@@ -28,7 +28,7 @@ class Bionic extends Component {
 
   async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
-   
+
     setTimeout(() => {
       this.refs.bionic.style.opacity = 1
     }, 20);
@@ -98,6 +98,7 @@ class Bionic extends Component {
       })
     }
     else if (socketData.type === 'bionic') {
+      console.log(socketData)
       this.setState({
         sensorData: parseInt(socketData.payload)
       })
@@ -122,11 +123,11 @@ class Bionic extends Component {
         </div>
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
+          <div className="dial-label">Gain</div>
           <span>{this.state.gain}</span>
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.gain}
-            text="Gain"
             background
             backgroundPadding={3}
             styles={buildStyles({
@@ -142,11 +143,11 @@ class Bionic extends Component {
         </div>
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
+          <div className="dial-label">Sensitivity</div>
           <span>{this.state.sensitivity}</span>
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.sensitivity}
-            text="Sensitivity"
             background
             backgroundPadding={3}
             styles={buildStyles({

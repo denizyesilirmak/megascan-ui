@@ -215,7 +215,6 @@ class Ionic extends Component {
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.gain}
-            text="Gain"
             background
             backgroundPadding={3}
             styles={buildStyles({
@@ -234,7 +233,6 @@ class Ionic extends Component {
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
             value={this.state.sensitivity}
-            text="Sensitivity"
             background
             backgroundPadding={3}
             styles={buildStyles({

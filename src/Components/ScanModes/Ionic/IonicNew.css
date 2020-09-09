@@ -1,0 +1,37 @@
+.ionic-new {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0, 3, 24);
+}
+
+.ionic-new .ionic-radar {
+  width: 350px;
+  height: 350px;
+  background-image: url('../../../Assets/MenuIcons/ionic-radar.png');
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ionic-new .ionic-radar .radar-indicator {
+  width: 40px;
+  height: 40px;
+  background: #00ff0070;
+  border-radius: 50%;
+  border: 2px dashed #ffffff;
+  transform: scale(6);
+  animation: radar-rotate 2s linear infinite;
+  transition: width .1s, height .1s;
+  opacity: 0.5;
+}
+
+@keyframes radar-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

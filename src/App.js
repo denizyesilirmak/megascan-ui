@@ -16,6 +16,9 @@ import Setup from './Components/Setup/Setup'
 import ResetFactory from './Components/Settings/SettingsPopups/ResetFactory/ResetFactory'
 import ResetSettings from './Components/Settings/SettingsPopups/ResetSettings/ResetSettings'
 import ResetStorage from './Components/Settings/SettingsPopups/ResetStorage/ResetStorage'
+import ActionResetFactory from './Components/Settings/Resets/ResetFactory'
+import ActionResetMemory from './Components/Settings/Resets/ResetMemory'
+import ActionResetSettings from './Components/Settings/Resets/ResetSettings'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -27,6 +30,7 @@ import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundS
 import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
 import Bionic from './Components/ScanModes/Bionic/Bionic'
 import Ionic from './Components/ScanModes/Ionic/Ionic'
+import IonicNew from './Components/ScanModes/Ionic/InonicNew'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
 import MobileGroundScan from './Components/MobileGroundScan/MobileGroundScan'
@@ -60,16 +64,16 @@ class App extends Component {
     }
 
     fetch('http://localhost:9090/serial')
-    .then(data => data.text())
-    .then(data => {
-      if(data.length === 7)
-      this.setState({
-        serial: data
+      .then(data => data.text())
+      .then(data => {
+        if (data.length === 7)
+          this.setState({
+            serial: data
+          })
+        else {
+          console.error("Cannot get serial number")
+        }
       })
-      else{
-        console.error("Cannot get serial number")
-      }
-    })
 
     dbStorage.getAll()
       .then(settings => {
@@ -77,7 +81,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "controlGroundScan" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "actionResetMemoryScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4)
@@ -92,13 +96,13 @@ class App extends Component {
 
   componentDidCatch(error, info) {
     // console.log("ERROR HATASI")
-    setTimeout(() => {
-      window.location.reload()
-    }, 1500);
+    // setTimeout(() => {
+    // window.location.reload()
+    // }, 1500);
   }
 
   setScanProperties = (scanPropObj) => {
-    // console.log(scanPropObj)
+    console.log(scanPropObj)
     this.tmpScanPropObj = scanPropObj
   }
 
@@ -144,7 +148,7 @@ class App extends Component {
       case "ctrlLrlScanScreen":
         return (<CtrlLRL navigateTo={this.navigateTo} />)
       case "liveStreamScreen":
-        return (<LiveStream navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume}  />)
+        return (<LiveStream navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "groundScanMethodSelectionScreen":
         return (<GroundScanMethodSelection navigateTo={this.navigateTo} />)
       case "deviceGroundScanPropertiesScreen":
@@ -154,9 +158,9 @@ class App extends Component {
       case "bionicScreen":
         return (<Bionic navigateTo={this.navigateTo} />)
       case "ionicScreen":
-        return (<Ionic navigateTo={this.navigateTo} />)
+        return (<IonicNew navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "lockScreen":
-        return (<LockScreen navigateTo={this.navigateTo} currentPin={this.state.pin}/>)
+        return (<LockScreen navigateTo={this.navigateTo} currentPin={this.state.pin} />)
       case "manualLRLScreen":
         return (<ManualScan navigateTo={this.navigateTo} />)
       case "manualLRLSettingsScreen":
@@ -169,6 +173,8 @@ class App extends Component {
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="ionicScreen" />)
       case "controlGroundScan":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="groundScanMethodSelectionScreen" />)
+      case "controlPinPointer":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="pinPointerScreen" />)
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
       case "changePinScreen":
@@ -193,6 +199,12 @@ class App extends Component {
         return (<ResetStorage navigateTo={this.navigateTo} />)
       case "ctrlLrlSearchScreen":
         return (<CtrlScan navigateTo={this.navigateTo} />)
+      case "actionResetMemoryScreen":
+        return (<ActionResetMemory navigateTo={this.navigateTo} />)
+      case "actionResetSettingsScreen":
+        return (<ActionResetSettings navigateTo={this.navigateTo} />)
+      case "actionResetFactoryScreen":
+        return (<ActionResetFactory navigateTo={this.navigateTo} />)
       default:
         break;
     }

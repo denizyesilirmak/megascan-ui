@@ -45,7 +45,7 @@
 
 .file-list-popup {
   position: absolute;
-  width: 500px;
+  width: 600px;
   height: 200px;
   background: black;
   z-index: 100;
@@ -69,17 +69,18 @@
 }
 
 .file-list-popup .buttons {
-  width: 400px;
+  width: 490px;
   display: flex;
   justify-content: space-around;
 }
 
 .file-list-popup .buttons .button {
   background: rgb(80, 80, 80);
-  width: 90px;
+  width: 120px;
   padding: 10px 20px 10px 20px;
   color: #ffffff;
   text-align: center;
+  font-size: 20px;
 }
 
 .file-list-popup .buttons .button.p-selected {

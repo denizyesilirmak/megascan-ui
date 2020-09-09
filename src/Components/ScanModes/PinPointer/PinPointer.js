@@ -55,12 +55,12 @@ class PinPointer extends Component {
       this.oscillator.frequency.value = this.state.sensorValue * 3;
       this.oscillator.start(currentTime);
       this.oscillator.stop(currentTime + 0.1);
-    }else{
+    } else {
       // oscillator.frequency.value = 300;
       // oscillator.start(currentTime);
       // oscillator.stop(currentTime + 0.1);
     }
-    this.timeout  = setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.beep()
     }, Math.pow((255 - this.state.sensorValue), 0.9) * 2);
   }

@@ -19,8 +19,7 @@ class ControlMagnetometer extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.refs.video.playbackRate = 4;
-
+      this.refs.video.playbackRate = 2;
       // this.refs.video.pause();
     }, 300);
     switch (this.props.target) {
@@ -62,9 +61,7 @@ class ControlMagnetometer extends Component {
 
   render() {
     return (
-      <div className="sensor-control">
         <video className="control-video" ref="video" preload="true" style={{ height: "72vh", backgroundSize: "contain", marginTop: 100 }} src={this.state.src} muted autoPlay></video>
-      </div>
     )
   }
 }

@@ -34,8 +34,8 @@
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   width: 100%;
   position: absolute;
-  bottom: 10px;
-  font-size: 16px;
+  top: 205px;
+  font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
 }

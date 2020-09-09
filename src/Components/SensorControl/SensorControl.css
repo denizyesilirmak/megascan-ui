@@ -10,10 +10,6 @@
   align-items: center;
 }
 
-.sensor-control video {
-  border: 2px solid white;
-}
-
 .sensor-control .sc-popup {
   margin-top: 60px;
   width: 600px;
@@ -29,6 +25,8 @@
 
 .sensor-control .sc-popup .title {
   color: white;
+  font-size: 20px;
+  text-align: center;
 }
 
 .sc-popup .indicator-container {
@@ -47,4 +45,23 @@
   height: 100%;
   background: rgb(0, 135, 79);
   background: linear-gradient(180deg, rgba(0, 135, 79, 1) 50%, rgba(178, 255, 74, 1) 100%);
+}
+
+.control-video {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+}
+
+.sensor-control .warning{
+  z-index: 100000;
+  background: red;
+  position: absolute;
+  bottom: 50px;
+  transform: translate(-50% -50%);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
 }

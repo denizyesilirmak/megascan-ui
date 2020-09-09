@@ -16,7 +16,7 @@ const COLORS = {
 }
 
 const TUNNELSCAN = false
-const IntervalSpeed = 150
+const IntervalSpeed = 1000
 
 class ScanScreen extends Component {
   static contextType = DeviceContext

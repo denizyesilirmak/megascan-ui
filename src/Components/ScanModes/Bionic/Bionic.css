@@ -82,8 +82,8 @@
 .dial{
   width: 150px;
   top: 120px;
-  border: 4px solid;
-  border-color: black;
+  border: 6px solid;
+  border-color: #00000000;
   border-radius: 50%;
   padding: 10px;
   transition: .4s border-color;
@@ -95,21 +95,21 @@
 
 .bionic .gain-dial{
   position: absolute;
-  left: 80px;
+  left: 60px;
 }
 
 .bionic .sens-dial{
   position: absolute;
-  right: 80px;
+  right: 60px;
 }
 
 .dial span{
   position: absolute;
-  color: black;
-  font-size: 22px;
+  color: #ffffff;
+  font-size: 30px;
   text-align: center;
-  left: 35px;
-  top: 100px;
+  left: 40px;
+  top: 66px;
   width: 100px;
 }
 
@@ -117,7 +117,17 @@
 .bionic .left-right-icon{
   width: 30px;
   position: absolute;
-  left: 70px;
-  top: 36px;
+  left: 30px;
+  top: 70px;
   transform: rotate(90deg);
+}
+
+.dial .dial-label{
+  color: #ffffff;
+  position: absolute;
+  top: -40px;
+  left: -47px;
+  text-align: center;
+  font-size: 22px;
+  width: 260px;
 }

@@ -97,7 +97,7 @@ class Mainmenu extends Component {
       {
         name: "pinpointer",
         icon: PinPointerIcon,
-        screenName: "pinPointerScreen"
+        screenName: "controlPinPointer"
       },
       {
         name: "files",

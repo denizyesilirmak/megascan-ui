@@ -18,40 +18,11 @@ import PinPointerIcon from '../../Assets/MenuIcons/mainmenu/pinpointer.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (2000 * 24 * 60 * 60 * 1000));
-  var expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
 
 class Mainmenu extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
-    const lastIndex = getCookie("menuIndex")
-    this.state = {
-      index: Number.isNaN(parseInt(lastIndex)) ? -1 : parseInt(lastIndex),
-      buttons: []
-    }
-
-
-
 
     this.buttons = [
       {
@@ -110,6 +81,12 @@ class Mainmenu extends Component {
         screenName: "settingsScreen"
       }
     ]
+
+    this.state = {
+      index: this.props.lastIndex,
+      buttons: []
+    }
+
   }
 
   componentDidMount() {
@@ -154,10 +131,9 @@ class Mainmenu extends Component {
         case 'ok':
           socketHelper.detach()
           // console.log("mainmenu: ok")
-          setCookie("menuIndex", this.state.index)
           this.refs.mainmenu.style.transform = "scale(2)"
           this.refs.mainmenu.style.opacity = 0
-
+          this.props.setLastMainMenuIndex(this.state.index)
           setTimeout(() => {
             if (this.buttons[this.state.index + 1].screenName !== "") {
               // console.log("main menu unmount")

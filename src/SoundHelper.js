@@ -1,24 +1,43 @@
-import React, { Component } from 'react'
-import Yodel from './Assets/yodel.mp3'
+class SoundHelper {
+  constructor() {
+    if (!SoundHelper.instance) {
+      console.log("soundhelper: instance")
+      this.audio_context = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: "interactive", sampleRate: 8000 })
+      this.gainnode = this.audio_context.createGain()
+      this.gainnode.connect(this.audio_context.destination)
+      // console.log(this.audio_context.baseLatency)
 
-class SoundHelper extends Component {
-  componentDidMount() {
-    this.context = new AudioContext();
-    setTimeout(() => {
-      this.play()
-    }, 2000);
-
+      SoundHelper.instance = this
+      this.started = false
+    }
+    return SoundHelper.instance
   }
 
-  play = () => {
-    const source = this.context.createBufferSource();
-    source.buffer = Yodel
-    source.connect(Yodel);
-    source.start();
+  stopOscillator() {
+    if (this.started === true) {
+      this.oscillator.disconnect()
+      this.oscillator.stop(this.audio_context.currentTime)
+      this.started = false
+    }
   }
 
-  render() {
-    return null
+  createOscillator(frequencyType = "sine") {
+    // console.log(this.started)
+    if (this.started === false) {
+      console.log("oscliator started")
+      this.oscillator = this.audio_context.createOscillator()
+      this.oscillator.connect(this.gainnode)
+      this.oscillator.type = frequencyType
+      // console.log(this.oscillator)
+      this.oscillator.start(this.audio_context.currentTime)
+      this.started = true
+    }
+  }
+  changeFrequency(hertz) {
+    this.oscillator.frequency.linearRampToValueAtTime(hertz, this.audio_context.currentTime + 0.04);
   }
 }
-export default SoundHelper
+
+const soundHelperInstance = new SoundHelper()
+
+export default soundHelperInstance

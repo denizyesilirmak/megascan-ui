@@ -47,11 +47,14 @@ import ControlMagnetometer from './Components/SensorControl/SensorControl'
 import dbStorage from './DatabaseHelper'
 dbStorage.init()
 
-// import SoundHelper from './SoundHelper'
 
 class App extends Component {
   constructor(props) {
     super(props)
+
+
+    dbStorage.setItem('lang', 'en')
+
     this.tmpScanPropObj = { mode: "manual", path: "zigzag", lines: 10, steps: 10, startPoint: "right" } // not if this is needed.
     document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')";
     // console.log(DeviceInfo.deviceModelName)
@@ -60,7 +63,8 @@ class App extends Component {
       ready: false,
       activeScreen: "setupScreen",
       fileToOpen: null,
-      serial: ''
+      serial: '',
+      lastMainMenuIndex: -1
     }
 
     fetch('http://localhost:9090/serial')
@@ -81,7 +85,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "actionResetMemoryScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4)
@@ -127,6 +131,12 @@ class App extends Component {
     })
   }
 
+  setLastMainMenuIndex = (index) => {
+    this.setState({
+      lastMainMenuIndex: index
+    })
+  }
+
   fontFallback = () => {
     switch (this.state.currentLanguage) {
       case 'tr': return 'lang-tr'
@@ -138,7 +148,7 @@ class App extends Component {
   renderScreen = () => {
     switch (this.state.activeScreen) {
       case "menuScreen":
-        return (<MainMenu navigateTo={this.navigateTo} />)
+        return (<MainMenu navigateTo={this.navigateTo} setLastMainMenuIndex={this.setLastMainMenuIndex} lastIndex={this.state.lastMainMenuIndex} />)
       case "settingsScreen":
         return (<Settings navigateTo={this.navigateTo} setVolume={this.setVolume} />)
       case "turnOff":

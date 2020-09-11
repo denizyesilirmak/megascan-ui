@@ -5,14 +5,13 @@ import {
   buildStyles
 } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
-
-import socketHelper from '../../../SocketHelper'
-
 import Bionic_Rotator from '../../../Assets/MenuIcons/bionic-rotator.png'
 import LeftRight from '../../../Assets/MenuIcons/leftright.svg'
 import LineChart from './LineChat'
 
+import socketHelper from '../../../SocketHelper'
 import dbStorage from '../../../DatabaseHelper'
+import SoundHelper from '../../../SoundHelper'
 
 class Bionic extends Component {
   constructor(props) {
@@ -28,11 +27,12 @@ class Bionic extends Component {
 
   async componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    SoundHelper.createOscillator('sine')
 
     setTimeout(() => {
       this.refs.bionic.style.opacity = 1
     }, 20);
-    this.testInterval = setInterval(() => {
+    this.dataSensorInterval = setInterval(() => {
       socketHelper.send('J')
     }, 60);
 
@@ -41,6 +41,11 @@ class Bionic extends Component {
       sensitivity: await dbStorage.getItem("bionic_sensitivity") || 50,
       gain: await dbStorage.getItem("bionic_gain") || 50,
     })
+  }
+
+  componentWillUnmount(){
+    SoundHelper.stopOscillator()
+    clearInterval(this.dataSensorInterval)
   }
 
   handleKeyDown = (socketData) => {
@@ -79,7 +84,7 @@ class Bionic extends Component {
 
           return
         case 'back':
-          clearInterval(this.testInterval);
+          clearInterval(this.dataSensorInterval)
           this.refs.bionic.style.opacity = 0
           this.refs.bionic.style.transform = "translateY(400px)"
           this.saveToDb()
@@ -98,10 +103,16 @@ class Bionic extends Component {
       })
     }
     else if (socketData.type === 'bionic') {
-      console.log(socketData)
       this.setState({
         sensorData: parseInt(socketData.payload)
       })
+
+      if (this.state.sensorData > 30) {
+        SoundHelper.changeFrequency(this.state.sensorData * 4 + 440)
+      } else {
+        SoundHelper.changeFrequency(0)
+      }
+
     }
   }
 

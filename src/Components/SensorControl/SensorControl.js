@@ -50,14 +50,15 @@ class SensorControl extends React.Component {
       this.props.navigateTo('menuScreen')
     }, 4000);
 
+  }
 
-    this.refs.video.onended = () => {
-      clearTimeout(this.failTimeout)
-      this.refs.video.style.display = "none"
-      setTimeout(() => {
-        this.props.navigateTo("menuScreen")
-      }, 100);
-    }
+
+  onVideoEnded = () => {
+    clearTimeout(this.failTimeout)
+    this.refs.video.style.display = "none"
+    setTimeout(() => {
+      this.props.navigateTo("menuScreen")
+    }, 100);
   }
 
   controlRespond = (data) => {
@@ -76,7 +77,8 @@ class SensorControl extends React.Component {
           this.props.navigateTo(this.props.target)
         }
       }, 1000);
-    }
+    } else
+      return
   }
 
   renderPopup = () => {
@@ -98,7 +100,16 @@ class SensorControl extends React.Component {
         <div className="warning" style={{ display: this.state.renderVideo ? 'block' : 'none' }}>
           Please connect the sensor.
         </div>
-        <video className="control-video" ref="video" preload="true" style={{ display: this.state.renderVideo ? 'block' : 'none', height: "100vh", backgroundSize: "contain" }} src={this.state.src} muted autoPlay></video>
+        <video 
+        className="control-video" 
+        ref="video" 
+        preload="true" 
+        style={{ display: this.state.renderVideo ? 'block' : 'none', height: "100vh", backgroundSize: "contain" }} 
+        src={this.state.src} 
+        muted 
+        autoPlay
+        onEnded={() => this.onVideoEnded()}
+        ></video>
       </>
     )
   }
@@ -111,7 +122,8 @@ class SensorControl extends React.Component {
             this.renderPopup() : null
         }
         {
-          this.renderVideo()
+          this.state.renderVideo ? 
+          this.renderVideo() : null
         }
       </div>
     )

@@ -52,7 +52,7 @@ class LiveStrem extends Component {
     this.testInterval = setInterval(() => { this.requestSensorData() }, 120);
 
 
-    this.audio_context = new (window.AudioContext || window.webkitAudioContex)();
+    this.audio_context = new (window.AudioContext || window.webkitAudioContext)();
     this.gainnode = this.audio_context.createGain()
     this.gainnode.connect(this.audio_context.destination)
 

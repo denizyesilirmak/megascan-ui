@@ -15,7 +15,7 @@ class GroundScanMethodSelection extends Component {
     this.state = {
       buttonIndex: 800 * 2
     }
-    
+
     this.buttons = [
       {
         name: "device",
@@ -29,7 +29,7 @@ class GroundScanMethodSelection extends Component {
   }
 
   async componentDidMount() {
-    
+
     socketHelper.attach(this.handleKeyDown)
   }
 
@@ -65,6 +65,9 @@ class GroundScanMethodSelection extends Component {
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
           }, 250);
+          return
+        case 'turnoff':
+          this.props.navigateTo('turnOff')
           return
         default:
           break

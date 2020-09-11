@@ -117,17 +117,17 @@ class DeviceGroundScanProperties extends Component {
       case 2:
         return (
           <div className="dgsp-content scan-step-content">
-            <div style={{boxShadow: this.state.scanStepIndex % 2 === 0 && !this.state.verticalTabIndex ? this.context.theme.settings_shadow : null, background: this.state.scanStepIndex % 2 === 0 && !this.state.verticalTabIndex ? this.context.theme.background3 : null}} className={`scan-step-selector`}>
-              <img style={{filter: this.context.theme.arrorHueRotation}} src={upArrow} alt="column"></img>
+            <div style={{ boxShadow: this.state.scanStepIndex % 2 === 0 && !this.state.verticalTabIndex ? this.context.theme.settings_shadow : null, background: this.state.scanStepIndex % 2 === 0 && !this.state.verticalTabIndex ? this.context.theme.background3 : null }} className={`scan-step-selector`}>
+              <img style={{ filter: this.context.theme.arrorHueRotation }} src={upArrow} alt="column"></img>
               <div className="scan-step-value">{this.state.lines}</div>
-              <img style={{filter: this.context.theme.arrorHueRotation}}  className="down-scan-step" src={downArrow} alt="column"></img>
+              <img style={{ filter: this.context.theme.arrorHueRotation }} className="down-scan-step" src={downArrow} alt="column"></img>
               <div className="scan-step-label">Lines</div>
             </div>
 
-            <div style={{boxShadow: this.state.scanStepIndex % 2 === 1 && !this.state.verticalTabIndex ? this.context.theme.settings_shadow : null, background: this.state.scanStepIndex % 2 === 1 && !this.state.verticalTabIndex ? this.context.theme.background3 : null}}  className={`scan-step-selector `}>
-              <img style={{filter: this.context.theme.arrorHueRotation}} src={upArrow} alt="column"></img>
+            <div style={{ boxShadow: this.state.scanStepIndex % 2 === 1 && !this.state.verticalTabIndex ? this.context.theme.settings_shadow : null, background: this.state.scanStepIndex % 2 === 1 && !this.state.verticalTabIndex ? this.context.theme.background3 : null }} className={`scan-step-selector `}>
+              <img style={{ filter: this.context.theme.arrorHueRotation }} src={upArrow} alt="column"></img>
               <div className="scan-step-value">{this.state.steps}</div>
-              <img style={{filter: this.context.theme.arrorHueRotation}}  className="down-scan-step" src={downArrow} alt="column"></img>
+              <img style={{ filter: this.context.theme.arrorHueRotation }} className="down-scan-step" src={downArrow} alt="column"></img>
               <div className="scan-step-label">Steps</div>
             </div>
           </div>
@@ -322,7 +322,9 @@ class DeviceGroundScanProperties extends Component {
               verticalTabIndex: true
             })
           }
-
+          return
+        case 'turnoff':
+          this.props.navigateTo('turnOff')
           return
         default:
           break
@@ -334,7 +336,7 @@ class DeviceGroundScanProperties extends Component {
     return (
       <div ref="dgsp" className="device-ground-scan-properties component">
         <div className="dgsp-tabs">
-          <img alt="left" src={TabLeftArrow}  style={{filter: this.context.theme.arrorHueRotation }}/>
+          <img alt="left" src={TabLeftArrow} style={{ filter: this.context.theme.arrorHueRotation }} />
           <div className={`dgsp-tab`}
             style={{
               background: this.state.activeTabIndex % 5 === 0 ? this.context.theme.button_bg_selected : "black",
@@ -373,7 +375,7 @@ class DeviceGroundScanProperties extends Component {
               borderColor: this.context.theme.background3
             }}
           >Scan</div>
-          <img alt="left" src={TabRightArrow}  style={{filter: this.context.theme.arrorHueRotation }}/>
+          <img alt="left" src={TabRightArrow} style={{ filter: this.context.theme.arrorHueRotation }} />
         </div>
         {
           this.renderTabContent()

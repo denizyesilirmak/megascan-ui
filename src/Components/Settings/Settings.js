@@ -23,35 +23,13 @@ import { DeviceContext } from '../../Contexts/DeviceContext'
 import dbStorage from '../../DatabaseHelper'
 
 
-// 2020.07.16-10:10:00
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (2000 * 24 * 60 * 60 * 1000));
-  var expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
 
 
 class Settings extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
-    this.lastIndex = getCookie("settingsIndex")
 
     //get current date time
     this.currentDate = new Date();
@@ -176,7 +154,7 @@ class Settings extends Component {
 
   renderOkPopup = () => {
     return (
-      <div className="ok-popup" style={{background: this.context.theme.button_bg_selected}}>
+      <div className="ok-popup" style={{ background: this.context.theme.button_bg_selected }}>
         <img src={TickIcon} alt="tick"></img>
       </div>
     )
@@ -220,20 +198,20 @@ class Settings extends Component {
         else if (this.state.verticalIndex && this.state.activeSettingTab === 6) {
           if (this.state.subCursor === 0) {
             this.setState({
-              generalVolume: this.clamp(this.state.generalVolume - 5, 0, 100)
+              generalVolume: this.clamp(this.state.generalVolume - 25, 0, 100)
             })
             this.props.setVolume(this.state.generalVolume, this.state.searchVolume)
             await dbStorage.setItem("generalVolume", this.state.generalVolume)
           }
           else if (this.state.subCursor === 1) {
             this.setState({
-              keyToneVolume: this.clamp(this.state.keyToneVolume - 5, 0, 100)
+              keyToneVolume: this.clamp(this.state.keyToneVolume - 25, 0, 100)
             })
             await dbStorage.setItem("keyToneVolume", this.state.keyToneVolume)
           }
           else if (this.state.subCursor === 2) {
             this.setState({
-              searchVolume: this.clamp(this.state.searchVolume - 5, 0, 100)
+              searchVolume: this.clamp(this.state.searchVolume - 25, 0, 100)
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
@@ -276,7 +254,7 @@ class Settings extends Component {
         else if (this.state.verticalIndex && this.state.activeSettingTab === 6) {
           if (this.state.subCursor === 0) {
             this.setState({
-              generalVolume: this.clamp(this.state.generalVolume + 5, 0, 100)
+              generalVolume: this.clamp(this.state.generalVolume + 25, 0, 100)
             })
             this.props.setVolume(this.state.generalVolume, this.state.searchVolume)
             await dbStorage.setItem("generalVolume", this.state.generalVolume)
@@ -284,14 +262,14 @@ class Settings extends Component {
 
           else if (this.state.subCursor === 1) {
             this.setState({
-              keyToneVolume: this.clamp(this.state.keyToneVolume + 5, 0, 100)
+              keyToneVolume: this.clamp(this.state.keyToneVolume + 25, 0, 100)
             })
             await dbStorage.setItem("keyToneVolume", this.state.keyToneVolume)
           }
 
           else if (this.state.subCursor === 2) {
             this.setState({
-              searchVolume: this.clamp(this.state.searchVolume + 5, 0, 100)
+              searchVolume: this.clamp(this.state.searchVolume + 25, 0, 100)
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
@@ -460,7 +438,6 @@ class Settings extends Component {
             //language
             if (this.state.subCursor === 0) {
               console.log("change language")
-              setCookie("settingsIndex", this.state.activeSettingTab)
               this.props.navigateTo("changeLanguageScreen")
             }
 
@@ -492,6 +469,9 @@ class Settings extends Component {
         if (this.state.activePopup !== "") {
           this.setState({ activePopup: "" })
         }
+        return
+      case 'turnoff':
+        this.props.navigateTo('turnOff')
         return
       default:
         break

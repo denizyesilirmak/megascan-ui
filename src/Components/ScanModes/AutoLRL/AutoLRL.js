@@ -105,6 +105,9 @@ class AutoLRL extends Component {
           }
         }
         return
+      case 'turnoff':
+        this.props.navigateTo('turnOff')
+        return
       default:
         break
     }

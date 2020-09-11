@@ -141,6 +141,9 @@ class FileList extends Component {
         }
         this.context.buttonInterrupt()
         return
+      case 'turnoff':
+        this.props.navigateTo('turnOff')
+        return
       default:
         break
     }
@@ -206,10 +209,10 @@ class FileList extends Component {
   deleteFile = (filename) => {
     console.log("deleting: ", filename)
     fetch(`http://localhost:9090/deletefile/${filename}`)
-    .then(() => {
-      console.log('deleted: ', filename)
-      this.getFileList()
-    })
+      .then(() => {
+        console.log('deleted: ', filename)
+        this.getFileList()
+      })
   }
 
   render() {

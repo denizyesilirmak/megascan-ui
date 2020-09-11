@@ -35,3 +35,15 @@
     transform: rotate(360deg);
   }
 }
+
+.ionic-new .dial {
+  position: absolute;
+}
+
+.ionic-new .gain-dial {
+  left: 20px;
+}
+
+.ionic-new .sens-dial {
+  right: 20px;
+}

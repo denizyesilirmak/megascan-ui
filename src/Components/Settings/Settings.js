@@ -126,6 +126,7 @@ class Settings extends Component {
 
     setTimeout(() => {
       this.refs.settings.style.opacity = 1
+      this.refs.settings.style.transform = "scale(1)"
     }, 15);
   }
 

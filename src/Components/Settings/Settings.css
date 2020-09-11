@@ -5,6 +5,7 @@
   align-items: center;
   opacity: 0;
   transition: 1s all;
+  transform: scale(0.3) rotate3d(1, -2, 3, 45deg)
 
 }
 

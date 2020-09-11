@@ -6,9 +6,9 @@
   /* background: #000; */
   color: white;
   transition: 0.8s all;
-  background: black;
   opacity: 0;
-  transform: scale(0.1);
+  perspective: 300px;
+  transform: scale(0.1) rotate3d(1, 1, 1, 45deg);
 }
 
 .turn-off .question {

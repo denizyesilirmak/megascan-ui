@@ -96,7 +96,7 @@ class FileList extends Component {
         this.context.buttonInterrupt()
         break
       case 'ok':
-        if (!this.state.popup && !this.state.deletePopup) {
+        if (!this.state.popup && !this.state.deletePopup && this.state.fileList.length > 0) {
           tempPopupCursorIndex = 300
           this.setState({
             popup: true,

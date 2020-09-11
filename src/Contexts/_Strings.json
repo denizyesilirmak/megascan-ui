@@ -3,7 +3,7 @@
     "setupScreen": "Setup Device",
     "menuScreen": "Main Menu",
     "settingsScreen": "Settings",
-    "turnOff": "Turn Off Device",
+    "turnOff": "Turn Off",
     "autoLrlScanScreen": "Auto LRL",
     "ctrlLrlScanScreen": "CTRL LRL",
     "liveStreamScreen": "Canlı Akış",

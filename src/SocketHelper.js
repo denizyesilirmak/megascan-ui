@@ -1,7 +1,7 @@
 import io from 'socket.io-client'
 
 const SOCKET_SERVER_ADDRESS = 'ws://localhost:9090'
-const VOID = () => {}
+const VOID = () => { }
 
 class SocketHelper {
 
@@ -18,8 +18,9 @@ class SocketHelper {
     }
 
     this._socket.on('connect', () => {
-      if(this._socket.connected){
-        console.clear()
+      if (this._socket.connected) {
+        // console.clear()
+        console.log("socket connected", this._socket.id)
       }
     })
 
@@ -45,7 +46,6 @@ class SocketHelper {
   }
 
   attach = (fn) => {
-    // console.log("atached")
     this._messageHandlerStack.push(this._currentMessageHandler)
     this._setMessageHandler(fn)
   }

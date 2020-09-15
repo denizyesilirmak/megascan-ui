@@ -51,7 +51,7 @@ class Ionic extends React.Component {
         value: parseInt(socketData.payload)
       })
       if (this.state.value > 30) {
-        SoundHelper.changeFrequency(this.state.value + 440)
+        SoundHelper.changeFrequency(this.state.value * 2)
       } else {
         SoundHelper.changeFrequency(0)
       }

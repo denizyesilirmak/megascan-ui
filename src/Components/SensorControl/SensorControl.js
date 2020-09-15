@@ -8,6 +8,7 @@ import GroundScanVideo from '../../Assets/Videos/_controlGroundScan.mp4'
 class SensorControl extends React.Component {
   constructor(props) {
     super(props)
+    this.indicatorREF = React.createRef()
     this.state = {
       checking: true,
       currentSensor: 0,
@@ -41,12 +42,13 @@ class SensorControl extends React.Component {
     console.log("sensor control mounted")
     const timeoutB = setTimeout(() => {
       SocketHelper.send('X')
-      this.refs.indicator.style.width = "100%"
+      this.indicatorREF.current.style.width = "100%"
       clearTimeout(timeoutB)
-    }, 500);
+    }, 1000);
 
     this.failTimeout = setTimeout(() => {
       clearTimeout(this.failTimeout)
+      SocketHelper.detach()
       this.props.navigateTo('menuScreen')
     }, 4000);
 
@@ -57,6 +59,7 @@ class SensorControl extends React.Component {
     clearTimeout(this.failTimeout)
     this.refs.video.style.display = "none"
     setTimeout(() => {
+      SocketHelper.detach()
       this.props.navigateTo("menuScreen")
     }, 100);
   }
@@ -69,11 +72,16 @@ class SensorControl extends React.Component {
         currentSensor: parseInt(data.payload)
       })
       let timeoutA = setTimeout(() => {
-        this.refs.indicator.style.width = "100%"
+        try {
+          this.indicatorREF.current.style.width = "100%"
+        } catch (error) {
+          
+        }
         clearTimeout(timeoutA)
         if (this.state.targetSensorID !== this.state.currentSensor) {
           this.setState({ renderVideo: true, renderPopup: false })
         } else {
+          SocketHelper.detach()
           this.props.navigateTo(this.props.target)
         }
       }, 1000);
@@ -86,7 +94,7 @@ class SensorControl extends React.Component {
       <div className="sc-popup">
         <div className="title">Checking sensor connection...</div>
         <div className="indicator-container">
-          <div ref="indicator" className="indicator-value" />
+          <div ref={this.indicatorREF} className="indicator-value" />
         </div>
       </div>
     )

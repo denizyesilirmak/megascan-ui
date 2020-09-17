@@ -16,9 +16,7 @@ import Setup from './Components/Setup/Setup'
 import ResetFactory from './Components/Settings/SettingsPopups/ResetFactory/ResetFactory'
 import ResetSettings from './Components/Settings/SettingsPopups/ResetSettings/ResetSettings'
 import ResetStorage from './Components/Settings/SettingsPopups/ResetStorage/ResetStorage'
-import ActionResetFactory from './Components/Settings/Resets/ResetFactory'
-import ActionResetMemory from './Components/Settings/Resets/ResetMemory'
-import ActionResetSettings from './Components/Settings/Resets/ResetSettings'
+import Reboot from './Components/Reboot/Reboot'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -82,20 +80,28 @@ class App extends Component {
     dbStorage.getAll()
       .then(settings => {
         // console.log(typeof settings['generalVolume'])
+        // activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen", 
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? "menuScreen" : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
-          pin: settings['pincode'] || this.state.serial.slice(-4)
+          pin: settings['pincode'] || this.state.serial.slice(-4),
+          pinlock: settings['pinlock']
         })
       })
   }
 
   componentDidMount() {
-    if (this.state.lock)
+    if (this.state.pinlock) {
+      console.log("kilit")
       this.navigateTo("lockScreen")
+    }
+  }
+
+  componentDidUpdate() {
+
   }
 
   componentDidCatch(error, info) {
@@ -200,7 +206,7 @@ class App extends Component {
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "setupScreen":
-        return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
+        return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} serial={this.state.serial} />)
       case "factoryResetScreen":
         return (<ResetFactory navigateTo={this.navigateTo} />)
       case "resetSettingsScreen":
@@ -209,12 +215,8 @@ class App extends Component {
         return (<ResetStorage navigateTo={this.navigateTo} />)
       case "ctrlLrlSearchScreen":
         return (<CtrlScan navigateTo={this.navigateTo} />)
-      case "actionResetMemoryScreen":
-        return (<ActionResetMemory navigateTo={this.navigateTo} />)
-      case "actionResetSettingsScreen":
-        return (<ActionResetSettings navigateTo={this.navigateTo} />)
-      case "actionResetFactoryScreen":
-        return (<ActionResetFactory navigateTo={this.navigateTo} />)
+      case "rebootScreen":
+        return (<Reboot navigateTo={this.navigateTo} />)
       default:
         break;
     }

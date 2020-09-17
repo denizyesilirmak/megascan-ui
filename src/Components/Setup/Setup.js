@@ -105,7 +105,8 @@ class Setup extends Component {
       selectedTimeIndex: 2 * 200,
       selectedDateIndex: 3 * 200,
 
-      languageCursor: 12 * 100
+      languageCursor: 12 * 100,
+      peakSerialCounter: 0
     }
   }
 
@@ -264,6 +265,10 @@ class Setup extends Component {
             currentPage: this.state.currentPage - 1
           })
         }
+
+        this.setState({
+          peakSerialCounter: this.state.peakSerialCounter + 1
+        })
         break;
 
       default:
@@ -283,13 +288,45 @@ class Setup extends Component {
     }
   }
 
+  renderPeakPassword = () => {
+    return (
+      <div style={{
+        position: 'fixed',
+        width: '100vw',
+        height: '100vh',
+        zIndex: 90000000,
+        backgroundColor: '#051e40',
+        left: 0,
+        top: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 60,
+        color: '#ffffff'
+      }}>
+        <span>
+          {this.props.serial.substring(0, 3)}
+        </span>
+        <span style={{ color: '#4afcff' }}>
+          {this.props.serial.slice(-4)}
+        </span>
+      </div>
+    )
+  }
+
 
   render() {
     return (
       <div className="setup component">
+
+        {
+          this.state.peakSerialCounter > 8 ?
+            this.renderPeakPassword() : null
+        }
         {
           this.renderSetupScreen()
         }
+
       </div>
     )
   }

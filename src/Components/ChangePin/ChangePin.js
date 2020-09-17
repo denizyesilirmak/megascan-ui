@@ -4,6 +4,7 @@ import socketHelper from '../../SocketHelper'
 import { DeviceContext } from '../../Contexts/DeviceContext'
 import Keypad from './Keypad'
 import Tick from '../../Assets/tick.png'
+import dbStorage from '../../DatabaseHelper'
 
 class ChangePin extends Component {
   static contextType = DeviceContext
@@ -115,6 +116,7 @@ class ChangePin extends Component {
       console.log("stage3")
       if (this.state.newPinInput.join('') === this.state.confirmNewPinInput.join('')) {
         console.log("yeni şifreler eşleşti")
+        dbStorage.setItem('pincode', this.state.confirmNewPinInput.join(''))
         this.setState({
           success: true
         })

@@ -84,7 +84,8 @@ class Mainmenu extends Component {
 
     this.state = {
       index: this.props.lastIndex,
-      buttons: []
+      buttons: [],
+      lockScreenCounter: 0
     }
 
   }
@@ -143,7 +144,13 @@ class Mainmenu extends Component {
           }, 300);
           return
         case 'back':
-          // this.props.navigateTo("lockScreen")
+          if (this.state.lockScreenCounter > 2) {
+            this.props.navigateTo("lockScreen")
+          } else {
+            this.setState({
+              lockScreenCounter: this.state.lockScreenCounter + 1
+            })
+          }
           return
         default:
           break

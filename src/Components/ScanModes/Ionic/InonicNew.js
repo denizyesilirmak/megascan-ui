@@ -31,7 +31,7 @@ class Ionic extends React.Component {
     SocketHelper.attach(this.handleSocketData)
     this.dataSensorInterval = setInterval(() => {
       SocketHelper.send('J')
-    }, 80);
+    }, 50);
   }
 
   componentWillUnmount() {
@@ -50,7 +50,7 @@ class Ionic extends React.Component {
       this.setState({
         value: parseInt(socketData.payload)
       })
-      if (this.state.value > 30) {
+      if (this.state.value > 20) {
         SoundHelper.changeFrequency(this.state.value * 2)
       } else {
         SoundHelper.changeFrequency(0)

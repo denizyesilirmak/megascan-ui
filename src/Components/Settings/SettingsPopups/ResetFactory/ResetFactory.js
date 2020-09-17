@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { DeviceContext } from '../../../../Contexts/DeviceContext'
 import socketHelper from '../../../../SocketHelper'
+import dbStorage from '../../../../DatabaseHelper'
 import './ResetFactory.css'
 
 class ResetFactory extends Component {
@@ -23,7 +24,7 @@ class ResetFactory extends Component {
     }, 150);
   }
 
-  handleKeyDown = (socketData) => {
+  handleKeyDown = async (socketData) => {
     if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
       case 'left':
@@ -50,11 +51,18 @@ class ResetFactory extends Component {
           this.setState({
             popup: true,
           })
+          await this.deleteAllFiles()
+          await this.resetDbStorage()
+          
           setTimeout(() => {
             this.setState({
               progress: 100
             })
           }, 600);
+
+          setTimeout(() => {
+            this.props.navigateTo('rebootScreen')
+          }, 7000);
         } else {
           this.props.navigateTo("settingsScreen")
         }
@@ -65,6 +73,36 @@ class ResetFactory extends Component {
   }
 
 
+  deleteAllFiles = async () => {
+    fetch('http://localhost:9090/deleteallfiles')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      this.setState({
+        progress: 80
+      })
+
+    })
+  }
+
+  resetDbStorage = async () => {
+    dbStorage.setItem({
+      setupCompleted: false,
+      pinlock: false,
+      brightness: 100,
+      generalVolume: 100,
+      searchVolume: 100,
+      keyToneVolume: 100,
+      autolrl_depth: 10,
+      autolrl_distance: 100,
+      ctrllrl_depth: 0,
+      ctrllrl_distance: 500,
+      ctrllrl_frequency: 250,
+      ctrllrl_soiltype: 18000,
+      lang: 'en'
+    })
+  }
+
   render() {
     return (
       <div className="reset-factory component" ref="reset">
@@ -74,9 +112,7 @@ class ResetFactory extends Component {
             <div className="reset-preloader" style={{ background: this.context.theme.button_bg_selected }}>
               <div className="reseting-text">Resetting to factory settings, please wait...</div>
               <div className="reset-progress-bar-container" >
-                <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}>
-
-                </div>
+                <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}></div>
               </div>
             </div> : null
         }

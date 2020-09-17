@@ -9,7 +9,8 @@ class ResetStorage extends Component {
     this.state = {
       buttonIndex: 2 * 2500 + 1,
       progress: 0,
-      popup: false
+      popup: false,
+      success: false
     }
   }
 
@@ -48,11 +49,26 @@ class ResetStorage extends Component {
           this.setState({
             popup: true,
           })
+          fetch('http://localhost:9090/deleteallfiles')
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            this.setState({
+              progress: 80
+            })
+
+          })
           setTimeout(() => {
             this.setState({
               progress: 100
             })
-          }, 600);
+          }, 2500);
+
+          setTimeout(() => {
+            this.props.navigateTo('settingsScreen')
+          }, 7000);
+          
+          
         }else{
           this.props.navigateTo("settingsScreen")
         }
@@ -72,9 +88,7 @@ class ResetStorage extends Component {
             <div className="reset-preloader" style={{ background: this.context.theme.button_bg_selected }}>
               <div className="reseting-text">Deleting scan files, please wait...</div>
               <div className="reset-progress-bar-container" >
-                <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}>
-
-                </div>
+                <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}></div>
               </div>
             </div> : null
         }

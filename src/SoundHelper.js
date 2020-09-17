@@ -2,10 +2,11 @@ class SoundHelper {
   constructor() {
     if (!SoundHelper.instance) {
       console.log("soundhelper: instance")
-      this.audio_context = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: "interactive", sampleRate: 8000 })
+      this.audio_context = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: "interactive" })
       this.gainnode = this.audio_context.createGain()
       this.gainnode.gain.setValueAtTime(0,this.audio_context.currentTime)
       this.gainnode.connect(this.audio_context.destination)
+      console.log(this.audio_context.sampleRate)
       // console.log(this.audio_context.baseLatency)
 
       SoundHelper.instance = this
@@ -30,13 +31,14 @@ class SoundHelper {
   createOscillator(frequencyType = "sine") {
     // console.log(this.started)
     if (this.started === false) {
+      this.oscillator.type = frequencyType
       this.oscillator.connect(this.audio_context.destination)
       this.started = true
     }
   }
 
   changeFrequency(hertz) {
-    this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0.1, 0.1)
+    this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0, 0.25)
     // this.oscillator.frequency.linearRampToValueAtTime(hertz, this.audio_context.currentTime + 0.04);
   }
 }

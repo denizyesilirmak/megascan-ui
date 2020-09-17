@@ -215,6 +215,14 @@ class FileList extends Component {
       })
   }
 
+  noFilePopup = () => {
+    return (
+      <div className="no-file">
+        No scan files
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="file-list component">
@@ -224,6 +232,11 @@ class FileList extends Component {
 
         {
           this.state.deletePopup ? this.renderDeletePopup() : null
+        }
+
+        {
+          this.state.fileList.length < 1 ? this.noFilePopup() : null
+
         }
 
         <div className="files" style={{ transform: `translateY(${Math.trunc(this.state.cursorIndex / 12) * -317}px)` }}>

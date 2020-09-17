@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { DeviceContext } from '../../../../Contexts/DeviceContext'
 import socketHelper from '../../../../SocketHelper'
+import dbStorage from '../../../../DatabaseHelper'
 
 class ResetSettings extends Component {
   static contextType = DeviceContext
@@ -21,7 +22,7 @@ class ResetSettings extends Component {
     }, 150);
   }
 
-  handleKeyDown = (socketData) => {
+  handleKeyDown = async (socketData) => {
     if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
       case 'left':
@@ -48,18 +49,41 @@ class ResetSettings extends Component {
           this.setState({
             popup: true,
           })
+          await this.resetDbStorage()
           setTimeout(() => {
             this.setState({
               progress: 100
             })
           }, 600);
-        }else{
+
+          setTimeout(() => {
+            this.props.navigateTo('menuScreen')
+          }, 5500);
+        } else {
           this.props.navigateTo("settingsScreen")
         }
         break
       default:
         break
     }
+  }
+
+
+  resetDbStorage = async () => {
+    dbStorage.setItem({
+      pinlock: false,
+      brightness: 100,
+      generalVolume: 100,
+      searchVolume: 100,
+      keyToneVolume: 100,
+      autolrl_depth: 10,
+      autolrl_distance: 100,
+      ctrllrl_depth: 0,
+      ctrllrl_distance: 500,
+      ctrllrl_frequency: 250,
+      ctrllrl_soiltype: 18000,
+      lang: 'en'
+    })
   }
 
 

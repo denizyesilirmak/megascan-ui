@@ -108,9 +108,9 @@ class Bionic extends Component {
       })
 
       if (this.state.sensorData > 30) {
-        SoundHelper.changeFrequency(this.state.sensorData * 4 + 440)
+        SoundHelper.changeFrequencySmooth(this.state.sensorData * 4 + 440)
       } else {
-        SoundHelper.changeFrequency(0)
+        SoundHelper.changeFrequencySmooth(0)
       }
 
     }

@@ -5,6 +5,7 @@ import calibrationIcon from '../../../Assets/MenuIcons/calibration.png'
 import SpeedIcon from '../../../Assets/MenuIcons/speed.svg'
 import Left from '../../../Assets/MenuIcons/left-arrow3.png'
 import right from '../../../Assets/MenuIcons/right-arrow3.png'
+import SoundHelper from '../../../SoundHelper'
 
 
 const COLORS = {
@@ -18,7 +19,6 @@ const COLORS = {
 }
 
 class LiveStrem extends Component {
-
   constructor(props) {
     super(props)
 
@@ -34,61 +34,21 @@ class LiveStrem extends Component {
   }
 
   componentDidMount() {
+    SoundHelper.createOscillator('square')
     socketHelper.attach(this.handleKeyDown)
-    console.log("general volume: ", this.props.generalVolume)
-    console.log("search volume: ", this.props.searchVolume)
-    this.totalVolume = this.props.searchVolume * this.props.generalVolume / 10000 - 1
-    console.log(this.totalVolume)
-
-
-
 
 
 
     setTimeout(() => {
       this.refs.livestream.style.opacity = 1
     }, 60);
-
     this.testInterval = setInterval(() => { this.requestSensorData() }, 120);
-
-
-    this.audio_context = new (window.AudioContext || window.webkitAudioContext)();
-    this.gainnode = this.audio_context.createGain()
-    this.gainnode.connect(this.audio_context.destination)
-
-    this.oscillator = this.audio_context.createOscillator()
-    this.oscillator.connect(this.gainnode)
-    this.oscillator.frequency.setValueAtTime(0, this.audio_context.currentTime)
-    this.oscillator.start(0)
-    this.oscillator.type = "sine"
-
-    this.oscillatorsecond = this.audio_context.createOscillator()
-    this.oscillatorsecond.connect(this.gainnode)
-    this.oscillatorsecond.frequency.setValueAtTime(0, this.audio_context.currentTime)
-    this.oscillatorsecond.start(0)
-    this.oscillatorsecond.type = "sawtooth"
-
-    this.gainnode.gain.value = this.totalVolume
-
-    this.connected = false;
-    this.playpause()
   }
 
-  playpause = () => {
-    if (!this.connected) {
-      this.oscillator.connect(this.audio_context.destination);
-      this.oscillatorsecond.connect(this.audio_context.destination);
-    }
-    else {
-      this.oscillator.disconnect();
-      this.oscillatorsecond.disconnect();
-    }
-    this.connected = !this.connected;
-  };
+
 
   componentWillUnmount() {
-    this.oscillator.stop()
-    this.oscillatorsecond.stop()
+    SoundHelper.stopOscillator()
     clearInterval(this.testInterval)
   }
 
@@ -171,28 +131,14 @@ class LiveStrem extends Component {
         this.instantData = parseInt(socketData.payload)
       }
       else {
-        // this.instantData = parseInt(socketData.payload) - (this.total - 127)
         if (parseInt(socketData.payload) < this.total) {
           this.instantData = this.map(parseInt(socketData.payload), 0, this.total, 0, 127)
-          // console.log("a")
         } else {
           this.instantData = this.map(parseInt(socketData.payload), this.total, 255, 127, 255)
-          // console.log("b")
         }
       }
-
-      if (this.state.stream[9] > 132) {
-        this.oscillator.frequency.linearRampToValueAtTime(900 + this.state.stream[9], this.audio_context.currentTime + 0.1);
-        this.oscillatorsecond.frequency.linearRampToValueAtTime(100 + this.state.stream[9], this.audio_context.currentTime + 0.1);
-      } else if (this.state.stream[9] < 120) {
-        this.oscillator.frequency.linearRampToValueAtTime(700 - this.state.stream[9], this.audio_context.currentTime + 0.1);
-        this.oscillatorsecond.frequency.linearRampToValueAtTime(900 + this.state.stream[9], this.audio_context.currentTime + 0.1);
-      } else {
-        this.oscillator.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.05);
-        this.oscillatorsecond.frequency.linearRampToValueAtTime(0, this.audio_context.currentTime + 0.1);
-      }
-
-
+      
+      SoundHelper.changeFrequencySmooth(this.instantData)
       this.calibration(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))

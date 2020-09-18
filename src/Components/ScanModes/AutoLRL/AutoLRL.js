@@ -113,10 +113,16 @@ class AutoLRL extends Component {
     }
   }
 
+  goToResults = () => {
+    this.setState({
+      activeScreen: 2
+    })
+  }
+
   renderScreen = (screen) => {
     switch (screen) {
       case 0: return <AutoLRLSettings mode={this.state.settingsMode} distance={this.state.distance} depth={this.state.depth} limits={LIMITS} />
-      case 1: return <AutoLRLScan />
+      case 1: return <AutoLRLScan next={() => this.goToResults()} />
       case 2: return <AutoLRLResultScreen />
       default:
         break;

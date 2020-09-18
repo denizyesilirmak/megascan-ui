@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './AutoLRL.css'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
+import SoundHelper from '../../../SoundHelper'
 
 class AutoLRLScan extends Component {
   static contextType = DeviceContext
@@ -8,12 +9,16 @@ class AutoLRLScan extends Component {
     super(props)
     this.state = {
       value: 0,
-      direction: true
+      direction: true,
+      counter: 0
     }
   }
 
   componentDidMount() {
-    this.test = setInterval(() => {
+    SoundHelper.changeFrequencyFast(0)
+    SoundHelper.createOscillator('sine')
+
+    this.lrlInterval = setInterval(() => {
       if (this.state.direction) {
         this.setState({ value: this.state.value + 10 })
         if (this.state.value > 100) {
@@ -26,11 +31,25 @@ class AutoLRLScan extends Component {
           this.setState({ direction: true })
         }
       }
-    }, 500);
+
+      if(this.state.value === 0){
+        this.setState({
+          counter: this.state.counter +1
+        })
+      }
+
+      if(this.state.counter === 2){
+        clearInterval(this.lrlInterval)
+        this.props.next()
+      }
+
+      SoundHelper.changeFrequencySmooth(200 + Math.abs(this.state.value * 2))
+    }, 750);
   }
 
   componentWillUnmount() {
-    clearInterval(this.test)
+    SoundHelper.stopOscillator()
+    clearInterval(this.lrlInterval)
   }
 
 

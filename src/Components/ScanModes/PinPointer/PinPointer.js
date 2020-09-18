@@ -6,6 +6,7 @@ import socketHelper from '../../../SocketHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 import Sensitivity from './Sensitivity'
 import dbStorage from '../../../DatabaseHelper'
+import SoundHelper from '../../../SoundHelper'
 
 const lines = [
   ["#26ff00", "#26ff00",],
@@ -47,46 +48,10 @@ class PinPointer extends Component {
     }
   }
 
-  beep = (to) => {
-    this.oscillator = this.audio_context.createOscillator();
-    this.oscillator.connect(this.audio_context.destination);
-    let currentTime = this.audio_context.currentTime;
-    if (Math.abs(this.state.sensorValue) > 10) {
-      this.oscillator.frequency.value = this.state.sensorValue * 3;
-      this.oscillator.start(currentTime);
-      this.oscillator.stop(currentTime + 0.1);
-    } else {
-      // oscillator.frequency.value = 300;
-      // oscillator.start(currentTime);
-      // oscillator.stop(currentTime + 0.1);
-    }
-    this.timeout = setTimeout(() => {
-      this.beep()
-    }, Math.pow((255 - this.state.sensorValue), 0.9) * 2);
-  }
+
 
   async componentDidMount() {
-    console.log("general volume: ", this.props.generalVolume)
-    console.log("search volume: ", this.props.searchVolume)
-    this.totalVolume = this.props.searchVolume * this.props.generalVolume / 10000 - 1
-    console.log(this.totalVolume)
-
-
-    // window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.audio_context = new (window.AudioContext || window.webkitAudioContex)({
-      latencyHint: 'interactive',
-      sampleRate: 3000,
-    });
-
-    this.gainnode = this.audio_context.createGain()
-    this.gainnode.connect(this.audio_context.destination)
-
-
-    this.gainnode.gain.value = this.totalVolume
-
-    this.beep(1000)
-
-
+    SoundHelper.createOscillator('sine');
     this.setState({
       sensitivity: await dbStorage.getItem('sensitivity_pinpointer') || 5
     })
@@ -97,7 +62,11 @@ class PinPointer extends Component {
     }, 60);
   }
 
-
+  componentWillUnmount() {
+    SoundHelper.stopOscillator()
+    clearTimeout(this.timeout)
+    clearInterval(this.interval)
+  }
 
   handleKeyDown = async (socketData) => {
     // let tmpCalibration = this.state.calibration
@@ -157,6 +126,7 @@ class PinPointer extends Component {
         sensorValue: this.state.calibration - parseInt(socketData.payload),
         rawSensorValue: parseInt(socketData.payload),
       })
+      SoundHelper.changeFrequencySmooth(Math.abs(this.state.sensorValue * 4))
     }
 
   }
@@ -168,11 +138,7 @@ class PinPointer extends Component {
 
 
 
-  componentWillUnmount() {
-    this.oscillator.stop()
-    clearTimeout(this.timeout)
-    clearInterval(this.interval)
-  }
+
 
 
 

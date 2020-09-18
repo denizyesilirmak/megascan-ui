@@ -454,6 +454,7 @@ class Settings extends Component {
         }
         this.context.buttonInterrupt()
         return
+      case 'home':
       case 'back':
         this.context.buttonInterrupt()
         if (this.state.verticalIndex === true && this.state.activePopup === "") {

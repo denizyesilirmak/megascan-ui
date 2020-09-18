@@ -39,7 +39,6 @@ class SensorControl extends React.Component {
         break;
     }
     SocketHelper.attach(this.controlRespond)
-    console.log("sensor control mounted")
     const timeoutB = setTimeout(() => {
       SocketHelper.send('X')
       this.indicatorREF.current.style.width = "100%"

@@ -4,6 +4,7 @@ import FileIcon from '../../Assets/MenuIcons/icon-file.png'
 import DeleteFileIcon from '../../Assets/MenuIcons/deleteFile.png'
 import socketHelper from '../../SocketHelper'
 import { DeviceContext } from '../../Contexts/DeviceContext'
+import NoFileIcon from '../../Assets/MenuIcons/empty-folder.png'
 
 class FileList extends Component {
   static contextType = DeviceContext
@@ -218,6 +219,7 @@ class FileList extends Component {
   noFilePopup = () => {
     return (
       <div className="no-file">
+        <img className="no-file-icon" src={NoFileIcon} alt="ef"/>
         No scan files
       </div>
     )

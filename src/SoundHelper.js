@@ -37,10 +37,16 @@ class SoundHelper {
     }
   }
 
-  changeFrequency(hertz) {
+  changeFrequencySmooth(hertz) {
     this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0, 0.25)
     // this.oscillator.frequency.linearRampToValueAtTime(hertz, this.audio_context.currentTime + 0.04);
   }
+
+  changeFrequencyFast(hertz) {
+    this.oscillator.frequency.setValueAtTime(hertz, this.audio_context.currentTime)
+  }
+
+
 }
 
 const soundHelperInstance = new SoundHelper()

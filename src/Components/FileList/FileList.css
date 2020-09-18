@@ -87,20 +87,20 @@
   background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 }
 
-@keyframes fileListPopupAnim{
-  0%{
+@keyframes fileListPopupAnim {
+  0% {
     transform: translateY(-300px);
   }
-  100%{
+  100% {
     transform: translateY(0px);
   }
 }
 
-.no-file{
+.no-file {
   position: absolute;
   width: 400px;
-  height: 150px;
-  background: red;
+  height: 160px;
+  background: black;
   border-radius: 30px;
   display: flex;
   text-align: center;
@@ -109,4 +109,30 @@
   font-size: 30px;
   padding: 30px;
   color: white;
+  flex-direction: column;
+  border: 2px solid white;
+  animation: no-file-anim 3s linear infinite;
+}
+
+.no-file .no-file-icon {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+@keyframes no-file-anim{
+  0%{
+    transform: rotate(0deg);
+  }
+  2%{
+    transform: rotate(10deg);
+  }
+  4%{
+    transform: rotate(-10deg);
+  }
+  6%{
+    transform: rotate(0deg);
+  }
+  100%{
+
+  }
 }

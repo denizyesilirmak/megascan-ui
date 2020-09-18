@@ -69,7 +69,6 @@ class ResetSettings extends Component {
     }
   }
 
-
   resetDbStorage = async () => {
     dbStorage.setItem({
       pinlock: false,
@@ -86,7 +85,6 @@ class ResetSettings extends Component {
       lang: 'en'
     })
   }
-
 
   render() {
     return (

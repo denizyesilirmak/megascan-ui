@@ -114,6 +114,9 @@ class Mainmenu extends Component {
       this.context.buttonInterrupt()
       let tempIndex = this.state.index
       switch (socketData.payload) {
+        case 'home':
+          console.log("home")
+          break
         case 'left':
           // console.log("mainmenu: left")
           if (tempIndex >= 0)

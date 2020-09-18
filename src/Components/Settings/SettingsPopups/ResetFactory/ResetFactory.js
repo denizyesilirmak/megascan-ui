@@ -15,7 +15,6 @@ class ResetFactory extends Component {
     }
   }
 
-
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
     setTimeout(() => {
@@ -72,7 +71,6 @@ class ResetFactory extends Component {
         break
     }
   }
-
 
   deleteAllFiles = async () => {
     fetch('http://localhost:9090/deleteallfiles')

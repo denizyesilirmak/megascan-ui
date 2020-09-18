@@ -48,7 +48,6 @@ class LockScreen extends Component {
   componentWillUnmount() {
     socketHelper.detach()
     clearTimeout(this.introTimeout)
-    clearTimeout(this.introTimeout)
   }
 
   renderWrongPinPopup() {
@@ -97,7 +96,7 @@ class LockScreen extends Component {
           }
         }
         else if (this.state.pin.length === 4) {
-          console.log(this.state.pin.join(''))
+          // console.log(this.state.pin.join(''))
           DEFAULTPINS.forEach(element => {
             if (element === this.state.pin.join('')) {
               clearTimeout(this.introTimeout)
@@ -126,7 +125,6 @@ class LockScreen extends Component {
   render() {
     return (
       <div className="lock-screen">
-
         {
           (this.state.wrongPinPopup) ? this.renderWrongPinPopup() : ''
         }

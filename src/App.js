@@ -126,7 +126,6 @@ class App extends Component {
     })
   }
 
-
   setLanguage = (lang_code) => {
     console.log("selected language:", lang_code)
     this.setState({

@@ -79,7 +79,6 @@ class ResetStorage extends Component {
     }
   }
 
-
   render() {
     return (
       <div className="reset-factory component" ref="reset">

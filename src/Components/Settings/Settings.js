@@ -71,8 +71,8 @@ class Settings extends Component {
     ]
 
     this.state = {
-      activeSettingTab: 0,
-      activeSettingTabName: "power",
+      activeSettingTab: this.props.settingsTabIndex,
+      activeSettingTabName: this.buttons[this.props.settingsTabIndex].name,
       verticalIndex: false,
       subCursor: 0,
       activePopup: "",
@@ -403,7 +403,7 @@ class Settings extends Component {
               await dbStorage.setItem("pinlock", this.state.pinlock)
             }
             else if (this.state.subCursor === 1) {
-              console.log("pin popup open")
+              // console.log("pin popup open")
               this.props.navigateTo("changePinScreen")
             }
           }

@@ -50,6 +50,7 @@
   align-items: center;
   background-image: url(../../../Assets/MenuIcons/grid_mega_bionic.png);
   background-size: cover;
+  background-color: black;
 }
 
 .rotating-indicator-container .rotator{

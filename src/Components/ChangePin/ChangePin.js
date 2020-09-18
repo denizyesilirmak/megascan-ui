@@ -87,12 +87,14 @@ class ChangePin extends Component {
       case 'back':
         if (this.state.stage === 0) {
           if (this.tempPin.length === 0) {
-            this.props.navigateTo('settingsScreen')
+            this.props.navigateTo('settingsScreen', null, 2)
+            return
           }
           this.tempPin = []
           this.setState({ oldPinInput: [] })
         } else {
-          this.props.navigateTo("settingsScreen")
+          this.props.navigateTo("settingsScreen", null, 2)
+          return
         }
         return
       default:
@@ -122,7 +124,7 @@ class ChangePin extends Component {
         })
       }
       setTimeout(() => {
-        this.props.navigateTo('settingsScreen')
+        this.props.navigateTo('settingsScreen', null, 2)
       }, 3000);
     }
   }

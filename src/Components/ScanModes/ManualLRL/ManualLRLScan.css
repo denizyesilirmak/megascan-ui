@@ -16,8 +16,9 @@
   position: relative;
   left: 213px;
   top: 108px;
-  transform-origin: 20px 130px;
-  transition: all 0.2s;
+  transform-origin: 18px 132px;
+  transition: all 5ms;
+  transition-timing-function: ease-in-out;
 }
 
 .compass {
@@ -53,5 +54,5 @@
 }
 
 .indicator-angle{
-  transition: transform 1s;
+  transition: transform 0.3s;
 }

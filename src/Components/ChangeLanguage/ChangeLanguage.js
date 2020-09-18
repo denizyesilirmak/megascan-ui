@@ -137,11 +137,11 @@ class ChangeLanguage extends Component {
       case 'back':
         try {
           socketHelper.detach()
-          this.props.navigateTo("settingsScreen")
+          this.props.navigateTo("settingsScreen", null, 5)
         } catch (error) {
-          console.log(error)
+          // console.log(error)
         }
-        break
+        return
       default:
         break
     }

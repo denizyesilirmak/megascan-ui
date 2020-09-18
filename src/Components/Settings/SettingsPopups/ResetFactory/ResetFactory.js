@@ -43,7 +43,8 @@ class ResetFactory extends Component {
         break
       case 'back':
         if (!this.state.popup) {
-          this.props.navigateTo("menuScreen")
+          this.props.navigateTo("settingsScreen", null, 3)
+          return
         }
         break
       case 'ok':
@@ -53,7 +54,7 @@ class ResetFactory extends Component {
           })
           await this.deleteAllFiles()
           await this.resetDbStorage()
-          
+
           setTimeout(() => {
             this.setState({
               progress: 100
@@ -75,14 +76,14 @@ class ResetFactory extends Component {
 
   deleteAllFiles = async () => {
     fetch('http://localhost:9090/deleteallfiles')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      this.setState({
-        progress: 80
-      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({
+          progress: 80
+        })
 
-    })
+      })
   }
 
   resetDbStorage = async () => {

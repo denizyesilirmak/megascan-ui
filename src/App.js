@@ -62,7 +62,8 @@ class App extends Component {
       activeScreen: "setupScreen",
       fileToOpen: null,
       serial: '',
-      lastMainMenuIndex: -1
+      lastMainMenuIndex: -1,
+      settingsTabIndex: 0
     }
 
     fetch('http://localhost:9090/serial')
@@ -100,10 +101,6 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-
-  }
-
   componentDidCatch(error, info) {
     // console.log("ERROR HATASI")
     // setTimeout(() => {
@@ -116,12 +113,19 @@ class App extends Component {
     this.tmpScanPropObj = scanPropObj
   }
 
-  navigateTo = (screenName, file) => {
+  /**
+   * @param {string} screenName - Screen name to navigate.
+   * @param {string} file - File name to send 3D Scan Viewer.
+   * @param {number} settingsTabIndex - Last Settings Tab index.
+   */
+  navigateTo = (screenName, file, settingsTabIndex=0) => {
     this.setState({
+      settingsTabIndex: settingsTabIndex,
       activeScreen: screenName,
       fileToOpen: file
     })
   }
+
 
   setLanguage = (lang_code) => {
     console.log("selected language:", lang_code)
@@ -156,7 +160,7 @@ class App extends Component {
       case "menuScreen":
         return (<MainMenu navigateTo={this.navigateTo} setLastMainMenuIndex={this.setLastMainMenuIndex} lastIndex={this.state.lastMainMenuIndex} />)
       case "settingsScreen":
-        return (<Settings navigateTo={this.navigateTo} setVolume={this.setVolume} />)
+        return (<Settings navigateTo={this.navigateTo} setVolume={this.setVolume} settingsTabIndex={this.state.settingsTabIndex} />)
       case "turnOff":
         return (<TurnOff navigateTo={this.navigateTo} />)
       case "autoLrlScanScreen":

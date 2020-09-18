@@ -10,6 +10,7 @@ class Navigator extends Component {
 
   componentDidMount(){
     this.refs.naviSlider.style.transform = `translateX(${-1 * this.props.activeSettingTab * 220}px)`
+    this.refs.naviSlider.style.transform = `translateX(${-1 * Math.trunc((this.props.activeSettingTab) / 3) * 660}px)`
   }
 
   componentDidUpdate(prevProps) {

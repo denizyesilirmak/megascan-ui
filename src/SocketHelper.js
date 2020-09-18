@@ -19,7 +19,7 @@ class SocketHelper {
 
     this._socket.on('connect', () => {
       if (this._socket.connected) {
-        // console.clear()
+        console.clear()
         console.log("socket connected", this._socket.id)
       }
     })

@@ -22,17 +22,31 @@ class CTRLLRLScan extends Component {
     socketHelper.attach(this.handleKeyDown)
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
-    }, 150);
+    }, 90);
 
-    setInterval(() => {
-      this.setState({
-        angle: Math.random() * 180 - 90
-      })
-    }, 1000);
+    // setInterval(() => {
+    //   this.setState({
+    //     angle: Math.random() * 180 - 90
+    //   })
+    // }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.compassInterval)
   }
 
   requestSensorData = () => {
     socketHelper.send('L')
+  }
+
+  clamp = (value, min, max) => {
+    if (value <= min) {
+      return min
+    }
+    if (value >= max) {
+      return max
+    }
+    else return value
   }
 
   handleKeyDown = (socketData) => {
@@ -52,11 +66,20 @@ class CTRLLRLScan extends Component {
     }
 
     if (socketData.type === "lrlantenna") {
+      const angle = this.clamp(this.map(parseInt(socketData.payload), 0, 630, 0, 180) - 90, -90, 90)
       this.setState({
-        angle: (parseInt(socketData.payload) - 90),
-        heading: socketData.compass,
-        tilt: socketData.angle
+        angle: angle,
+        heading: parseInt(socketData.compass) + 720,
+        tilt: socketData.angle * 1.3
       })
+
+      let hertz = 0
+      if (angle < 0) {
+        hertz = parseInt(angle + 90)
+      } else {
+        hertz = parseInt(90 - angle)
+      }
+      console.log(hertz)
     }
   }
 
@@ -76,6 +99,10 @@ class CTRLLRLScan extends Component {
     });
     // console.log(a_pathString)
     return a_pathString
+  }
+
+  map = (x, in_min, in_max, out_min, out_max) => {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
   render() {

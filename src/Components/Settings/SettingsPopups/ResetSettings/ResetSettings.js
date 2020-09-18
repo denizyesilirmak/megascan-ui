@@ -41,7 +41,8 @@ class ResetSettings extends Component {
         break
       case 'back':
         if (!this.state.popup) {
-          this.props.navigateTo("menuScreen")
+          this.props.navigateTo("settingsScreen", null, 3)
+          return
         }
         break
       case 'ok':

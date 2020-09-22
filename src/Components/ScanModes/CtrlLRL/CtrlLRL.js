@@ -203,7 +203,7 @@ class CtrlLRL extends Component {
       case 3:
         return <Depth value={this.state.depth} />
       case 4:
-        return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 4} value={this.state.depth} />
+        return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 4}  />
       default:
         break;
     }

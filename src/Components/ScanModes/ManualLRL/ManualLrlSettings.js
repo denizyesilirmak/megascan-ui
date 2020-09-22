@@ -7,6 +7,7 @@ import Navigator from '../../Settings/SettingsElements/Navigator'
 import Distance from '../CtrlLRL/CtrlLRLComponents/Distance/Distance'
 import Depth from '../CtrlLRL/CtrlLRLComponents/Depth/Depth'
 import Target from './ManualLRLComponents/Target/Target'
+import Search from '../CtrlLRL/CtrlLRLComponents/Search/Search'
 
 import DatabaseHelper from '../../../DatabaseHelper'
 
@@ -35,13 +36,13 @@ class CtrlLRL extends Component {
     }
 
     DatabaseHelper.getAll()
-    .then(lastState => {
-      this.setState({
-        targets: lastState.manuallrl_targets || 6 * 3000,
-        distance: lastState.manuallrl_distance || 500,
-        depth: lastState.manuallrl_depth || 10
+      .then(lastState => {
+        this.setState({
+          targets: lastState.manuallrl_targets || 6 * 3000,
+          distance: lastState.manuallrl_distance || 500,
+          depth: lastState.manuallrl_depth || 10
+        })
       })
-    })
 
     this.buttons = [
       {
@@ -52,6 +53,9 @@ class CtrlLRL extends Component {
       },
       {
         name: "depth"
+      },
+      {
+        name: "search"
       }
     ]
 
@@ -137,9 +141,9 @@ class CtrlLRL extends Component {
         break
       case 'ok':
         if (!tempVerticalIndex) {
-          if (tempActiveSettingTab === 2) {
+          if (tempActiveSettingTab === 3) {
             this.saveToDb()
-            this.props.navigateTo('ctrlLrlSearchScreen')
+            this.props.navigateTo('manualLrlSearchScreen')
             return
           }
         }
@@ -176,6 +180,8 @@ class CtrlLRL extends Component {
         return <Distance value={this.state.distance} />
       case 2:
         return <Depth value={this.state.depth} />
+      case 3:
+        return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 3}/>
       default:
         break;
     }

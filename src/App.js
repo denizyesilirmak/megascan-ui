@@ -118,7 +118,7 @@ class App extends Component {
    * @param {string} file - File name to send 3D Scan Viewer.
    * @param {number} settingsTabIndex - Last Settings Tab index.
    */
-  navigateTo = (screenName, file, settingsTabIndex=0) => {
+  navigateTo = (screenName, file, settingsTabIndex = 0) => {
     this.setState({
       settingsTabIndex: settingsTabIndex,
       activeScreen: screenName,
@@ -217,6 +217,8 @@ class App extends Component {
       case "resetStorageScreen":
         return (<ResetStorage navigateTo={this.navigateTo} />)
       case "ctrlLrlSearchScreen":
+        return (<CtrlScan navigateTo={this.navigateTo} />)
+      case "manualLrlSearchScreen":
         return (<CtrlScan navigateTo={this.navigateTo} />)
       case "rebootScreen":
         return (<Reboot navigateTo={this.navigateTo} />)

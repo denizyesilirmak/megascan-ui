@@ -18,7 +18,6 @@ class FileList extends Component {
       fileList: [],
       popup: false,
       deletePopup: false
-
     }
   }
 
@@ -118,13 +117,13 @@ class FileList extends Component {
           }
         } else if (this.state.deletePopup) {
           if (this.state.deletePopupCursorIndex % 2 === 0) {
-            console.log("delete file now")
+            //console.log("delete file now")
 
             this.deleteFile(this.state.fileList[this.state.cursorIndex])
             this.setState({ deletePopup: false, popup: false, deletePopupCursorIndex: 2 * 100, popupCursorIndex: 3 * 100 })
           }
           else if (this.state.deletePopupCursorIndex % 2 === 1) {
-            console.log("back from delete popup")
+            //console.log("back from delete popup")
             this.setState({ deletePopup: false, popup: true })
           }
 
@@ -252,7 +251,6 @@ class FileList extends Component {
               )
             })
           }
-
         </div>
       </div >
     )

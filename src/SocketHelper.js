@@ -43,7 +43,7 @@ class SocketHelper {
 
   send = (msg) => {
     this._socket.send(msg)
-  }
+  } 
 
   attach = (fn) => {
     this._messageHandlerStack.push(this._currentMessageHandler)

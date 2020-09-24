@@ -190,7 +190,12 @@ class Settings extends Component {
             this.setState({
               brightness: this.clamp(this.state.brightness - 10, 10, 100)
             })
-            socketHelper.send('br.' + this.state.brightness)
+            // socketHelper.send('br.' + this.state.brightness)
+            socketHelper.send(JSON.stringify({
+              type: 'settings',
+              mode: 'brightness',
+              payload: 'br.' + this.state.brightness
+            }))
             await dbStorage.setItem("brightness", this.state.brightness)
           }
         }
@@ -215,7 +220,12 @@ class Settings extends Component {
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
-          socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
+          socketHelper.send(JSON.stringify({
+            type: 'settings',
+            mode: 'volume',
+            payload: `vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`
+          }))
+          // socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
 
         this.context.buttonInterrupt()
@@ -245,7 +255,12 @@ class Settings extends Component {
             this.setState({
               brightness: this.clamp(this.state.brightness + 10, 10, 100)
             })
-            socketHelper.send('br.' + this.state.brightness)
+            // socketHelper.send('br.' + this.state.brightness)
+            socketHelper.send(JSON.stringify({
+              type: 'settings',
+              mode: 'brightness',
+              payload: 'br.' + this.state.brightness
+            }))
             await dbStorage.setItem("brightness", this.state.brightness)
           }
 
@@ -273,7 +288,12 @@ class Settings extends Component {
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
-          socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
+          socketHelper.send(JSON.stringify({
+            type: 'settings',
+            mode: 'volume',
+            payload: `vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`
+          }))
+          // socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
         this.context.buttonInterrupt()
         break
@@ -382,14 +402,26 @@ class Settings extends Component {
             else if (this.state.subCursor === 0 && this.state.activePopup === "date") {
               // console.log("set date")
               console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
-              socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+
+              socketHelper.send(JSON.stringify({
+                type: 'settings',
+                mode: 'datetime',
+                payload: `date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`
+              }))
+              // socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+
               this.openOkPopup()
 
             }
             else if (this.state.subCursor === 1 && this.state.activePopup === "time") {
               // console.log("set time")
               console.log(`${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
-              socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
+              socketHelper.send(JSON.stringify({
+                type: 'settings',
+                mode: 'datetime',
+                payload: `date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`
+              }))
+              // socketHelper.send(`date#${this.state.year}.${this.state.month}.${this.state.day}-${this.state.hour}:${this.state.minute}:00`)
               this.openOkPopup()
             }
           }

@@ -17,7 +17,8 @@ class FileList extends Component {
       deletePopupCursorIndex: 2 * 100,
       fileList: [],
       popup: false,
-      deletePopup: false
+      deletePopup: false,
+      didFetchDone: false
     }
   }
 
@@ -36,6 +37,7 @@ class FileList extends Component {
       .then(data => {
         if (data.success)
           this.setState({
+            didFetchDone: true,
             fileList: data.filelist.reverse()
           })
       })
@@ -236,7 +238,7 @@ class FileList extends Component {
         }
 
         {
-          this.state.fileList.length < 1 ? this.noFilePopup() : null
+          this.state.didFetchDone && this.state.fileList.length < 1 ? this.noFilePopup() : null
 
         }
 

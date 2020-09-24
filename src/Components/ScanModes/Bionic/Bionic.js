@@ -122,11 +122,15 @@ class Bionic extends Component {
     dbStorage.setItem("bionic_gain", this.state.gain)
   }
 
+  map = (x, in_min, in_max, out_min, out_max) => {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
+
   render() {
     return (
       <div ref="bionic" className="bionic component">
         <div className="rotating-indicator-container">
-          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator" style={{ transform: `rotate(${this.state.sensorData * 1.4 - 20}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)` }} />
+          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator" style={{ transform: `rotate(${(this.state.sensorData * 1.4 - 20) + (this.state.gain + this.state.sensitivity) / 5}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)` }} />
         </div>
 
         <div className="line-chart">

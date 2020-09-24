@@ -160,8 +160,6 @@ class ScanScreen extends Component {
               //console.log("resume")
               this.setState({ pausePopup: false })
             } else {
-
-
               this.matrix.forEach((a, i) => {
                 a.forEach((b, j) => {
                   b.forEach((c, t) => {
@@ -184,6 +182,11 @@ class ScanScreen extends Component {
           if (this.counter + 1 === this.width * this.height && this.state.finishScanPopup === false && this.props.scanProps.mode === "manual") {
             this.setState({
               finishScanPopup: true
+            })
+          }
+          if (this.state.newLinePopup === true && this.state.finishScanPopup === false) {
+            this.setState({
+              newLinePopup: false
             })
           }
           break

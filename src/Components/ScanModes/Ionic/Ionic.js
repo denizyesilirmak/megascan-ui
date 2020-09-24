@@ -67,48 +67,23 @@ class Ionic extends Component {
 
   handleKeyDown = (socketData) => {
     if (socketData.type === 'button') {
-
+      console.log("buttom")
       let tmpCursorIndex = this.state.cursorIndex
       let tmpSensitivity = this.state.sensitivity
       let tmpGain = this.state.gain
       switch (socketData.payload) {
         case 'left':
-          if (!this.state.depthPopup) {
-            if (this.state.cursorIndex % 2 === 0) {
-              if (tmpSensitivity < 100)
-                tmpSensitivity += 5
-            }
-            else if (this.state.cursorIndex % 2 === 1) {
-              if (tmpGain < 100)
-                tmpGain += 5
-            }
-          }
+          console.log("asdasd")
+          tmpCursorIndex --
           break;
         case 'right':
-          if (!this.state.depthPopup) {
-            if (this.state.cursorIndex % 2 === 0) {
-              if (tmpSensitivity > 0)
-                tmpSensitivity -= 5
-            }
-            else if (this.state.cursorIndex % 2 === 1) {
-              if (tmpGain > 0)
-                tmpGain -= 5
-            }
-          }
+          tmpCursorIndex ++
           break;
         case 'up':
-          if (!this.state.depthPopup) {
-            tmpCursorIndex -= 1
-          } else {
-            this.setState({ depth: this.clamp(this.state.depth - DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
-          }
+
           break
         case 'down':
-          if (!this.state.depthPopup) {
-            tmpCursorIndex += 1
-          } else {
-            this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
-          }
+
           break
         case 'ok':
           break
@@ -199,8 +174,8 @@ class Ionic extends Component {
             <ellipse
               style={{ transition: "0.3s all" }}
               stroke={'#' + (this.state.sensorData < 10 ? '0' : '') + (this.state.sensorData).toString(16) + (255 - this.state.sensorData < 10 ? '0' : '') + (255 - this.state.sensorData).toString(16) + '00'}
-              ry={(this.state.sensorData) / 4 + 5}
-              rx={(this.state.sensorData) / 4 + 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#ff000060" />
+              ry={(this.state.sensorData) / 4 + 5 + (this.state.sensitivity + this.state.gain) / 5}
+              rx={(this.state.sensorData) / 4 + 5 + (this.state.sensitivity + this.state.gain) / 5} id="svg_2" cy="75" cx="75" strokeWidth="9" fill="#ff000060" />
           </g>
         </svg>
 

@@ -63,7 +63,8 @@ class App extends Component {
       fileToOpen: null,
       serial: '',
       lastMainMenuIndex: -1,
-      settingsTabIndex: 0
+      settingsTabIndex: 0,
+      info: {}
     }
 
     fetch('http://localhost:9090/serial')
@@ -85,7 +86,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'mobileGroundScan' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -117,12 +118,14 @@ class App extends Component {
    * @param {string} screenName - Screen name to navigate.
    * @param {string} file - File name to send 3D Scan Viewer.
    * @param {number} settingsTabIndex - Last Settings Tab index.
+   * @param {object} mobileGroundScan - Mobile ground scan options.
    */
-  navigateTo = (screenName, file, settingsTabIndex = 0) => {
+  navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}) => {
     this.setState({
       settingsTabIndex: settingsTabIndex,
       activeScreen: screenName,
-      fileToOpen: file
+      fileToOpen: file,
+      info: mobileGroundScanInfo
     })
   }
 
@@ -205,7 +208,7 @@ class App extends Component {
       case "geophysicalScreen":
         return (<Geophysical navigateTo={this.navigateTo} />)
       case "mobileGroundScan":
-        return (<MobileGroundScan navigateTo={this.navigateTo} />)
+        return (<MobileGroundScan navigateTo={this.navigateTo} info={this.state.info} />)
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "setupScreen":

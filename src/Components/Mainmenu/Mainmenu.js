@@ -110,6 +110,7 @@ class Mainmenu extends Component {
   }
 
   handleKeyDown = (socketData) => {
+    //console.log(socketData)
     if (socketData.type === 'button') {
       this.context.buttonInterrupt()
       let tempIndex = this.state.index
@@ -159,9 +160,15 @@ class Mainmenu extends Component {
           break
       }
 
+
       this.setState({
         index: tempIndex
       })
+    }
+    else if (socketData.type === 'mobile' && socketData.payload !== 'exitGroundScanMenu') {
+      console.log("giriyorum kanka")
+      this.props.navigateTo("mobileGroundScan", null, null, socketData.info)
+      return
     }
   }
 

@@ -57,7 +57,36 @@ class Ionic extends React.Component {
       }
     }
     else if (socketData.type === "button") {
+      let tmpCursorIndex = this.state.cursorIndex
+      let tmpSensitivity = this.state.sensitivity
+      let tmpGain = this.state.gain
       switch (socketData.payload) {
+        case 'left':
+          tmpCursorIndex--
+          break
+        case 'right':
+          tmpCursorIndex++
+          break
+        case 'up':
+          if (this.state.cursorIndex % 2 === 1) {
+            if (tmpSensitivity < 100)
+              tmpSensitivity += 5
+          }
+          else if (this.state.cursorIndex % 2 === 0) {
+            if (tmpGain < 100)
+              tmpGain += 5
+          }
+          break;
+        case 'down':
+          if (this.state.cursorIndex % 2 === 1) {
+            if (tmpSensitivity > 0)
+              tmpSensitivity -= 5
+          }
+          else if (this.state.cursorIndex % 2 === 0) {
+            if (tmpGain > 0)
+              tmpGain -= 5
+          }
+          break;
         case 'back':
           clearInterval(this.dataSensorInterval)
           SoundHelper.stopOscillator()
@@ -66,6 +95,11 @@ class Ionic extends React.Component {
         default:
           return
       }
+      this.setState({
+        cursorIndex: tmpCursorIndex,
+        sensitivity: tmpSensitivity,
+        gain: tmpGain
+      })
     }
   }
 

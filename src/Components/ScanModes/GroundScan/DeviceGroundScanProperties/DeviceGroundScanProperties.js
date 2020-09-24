@@ -300,7 +300,7 @@ class DeviceGroundScanProperties extends Component {
             //active tab start sekmesinde. taramaya başla
             //generate scan properties object
             let scanProperties = {
-              mode: this.state.scanModeIndex % 2 === 0 ? "auto" : "manual",
+              mode: this.state.scanModeIndex % 2 === 0 ? "manual" : "auto",
               path: this.state.scanPathIndex % 2 === 0 ? "zigzag" : "parallel",
               lines: this.state.lines,
               steps: this.state.steps,

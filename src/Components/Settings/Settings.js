@@ -19,7 +19,6 @@ import PinPopup from './SettingsPopups/Pin/PinPopup'
 import TickIcon from '../../Assets/tick.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
-
 import dbStorage from '../../DatabaseHelper'
 
 

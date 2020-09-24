@@ -6,7 +6,7 @@ import SpeedIcon from '../../../Assets/MenuIcons/speed.svg'
 import Left from '../../../Assets/MenuIcons/left-arrow3.png'
 import right from '../../../Assets/MenuIcons/right-arrow3.png'
 import SoundHelper from '../../../SoundHelper'
-
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const COLORS = {
   jet: [
@@ -19,6 +19,7 @@ const COLORS = {
 }
 
 class LiveStrem extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -137,7 +138,7 @@ class LiveStrem extends Component {
           this.instantData = this.map(parseInt(socketData.payload), this.total, 255, 127, 255)
         }
       }
-      
+
       SoundHelper.changeFrequencySmooth(this.instantData)
       this.calibration(this.instantData)
       let tmpStream = this.state.stream
@@ -196,7 +197,7 @@ class LiveStrem extends Component {
         <img src={calibrationIcon} alt="cal"></img>
         <div className="calibration-warning">The device is calibrating the sensor. Keep the sensor perpendicular to the ground. </div>
         <div className="calibration-preloader-holder">
-          <div ref="calib" className="calibration-preloader-value">
+          <div ref="calib" className="calibration-preloader-value" style={{ background: this.context.theme.button_bg_selected }}>
 
           </div>
         </div>

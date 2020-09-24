@@ -22,7 +22,7 @@ class ScanScreen extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
-    console.log(this.props.scanProps)
+    //console.log(this.props.scanProps)
     this.y = this.props.scanProps.steps // max 20
     this.x = this.props.scanProps.lines * 4 // max 10
     this.direction = this.props.scanProps.startPoint
@@ -85,7 +85,7 @@ class ScanScreen extends Component {
     this.graphMesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.graphMesh);
     this.initGrid()
-    this.animate();
+    this.animate()
   }
 
   componentWillUnmount() {
@@ -100,7 +100,7 @@ class ScanScreen extends Component {
 
   clearMemory = () => {
     this.over = true
-    console.log("scan screen unmount")
+    //console.log("scan screen unmount")
     this.scene.dispose()
     this.renderer.dispose()
     this.geometry.dispose()
@@ -108,11 +108,10 @@ class ScanScreen extends Component {
   }
 
   requestSensorData = () => {
-    if (true && !this.state.finishScanPopup && !this.state.newLinePopup) {
+    if (true && !this.state.finishScanPopup && !this.state.newLinePopup && this.props.scanProps.mode === "auto") {
       socketHelper.send('W')
     }
   }
-
 
   handleKeyDown = (socketData) => {
     if (socketData.type === 'button') {
@@ -149,30 +148,43 @@ class ScanScreen extends Component {
           }
           else if (this.state.finishScanPopup) {
             if (this.state.finishPopupButtonIndex === true) {
-              console.log("pressed ok")
-              fetch('http://localhost:9090/savescan', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ "data": this.matrix })
-              }).then(res => res.json())
-                .then(data => {
-                  console.log(data)
-                  this.props.navigateTo('scanViewerScreen', data.fileName)
-                })
+              //console.log("pressed ok")
+              this.saveScan()
             } else {
-              console.log("pressed cancel")
+              //console.log("pressed cancel")
+              this.props.navigateTo("deviceGroundScanPropertiesScreen")
             }
           }
-          else if(this.state.pausePopup){
-            if(this.state.pausePopupButtonIndex){
-              console.log("resume")
-              this.setState({pausePopup: false})
-            }else{
-              console.log("stop")
+          else if (this.state.pausePopup) {
+            if (this.state.pausePopupButtonIndex) {
+              //console.log("resume")
+              this.setState({ pausePopup: false })
+            } else {
+
+
+              this.matrix.forEach((a, i) => {
+                a.forEach((b, j) => {
+                  b.forEach((c, t) => {
+                    if(c === null)
+                    this.matrix[i][j][t] = this.average
+                  })
+                })
+              })
+
+             // console.log("stop - current matrix", this.matrix, 'average', this.average)
+              this.saveScan()
             }
+          }
+          break
+
+        case 'start':
+          if (this.props.scanProps.mode === "manual" && this.state.finishScanPopup === false) {
+            socketHelper.send('W')
+          }
+          if (this.counter + 1 === this.width * this.height && this.state.finishScanPopup === false && this.props.scanProps.mode === "manual") {
+            this.setState({
+              finishScanPopup: true
+            })
           }
           break
         case 'back':
@@ -190,6 +202,7 @@ class ScanScreen extends Component {
       }
     } else if (socketData.type === 'multipleSensor') {
       let localSensorArray = [parseInt(socketData.payload[0]), parseInt(socketData.payload[1]), parseInt(socketData.payload[2]), parseInt(socketData.payload[3])]
+      //console.log(localSensorArray)
       let localMin = Math.min.apply(null, localSensorArray)
       let localMax = Math.max.apply(null, localSensorArray)
       this.min = localMin < this.min ? localMin : this.min
@@ -233,7 +246,7 @@ class ScanScreen extends Component {
       if (this.counter - 1 === (this.x / 4) * this.y) {
         //tarama bitti
         clearInterval(this.dataInterval)
-        console.log(JSON.stringify(this.matrix))
+       // console.log(JSON.stringify(this.matrix))
         this.setState({
           finishScanPopup: true
         })
@@ -242,6 +255,20 @@ class ScanScreen extends Component {
     }
   }
 
+  saveScan = () => {
+    fetch('http://localhost:9090/savescan', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "data": this.matrix })
+    }).then(res => res.json())
+      .then(data => {
+        //console.log(data)
+        this.props.navigateTo('scanViewerScreen', data.fileName)
+      })
+  }
 
 
   colorSquare = (x, y, c) => {
@@ -296,10 +323,10 @@ class ScanScreen extends Component {
 
   map = (x, in_min, in_max, out_min, out_max) => {
     let m = (Math.abs(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
-  
-    if(isNaN(m)){
+
+    if (isNaN(m)) {
       return 127
-    }else{
+    } else {
       return m;
     }
   }
@@ -379,7 +406,7 @@ class ScanScreen extends Component {
         // Y sifir ise X'i arttir, Y'yi resetle
         if (this.currentPoint.y > 0) {
           this.currentPoint.y--
-          if (this.currentPoint.y === 0) {
+          if (this.currentPoint.y === 0 && this.counter + 1 !== this.width * this.height && this.props.scanProps.mode === "auto") {
             this.setState({
               newLinePopup: true
             })
@@ -398,7 +425,7 @@ class ScanScreen extends Component {
         // Y sifir ise X'i azalt, Y'yi resetle
         if (this.currentPoint.y > 0) {
           this.currentPoint.y--
-          if (this.currentPoint.y === 0) {
+          if (this.currentPoint.y === 0 && this.counter + 1 !== this.width * this.height && this.props.scanProps.mode === "auto") {
             this.setState({
               newLinePopup: true
             })
@@ -418,6 +445,7 @@ class ScanScreen extends Component {
 
   zigzag = (startPos) => {
     // First run
+    console.log(this.counter, this.width * this.height)
     if (this.currentPoint.x === null) {
       let startPoint = { x: null, y: null }
 
@@ -454,14 +482,14 @@ class ScanScreen extends Component {
           if (dir === 'up') {
 
             this.currentPoint.y--
-            if (this.currentPoint.y === 0) {
+            if (this.currentPoint.y === 0 && this.counter + 1 !== this.width * this.height && this.props.scanProps.mode === "auto") {
               this.setState({
                 newLinePopup: true
               })
             }
           } else {
             this.currentPoint.y++
-            if (this.currentPoint.y === this.y - 1) {
+            if (this.currentPoint.y === this.y - 1 && this.counter + 1 !== this.width * this.height && this.props.scanProps.mode === "auto") {
               this.setState({
                 newLinePopup: true
               })
@@ -505,14 +533,14 @@ class ScanScreen extends Component {
           // Sadece Y degisiyor
           if (dir === 'up') {
             this.currentPoint.y--
-            if (this.currentPoint.y === 0) {
+            if (this.currentPoint.y === 0 && this.counter + 1 !== this.width * this.height && this.props.scanProps.mode === "auto") {
               this.setState({
                 newLinePopup: true
               })
             }
           } else {
             this.currentPoint.y++
-            if (this.currentPoint.y === this.y - 1) {
+            if (this.currentPoint.y === this.y - 1 && this.counter + 1 !== this.width * this.height && this.props.scanProps.mode === "auto") {
               this.setState({
                 newLinePopup: true
               })

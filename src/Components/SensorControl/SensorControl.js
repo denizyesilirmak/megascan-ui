@@ -5,6 +5,8 @@ import LiveStremVideo from '../../Assets/Videos/_controlLiveStream.mp4'
 import BionicVideo from '../../Assets/Videos/_controlIonicBionic.mp4'
 import GroundScanVideo from '../../Assets/Videos/_controlGroundScan.mp4'
 
+const bypass = true
+
 class SensorControl extends React.Component {
   constructor(props) {
     super(props)
@@ -18,6 +20,10 @@ class SensorControl extends React.Component {
   }
 
   componentDidMount() {
+    if (bypass) {
+      this.props.navigateTo(this.props.target)
+      return
+    }
     switch (this.props.target) {
       case "liveStreamScreen":
         this.setState({ src: LiveStremVideo, targetSensorID: 2 })
@@ -34,10 +40,10 @@ class SensorControl extends React.Component {
       case "pinPointerScreen":
         this.setState({ src: LiveStremVideo, targetSensorID: 2 })
         break;
-
       default:
         break;
     }
+
     SocketHelper.attach(this.controlRespond)
     const timeoutB = setTimeout(() => {
       SocketHelper.send('X')
@@ -50,9 +56,7 @@ class SensorControl extends React.Component {
       SocketHelper.detach()
       this.props.navigateTo('menuScreen')
     }, 4000);
-
   }
-
 
   onVideoEnded = () => {
     clearTimeout(this.failTimeout)
@@ -74,7 +78,7 @@ class SensorControl extends React.Component {
         try {
           this.indicatorREF.current.style.width = "100%"
         } catch (error) {
-          
+
         }
         clearTimeout(timeoutA)
         if (this.state.targetSensorID !== this.state.currentSensor) {
@@ -99,23 +103,21 @@ class SensorControl extends React.Component {
     )
   }
 
-
-
   renderVideo = () => {
     return (
       <>
         <div className="warning" style={{ display: this.state.renderVideo ? 'block' : 'none' }}>
           Please connect the sensor.
         </div>
-        <video 
-        className="control-video" 
-        ref="video" 
-        preload="true" 
-        style={{ display: this.state.renderVideo ? 'block' : 'none', height: "100vh", backgroundSize: "contain" }} 
-        src={this.state.src} 
-        muted 
-        autoPlay
-        onEnded={() => this.onVideoEnded()}
+        <video
+          className="control-video"
+          ref="video"
+          preload="true"
+          style={{ display: this.state.renderVideo ? 'block' : 'none', height: "100vh", backgroundSize: "contain" }}
+          src={this.state.src}
+          muted
+          autoPlay
+          onEnded={() => this.onVideoEnded()}
         ></video>
       </>
     )
@@ -129,8 +131,8 @@ class SensorControl extends React.Component {
             this.renderPopup() : null
         }
         {
-          this.state.renderVideo ? 
-          this.renderVideo() : null
+          this.state.renderVideo ?
+            this.renderVideo() : null
         }
       </div>
     )

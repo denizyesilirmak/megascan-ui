@@ -2,14 +2,14 @@
   background: black;
 }
 
-.mobile-ground-scan .mgs-props{
+.mobile-ground-scan .mgs-props {
   width: fit-content;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  margin-left:  20px;
+  margin-left: 20px;
 }
 
 .mobile-ground-scan .mgs-prop {
@@ -24,9 +24,30 @@
   font-size: 22px;
 }
 
-.mgs-prop .value{
+.mgs-prop .value {
   font-size: 30px;
-  color: rgb(0, 0, 0);
+  color: #ffffff;
   /* -webkit-text-stroke-width: 1px; */
   /* -webkit-text-stroke-color: white; */
+}
+
+.mobile-ground-scan .tablet-image {
+  position: absolute;
+  right: 40px;
+  z-index: 10000;
+  top: 70px;
+  width: 280px;
+  animation: tablet-anim 2s infinite;
+}
+
+@keyframes tablet-anim {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }

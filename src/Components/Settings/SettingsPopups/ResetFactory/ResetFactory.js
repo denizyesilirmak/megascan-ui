@@ -109,7 +109,7 @@ class ResetFactory extends Component {
         {
           this.state.popup ?
             <div className="reset-preloader" style={{ background: this.context.theme.button_bg_selected }}>
-              <div className="reseting-text">Resetting to factory settings, please wait...</div>
+              <div className="reseting-text">{this.context.strings['resetFactoryProgress']}</div>
               <div className="reset-progress-bar-container" >
                 <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}></div>
               </div>
@@ -117,12 +117,12 @@ class ResetFactory extends Component {
         }
 
         <div className="reset-question">
-          Restoring factory settings resets all device settings and deletes saved files. Are you sure?
+          {this.context.strings['resetFactoryQuestion']}
         </div>
 
         <div className="reset-answers">
-          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>Yes</div>
-          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>No</div>
+          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>{this.context.strings['yes']}</div>
+          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>{this.context.strings['no']}</div>
         </div>
       </div>
     )

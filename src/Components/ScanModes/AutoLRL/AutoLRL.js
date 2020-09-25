@@ -46,7 +46,7 @@ class AutoLRL extends Component {
     let tempActiveScreen = this.state.activeScreen
     switch (socketData.payload) {
       case 'ok':
-        if (tempActiveScreen >= 0 && tempActiveScreen < 2) {
+        if (tempActiveScreen >= 0 && tempActiveScreen < 1) {
           tempActiveScreen++
           await dbStorage.setItem("autolrl_distance", this.state.distance)
           await dbStorage.setItem("autolrl_depth", this.state.depth)

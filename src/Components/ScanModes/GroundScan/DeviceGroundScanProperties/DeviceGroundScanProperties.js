@@ -121,14 +121,14 @@ class DeviceGroundScanProperties extends Component {
               <img style={{ filter: this.context.theme.arrorHueRotation }} src={upArrow} alt="column"></img>
               <div className="scan-step-value">{this.state.lines}</div>
               <img style={{ filter: this.context.theme.arrorHueRotation }} className="down-scan-step" src={downArrow} alt="column"></img>
-              <div className="scan-step-label">Lines</div>
+              <div className="scan-step-label">{this.context.strings["lines"]}</div>
             </div>
 
             <div style={{ boxShadow: this.state.scanStepIndex % 2 === 1 && !this.state.verticalTabIndex ? this.context.theme.settings_shadow : null, background: this.state.scanStepIndex % 2 === 1 && !this.state.verticalTabIndex ? this.context.theme.background3 : null }} className={`scan-step-selector `}>
               <img style={{ filter: this.context.theme.arrorHueRotation }} src={upArrow} alt="column"></img>
               <div className="scan-step-value">{this.state.steps}</div>
               <img style={{ filter: this.context.theme.arrorHueRotation }} className="down-scan-step" src={downArrow} alt="column"></img>
-              <div className="scan-step-label">Steps</div>
+              <div className="scan-step-label">{this.context.strings["steps"]}</div>
             </div>
           </div>
         )
@@ -147,25 +147,25 @@ class DeviceGroundScanProperties extends Component {
 
                 <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
                   <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
-                    Mode
+                  {this.context.strings["mode"] }
                   </div>
                   <div className="summary-value">
-                    {this.state.scanModeIndex % 2 === 0 ? "Auto" : "Manual"}
+                    {this.context.strings[this.state.scanModeIndex % 2 === 0 ? "auto" : "manual"]}
                   </div>
                 </div>
 
                 <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
                   <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
-                    Path
+                  {this.context.strings["path"] }
                   </div>
                   <div className="summary-value">
-                    {this.state.scanPathIndex % 2 === 0 ? "Alternative" : "One Direction"}
+                    {this.context.strings[this.state.scanPathIndex % 2 === 0 ? "alternate" : "onedirection"]}
                   </div>
                 </div>
 
                 <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
                   <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
-                    Size
+                  {this.context.strings["size"] }
                   </div>
                   <div className="summary-value">
                     {this.state.lines} x {this.state.steps}
@@ -174,17 +174,17 @@ class DeviceGroundScanProperties extends Component {
 
                 <div className="summary-prop" style={{ borderColor: this.context.theme.background2 }}>
                   <div className="summary-label" style={{ background: this.context.theme.button_bg_selected, borderBottomColor: this.context.theme.background2 }}>
-                    Start Point
+                  {this.context.strings["startpoint"] }
                   </div>
                   <div className="summary-value">
-                    {this.state.startPointIndex % 2 === 0 ? "Left" : "Right"}
+                    {this.context.strings[this.state.startPointIndex % 2 === 0 ? "left" : "right"]}
                   </div>
                 </div>
 
 
               </div>
 
-              <div className="scan-start">PRESS OK TO START SCAN</div>
+              <div className="scan-start">{this.context.strings["pressoktoscan"]}</div>
             </div>
           </div>
         )
@@ -343,7 +343,7 @@ class DeviceGroundScanProperties extends Component {
               borderColor: this.context.theme.background3
             }}
           >
-            Mode
+            {this.context.strings["mode"] }
             </div>
           <div className={`dgsp-tab`}
             style={{
@@ -351,7 +351,7 @@ class DeviceGroundScanProperties extends Component {
               borderColor: this.context.theme.background3
             }}
           >
-            Path
+            {this.context.strings["path"] }
             </div>
           <div className={`dgsp-tab`}
             style={{
@@ -359,7 +359,7 @@ class DeviceGroundScanProperties extends Component {
               borderColor: this.context.theme.background3
             }}
           >
-            Size
+            {this.context.strings["size"] }
             </div>
           <div className={`dgsp-tab`}
             style={{
@@ -367,14 +367,14 @@ class DeviceGroundScanProperties extends Component {
               borderColor: this.context.theme.background3
             }}
           >
-            Start Point
+           {this.context.strings["startpoint"] }
             </div>
           <div className={`dgsp-tab`}
             style={{
               background: this.state.activeTabIndex % 5 === 4 ? this.context.theme.button_bg_selected : "black",
               borderColor: this.context.theme.background3
             }}
-          >Scan</div>
+          >{this.context.strings["scan"] }</div>
           <img alt="left" src={TabRightArrow} style={{ filter: this.context.theme.arrorHueRotation }} />
         </div>
         {

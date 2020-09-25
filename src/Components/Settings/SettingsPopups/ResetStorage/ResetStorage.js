@@ -51,14 +51,14 @@ class ResetStorage extends Component {
             popup: true,
           })
           fetch('http://localhost:9090/deleteallfiles')
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
-            this.setState({
-              progress: 80
-            })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data)
+              this.setState({
+                progress: 80
+              })
 
-          })
+            })
           setTimeout(() => {
             this.setState({
               progress: 100
@@ -68,9 +68,9 @@ class ResetStorage extends Component {
           setTimeout(() => {
             this.props.navigateTo('settingsScreen')
           }, 7000);
-          
-          
-        }else{
+
+
+        } else {
           this.props.navigateTo("settingsScreen")
         }
         break
@@ -86,7 +86,7 @@ class ResetStorage extends Component {
         {
           this.state.popup ?
             <div className="reset-preloader" style={{ background: this.context.theme.button_bg_selected }}>
-              <div className="reseting-text">Deleting scan files, please wait...</div>
+              <div className="reseting-text">{this.context.strings['resetStorageProgress']}</div>
               <div className="reset-progress-bar-container" >
                 <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}></div>
               </div>
@@ -94,11 +94,11 @@ class ResetStorage extends Component {
         }
 
         <div className="reset-question">
-          All your scan files will be deleted. Are you sure?
+          {this.context.strings['resetStorageQuestion']}
         </div>
         <div className="reset-answers">
-          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>Yes</div>
-          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>No</div>
+          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>{this.context.strings['yes']}</div>
+          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>{this.context.strings['no']}</div>
         </div>
       </div>
     )

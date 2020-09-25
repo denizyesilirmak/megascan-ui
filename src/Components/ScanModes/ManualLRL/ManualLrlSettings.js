@@ -55,7 +55,7 @@ class CtrlLRL extends Component {
         name: "depth"
       },
       {
-        name: "search"
+        name: "scan"
       }
     ]
 

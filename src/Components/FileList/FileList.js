@@ -162,7 +162,7 @@ class FileList extends Component {
       <div className="file-list-popup" style={{ borderColor: this.context.theme.background3 }}>
 
         <div className="question">
-          Selected File:
+          {this.context.strings["selectedfile"]}
         </div>
         <div className="selected-file-name">
           {
@@ -172,13 +172,13 @@ class FileList extends Component {
         <div className="buttons">
           <div className={`button`}
             style={{ background: this.state.popupCursorIndex % 3 === 0 ? this.context.theme.button_bg_selected : null }}
-          >Open</div>
+          >{this.context.strings["open"]}</div>
           <div className={`button`}
             style={{ background: this.state.popupCursorIndex % 3 === 1 ? this.context.theme.button_bg_selected : null }}
-          >Cancel</div>
+          >{this.context.strings["cancel"]}</div>
           <div className={`button`}
             style={{ background: this.state.popupCursorIndex % 3 === 2 ? "#ff4900" : null }}
-          >Delete</div>
+          >{this.context.strings["delete"]}</div>
         </div>
       </div >
     )
@@ -221,7 +221,7 @@ class FileList extends Component {
     return (
       <div className="no-file">
         <img className="no-file-icon" src={NoFileIcon} alt="ef"/>
-        No scan files
+        {this.context.strings['noscanfiles']}
       </div>
     )
   }

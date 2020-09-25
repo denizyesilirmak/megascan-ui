@@ -7,7 +7,7 @@ class Sensitivity extends Component {
   render() {
     return (
       <div className="sensitivity" style={{ background: this.props.selected ? this.context.theme.button_bg_selected : null }}>
-        <span>SENSITIVITY</span>
+        <span>{this.context.strings["sensitivity"]}</span>
         <svg width="120" height="30">
           <g>
             <rect rx="2" stroke="null" height="21.99964" width="8.87485" y="4.00018" x="6.73157" fill={this.props.value < 1 ? '#333333' : '#ffffff'} />

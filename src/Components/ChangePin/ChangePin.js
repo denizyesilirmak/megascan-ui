@@ -169,15 +169,15 @@ class ChangePin extends Component {
         <div className="change-pin-container" style={{ transform: this.state.error ? 'translateX(-200px)' : null }}>
           {
             this.state.stage === 0 ?
-              <div className="old-pin-label">Please Enter Old Pin Number</div> : null
+              <div className="old-pin-label">{this.context.strings["enteroldpinnumber"]}</div> : null
           }
           {
             this.state.stage === 1 ?
-              <div className="old-pin-label">Please Enter New Pin Number</div> : null
+              <div className="old-pin-label">{this.context.strings["enternewpinnumber"]}</div> : null
           }
           {
             this.state.stage === 2 ?
-              <div className="old-pin-label">Please Re-Enter New Pin Number</div> : null
+              <div className="old-pin-label">{this.context.strings["confirmnewpinnumber"]}</div> : null
           }
           {
             this.renderCurrentPin()

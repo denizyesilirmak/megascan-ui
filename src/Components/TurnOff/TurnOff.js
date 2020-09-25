@@ -69,11 +69,11 @@ class TurnOff extends Component {
       <div ref="turnOff" className="turn-off component">
         <img alt="turn-off" className="turn-off-icon" src={TurnOffIcon} />
         <div className="question">
-          Do you want to turn off the device?
+          {this.context.strings["turnoffquestion"]}
         </div>
         <div className="turn-off-buttons">
-          <div style={{ background: this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${this.state.yesNo ? "selected" : ""}`}>YES</div>
-          <div style={{ background: !this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${!this.state.yesNo ? "selected" : ""}`}>NO</div>
+          <div style={{ background: this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${this.state.yesNo ? "selected" : ""}`}>{this.context.strings['yes']}</div>
+          <div style={{ background: !this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${!this.state.yesNo ? "selected" : ""}`}>{this.context.strings['no']}</div>
         </div>
 
       </div>

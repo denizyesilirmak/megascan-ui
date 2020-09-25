@@ -175,7 +175,7 @@ class PinPointer extends Component {
 
           <div className="pinpointer-button" style={{ background: this.state.selectedButton % 3 === 0 ? this.context.theme.button_bg_selected : null }}>
             <img src={CalibrationIcon} alt="calibraiton"></img>
-            <div className="label">CALIBRATION</div>
+            <div className="label">{this.context.strings["calibration"]}</div>
           </div>
 
           <div className="pinpointer-button" style={{ background: this.state.selectedButton % 3 === 1 ? this.context.theme.button_bg_selected : null }}>

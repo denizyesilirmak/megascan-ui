@@ -195,7 +195,7 @@ class LiveStrem extends Component {
     return (
       <div className="live-stream-calibration">
         <img src={calibrationIcon} alt="cal"></img>
-        <div className="calibration-warning">The device is calibrating the sensor. Keep the sensor perpendicular to the ground. </div>
+        <div className="calibration-warning">{this.context.strings["calibrationwarning"]}</div>
         <div className="calibration-preloader-holder">
           <div ref="calib" className="calibration-preloader-value" style={{ background: this.context.theme.button_bg_selected }}>
 

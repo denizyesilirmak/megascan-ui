@@ -93,7 +93,7 @@ class ResetSettings extends Component {
         {
           this.state.popup ?
             <div className="reset-preloader" style={{ background: this.context.theme.button_bg_selected }}>
-              <div className="reseting-text">Resetting to factory settings, please wait...</div>
+              <div className="reseting-text">{this.context.strings['resetSettingsProgress']}</div>
               <div className="reset-progress-bar-container" >
                 <div className="reset-progress-bar" style={{ width: `${this.state.progress}%` }}>
 
@@ -103,11 +103,11 @@ class ResetSettings extends Component {
         }
 
         <div className="reset-question">
-          Reset Settings restores all settings to factory default. Your files will not be deleted. Are you sure?
+          {this.context.strings['resetSettingsQuestion']}
         </div>
         <div className="reset-answers">
-          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>Yes</div>
-          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>No</div>
+          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 0 ? this.context.theme.button_bg_selected : null }}>{this.context.strings['yes']}</div>
+          <div className="reset-button" style={{ background: this.state.buttonIndex % 2 === 1 ? this.context.theme.button_bg_selected : null }}>{this.context.strings['no']}</div>
         </div>
       </div>
     )

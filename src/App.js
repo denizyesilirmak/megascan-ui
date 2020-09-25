@@ -49,10 +49,6 @@ dbStorage.init()
 class App extends Component {
   constructor(props) {
     super(props)
-
-
-    dbStorage.setItem('lang', 'en')
-
     this.tmpScanPropObj = { mode: "manual", path: "zigzag", lines: 10, steps: 10, startPoint: "right" } // not if this is needed.
     document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')";
     // console.log(DeviceInfo.deviceModelName)
@@ -86,7 +82,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'mobileGroundScan' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),

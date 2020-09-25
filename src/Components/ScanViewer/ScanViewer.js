@@ -187,14 +187,14 @@ class ScanViewer extends Component {
         <div className="sv-bottom">
 
           <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
-            <div className="title">Average</div>
+            <div className="title">{this.context.strings["average"]}</div>
             <div className="value">{this.state.average}</div>
           </div>
 
           {
             this.state.analyseMode ?
               <div className="sv-bottom-panel animation" style={{ background: this.context.theme.button_bg_selected }}>
-                <div className="title">Depth</div>
+                <div className="title">{this.context.strings["depth"]}</div>
                 <div className="value">{this.state.depth.toFixed(2)}</div>
               </div>
               :

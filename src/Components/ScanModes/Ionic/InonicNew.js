@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './IonicNew.css'
 import {
   CircularProgressbar,
@@ -6,16 +6,17 @@ import {
 } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import LeftRight from '../../../Assets/MenuIcons/leftright.svg'
-
-
-
 import SocketHelper from '../../../SocketHelper'
 import SoundHelper from '../../../SoundHelper'
 
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
-class Ionic extends React.Component {
+
+class Ionic extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
+
     this.state = {
       value: 0,
       cursorIndex: 4 * 1000,
@@ -113,7 +114,7 @@ class Ionic extends React.Component {
 
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
-          <div className="dial-label">Gain</div>
+          <div className="dial-label">{this.context.strings["gain"]}</div>
           <span>{this.state.gain}</span>
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
@@ -134,7 +135,7 @@ class Ionic extends React.Component {
 
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
-          <div className="dial-label">Sensitivity</div>
+          <div className="dial-label">{this.context.strings["sensitivity"]}</div>
           <span>{this.state.sensitivity}</span>
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar

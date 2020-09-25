@@ -54,7 +54,7 @@ class LockScreen extends Component {
     return (
       <div className="black-overlay">
         <div className="popup wrong-pin">
-          The pin you entered is incorrect. Please correct and try again.
+          {this.context.strings['wrongPinWarn']}
         </div>
       </div>
     )

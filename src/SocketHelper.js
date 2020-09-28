@@ -20,8 +20,12 @@ class SocketHelper {
     this._socket.on('connect', () => {
       if (this._socket.connected) {
         console.clear()
-        console.log("socket connected", this._socket.id)
+        console.log(`%csocket connected ${this._socket.id}`, "color:green")
       }
+    })
+
+    this._socket.on('disconnect', () => {
+      console.log("%cSocket disconnected", "color:red");
     })
 
     return SocketHelper.instance
@@ -43,7 +47,7 @@ class SocketHelper {
 
   send = (msg) => {
     this._socket.send(msg)
-  } 
+  }
 
   attach = (fn) => {
     this._messageHandlerStack.push(this._currentMessageHandler)

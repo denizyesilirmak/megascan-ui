@@ -1,5 +1,9 @@
 .mobile-ground-scan {
   background: black;
+  transform: rotate3d(1,2,3, 245deg) translateY(499px);
+  transition: transform 0.5s, opacity 1s;
+  transition-delay: 300ms;
+  opacity: 0;
 }
 
 .mobile-ground-scan .mgs-props {
@@ -28,10 +32,10 @@
 .mgs-prop .value {
   font-size: 24px;
   color: #ffffff;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-weight: bold;
-  /* -webkit-text-stroke-width: 1px; */
-  /* -webkit-text-stroke-color: white; */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 .mobile-ground-scan .tablet-image {

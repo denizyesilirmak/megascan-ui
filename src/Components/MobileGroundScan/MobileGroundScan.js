@@ -10,6 +10,10 @@ class MobileGroundScan extends Component {
   constructor(props) {
     super(props)
 
+    this.component = React.createRef()
+
+    
+
     this.state = {
       width: this.props.info.width || 0,
       height: this.props.info.height || 0,
@@ -23,6 +27,14 @@ class MobileGroundScan extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleSocketData)
+    setTimeout(() => {
+      try {
+        this.component.current.style.transform = "scale(1)"
+        this.component.current.style.opacity = "1"
+      } catch (error) {
+        console.log("couldnt catch speed")
+      }
+    }, 200);
   }
 
 
@@ -38,7 +50,7 @@ class MobileGroundScan extends Component {
           scanMode: socketData.info.scanMode
         })
       else if (socketData.payload === "exitGroundScanMenu") {
-        console.log("çıkıyorum")
+        // console.log("çıkıyorum")
         this.props.navigateTo('menuScreen')
         return
       }
@@ -107,7 +119,7 @@ class MobileGroundScan extends Component {
 
   render() {
     return (
-      <div className="mobile-ground-scan component">
+      <div className="mobile-ground-scan component" ref={this.component}>
 
         {
           this.state.exitPopup ? this.renderExitPopup() : null

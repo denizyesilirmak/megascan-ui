@@ -166,9 +166,15 @@ class Mainmenu extends Component {
       })
     }
     else if (socketData.type === 'mobile' && socketData.payload !== 'exitGroundScanMenu') {
-      console.log("giriyorum kanka")
-      this.props.navigateTo("mobileGroundScan", null, null, socketData.info)
-      return
+      // console.log("giriyorum kanka")
+      if (socketData.payload === 'gs') {
+        this.props.navigateTo("mobileGroundScan", null, null, socketData.info)
+        return
+      }
+      else if(socketData.payload === 'ls'){
+        this.props.navigateTo("mobileLiveStream")
+        return
+      }
     }
   }
 

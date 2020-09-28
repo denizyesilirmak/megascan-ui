@@ -34,6 +34,7 @@ import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
 import MobileGroundScan from './Components/MobileGroundScan/MobileGroundScan'
 import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSettings'
+import MobileLiveStream from './Components/MobileLiveStream/MobileLiveStream'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -205,6 +206,8 @@ class App extends Component {
         return (<Geophysical navigateTo={this.navigateTo} />)
       case "mobileGroundScan":
         return (<MobileGroundScan navigateTo={this.navigateTo} info={this.state.info} />)
+      case "mobileLiveStream":
+        return (<MobileLiveStream navigateTo={this.navigateTo} info={this.state.info} />)
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "setupScreen":

@@ -1,0 +1,21 @@
+.mls {
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mls .mls-info {
+  color: #000000;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  z-index: 20;
+  max-width: 650px;
+  font-size: 22px;
+}
+
+.mls .mobile-app{
+  position: absolute;
+
+}

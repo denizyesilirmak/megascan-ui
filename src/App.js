@@ -27,7 +27,6 @@ import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
 import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundScanMethodSelection/GroundScanMethodSelection'
 import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
 import Bionic from './Components/ScanModes/Bionic/Bionic'
-// import Ionic from './Components/ScanModes/Ionic/Ionic'
 import IonicNew from './Components/ScanModes/Ionic/InonicNew'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
@@ -35,6 +34,7 @@ import MobileGroundScan from './Components/MobileGroundScan/MobileGroundScan'
 import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSettings'
 import MobileLiveStream from './Components/MobileLiveStream/MobileLiveStream'
+import Pulse from './Components/ScanModes/Pulse/Pulse'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -150,6 +150,7 @@ class App extends Component {
     switch (this.state.currentLanguage) {
       case 'tr': return 'lang-tr'
       case 'iw': return 'lang-iw'
+      case 'ar': return 'lang-ar'
       default: return ''
     }
   }
@@ -224,6 +225,8 @@ class App extends Component {
         return (<CtrlScan navigateTo={this.navigateTo} />)
       case "rebootScreen":
         return (<Reboot navigateTo={this.navigateTo} />)
+      case "pulseScreen":
+        return (<Pulse navigateTo={this.navigateTo} />)
       default:
         break;
     }
@@ -234,7 +237,7 @@ class App extends Component {
       return (
         <div className={`App ${this.fontFallback()}`}>
           <DeviceContextProvider language={this.state.currentLanguage} activeScreen={this.state.activeScreen}>
-            <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume} />
+            <Statusbar title={this.state.activeScreen} generalVolume={this.state.generalVolume} currentLanguage={this.state.currentLanguage} />
             {
               this.renderScreen()
             }

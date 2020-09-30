@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Statusbar.css'
 
+import ResponsizeText from '../../ResponsiveText'
+
 // import socketHelper from '../../SocketHelper'
 
 import Volume from './StatusbarElements/Volume'
@@ -16,17 +18,14 @@ import { DeviceContext } from '../../Contexts/DeviceContext'
 
 class Statusbar extends Component {
   static contextType = DeviceContext
-  componentDidMount(){
-    // console.log("status bar")
-  }
 
-  getLogo = () =>  {
+  getLogo = () => {
     switch (this.context.device) {
       case "infinity": return Infinity_D
       case "goldstar": return Goldstar_D
       case "concord": return Concord_D
 
-    
+
       default:
         break;
     }
@@ -36,7 +35,7 @@ class Statusbar extends Component {
     return (
       <div className='status-bar-component'>
         <img className="device-logo" src={this.getLogo()} alt="logo"></img>
-        <div className='title'> {this.context.strings[this.props.title] } </div>
+        <div className='title'> <ResponsizeText large={this.props.currentLanguage === 'ar'} text={this.context.strings[this.props.title]} /> </div>
         <div className='icons'>
           <Volume generalVolume={this.props.generalVolume} />
           <Wifi />

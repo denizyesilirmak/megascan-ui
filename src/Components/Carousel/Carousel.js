@@ -5,22 +5,23 @@ import RightArrow from '../../Assets/MenuIcons/right-arrow1.png'
 import ButtonIndicator from '../../Assets/MenuIcons/button-indicator.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
+import ResponsiveText from '../../ResponsiveText'
 
 class Carousel extends Component {
   static contextType = DeviceContext
-  componentDidMount(){
+  componentDidMount() {
     this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.refs.slider.style.transform = 'translateX(' + -220 * this.props.index + 'px)'
   }
 
-  render () {
+  render() {
     return (
       <div className='carousel-component'>
-        <img src={LeftArrow} style={{filter: this.context.theme.arrorHueRotation}} className={`left-arrow ${(this.props.index !== -1) ? 'show' : 'hide'}`} alt='la' />
-        <img src={RightArrow} style={{filter: this.context.theme.arrorHueRotation}} className={`right-arrow ${(this.props.index !== this.props.buttons.length - 2) ? 'show' : 'hide'}`} alt='la' />
+        <img src={LeftArrow} style={{ filter: this.context.theme.arrorHueRotation }} className={`left-arrow ${(this.props.index !== -1) ? 'show' : 'hide'}`} alt='la' />
+        <img src={RightArrow} style={{ filter: this.context.theme.arrorHueRotation }} className={`right-arrow ${(this.props.index !== this.props.buttons.length - 2) ? 'show' : 'hide'}`} alt='la' />
         <div className='carousel-buttons'>
           <div className='slider' ref='slider'>
             {
@@ -29,7 +30,9 @@ class Carousel extends Component {
                   <div key={k} className={`carousel-button ${this.props.index + 1 === k ? 'selected' : ''}`}>
                     <img alt='ind' className='indicator' src={ButtonIndicator} style={{ display: (this.props.index + 1 === k) ? 'block' : 'none' }} />
                     <img alt='mi' className='carousel-icon' src={e.icon} />
-                    <div className='carousel-title'>{this.context.strings[e.name]}</div>
+                    <div className='carousel-title'>
+                      <ResponsiveText text={this.context.strings[e.name]} />
+                    </div>
                   </div>
                 )
               })

@@ -22,6 +22,10 @@
   overflow: hidden;
 } 
 
+.lang-ar .status-bar-component .title{
+  font-weight: bold;
+} 
+
 .status-bar-component .icons{
   padding-right: 2%;
   width: 28%;

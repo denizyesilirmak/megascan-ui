@@ -27,17 +27,18 @@
   /* transition-delay: 300ms; */
   margin: 0px 20px 0px 20px;
   opacity: 0.6;
-
+  text-align: center;
 }
 
 .carousel-title{
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-  width: 100%;
   position: absolute;
   top: 205px;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .carousel-icon{

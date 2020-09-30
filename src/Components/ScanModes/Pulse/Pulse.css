@@ -1,0 +1,61 @@
+.pulse {
+  background: #000;
+}
+
+.pulse-options {
+  width: 180px;
+  height: 95%;
+  position: absolute;
+  border-right: 2px solid #ffffff30;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pulse-plot {
+  border: 2px solid #ffffff80;
+  position: absolute;
+  height: 240px;
+  width: 550px;
+  left: 190px;
+  background-image: url(../../../Assets/MenuIcons/pulse-plot-bg.png);
+}
+
+.pulse-info {
+  position: absolute;
+  width: 550px;
+  height: 90px;
+  left: 190px;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pulse-options .pulse-options-item {
+  width: 80%;
+  border-radius: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  padding: 10px;
+}
+
+
+.pulse-options .pulse-options-item img {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 5px;
+}
+
+.pulse-options .pulse-options-item .label {
+  color: #ffffff;
+  font-size: 12px;
+  width: 120px;
+  padding-left: 5px;
+  text-align: center;
+  word-wrap: break-word;
+}

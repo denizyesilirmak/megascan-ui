@@ -46,6 +46,10 @@ class SoundHelper {
     this.oscillator.frequency.setValueAtTime(hertz, this.audio_context.currentTime)
   }
 
+  changeFrequencyType(frequencyType) {
+    this.oscillator.type = frequencyType
+  }
+
 
 }
 

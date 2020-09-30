@@ -10,6 +10,18 @@
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+@font-face {
+  font-family: 'Almarai';
+  src: url('./Assets/Fonts/Almarai/Almarai-Regular.ttf') format('truetype'), url('./Assets/Fonts/Almarai/Almarai-Regular.ttf') format('truetype');
+  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+@font-face {
+  font-family: 'Rubic';
+  src: url('./Assets/Fonts/Rubic/Rubik-Regular.ttf') format('truetype'), url('./Assets/Fonts/Rubic/Rubik-Regular.ttf') format('truetype');
+  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
 body {
   background-size: cover;
   font-family: Morris;
@@ -38,5 +50,10 @@ body {
 }
 
 .lang-iw{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Rubic;
 }
+
+.lang-ar{
+  font-family: Almarai;
+}
+

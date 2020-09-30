@@ -1,0 +1,30 @@
+.pulse-progress {
+  width: 220px;
+}
+
+.pulse-progress-container {
+  width: 220px;
+  height: 35px;
+  border: 2px solid white;
+  margin-top: 10px;
+}
+
+.pulse-progress-bar {
+  height: 100%;
+  transition: width .1s;
+  max-width: 100%;
+}
+
+.pulse-progress-bar.gold{
+  background: linear-gradient(0deg, rgba(255,248,38,1) 18%, rgba(230,179,30,1) 54%, rgba(255,255,128,1) 86%, rgba(255,225,42,1) 100%);
+}
+
+.pulse-progress-bar.iron{
+  background: linear-gradient(0deg, rgba(128,128,128,1) 18%, rgba(226,226,226,1) 54%, rgba(101,101,101,1) 86%, rgba(219,219,219,1) 100%);
+}
+
+.pulse-progress-label {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 5px;
+}

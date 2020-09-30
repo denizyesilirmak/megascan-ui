@@ -17,6 +17,8 @@ import flag_zh from '../../Assets/Flags/new/zh.png'
 import flag_ru from '../../Assets/Flags/new/ru.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
+import availableLanguages from '../../AvailableLanguages.json'
+
 
 const LANGUAGES = [
   {
@@ -92,17 +94,16 @@ class ChangeLanguage extends Component {
   }
 
   async componentDidMount() {
+    console.log(availableLanguages)
     socketHelper.attach(this.handleKeyDown)
     const currentLang = (await dbStorage.getItem("lang"))
     const indexOfCurrentLang = LANGUAGES.findIndex(a => a.code === currentLang)
     this.setState({
       activeIndex: 12 * 900 + indexOfCurrentLang
     })
-
-    console.log("sa")
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     socketHelper.detach()
   }
 
@@ -124,7 +125,10 @@ class ChangeLanguage extends Component {
         tempActiveIndex = tempActiveIndex + 6
         break
       case 'ok':
-        console.log(LANGUAGES[this.state.activeIndex % 12].code)
+
+        if(!availableLanguages.available_languages.includes(LANGUAGES[this.state.activeIndex % 12].code)){
+          return
+        }
 
         this.props.setLanguage(LANGUAGES[this.state.activeIndex % 12].code)
         await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex % 12].code)

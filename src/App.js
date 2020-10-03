@@ -17,6 +17,8 @@ import ResetFactory from './Components/Settings/SettingsPopups/ResetFactory/Rese
 import ResetSettings from './Components/Settings/SettingsPopups/ResetSettings/ResetSettings'
 import ResetStorage from './Components/Settings/SettingsPopups/ResetStorage/ResetStorage'
 import Reboot from './Components/Reboot/Reboot'
+import HomeScreen from './Components/Homescreen/Homescreen'
+import AntennaCalibration from './Components/AntennaCalibration/AntennaCalibration'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -83,7 +85,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'antennaCalibrationScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -227,6 +229,10 @@ class App extends Component {
         return (<Reboot navigateTo={this.navigateTo} />)
       case "pulseScreen":
         return (<Pulse navigateTo={this.navigateTo} />)
+      case "homeScreen":
+        return (<HomeScreen navigateTo={this.navigateTo} />)
+      case "antennaCalibrationScreen":
+        return (<AntennaCalibration navigateTo={this.navigateTo} />)
       default:
         break;
     }

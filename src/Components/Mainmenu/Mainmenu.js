@@ -122,8 +122,8 @@ class Mainmenu extends Component {
       let tempIndex = this.state.index
       switch (socketData.payload) {
         case 'home':
-          console.log("home")
-          break
+          this.props.navigateTo('homeScreen')
+          return
         case 'left':
           // console.log("mainmenu: left")
           if (tempIndex >= 0)

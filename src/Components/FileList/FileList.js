@@ -220,10 +220,15 @@ class FileList extends Component {
   noFilePopup = () => {
     return (
       <div className="no-file">
-        <img className="no-file-icon" src={NoFileIcon} alt="ef"/>
+        <img className="no-file-icon" src={NoFileIcon} alt="ef" />
         {this.context.strings['noscanfiles']}
       </div>
     )
+  }
+
+  dateFormatter = (timestamp) => {
+    const date = new Date(parseInt(timestamp))
+    return date.toLocaleDateString('tr-TR')
   }
 
   render() {
@@ -248,7 +253,10 @@ class FileList extends Component {
               return (
                 <div key={i} className='file' style={{ background: this.state.cursorIndex === i ? this.context.theme.button_bg_selected : null }}>
                   <img src={FileIcon} alt="file" />
-                  <span>{e}</span>
+                  <div className="file-th">
+                    <span className="file-number">{e.split('-')[0]}</span>
+                    <span className="file-date">{this.dateFormatter(e.split('-')[1])}</span>
+                  </div>
                 </div>
               )
             })

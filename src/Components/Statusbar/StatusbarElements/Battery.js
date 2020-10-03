@@ -21,7 +21,7 @@ class Battery extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      level: 0
+      level: 100
     }
   }
 
@@ -46,7 +46,7 @@ class Battery extends React.Component {
 
   renderThunderbolt = () => {
     return (
-      <svg width="35" height="14.00000000000000" className="thunder">
+      <svg width="35" height="14" className="thunder">
         <g>
           <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
             <rect fill="url(#gridpattern)" strokeWidth="0" y="0" x="0" height="100%" width="100%" />
@@ -64,8 +64,8 @@ class Battery extends React.Component {
     return (
       <React.Fragment>
         <div className="battery-indicator">
-        <div className="battery-percentage">{Math.trunc(this.state.level)}</div>
           <div className="level-holder">
+            <div className="battery-percentage">{Math.trunc(this.state.level)}</div>
             <div className="battery-juice" style={{ width: this.state.level + "%", backgroundColor: batteryColors[Math.trunc(this.state.level / 10)] }}>
             </div>
           </div>

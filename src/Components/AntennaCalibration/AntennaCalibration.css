@@ -1,0 +1,61 @@
+.antenna-calibration {
+  background: #000;
+}
+
+.antenna-calibration .radial {
+  width: 80px;
+  height: 80px;
+  background: white;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  z-index: 10;
+}
+
+.cal-gauge {
+  position: absolute;
+  width: 6px;
+  height: 200px;
+  background: red;
+  border-radius: 3px;
+  bottom: 60px;
+  left: 50%;
+  transform-origin: 3px 200px;
+  transform: translateX(-50%) rotate(0deg);
+  transition: all 0.5s;
+}
+
+.cal-gauge .degree{
+  color: #ffffff;
+  position: absolute;
+  top: -55px;
+  display: block;
+  width: 120px;
+  text-align: center;
+  left: -60px;
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+.cal-guide {
+  position: absolute;
+  width: 4px;
+  height: 300px;
+  background: #ffffff30;
+  border-radius: 3px;
+  bottom: 60px;
+  left: 50%;
+  transform-origin: 2px 200px;
+  transform: translateX(-50%);
+}
+
+.antenna-calibration .title {
+  color: #ffffff;
+  margin-left: 20px;
+}

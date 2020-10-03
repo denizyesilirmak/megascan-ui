@@ -28,11 +28,11 @@ class Info extends Component {
         <div className="info-container">
           <div className="info-left">
             <QRCode
-              bgColor="#FFFFFF"
-              fgColor="#000000"
+              bgColor="#000000"
+              fgColor="#FFFFFF"
               level="Q"
-              style={{ width: 160 }}
-              value="A1357"
+              style={{ width: 180 }}
+              value={this.props.serial}
             />
           </div>
 

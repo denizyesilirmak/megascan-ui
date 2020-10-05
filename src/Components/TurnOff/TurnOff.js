@@ -10,7 +10,8 @@ class TurnOff extends Component {
     super(props)
 
     this.state = {
-      yesNo: false
+      yesNo: false,
+      calibrationScreenCounter: 0
     }
   }
 
@@ -45,6 +46,15 @@ class TurnOff extends Component {
       case 'right':
         tempIndex = !tempIndex
         break
+      case 'up':
+        if(this.state.calibrationScreenCounter < 8){
+          this.setState({
+            calibrationScreenCounter: this.state.calibrationScreenCounter + 1
+          })
+        }else{
+          this.props.navigateTo('antennaCalibrationScreen')
+        }
+        return
       case 'back':
         console.log("mainmenu: ok")
         this.refs.turnOff.style.transform = "translateY(400px)"

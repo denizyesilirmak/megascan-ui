@@ -3,10 +3,12 @@ import '../../../ManualLRL/ManualLRLScan.css'
 import DialImage from '../../../../../Assets/MenuIcons/dial.png'
 import CompassOut from '../../../../../Assets/MenuIcons/compas-out.png'
 import socketHelper from '../../../../../SocketHelper'
+import dbStorage from '../../../../../DatabaseHelper'
 
 class CTRLLRLScan extends Component {
   constructor(props) {
     super(props)
+
     this.width = 20
     this.amplitute = 15
     this.signal = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -18,21 +20,25 @@ class CTRLLRLScan extends Component {
     }
   }
 
+
+
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
     }, 90);
 
-    // setInterval(() => {
-    //   this.setState({
-    //     angle: Math.random() * 180 - 90
-    //   })
-    // }, 1000);
+    this.getCalibrationValues()
   }
 
   componentWillUnmount() {
     clearInterval(this.compassInterval)
+  }
+
+  getCalibrationValues = async () => {
+    this.left = await dbStorage.getItem('lrlAntennaLeftEnd')
+    this.right = await dbStorage.getItem('lrlAntennaRightEnd')
+    // console.log(this.left, this.right)
   }
 
   requestSensorData = () => {
@@ -55,7 +61,7 @@ class CTRLLRLScan extends Component {
 
         return
       case 'back':
-        console.log("back")
+        // console.log("back")
         clearInterval(this.compassInterval)
         setTimeout(() => {
           this.props.navigateTo("menuScreen")
@@ -66,7 +72,7 @@ class CTRLLRLScan extends Component {
     }
 
     if (socketData.type === "lrlantenna") {
-      const angle = this.clamp(this.map(parseInt(socketData.payload), 0, 630, 0, 180) - 90, -90, 90)
+      const angle = this.clamp(this.map(parseInt(socketData.payload), this.left, this.right, 0, 180) - 90, -90, 90)
       this.setState({
         angle: angle,
         heading: parseInt(socketData.compass) + 720,
@@ -79,7 +85,7 @@ class CTRLLRLScan extends Component {
       } else {
         hertz = parseInt(90 - angle)
       }
-      console.log(hertz)
+      // console.log(hertz)
     }
   }
 

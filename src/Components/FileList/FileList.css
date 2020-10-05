@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background: #000000aa;
 }
 
 .file-list .files {

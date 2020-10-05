@@ -49,11 +49,12 @@ class ScanViewer extends Component {
         })
         this.widthLimit = (this.normalizedData[0].length / 4 - 1)
         this.heightLimit = (this.normalizedData.length - 2)
-        setTimeout(() => {
+        let timeout = setTimeout(() => {
           this.setState({
             fetch: true
           })
-        }, 1000);
+          clearTimeout(timeout)
+        }, 300);
       })
 
   }
@@ -135,7 +136,7 @@ class ScanViewer extends Component {
       default:
         break;
     }
-    if(this.state.analyseMode){
+    if (this.state.analyseMode) {
       this.setState({
         depth: this.calculateDepth(this.normalizedData[this.state.height][this.state.width * 4 + 1], this.state.max, this.state.min, this.state.average)
       })
@@ -155,7 +156,7 @@ class ScanViewer extends Component {
     })
   }
 
-  calculateDepth = (point, max, min, average) =>  {
+  calculateDepth = (point, max, min, average) => {
     if (isNaN(Math.abs(parseInt(point) - Math.floor(average)) / (max - min) * 3.5)) {
       return 0
     } else {

@@ -5,7 +5,7 @@ import LiveStremVideo from '../../Assets/Videos/_controlLiveStream.mp4'
 import BionicVideo from '../../Assets/Videos/_controlIonicBionic.mp4'
 import GroundScanVideo from '../../Assets/Videos/_controlGroundScan.mp4'
 
-const bypass = true
+const bypass = false
 
 class SensorControl extends React.Component {
   constructor(props) {

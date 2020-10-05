@@ -268,7 +268,7 @@ class ScanScreen extends Component {
       body: JSON.stringify({ "data": this.matrix })
     }).then(res => res.json())
       .then(data => {
-        //console.log(data)
+        console.log(data)
         this.props.navigateTo('scanViewerScreen', data.fileName)
       })
   }

@@ -166,7 +166,7 @@ class FileList extends Component {
         </div>
         <div className="selected-file-name">
           {
-            this.state.fileList[this.state.cursorIndex]
+            this.state.fileList[this.state.cursorIndex].split('-')[0]
           }
         </div>
         <div className="buttons">

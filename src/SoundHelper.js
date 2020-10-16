@@ -12,6 +12,7 @@ class SoundHelper {
       SoundHelper.instance = this
       this.started = false
       this.oscillator = this.audio_context.createOscillator()
+      this.oscillator.frequency.value = 0
       this.oscillator.connect(this.gainnode)
       this.oscillator.start(this.audio_context.currentTime)
       setTimeout(() => {
@@ -24,6 +25,7 @@ class SoundHelper {
   stopOscillator() {
     if (this.started === true) {
       this.oscillator.disconnect()
+      this.oscillator.frequency.value = 0
       this.started = false
     }
   }

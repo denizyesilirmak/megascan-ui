@@ -19,6 +19,7 @@ import ResetStorage from './Components/Settings/SettingsPopups/ResetStorage/Rese
 import Reboot from './Components/Reboot/Reboot'
 import HomeScreen from './Components/Homescreen/Homescreen'
 import AntennaCalibration from './Components/AntennaCalibration/AntennaCalibration'
+import GroundScanSensorCalibration from './Components/GroundScanSensorCalibration/GroundScanSensorCalibration'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -85,7 +86,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'groundScanSensorCalibration' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -233,6 +234,8 @@ class App extends Component {
         return (<HomeScreen navigateTo={this.navigateTo} />)
       case "antennaCalibrationScreen":
         return (<AntennaCalibration navigateTo={this.navigateTo} />)
+      case "groundScanSensorCalibration":
+        return (<GroundScanSensorCalibration navigateTo={this.navigateTo} />)
       default:
         break;
     }

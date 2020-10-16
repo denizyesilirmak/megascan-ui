@@ -15,7 +15,7 @@ class SensorControl extends React.Component {
       checking: true,
       currentSensor: 0,
       src: '',
-      renderVideo: false
+      renderVideo: false,
     }
   }
 

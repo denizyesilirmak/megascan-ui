@@ -21,7 +21,10 @@ class Bionic extends Component {
       sensorData: 0,
       cursorIndex: 4 * 1000,
       sensitivity: 50,
-      gain: 50
+      gain: 50,
+      isCalibrated: false,
+      calibrationValue: 0,
+      locked: false
     }
   }
 
@@ -43,7 +46,7 @@ class Bionic extends Component {
     })
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     SoundHelper.stopOscillator()
     clearInterval(this.dataSensorInterval)
   }
@@ -55,10 +58,14 @@ class Bionic extends Component {
       let tmpGain = this.state.gain
       switch (socketData.payload) {
         case 'left':
-          tmpCursorIndex--
+          if (this.state.isCalibrated) {
+            tmpCursorIndex--
+          }
           break
         case 'right':
-          tmpCursorIndex++
+          if (this.state.isCalibrated) {
+            tmpCursorIndex++
+          }
           break
         case 'up':
           if (this.state.cursorIndex % 2 === 1) {
@@ -79,6 +86,13 @@ class Bionic extends Component {
             if (tmpGain > 0)
               tmpGain -= 5
           }
+          break;
+        case 'start':
+          console.log("start")
+          this.setState({
+            isCalibrated: true,
+            calibrationValue: this.state.sensorData
+          })
           break;
         case 'ok':
 
@@ -107,35 +121,57 @@ class Bionic extends Component {
         sensorData: parseInt(socketData.payload)
       })
 
-      if (this.state.sensorData > 30) {
-        SoundHelper.changeFrequencySmooth(this.state.sensorData * 4 + 440)
-      } else {
-        SoundHelper.changeFrequencySmooth(0)
+      if (this.state.isCalibrated) {
+        if (Math.abs(this.state.calibrationValue - this.state.sensorData) <= (5 - parseInt(this.state.sensitivity / 25))) {
+          this.setState({ locked: true })
+          SoundHelper.changeFrequencyFast(800)
+        } else {
+          this.setState({ locked: false })
+          SoundHelper.changeFrequencyFast(0)
+        }
       }
 
     }
   }
 
 
-  saveToDb = () => {
-    dbStorage.setItem("bionic_sensitivity", this.state.sensitivity)
-    dbStorage.setItem("bionic_gain", this.state.gain)
+  saveToDb = async () => {
+    await dbStorage.setItem("bionic_sensitivity", this.state.sensitivity)
+    await dbStorage.setItem("bionic_gain", this.state.gain)
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
+  renderCalibrationPopup = () => {
+    return (
+      <div className="calibration-popup-bionic">
+        <div className="calibration-popup-text" >
+          Press START button to lock the target
+        </div>
+      </div>
+
+    )
+  }
+
   render() {
     return (
       <div ref="bionic" className="bionic component">
         <div className="rotating-indicator-container">
-          <img ref="Rotator" className="rotator" src={Bionic_Rotator} alt="rotator" style={{ transform: `rotate(${(this.state.sensorData * 1.4 - 20) + (this.state.gain + this.state.sensitivity) / 5}deg)`, filter: `hue-rotate(${-this.state.sensorData / 2 - 30}deg)` }} />
+          <img ref="Rotator" className={`rotator ${this.state.locked ? 'locked' : ''}`} src={Bionic_Rotator} alt="rotator" />
         </div>
 
         <div className="line-chart">
-          <LineChart value={this.state.sensorData} />
+          {
+            this.state.isCalibrated ?
+              <LineChart value={this.state.sensorData} /> : null
+          }
         </div>
+
+        {
+          !this.state.isCalibrated ? this.renderCalibrationPopup() : null
+        }
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
           <div className="dial-label">Gain</div>

@@ -17,28 +17,28 @@
   border: 4px solid black;
 }
 
-.b-button.selected{
+.b-button.selected {
   border-color: #d8d8d8;
 }
 
-.bionic .b-button .label{
+.bionic .b-button .label {
   color: white;
   margin-top: 5px;
   line-break: strict;
   text-align: center;
 }
 
-.bionic #depth-button{
+.bionic #depth-button {
   left: 20px;
   top: 10px;
 }
 
-.bionic #save-button{
+.bionic #save-button {
   right: 20px;
   top: 10px;
 }
 
-.rotating-indicator-container{
+.rotating-indicator-container {
   width: 250px;
   height: 250px;
   position: absolute;
@@ -53,20 +53,24 @@
   background-color: black;
 }
 
-.rotating-indicator-container .rotator{
+.rotating-indicator-container .rotator {
   width: 200px;
   height: 200px;
-  /* animation: spin-full linear infinite; */
-  animation-duration: 4s;
 }
 
-@keyframes spin-full{
-  100%{
+.rotator.locked {
+  animation: spin-full linear infinite;
+  animation-duration: 1s;
+  filter: hue-rotate(180deg);
+}
+
+@keyframes spin-full {
+  100% {
     transform: rotate(360deg);
   }
 }
 
-.line-chart{
+.line-chart {
   width: 600px;
   height: 80px;
   /* background: tomato; */
@@ -76,11 +80,11 @@
   transform: translateX(-50%);
 }
 
-.bionic rect{
+.bionic rect {
   transition: all 0.1s;
 }
 
-.dial{
+.dial {
   width: 150px;
   top: 120px;
   border: 6px solid;
@@ -90,21 +94,21 @@
   transition: .4s border-color;
 }
 
-.dial.selected{
+.dial.selected {
   border-color: #d8d8d8;
 }
 
-.bionic .gain-dial{
+.bionic .gain-dial {
   position: absolute;
   left: 60px;
 }
 
-.bionic .sens-dial{
+.bionic .sens-dial {
   position: absolute;
   right: 60px;
 }
 
-.dial span{
+.dial span {
   position: absolute;
   color: #ffffff;
   font-size: 30px;
@@ -114,8 +118,7 @@
   width: 100px;
 }
 
-
-.left-right-icon{
+.left-right-icon {
   width: 30px;
   position: absolute;
   left: 30px;
@@ -123,7 +126,7 @@
   transform: rotate(90deg);
 }
 
-.dial .dial-label{
+.dial .dial-label {
   color: #ffffff;
   position: absolute;
   top: -40px;
@@ -131,4 +134,39 @@
   text-align: center;
   font-size: 22px;
   width: 260px;
+}
+
+.calibration-popup-bionic {
+  position: absolute;
+  width: 550px;
+  height: 200px;
+  background: #000000df;
+  z-index: 10000;
+  left: 100px;
+  top: 70px;
+  border: 3px solid white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  text-align: center;
+  transition: top 1s;
+  animation: borderanim infinite 1s;
+}
+
+@keyframes borderanim {
+  0% {
+    border-color: white;
+  }
+  50%{
+    border-color: red;
+  }
+  100%{
+    border-color: white;
+  }
+}
+
+.calibration-popup-bionic .calibration-popup-text {
+  color: white;
 }

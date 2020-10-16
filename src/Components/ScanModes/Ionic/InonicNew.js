@@ -21,7 +21,10 @@ class Ionic extends Component {
       value: 0,
       cursorIndex: 4 * 1000,
       sensitivity: 50,
-      gain: 50
+      gain: 50,
+      calibrationValue: 0,
+      isCalibrated: false,
+      newValue: 127
     }
   }
 
@@ -44,18 +47,47 @@ class Ionic extends Component {
   handleSocketData = (socketData) => {
     if (socketData.type === "bionic") {
       if (this.refs.indicator) {
-        this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
-        this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
-        this.refs.indicator.style.background = `rgb(${this.map(parseInt(socketData.payload), 0, 255, 0, 255)},0,0)`
+        if(!this.state.isCalibrated){
+          this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
+        }
       }
+
       this.setState({
         value: parseInt(socketData.payload)
       })
-      if (this.state.value > 20) {
-        SoundHelper.changeFrequencySmooth(this.state.value * 2)
+
+      if (!this.state.isCalibrated) {
+        SoundHelper.changeFrequencySmooth(this.state.value * 2 + 200)
       } else {
-        SoundHelper.changeFrequencySmooth(0)
+        if (this.state.value < this.state.calibrationValue) {
+          const mv = this.map(this.state.value, 0, this.state.calibrationValue, 0, 255)
+          this.setState({
+            newValue: mv
+          })
+          SoundHelper.changeFrequencySmooth((255- mv) * 2 + 200)
+          this.refs.indicator.style.background = `rgb(0,0,${this.map(255 -mv, 0, 255, 0, 255)})`
+          this.refs.indicator.style.width = this.map(255- mv, 0, 255, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(255- mv, 0, 255, 30, 250) + "px"
+        } else {
+          const mv = 255 - this.map(this.state.value, this.state.calibrationValue, 255, 0, 255)
+          this.setState({
+            newValue: mv
+          })
+          SoundHelper.changeFrequencySmooth((255- mv) * 2 + 200)
+          this.refs.indicator.style.background = `rgb(${this.map(255 -mv, 0, 255, 0, 255)},0,0)`
+          this.refs.indicator.style.width = this.map(255- mv, 0, 255, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(255- mv, 0, 255, 30, 250) + "px"
+        }
+
+
       }
+
+
+
+
+
+
     }
     else if (socketData.type === "button") {
       let tmpCursorIndex = this.state.cursorIndex
@@ -88,6 +120,13 @@ class Ionic extends Component {
               tmpGain -= 5
           }
           break;
+
+        case 'start':
+          this.setState({
+            isCalibrated: true,
+            calibrationValue: this.state.value
+          })
+          break
         case 'back':
           clearInterval(this.dataSensorInterval)
           SoundHelper.stopOscillator()
@@ -105,7 +144,7 @@ class Ionic extends Component {
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return parseInt((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
   }
 
   render() {

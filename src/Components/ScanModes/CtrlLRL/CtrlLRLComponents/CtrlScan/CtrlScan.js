@@ -79,12 +79,12 @@ class CTRLLRLScan extends Component {
         tilt: socketData.angle * 1.3
       })
 
-      let hertz = 0
-      if (angle < 0) {
-        hertz = parseInt(angle + 90)
-      } else {
-        hertz = parseInt(90 - angle)
-      }
+      // let hertz = 0
+      // if (angle < 0) {
+      //   hertz = parseInt(angle + 90)
+      // } else {
+      //   hertz = parseInt(90 - angle)
+      // }
       // console.log(hertz)
     }
   }

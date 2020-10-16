@@ -6,7 +6,10 @@ class Reboot extends React.Component {
   componentDidMount() {
     console.log("reboot request in 5 seconds")
     setTimeout(() => {
-      SocketHelper.send('reboot')
+      SocketHelper.send(JSON.stringify({
+        'type': 'settings',
+        'mode': 'reboot' 
+      }))
     }, 5000);
   }
 

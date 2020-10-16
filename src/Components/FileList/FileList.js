@@ -193,7 +193,7 @@ class FileList extends Component {
         <div className="selected-file-name" style={{ textAlign: "center" }}>
           <span style={{ fontSize: 18 }}>File will be deleted: </span> <br />
           {
-            this.state.fileList[this.state.cursorIndex]
+            this.state.fileList[this.state.cursorIndex].split('-')[0]
           }
         </div>
         <div className="buttons" style={{ justifyContent: "center" }}>

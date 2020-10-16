@@ -36,7 +36,8 @@ class Ionic extends Component {
       gain: 50,
       depth: 10,
       depthPopup: false,
-      sensorData: 0
+      sensorData: 0,
+      calibrationValue: 0
     }
   }
 
@@ -74,10 +75,10 @@ class Ionic extends Component {
       switch (socketData.payload) {
         case 'left':
           console.log("asdasd")
-          tmpCursorIndex --
+          tmpCursorIndex--
           break;
         case 'right':
-          tmpCursorIndex ++
+          tmpCursorIndex++
           break;
         case 'up':
 
@@ -86,6 +87,11 @@ class Ionic extends Component {
 
           break
         case 'ok':
+          break
+        case 'start':
+          this.setState({
+            calibrationValue: this.state.sensorData
+          })
           break
         case 'back':
           this.saveToDb()

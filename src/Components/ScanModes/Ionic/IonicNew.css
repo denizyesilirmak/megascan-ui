@@ -24,7 +24,7 @@
   transform: scale(6);
   animation: radar-rotate 2s linear infinite;
   transition: width .1s, height .1s;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 @keyframes radar-rotate {

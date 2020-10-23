@@ -39,17 +39,17 @@ class Mainmenu extends Component {
       {
         name: "autolrl",
         icon: AutoLRLIcon,
-        screenName: "autoLrlScanScreen"
+        screenName: "controlAutoLrlScreen"
       },
       {
         name: "ctrllrl",
         icon: CtrlLrlIcon,
-        screenName: "ctrlLrlScanScreen"
+        screenName: "controlCtrlLrlScreen"
       },
       {
         name: "manuallrl",
         icon: ManualLRLIcon,
-        screenName: "manualLRLSettingsScreen"
+        screenName: "controlManualLrlScreen"
       },
       {
         name: "ionic",

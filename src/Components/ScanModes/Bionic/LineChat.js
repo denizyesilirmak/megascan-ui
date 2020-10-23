@@ -25,7 +25,7 @@ class LineChart extends Component {
       <svg width="600" height="80" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient spreadMethod="pad" y2="1" x2="0" y1="0" x1="0" id="svg_38">
-            <stop offset="0" stopColor={`#ff7700ff`} />
+            <stop offset="0" stopColor={`#ff2000ff`} />
             <stop offset="1" stopColor="#00ff00ff" />
           </linearGradient>
         </defs>

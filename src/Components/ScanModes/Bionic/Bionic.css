@@ -56,15 +56,18 @@
 .rotating-indicator-container .rotator {
   width: 200px;
   height: 200px;
+  animation: spin-full .8s linear infinite;
 }
 
 .rotator.locked {
-  animation: spin-full linear infinite;
-  animation-duration: 1s;
+  animation-play-state: paused;
   filter: hue-rotate(180deg);
 }
 
 @keyframes spin-full {
+  0%{
+    transform: rotate(0deg);
+  }
   100% {
     transform: rotate(360deg);
   }

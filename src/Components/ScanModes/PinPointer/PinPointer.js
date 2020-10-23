@@ -123,7 +123,7 @@ class PinPointer extends Component {
     }
     else if (socketData.type === "bionic") {
       this.setState({
-        sensorValue: this.state.calibration - parseInt(socketData.payload),
+        sensorValue: this.clamp(this.state.calibration - parseInt(socketData.payload), -127, 127),
         rawSensorValue: parseInt(socketData.payload),
       })
       SoundHelper.changeFrequencySmooth(Math.abs(this.state.sensorValue * 4))
@@ -136,10 +136,15 @@ class PinPointer extends Component {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
-
-
-
-
+  clamp = (value, min, max) => {
+    if (value <= min) {
+      return min
+    }
+    if (value >= max) {
+      return max
+    }
+    else return value
+  }
 
 
 

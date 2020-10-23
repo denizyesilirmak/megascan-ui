@@ -165,7 +165,7 @@ class Bionic extends Component {
         <div className="line-chart">
           {
             this.state.isCalibrated ?
-              <LineChart value={this.state.sensorData} /> : null
+              <LineChart value={this.state.locked ? 255 : this.state.sensorData} /> : null
           }
         </div>
 

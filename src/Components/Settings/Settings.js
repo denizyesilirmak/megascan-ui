@@ -99,7 +99,7 @@ class Settings extends Component {
     fetch('http://localhost:9090/serial')
       .then(data => data.text())
       .then(data => {
-        if (data.length < 10)
+        if (data.length < 13)
           this.setState({
             serial: data
           })

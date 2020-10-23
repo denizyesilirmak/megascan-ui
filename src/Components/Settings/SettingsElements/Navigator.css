@@ -25,7 +25,6 @@
   font-size: 18px;
   text-transform: uppercase;
   overflow: hidden;
-  resize: both;
 }
 
 .navigator-button.selected{

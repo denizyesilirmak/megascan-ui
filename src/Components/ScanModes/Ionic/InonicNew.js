@@ -47,7 +47,7 @@ class Ionic extends Component {
   handleSocketData = (socketData) => {
     if (socketData.type === "bionic") {
       if (this.refs.indicator) {
-        if(!this.state.isCalibrated){
+        if (!this.state.isCalibrated) {
           this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
           this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
         }
@@ -58,26 +58,32 @@ class Ionic extends Component {
       })
 
       if (!this.state.isCalibrated) {
-        SoundHelper.changeFrequencySmooth(this.state.value * 2 + 200)
+        SoundHelper.changeFrequencySmooth(this.state.value * 2 + 1)
       } else {
         if (this.state.value < this.state.calibrationValue) {
           const mv = this.map(this.state.value, 0, this.state.calibrationValue, 0, 255)
+          if (isNaN(mv)) {
+            return
+          }
           this.setState({
             newValue: mv
           })
-          SoundHelper.changeFrequencySmooth((255- mv) * 2 + 200)
-          this.refs.indicator.style.background = `rgb(0,0,${this.map(255 -mv, 0, 255, 0, 255)})`
-          this.refs.indicator.style.width = this.map(255- mv, 0, 255, 30, 250) + "px"
-          this.refs.indicator.style.height = this.map(255- mv, 0, 255, 30, 250) + "px"
+          SoundHelper.changeFrequencySmooth((255 - mv) * 2 + 1)
+          this.refs.indicator.style.background = `rgb(0,0,${this.map(255 - mv, 0, 255, 0, 255)})`
+          this.refs.indicator.style.width = this.map(255 - mv, 0, 255, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(255 - mv, 0, 255, 30, 250) + "px"
         } else {
           const mv = 255 - this.map(this.state.value, this.state.calibrationValue, 255, 0, 255)
+          if (isNaN(mv)) {
+            return
+          }
           this.setState({
             newValue: mv
           })
-          SoundHelper.changeFrequencySmooth((255- mv) * 2 + 200)
-          this.refs.indicator.style.background = `rgb(${this.map(255 -mv, 0, 255, 0, 255)},0,0)`
-          this.refs.indicator.style.width = this.map(255- mv, 0, 255, 30, 250) + "px"
-          this.refs.indicator.style.height = this.map(255- mv, 0, 255, 30, 250) + "px"
+          SoundHelper.changeFrequencySmooth((255 - mv) * 2 + 1)
+          this.refs.indicator.style.background = `rgb(${this.map(255 - mv, 0, 255, 0, 255)},0,0)`
+          this.refs.indicator.style.width = this.map(255 - mv, 0, 255, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(255 - mv, 0, 255, 30, 250) + "px"
         }
 
 

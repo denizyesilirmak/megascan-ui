@@ -9,28 +9,40 @@ class SoilType extends Component {
       <div className="soiltype-component">
         <div className="soiltype-buttons">
           <div className="soiltype-button"
-            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 6 === 0 ? this.context.theme.button_bg_selected : 'black' }}>
-            Rock
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 0 ? this.context.theme.button_bg_selected : 'black' }}>
+            rock
           </div>
           <div className="soiltype-button"
-            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 6 === 1 ? this.context.theme.button_bg_selected : 'black' }}>
-            Neutral
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 1 ? this.context.theme.button_bg_selected : 'black' }}>
+            neutral
           </div>
           <div className="soiltype-button"
-            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 6 === 2 ? this.context.theme.button_bg_selected : 'black' }}>
-            Mixed
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 2 ? this.context.theme.button_bg_selected : 'black' }}>
+            mixed
           </div>
           <div className="soiltype-button"
-            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 6 === 3 ? this.context.theme.button_bg_selected : 'black' }}>
-            Metallic
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 3 ? this.context.theme.button_bg_selected : 'black' }}>
+            metallic
           </div>
           <div className="soiltype-button"
-            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 6 === 4 ? this.context.theme.button_bg_selected : 'black' }}>
-            Clay
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 4 ? this.context.theme.button_bg_selected : 'black' }}>
+            clay
           </div>
           <div className="soiltype-button"
-            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 6 === 5 ? this.context.theme.button_bg_selected : 'black' }}>
-            Sandy
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 5 ? this.context.theme.button_bg_selected : 'black' }}>
+            sandy
+          </div>
+          <div className="soiltype-button"
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 6 ? this.context.theme.button_bg_selected : 'black' }}>
+            mineral
+          </div>
+          <div className="soiltype-button"
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 7 ? this.context.theme.button_bg_selected : 'black' }}>
+            chalky
+          </div>
+          <div className="soiltype-button"
+            style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 8 ? this.context.theme.button_bg_selected : 'black' }}>
+            silty
           </div>
         </div>
       </div>

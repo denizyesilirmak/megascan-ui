@@ -20,6 +20,7 @@ import Reboot from './Components/Reboot/Reboot'
 import HomeScreen from './Components/Homescreen/Homescreen'
 import AntennaCalibration from './Components/AntennaCalibration/AntennaCalibration'
 import GroundScanSensorCalibration from './Components/GroundScanSensorCalibration/GroundScanSensorCalibration'
+import SerialCodeChanger from './Components/SerialCodeChanger/SerialCodeChanger'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -70,7 +71,7 @@ class App extends Component {
     fetch('http://localhost:9090/serial')
       .then(data => data.text())
       .then(data => {
-        if (data.length === 7)
+        if (data.length === 12)
           this.setState({
             serial: data
           })
@@ -86,7 +87,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'groundScanSensorCalibration' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -198,6 +199,12 @@ class App extends Component {
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="groundScanMethodSelectionScreen" />)
       case "controlPinPointer":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="pinPointerScreen" />)
+      case "controlManualLrlScreen":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="manualLRLSettingsScreen" />)
+      case "controlCtrlLrlScreen":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="ctrlLrlScanScreen" />)
+      case "controlAutoLrlScreen":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="autoLrlScanScreen" />)
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
       case "changePinScreen":
@@ -236,6 +243,8 @@ class App extends Component {
         return (<AntennaCalibration navigateTo={this.navigateTo} />)
       case "groundScanSensorCalibration":
         return (<GroundScanSensorCalibration navigateTo={this.navigateTo} />)
+      case "serialCodeChangerScreen":
+        return (<SerialCodeChanger navigateTo={this.navigateTo} />)
       default:
         break;
     }

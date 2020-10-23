@@ -40,6 +40,9 @@ class SoundHelper {
   }
 
   changeFrequencySmooth(hertz) {
+    if (isNaN(hertz)) {
+      return
+   }
     this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0, 0.25)
     // this.oscillator.frequency.linearRampToValueAtTime(hertz, this.audio_context.currentTime + 0.04);
   }

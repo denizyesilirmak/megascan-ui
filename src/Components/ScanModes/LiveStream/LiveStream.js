@@ -43,10 +43,16 @@ class LiveStrem extends Component {
     setTimeout(() => {
       this.refs.livestream.style.opacity = 1
     }, 60);
-    this.testInterval = setInterval(() => { this.requestSensorData() }, 120);
+
+    this.startInterval(300)
+
+
   }
 
-
+  startInterval = (speed) => {
+    clearInterval(this.testInterval)
+    this.testInterval = setInterval(() => { this.requestSensorData() }, speed);
+  }
 
   componentWillUnmount() {
     SoundHelper.stopOscillator()
@@ -85,21 +91,21 @@ class LiveStrem extends Component {
       switch (socketData.payload) {
         case 'left':
           if (tmpSpeed > 0) {
-            tmpSpeed--
-            clearInterval(this.testInterval)
-            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed * 10)
+            tmpSpeed = tmpSpeed - 1
             this.setState({
               speed: tmpSpeed
+            }, () => {
+              this.startInterval((6 - this.state.speed) * 80)
             })
           }
           break
         case 'right':
           if (tmpSpeed < 5) {
-            tmpSpeed++
-            clearInterval(this.testInterval)
-            this.testInterval = setInterval(this.requestSensorData(), tmpSpeed * 10)
+            tmpSpeed = tmpSpeed + 1
             this.setState({
               speed: tmpSpeed
+            }, () => {
+              this.startInterval((6 - this.state.speed) * 80)
             })
           }
           break

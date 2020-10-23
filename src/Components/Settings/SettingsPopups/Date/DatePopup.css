@@ -72,12 +72,12 @@
 
 
 .settings-popup .item.selected #up-arrow{
-  opacity: 1;
+  opacity: 1 !important;
   animation: arrUp .7s ease-in-out infinite;
 }
 
 .settings-popup .item.selected #down-arrow{
-  opacity: 1;
+  opacity: 1 !important;
   animation: arrDown .7s ease-in-out infinite;
 }
 

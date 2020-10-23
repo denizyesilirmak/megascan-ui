@@ -26,7 +26,7 @@ class Navigator extends Component {
 
   render() {
     return (
-      <div className="navigator-component">
+      <div className="navigator-component" style={{ opacity: this.props.active ? 1 : 0.34 }}>
         <img style={{ filter: this.context.theme.arrorHueRotation }} alt="left" className={`navigator-left-arrow ${(this.props.activeSettingTab !== 0) || this.props.arrowsAlwaysOn ? 'show' : 'hide'}`} src={LeftArrow}></img>
         <img style={{ filter: this.context.theme.arrorHueRotation }} alt="right" className={`navigator-right-arrow ${(this.props.activeSettingTab !== this.props.last) || this.props.arrowsAlwaysOn ? 'show' : 'hide'}`} src={RightArrow}></img>
 
@@ -43,8 +43,8 @@ class Navigator extends Component {
                     }
                   }
                   className={`navigator-button`}>
-                    <ResponsiveText text={this.context.strings[e.name]}/>
-                  
+                  <ResponsiveText text={this.context.strings[e.name]} />
+
                 </div>
               )
             })

@@ -13,6 +13,7 @@ import Clock from './StatusbarElements/Clock'
 import Infinity_D from '../../Assets/Logos/infinity.png'
 import Goldstar_D from '../../Assets/Logos/goldstar.png'
 import Concord_D from '../../Assets/Logos/concord.png'
+import Pheonix_D from '../../Assets/Logos/pheonix.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
@@ -24,6 +25,7 @@ class Statusbar extends Component {
       case "infinity": return Infinity_D
       case "goldstar": return Goldstar_D
       case "concord": return Concord_D
+      case "pheonix": return Pheonix_D
 
 
       default:

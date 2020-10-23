@@ -46,5 +46,21 @@
       "pulse": false,
       "files": false,
       "settings": true
+    },
+    "phoenix": {
+      "groundscan": false,
+      "tunnelscan": false,
+      "geophysical": false,
+      "autolrl": true,
+      "ctrllrl": true,
+      "manuallrl": true,
+      "ionic": true,
+      "bionic": true,
+      "livestream": false,
+      "pinpointer": false,
+      "vlf": false,
+      "pulse": false,
+      "files": false,
+      "settings": true
     }
 }

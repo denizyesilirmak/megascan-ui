@@ -8,10 +8,10 @@
 }
 
 .soiltype-buttons{
-  width: 480px;
+  width: 650px;
   height: 200px;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 33% 33%;
   grid-template-rows: 33% 33% 33%;
 }
 

@@ -1,4 +1,4 @@
-.ctrl-lrl-target{
+.ctrl-lrl-target {
   width: 100%;
   height: 100%;
   display: flex;
@@ -6,43 +6,41 @@
   align-items: center;
 }
 
-.ctrl-lrl-target .target-button-container{
+.ctrl-lrl-target .target-button-container {
   width: 600px;
   height: 200px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   margin-bottom: 20px;
-
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
-.ctrl-lrl-target .target-button-container .target-button{
-  width: 180px;
-  height: 180px;
-  background-image: url(../../../../../Assets/MenuIcons/button-border.png);
-  background-position: center;
+.target-slider {
+  width: 2200px;
+  height: 300px;
   display: flex;
-  justify-content: center;
+  transition: all 0.3s;
+  padding-top: 20px;
+}
+
+.target-slider .target-item {
+  width: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 20px;
   align-items: center;
   flex-direction: column;
-  transform: scale(0.8);
-  transition: transform .5s;
+  opacity: 0.4;
+  transition: all 0.5s;
 }
 
-.target-button img{
-  width: 120px;
-  height: 120px;
-  position: relative;
-  left: 0px;
-  top: 10px
-}
-
-.target-button .label{
+.target-item .target-name {
   color: white;
-  width: 200px;
-  text-align: center;
-  height: min-content;
   position: relative;
-  bottom: -30px;
-  font-size: 20px;
+  top: -20px;
+}
+
+.target-item.target-active {
+  transform: scale(1.28);
+  opacity: 1;
 }

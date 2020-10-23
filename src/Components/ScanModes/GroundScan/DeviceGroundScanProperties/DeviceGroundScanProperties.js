@@ -150,7 +150,7 @@ class DeviceGroundScanProperties extends Component {
                   {this.context.strings["mode"] }
                   </div>
                   <div className="summary-value">
-                    {this.context.strings[this.state.scanModeIndex % 2 === 0 ? "auto" : "manual"]}
+                    {this.context.strings[this.state.scanModeIndex % 2 === 0 ? "manual" : "auto"]}
                   </div>
                 </div>
 
@@ -159,7 +159,7 @@ class DeviceGroundScanProperties extends Component {
                   {this.context.strings["path"] }
                   </div>
                   <div className="summary-value">
-                    {this.context.strings[this.state.scanPathIndex % 2 === 0 ? "alternate" : "onedirection"]}
+                    {this.context.strings[this.state.scanPathIndex % 2 === 0 ? "alternative" : "onedirection"]}
                   </div>
                 </div>
 

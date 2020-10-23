@@ -38,7 +38,8 @@ class ManualLRLScan extends Component {
         console.log("back")
         clearInterval(this.compassInterval)
         setTimeout(() => {
-          this.props.navigateTo("menuScreen")
+          this.props.navigateTo("manualLRLSettingsScreen")
+          
         }, 500);
         return
       default:

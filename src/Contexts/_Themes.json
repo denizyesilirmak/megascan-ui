@@ -37,5 +37,18 @@
     "shadowPopup": "inset 0px 0px 10px 5px #70643c",
     "arrorHueRotation": "hue-rotate(320deg)",
     "navigatorItemNumber": 9
+  },
+  "phoenix": {
+    "background_url": "./Assets/backgrounds/goldstar.png",
+    "button_bg_selected": "linear-gradient(120deg, #004990, #15b6e5)",
+    "border_color": "#0b8cbd",
+    "selected_text_color": "#ffffff",
+    "settings_item_bg": "rgb(13, 28, 63)",
+    "settings_shadow": "0px 0px 10px 2px rgb(143, 255, 246)",
+    "background2": "#bce8fd",
+    "background3": "#00224f",
+    "shadowPopup": "inset 0px 0px 10px 5px #ffffff",
+    "arrorHueRotation": "hue-rotate(160deg)",
+    "navigatorItemNumber": 9
   }
 }

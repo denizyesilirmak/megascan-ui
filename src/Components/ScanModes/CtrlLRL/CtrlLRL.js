@@ -14,12 +14,12 @@ import DatabaseHelper from '../../../DatabaseHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const DISTANCEMAX = 2500
-const DISTANCEMIN = 500
+const DISTANCEMIN = 250
 const DISTANCESTEP = 250
 
-const DEPTHMAX = 10
+const DEPTHMAX = 50
 const DEPTHMIN = 0
-const DEPTHSTEP = 1
+const DEPTHSTEP = 5
 
 const FREQUENCYMAX = 18000
 const FREQUENCYMIN = 250
@@ -146,7 +146,7 @@ class CtrlLRL extends Component {
           tempVerticalIndex++
         else if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 0) {
-            this.setState({ selectedSoilType: this.state.selectedSoilType + 2 })
+            this.setState({ selectedSoilType: this.state.selectedSoilType + 3 })
           }
 
         }
@@ -154,7 +154,7 @@ class CtrlLRL extends Component {
       case 'up':
         if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 0) {
-            this.setState({ selectedSoilType: this.state.selectedSoilType - 2 })
+            this.setState({ selectedSoilType: this.state.selectedSoilType - 3 })
           }
         }
 
@@ -203,7 +203,13 @@ class CtrlLRL extends Component {
       case 3:
         return <Depth value={this.state.depth} />
       case 4:
-        return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 4}  />
+        return <Search 
+        active={!this.state.verticalIndex && this.state.activeSettingTab === 4} 
+        soiltype={this.state.selectedSoilType}
+        distance={this.state.distance}
+        frequency={this.state.frequency}
+        depth={this.state.depth}
+        />
       default:
         break;
     }

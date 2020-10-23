@@ -58,11 +58,19 @@ class AutoLRL extends Component {
         return
       case 'back':
         console.log("back")
-        this.refs.autoLrl.style.opacity = 0
-        this.refs.autoLrl.style.transform = "translateY(200px)"
-        setTimeout(() => {
-          this.props.navigateTo("menuScreen")
-        }, 500);
+        if (this.state.activeScreen === 0) {
+          this.refs.autoLrl.style.opacity = 0
+          this.refs.autoLrl.style.transform = "translateY(200px)"
+          setTimeout(() => {
+            this.props.navigateTo('menuScreen')
+            return
+          }, 500);
+        } else {
+          tempActiveScreen = tempActiveScreen - 1
+          this.setState({
+            activeScreen: tempActiveScreen
+          })
+        }
         return
 
       case 'right':

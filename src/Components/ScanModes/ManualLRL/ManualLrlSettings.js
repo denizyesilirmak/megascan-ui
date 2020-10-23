@@ -7,7 +7,7 @@ import Navigator from '../../Settings/SettingsElements/Navigator'
 import Distance from '../CtrlLRL/CtrlLRLComponents/Distance/Distance'
 import Depth from '../CtrlLRL/CtrlLRLComponents/Depth/Depth'
 import Target from './ManualLRLComponents/Target/Target'
-import Search from '../CtrlLRL/CtrlLRLComponents/Search/Search'
+import Search from './ManualLRLComponents/Search/Search'
 
 import DatabaseHelper from '../../../DatabaseHelper'
 
@@ -32,13 +32,13 @@ class CtrlLRL extends Component {
       verticalIndex: true,
       depth: 10,
       distance: 1000,
-      targets: 5000 * 3
+      targets: 0
     }
 
     DatabaseHelper.getAll()
       .then(lastState => {
         this.setState({
-          targets: lastState.manuallrl_targets || 6 * 3000,
+          targets: lastState.manuallrl_targets || 0,
           distance: lastState.manuallrl_distance || 500,
           depth: lastState.manuallrl_depth || 10
         })
@@ -96,7 +96,8 @@ class CtrlLRL extends Component {
           tempActiveSettingTab--
         else if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 0) {
-            this.setState({ targets: this.state.targets - 1 })
+            if (this.state.targets > 0)
+              this.setState({ targets: this.state.targets - 1 })
           }
           else if (tempActiveSettingTab === 1) {
             this.setState({ distance: this.clamp(this.state.distance - DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
@@ -111,7 +112,8 @@ class CtrlLRL extends Component {
           tempActiveSettingTab++
         else if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 0) {
-            this.setState({ targets: this.state.targets + 1 })
+            if (this.state.targets < 10)
+              this.setState({ targets: this.state.targets + 1 })
           }
           else if (tempActiveSettingTab === 1) {
             this.setState({ distance: this.clamp(this.state.distance + DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
@@ -143,7 +145,7 @@ class CtrlLRL extends Component {
         if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 3) {
             this.saveToDb()
-            this.props.navigateTo('manualLrlSearchScreen')
+            this.props.navigateTo('manualLRLScreen')
             return
           }
         }
@@ -175,13 +177,18 @@ class CtrlLRL extends Component {
   renderCtrlLrlComponent = () => {
     switch (this.state.activeSettingTab) {
       case 0:
-        return <Target index={this.state.targets % 3} />
+        return <Target index={this.state.targets % 11} />
       case 1:
         return <Distance value={this.state.distance} />
       case 2:
         return <Depth value={this.state.depth} />
       case 3:
-        return <Search active={!this.state.verticalIndex && this.state.activeSettingTab === 3}/>
+        return <Search
+          active={!this.state.verticalIndex && this.state.activeSettingTab === 3}
+          target={this.state.targets % 11}
+          distance={this.state.distance}
+          depth={this.state.depth}
+        />
       default:
         break;
     }
@@ -190,7 +197,7 @@ class CtrlLRL extends Component {
   render() {
     return (
       <div ref="ctrllrl" className="ctrl-lrl-component component">
-        <Navigator arrowsAlwaysOn={true} last={4} activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex} buttons={this.buttons} />
+        <Navigator arrowsAlwaysOn={false} last={3} activeSettingTab={this.state.activeSettingTab} active={this.state.verticalIndex} buttons={this.buttons} />
         <div className={`settings-component-container`}
           style={{ borderColor: this.context.theme.border_color, boxShadow: !this.state.verticalIndex ? this.context.theme.settings_shadow : 'none' }}
         >

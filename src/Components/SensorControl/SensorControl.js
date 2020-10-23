@@ -1,11 +1,11 @@
 import React from 'react'
 import './SensorControl.css'
 import SocketHelper from '../../SocketHelper'
-import LiveStremVideo from '../../Assets/Videos/_controlLiveStream.mp4'
-import BionicVideo from '../../Assets/Videos/_controlIonicBionic.mp4'
-import GroundScanVideo from '../../Assets/Videos/_controlGroundScan.mp4'
+import LiveStremVideo from '../../Assets/Videos/controlLiveStream.mp4'
+import BionicVideo from '../../Assets/Videos/controlBionic.mp4'
+import GroundScanVideo from '../../Assets/Videos/controlGroundScan.mp4'
 
-const bypass = false
+const bypass = true
 
 class SensorControl extends React.Component {
   constructor(props) {
@@ -39,6 +39,15 @@ class SensorControl extends React.Component {
         break;
       case "pinPointerScreen":
         this.setState({ src: LiveStremVideo, targetSensorID: 2 })
+        break;
+      case "manualLRLSettingsScreen":
+        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        break;
+      case "ctrlLrlScanScreen":
+        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        break;
+      case "autoLrlScanScreen":
+        this.setState({ src: BionicVideo, targetSensorID: 1 })
         break;
       default:
         break;
@@ -85,11 +94,20 @@ class SensorControl extends React.Component {
           this.setState({ renderVideo: true, renderPopup: false })
         } else {
           SocketHelper.detach()
+          clearTimeout(this.failTimeout)
           this.props.navigateTo(this.props.target)
         }
       }, 1000);
-    } else
+    } else if (data.type === 'button') {
+      if (data.payload === 'back') {
+        clearTimeout(this.failTimeout)
+        this.props.navigateTo('menuScreen')
+        return
+      }
+    }
+    else {
       return
+    }
   }
 
   renderPopup = () => {
@@ -113,7 +131,13 @@ class SensorControl extends React.Component {
           className="control-video"
           ref="video"
           preload="true"
-          style={{ display: this.state.renderVideo ? 'block' : 'none', height: "100vh", backgroundSize: "contain" }}
+          style={{
+            display: this.state.renderVideo ? 'block' : 'none',
+            height: "360px",
+            width: "630px",
+            backgroundSize: "stretch",
+            marginTop: "60px"
+          }}
           src={this.state.src}
           muted
           autoPlay

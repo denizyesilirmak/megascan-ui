@@ -11,7 +11,7 @@ export const DeviceContext = createContext()
 const systems = DEVICE_LIST[DEVICE_MODEL]
 const curentTheme = THEMES[DEVICE_MODEL]
 
-const SLEEPMODETIMEOUT = 90000
+const SLEEPMODETIMEOUT = 5000
 
 class DeviceContextProvider extends Component {
   constructor(props) {

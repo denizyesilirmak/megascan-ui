@@ -32,7 +32,7 @@ class Info extends Component {
               fgColor="#FFFFFF"
               level="Q"
               style={{ width: 180 }}
-              value={this.props.serial}
+              value={'http://megalocators.com/'+this.props.serial}
             />
           </div>
 
@@ -54,7 +54,7 @@ class Info extends Component {
 
             <div className="info-item">
               <span>{this.context.strings["serialnumber"]}</span>
-              <span>{this.props.serial}</span>
+              <span style={{fontSize: 14}}>{this.props.serial}</span>
             </div>
 
             <div className="info-item" style={{ justifyContent: "center" }}>

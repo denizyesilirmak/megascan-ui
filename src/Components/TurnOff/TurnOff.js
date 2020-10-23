@@ -11,7 +11,8 @@ class TurnOff extends Component {
 
     this.state = {
       yesNo: false,
-      calibrationScreenCounter: 0
+      lrlantennacalibrationcounter: 0,
+      groundscancalibrationcounter: 0
     }
   }
 
@@ -50,12 +51,22 @@ class TurnOff extends Component {
         tempIndex = !tempIndex
         break
       case 'up':
-        if(this.state.calibrationScreenCounter < 8){
+        if (this.state.lrlantennacalibrationcounter < 8) {
           this.setState({
-            calibrationScreenCounter: this.state.calibrationScreenCounter + 1
+            lrlantennacalibrationcounter: this.state.lrlantennacalibrationcounter + 1
           })
-        }else{
+        } else {
           this.props.navigateTo('antennaCalibrationScreen')
+        }
+        return
+
+      case 'down':
+        if (this.state.groundscancalibrationcounter < 8) {
+          this.setState({
+            groundscancalibrationcounter: this.state.groundscancalibrationcounter + 1
+          })
+        } else {
+          this.props.navigateTo('groundScanSensorCalibration')
         }
         return
       case 'back':

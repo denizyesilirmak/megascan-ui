@@ -118,7 +118,7 @@ class Mainmenu extends Component {
   handleKeyDown = (socketData) => {
     //console.log(socketData)
     if (socketData.type === 'button') {
-      this.context.buttonInterrupt()
+      
       let tempIndex = this.state.index
       switch (socketData.payload) {
         case 'home':

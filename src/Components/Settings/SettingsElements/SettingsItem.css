@@ -12,6 +12,7 @@
   background: rgb(24, 18, 2);
   transition: background .2s;
   transition-timing-function: ease-in-out;
+  white-space: nowrap;
 }
 
 .settings-item.selected{

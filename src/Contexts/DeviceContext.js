@@ -1,10 +1,24 @@
 import React, { createContext, Component } from 'react'
 import dbStorage from '../DatabaseHelper'
+import socketHelper from '../SocketHelper'
 const STRINGS = require('./_Strings.json')
 const DEVICE_MODEL = require('./_DeviceInfo.json').deviceModelName
 const DEVICE_LIST = require('./_DeviceList.json')
 const THEMES = require('./_Themes.json')
 export const DeviceContext = createContext()
+
+const NotSleepingScreens = [
+  "pinPointerScreen",
+  "liveStreamScreen",
+  "bionicScreen",
+  "ionicScreen",
+  "manualLRLScreen",
+  "ctrlLrlSearchScreen",
+  "autoLrlScanScreen",
+  "scanScreen",
+  "mobileGroundScan",
+  "mobileLiveStream"
+]
 
 // console.log(DEVICE_MODEL)
 // console.log(DEVICE_LIST[DEVICE_MODEL])
@@ -28,14 +42,18 @@ class DeviceContextProvider extends Component {
   }
 
   componentDidMount() {
+    // Add button interceptor function to socket connection
+    // which will be called on each keypress
+    socketHelper.addKeypressInterceptor(this.buttonInterrupt)
+
     this.getSleepModeStatus()
 
     this.sleepModeTimer = setTimeout(() => {
       //turn off screen after SLEEPMODETIMEOUT ms
       if (this.sleepModeStatus === true) {
         console.log("screen off")
-        if (this.props.activeScreen !== "settingsScreen") {
-          console.log("selamın aleyküm:mount")
+        if (!NotSleepingScreens.includes(this.props.activeScreen)) {
+          // console.log("selamın aleyküm:mount")
           this.sleepMode = true;
           this.setState({ sleepModeActive: true })
         }
@@ -43,14 +61,13 @@ class DeviceContextProvider extends Component {
     }, SLEEPMODETIMEOUT);
   }
 
-
-
   changeSleepModeStatus = (status) => {
+    console.log('DeviceContext / sleep mode status: ', status)
     this.sleepModeStatus = status
     this.sleepModeTimer = setTimeout(() => {
       //turn off screen after SLEEPMODETIMEOUT ms
       if (this.sleepModeStatus === true) {
-        if (this.props.activeScreen !== "settingsScreen") {
+        if (!NotSleepingScreens.includes(this.props.activeScreen)) {
           this.sleepMode = true;
           this.setState({ sleepModeActive: true })
         }
@@ -67,8 +84,8 @@ class DeviceContextProvider extends Component {
       this.sleepModeTimer = setTimeout(() => {
         if (this.sleepModeStatus === true) {
 
-          if(this.props.activeScreen !== "settingsScreen")
-          this.setState({ sleepModeActive: true })
+          if (!NotSleepingScreens.includes(this.props.activeScreen))
+            this.setState({ sleepModeActive: true })
           this.sleepMode = true;
         }
       }, SLEEPMODETIMEOUT);
@@ -89,7 +106,7 @@ class DeviceContextProvider extends Component {
         setScanProperties: this.setScanProperties,
       }}>
 
-        <div className="sleepmode-overlay black-screen" style={{ transform: `scaleY(${this.state.sleepModeActive ? 1 : 0})` }} />
+        <div className="sleepmode-overlay black-screen" style={{ opacity: this.state.sleepModeActive ? 1 : 0 }} />
         {this.props.children}
       </DeviceContext.Provider>
     )

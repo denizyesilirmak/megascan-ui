@@ -43,8 +43,14 @@
   color: white;
   font-size: 12px;
   position: relative;
-  left: -60px;
+  left: -40px;
   top: 123px;
+  text-align: right;
+}
+
+.stream-orientation .line .indicator-angle span {
+  text-align: right;
+  text-transform: capitalize;
 }
 
 .stream-orientation .line .indicator-angle::after {
@@ -53,7 +59,7 @@
   height: 2px;
   background: red;
   position: absolute;
-  left: 54px;
+  left: 34px;
   top: 6px
 }
 
@@ -143,4 +149,25 @@
 
 .speed-holder .arrows {
   margin-top: 3px;
+}
+
+.speed-warning {
+  background: #000;
+  border: 2px solid white;
+  position: absolute;
+  bottom: 13px;
+  left: 13px;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  overflow: hidden;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.speed-warning img {
+  width: 30px;
+  margin-right: 10px;
 }

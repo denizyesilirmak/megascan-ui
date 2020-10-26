@@ -4,8 +4,10 @@ import DialImage from '../../../../../Assets/MenuIcons/dial.png'
 import CompassOut from '../../../../../Assets/MenuIcons/compas-out.png'
 import socketHelper from '../../../../../SocketHelper'
 import dbStorage from '../../../../../DatabaseHelper'
+import { DeviceContext } from '../../../../../Contexts/DeviceContext'
 
 class CTRLLRLScan extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -111,6 +113,18 @@ class CTRLLRLScan extends Component {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
+  tiltControl = (tilt) => {
+    if (tilt >= 20) {
+      return 'low'
+    }
+    else if (tilt < 20 && tilt > -20) {
+      return 'normal'
+    }
+    else if (tilt <= -20) {
+      return 'high'
+    }
+  }
+
   render() {
     return (
       <div className="manual-lrl-scan component">
@@ -129,7 +143,11 @@ class CTRLLRLScan extends Component {
 
         <div className="stream-orientation" style={{ position: "absolute", right: "30px" }}>
           <div className="line" >
-            <div style={{ transform: `translateY(${this.state.tilt}px)` }} className="indicator-angle"><span>Normal</span></div>
+            <div style={{ transform: `translateY(${this.clamp(this.state.tilt, -130, 130)}px)` }} className="indicator-angle">
+              <span>
+                {this.context.strings[this.tiltControl(this.state.tilt)]}
+              </span>
+            </div>
           </div>
         </div>
 

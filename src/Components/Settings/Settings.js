@@ -228,7 +228,7 @@ class Settings extends Component {
           // socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
 
-        this.context.buttonInterrupt()
+        
         break
       case 'right':
         if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
@@ -295,7 +295,7 @@ class Settings extends Component {
           }))
           // socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'down':
         if (this.state.verticalIndex && this.state.activePopup === "") {
@@ -334,7 +334,7 @@ class Settings extends Component {
             year: this.state.year - 1
           })
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'up':
         if (this.state.verticalIndex && this.state.activePopup === "") {
@@ -372,7 +372,7 @@ class Settings extends Component {
             year: this.state.year + 1
           })
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'ok':
         if (this.state.verticalIndex === false && this.state.activePopup === "") {
@@ -483,11 +483,11 @@ class Settings extends Component {
             }
           }
         }
-        this.context.buttonInterrupt()
+        
         return
       case 'home':
       case 'back':
-        this.context.buttonInterrupt()
+        
         if (this.state.verticalIndex === true && this.state.activePopup === "") {
           this.setState({ verticalIndex: false })
         } else if (this.state.activePopup === "") {

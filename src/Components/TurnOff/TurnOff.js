@@ -12,7 +12,8 @@ class TurnOff extends Component {
     this.state = {
       yesNo: false,
       lrlantennacalibrationcounter: 0,
-      groundscancalibrationcounter: 0
+      groundscancalibrationcounter: 0,
+      serialnumbercalibrationcounter: 0
     }
   }
 
@@ -67,6 +68,16 @@ class TurnOff extends Component {
           })
         } else {
           this.props.navigateTo('groundScanSensorCalibration')
+        }
+        return
+
+      case 'start':
+        if (this.state.serialnumbercalibrationcounter < 8) {
+          this.setState({
+            serialnumbercalibrationcounter: this.state.serialnumbercalibrationcounter + 1
+          })
+        } else {
+          this.props.navigateTo('serialCodeChangerScreen')
         }
         return
       case 'back':

@@ -8,6 +8,7 @@ class SocketHelper {
   constructor() {
     if (!SocketHelper.instance) {
       // Init
+      this._keypressInterceptor = null
       this._currentMessageHandler = VOID
       this._messageHandlerStack = []
       this._socket = null
@@ -23,6 +24,8 @@ class SocketHelper {
         console.log(`%csocket connected ${this._socket.id}`, "color:green")
       }
     })
+
+    this._socket.on('message', this._messageHandler)
 
     this._socket.on('disconnect', () => {
       console.log("%cSocket disconnected", "color:red");
@@ -40,9 +43,17 @@ class SocketHelper {
   }
 
   _setMessageHandler = (fn) => {
-    this._socket.removeAllListeners('message')
-    this._socket.on('message', fn)
+    // this._socket.removeAllListeners('message')
     this._currentMessageHandler = fn
+  }
+
+  _messageHandler = (data) => {
+    if (this._keypressInterceptor) {
+      if (data.type === 'button') {
+        this._keypressInterceptor(data)
+      }
+    }
+    this._currentMessageHandler(data)
   }
 
   send = (msg) => {
@@ -71,6 +82,10 @@ class SocketHelper {
     if (last !== VOID) {
       this._setMessageHandler(last)
     }
+  }
+
+  addKeypressInterceptor = (fn) => {
+    this._keypressInterceptor = fn
   }
 
 }

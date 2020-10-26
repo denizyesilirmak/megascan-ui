@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './ChangeLanguage.css'
 import socketHelper from '../../SocketHelper'
 import dbStorage from '../../DatabaseHelper'
+import TickIcon from '../../Assets/MenuIcons/tick.png'
 
 import flag_ar from '../../Assets/Flags/new/ar.png'
 import flag_de from '../../Assets/Flags/new/de.png'
@@ -89,7 +90,8 @@ class ChangeLanguage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: 12 * 900
+      activeIndex: 12 * 900,
+      popup: false
     }
   }
 
@@ -113,37 +115,56 @@ class ChangeLanguage extends Component {
 
     switch (socketData.payload) {
       case 'left':
-        tempActiveIndex--
+        if (this.state.popup === false) {
+          tempActiveIndex--
+        }
         break
       case 'right':
-        tempActiveIndex++
+        if (this.state.popup === false) {
+          tempActiveIndex++
+        }
         break
       case 'up':
-        tempActiveIndex = tempActiveIndex - 6
+        if (this.state.popup === false) {
+          tempActiveIndex = tempActiveIndex - 6
+        }
         break
       case 'down':
-        tempActiveIndex = tempActiveIndex + 6
+        if (this.state.popup === false) {
+          tempActiveIndex = tempActiveIndex + 6
+        }
         break
       case 'ok':
+        if (this.state.popup === false) {
+          if (!availableLanguages.available_languages.includes(LANGUAGES[this.state.activeIndex % 12].code)) {
+            return
+          }
+          this.setState({
+            popup: true
+          })
+          this.props.setLanguage(LANGUAGES[this.state.activeIndex % 12].code)
+          await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex % 12].code)
+          try {
+            setTimeout(() => {
+              this.props.navigateTo("settingsScreen", null, 5)
+            }, 3200);
+          } catch (error) {
+            console.log(error)
+          }
 
-        if(!availableLanguages.available_languages.includes(LANGUAGES[this.state.activeIndex % 12].code)){
-          return
         }
 
-        this.props.setLanguage(LANGUAGES[this.state.activeIndex % 12].code)
-        await dbStorage.setItem("lang", LANGUAGES[this.state.activeIndex % 12].code)
-        try {
-          this.props.navigateTo("settingsScreen")
-        } catch (error) {
-          console.log(error)
-        }
+
+
         return
       case 'back':
-        try {
-          socketHelper.detach()
-          this.props.navigateTo("settingsScreen", null, 5)
-        } catch (error) {
-          // console.log(error)
+        if (this.state.popup === false) {
+          try {
+            socketHelper.detach()
+            this.props.navigateTo("settingsScreen", null, 5)
+          } catch (error) {
+            // console.log(error)
+          }
         }
         return
       default:
@@ -155,10 +176,28 @@ class ChangeLanguage extends Component {
     })
   }
 
+  renderOkPopup = () => {
+    return (
+      <div className="language-changed-popup">
+        <img src={TickIcon} alt="tick"></img>
+        <div className="text">
+          {
+            this.context.strings['languageChanged']
+          }
+        </div>
+      </div>
+    )
+  }
+
 
   render() {
     return (
       <div className="change-language component">
+        {
+          this.state.popup ?
+            this.renderOkPopup() : null
+        }
+
         <div className="languages">
           {
             LANGUAGES.map((e, i) => {

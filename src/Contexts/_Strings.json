@@ -112,7 +112,11 @@
     "wrongPinWarn": "The pin you entered is incorrect. Please correct and try again.",
     "noscanfiles": "No scan files",
     "pulseScreen": "Pulse",
-    "pulse": "Pulse Induction"
+    "pulse": "Pulse Induction",
+    "languageChanged": "Language has been successfully changed",
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High"
   },
   "tr": {
     "setupScreen": "İlk Kurulum",
@@ -224,7 +228,8 @@
     "wrongPinWarn": "Girdiğiniz Pin Kodu yanlış. Lütfen tekrar deneyiniz.",
     "noscanfiles": "Tarama dosyası yok",
     "pulseScreen": "Pulse",
-    "pulse": "Pulse"
+    "pulse": "Pulse",
+    "languageChanged": "Dil başarıyla değiştirildi"
   },
   "iw": {
     "setupScreen": "התקן התקן",
@@ -399,7 +404,11 @@
     "wrongPinWarn": "Der eingegebene Pin ist falsch. Bitte korrigieren und erneut versuchen.",
     "noscanfiles": "Keine Scan-Dateien",
     "pulseScreen": "Pulse",
-    "pulse": "Pulse"
+    "pulse": "Pulse",
+    "languageChanged": "Language has been successfully changed",
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High"
   },
   "ar": {
     "setupScreen": "اعداد الجهاز",
@@ -514,7 +523,11 @@
     "wrongPinWarn": "الرمز الامني الذي أدخلته غير صحيح. يرجى التصحيح وحاول مرة أخرى.",
     "noscanfiles": "لايوجد ملفات مسح",
     "pulseScreen": "تحريض النبض",
-    "pulse": "تحريض النبض"
+    "pulse": "تحريض النبض",
+    "languageChanged": "Language has been successfully changed",
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High"
   },
   "fa": {
     "setupScreen": "پیکر بندی دستگاه",
@@ -629,6 +642,10 @@
     "wrongPinWarn": "رمز وارد شده اشتباه است. لطفاً تصحیح کنید و دوباره امتحان کنید.",
     "noscanfiles": "فایلی وجود ندارد",
     "pulseScreen": "Pulse",
-    "pulse": "Pulse Induction"
+    "pulse": "Pulse Induction",
+    "languageChanged": "Language has been successfully changed",
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High"
   }
 }

@@ -1,17 +1,16 @@
-.navigator-component{
+.navigator-component {
   width: 660px;
   height: 50px;
   overflow: hidden;
   opacity: 1;
 }
 
-.navigator-buttons{
+.navigator-buttons {
   display: flex;
   transition: .3s all;
-  
 }
 
-.navigator-button{
+.navigator-button {
   width: 196px;
   min-width: 196px;
   height: 45px;
@@ -25,21 +24,22 @@
   font-size: 18px;
   text-transform: uppercase;
   overflow: hidden;
+  white-space: nowrap;
 }
 
-.navigator-button.selected{
+.navigator-button.selected {
   transition: 0.4s all;
   background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
   color: black;
 }
 
-.navigator-left-arrow{
+.navigator-left-arrow {
   position: absolute;
   left: 20px;
   top: 14px;
 }
 
-.navigator-right-arrow{
+.navigator-right-arrow {
   position: absolute;
   right: 20px;
   top: 14px;

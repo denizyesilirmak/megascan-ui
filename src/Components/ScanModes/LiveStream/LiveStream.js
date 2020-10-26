@@ -7,6 +7,7 @@ import Left from '../../../Assets/MenuIcons/left-arrow3.png'
 import right from '../../../Assets/MenuIcons/right-arrow3.png'
 import SoundHelper from '../../../SoundHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
+import WarningIcon from '../../../Assets/MenuIcons/warning.png'
 
 const COLORS = {
   jet: [
@@ -30,7 +31,8 @@ class LiveStrem extends Component {
       stream: [127, 127, 127, 127, 127, 127, 127, 127, 127, 127],
       started: true,
       calibration: true,
-      speed: 0
+      speed: 0,
+      speedWarning: false
     }
   }
 
@@ -93,9 +95,8 @@ class LiveStrem extends Component {
           if (tmpSpeed > 0) {
             tmpSpeed = tmpSpeed - 1
             this.setState({
-              speed: tmpSpeed
-            }, () => {
-              this.startInterval((6 - this.state.speed) * 80)
+              speed: tmpSpeed,
+              speedWarning: true
             })
           }
           break
@@ -103,9 +104,8 @@ class LiveStrem extends Component {
           if (tmpSpeed < 5) {
             tmpSpeed = tmpSpeed + 1
             this.setState({
-              speed: tmpSpeed
-            }, () => {
-              this.startInterval((6 - this.state.speed) * 80)
+              speed: tmpSpeed,
+              speedWarning: true
             })
           }
           break
@@ -118,6 +118,16 @@ class LiveStrem extends Component {
         case 'ok':
 
           return
+
+        case 'start':
+          if (this.state.speedWarning === true) {
+            this.setState({
+              speedWarning: false
+            }, () => {
+              this.startInterval((6 - this.state.speed) * 80)
+            })
+          }
+          break
         case 'back':
           // this.playpause()
           clearInterval(this.testInterval)
@@ -243,9 +253,21 @@ class LiveStrem extends Component {
             <img className="arrows" src={right} alt="speed"></img>
           </div>
         </div>
+
+        <div className="speed-warning" style={{ display: this.state.speedWarning ? 'flex' : 'none' }}>
+          <img alt="warn" src={WarningIcon} />
+        Speed is changed. Press START to apply
+        </div>
+
+
       </div>
+
     )
   }
 }
 
 export default LiveStrem
+
+// () => {
+//   
+// }

@@ -59,7 +59,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
           tempDeletePopupCursorIndex--
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'right':
         if (this.state.popup === false && this.state.deletePopup === false) {
@@ -71,7 +71,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
           tempDeletePopupCursorIndex++
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'up':
         if (this.state.popup === false && this.state.deletePopup === false) {
@@ -83,7 +83,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
 
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'down':
         if (this.state.popup === false && this.state.deletePopup === false) {
@@ -95,7 +95,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
 
         }
-        this.context.buttonInterrupt()
+        
         break
       case 'ok':
         if (!this.state.popup && !this.state.deletePopup && this.state.fileList.length > 0) {
@@ -130,7 +130,7 @@ class FileList extends Component {
           }
 
         }
-        this.context.buttonInterrupt()
+        
         return
       case 'back':
         if (this.state.popup)
@@ -141,7 +141,7 @@ class FileList extends Component {
           //back to mainmenu
           this.props.navigateTo("menuScreen")
         }
-        this.context.buttonInterrupt()
+        
         return
       case 'turnoff':
         this.props.navigateTo('turnOff')

@@ -3,8 +3,10 @@ import './ManualLRLScan.css'
 import DialImage from '../../../Assets/MenuIcons/dial.png'
 import CompassOut from '../../../Assets/MenuIcons/compas-out.png'
 import socketHelper from '../../../SocketHelper'
+import {DeviceContext} from '../../../Contexts/DeviceContext'
 
 class ManualLRLScan extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.width = 20
@@ -39,14 +41,14 @@ class ManualLRLScan extends Component {
         clearInterval(this.compassInterval)
         setTimeout(() => {
           this.props.navigateTo("manualLRLSettingsScreen")
-          
+
         }, 500);
         return
       default:
         break
     }
 
-    if(socketData.type === "lrlantenna"){
+    if (socketData.type === "lrlantenna") {
       this.setState({
         angle: (parseInt(socketData.payload) - 90),
         heading: socketData.compass,
@@ -73,15 +75,37 @@ class ManualLRLScan extends Component {
     return a_pathString
   }
 
+  clamp = (value, min, max) => {
+    if (value <= min) {
+      return min
+    }
+    if (value >= max) {
+      return max
+    }
+    else return value
+  }
+
+  tiltControl = (tilt) => {
+    if (tilt >= 20) {
+      return 'low'
+    }
+    else if (tilt < 20 && tilt > -20) {
+      return 'normal'
+    }
+    else if (tilt <= -20) {
+      return 'high'
+    }
+  }
+
   render() {
     return (
       <div className="manual-lrl-scan component">
         <div className="compass">
-          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out"   style={{transform: `rotateZ(${this.state.heading}deg)`}}/>
+          <img ref="compass" className="compass-out" src={CompassOut} alt="compass-out" style={{ transform: `rotateZ(${this.state.heading}deg)` }} />
         </div>
 
         <div className="gauge">
-          <img className="gauge-dial" src={DialImage} alt="dial" style={{transform: `rotate(${this.state.angle}deg)`}} />
+          <img className="gauge-dial" src={DialImage} alt="dial" style={{ transform: `rotate(${this.state.angle}deg)` }} />
         </div>
 
         <svg className="manual-signal" height="40" width="350">
@@ -90,7 +114,11 @@ class ManualLRLScan extends Component {
 
         <div className="stream-orientation" style={{ position: "absolute", right: "30px" }}>
           <div className="line" >
-            <div style={{transform: `translateY(${this.state.tilt}px)`}} className="indicator-angle"><span>Normal</span></div>
+            <div style={{ transform: `translateY(${this.clamp(this.state.tilt, -130, 130)}px)` }} className="indicator-angle">
+              <span>
+                {this.context.strings[this.tiltControl(this.state.tilt)]}
+              </span>
+            </div>
           </div>
         </div>
 

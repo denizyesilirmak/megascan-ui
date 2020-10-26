@@ -36,18 +36,61 @@
   background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 }
 
-.language.selected img{
+.language.selected img {
   animation: jello-horizontal 1s both;
 }
 
 @keyframes jello-horizontal {
-  0%{
+  0% {
     transform: scale(1) rotate(0deg);
   }
-  30%{
+  30% {
     transform: scale(1.3) rotate(30deg);
   }
-  100%{
+  100% {
     transform: scale(1) rotate(0deg);
+  }
+}
+
+.language-changed-popup {
+  position: absolute;
+  background: black;
+  width: 550px;
+  height: 250px;
+  left: 103px;
+  top: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+  border-radius: 10px;
+  border: 2px solid white;
+  animation: popup-anim 3s ease-in-out both infinite;
+}
+
+.language-changed-popup img {
+  width: 100px;
+}
+
+.language-changed-popup .text {
+  font-size: 30px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+@keyframes popup-anim {
+  0% {
+    transform: translateX(800px) scale(0.1) rotate(30deg);
+  }
+  20% {
+    transform: translateX(0px) scale(1) rotate(0deg);
+  }
+  80% {
+    transform: translateX(0px) scale(1) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-800px) scale(0.1) rotate(-30deg);
   }
 }

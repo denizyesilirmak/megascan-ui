@@ -10,8 +10,7 @@
   width: 600px;
   height: 200px;
   margin-bottom: 20px;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
 }
 
 .target-slider {
@@ -20,6 +19,7 @@
   display: flex;
   transition: all 0.3s;
   padding-top: 20px;
+  overflow: hidden;
 }
 
 .target-slider .target-item {
@@ -32,6 +32,7 @@
   flex-direction: column;
   opacity: 0.4;
   transition: all 0.5s;
+  overflow: hidden;
 }
 
 .target-item .target-name {

@@ -48,19 +48,19 @@
       "settings": true
     },
     "phoenix": {
-      "groundscan": false,
+      "groundscan": true,
       "tunnelscan": false,
       "geophysical": false,
-      "autolrl": true,
-      "ctrllrl": true,
-      "manuallrl": true,
-      "ionic": true,
-      "bionic": true,
-      "livestream": false,
-      "pinpointer": false,
+      "autolrl": false,
+      "ctrllrl": false,
+      "manuallrl": false,
+      "ionic": false,
+      "bionic": false,
+      "livestream": true,
+      "pinpointer": true,
       "vlf": false,
       "pulse": false,
-      "files": false,
+      "files": true,
       "settings": true
     }
 }

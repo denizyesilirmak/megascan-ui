@@ -1,0 +1,23 @@
+.turning-off {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 20;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.turning-off img {
+  animation: turn-off 1s 2s ease-in 1 both;
+}
+
+@keyframes turn-off {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

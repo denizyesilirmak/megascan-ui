@@ -75,7 +75,7 @@ class Target extends Component {
                 return (
                   <div key={e.name} className={`target-item ${this.props.index === i ? 'target-active' : null}`} >
                     <img alt="target" src={e.icon} />
-                    <div className="target-name">{e.name}</div>
+                    <div className="target-name">{this.context.strings[e.name]}</div>
                   </div>
                 )
               })

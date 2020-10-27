@@ -48,7 +48,7 @@ class Search extends Component {
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Target
+            {this.context.strings['target']}
             </div>
             <div className="value">
               {targets[this.props.target].name}
@@ -57,7 +57,7 @@ class Search extends Component {
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Dist.
+            {this.context.strings['distance']}
             </div>
             <div className="value">
               {this.props.distance} m
@@ -66,7 +66,7 @@ class Search extends Component {
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Depth
+            {this.context.strings['depth']}
             </div>
             <div className="value">
             {this.props.depth} m

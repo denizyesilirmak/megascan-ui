@@ -31,10 +31,7 @@ class TurnOff extends Component {
     switch (socketData.payload) {
       case 'ok':
         if (this.state.yesNo % 2 === 1) {
-          socketHelper.send(JSON.stringify({
-            type: 'settings',
-            mode: 'turnoff'
-          }))
+          this.props.navigateTo('turningOff')
         }
         else if (this.state.yesNo % 2 === 0) {
           this.refs.turnOff.style.transform = "translateY(400px)"

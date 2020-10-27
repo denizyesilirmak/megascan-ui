@@ -63,11 +63,12 @@
 }
 
 .settings-popup .item #up-arrow{
-  opacity: 0.2;
+  opacity: 1;
+  filter: hue-rotate(0deg)
 }
 
 .settings-popup .item #down-arrow{
-  opacity: 0.2;
+  opacity: 1;
 }
 
 

@@ -24,16 +24,16 @@ class Search extends Component {
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Soil
+            {this.context.strings['soiltype']}
             </div>
             <div className="value">
-              {soiltypes[this.props.soiltype % 9]}
+              {this.context.strings[soiltypes[this.props.soiltype % 9]]}
             </div>
           </div>
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Freq.
+            {this.context.strings['frequency']}
             </div>
             <div className="value">
               {this.props.frequency} Hz
@@ -42,7 +42,7 @@ class Search extends Component {
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Dist.
+            {this.context.strings['distance']}
             </div>
             <div className="value">
               {this.props.distance} m
@@ -51,10 +51,10 @@ class Search extends Component {
 
           <div className="lrl-summary-item" style={{ borderColor: this.context.theme.border_color }}>
             <div className="title" style={{ borderColor: this.context.theme.border_color }}>
-              Depth
+              {this.context.strings['depth']}
             </div>
             <div className="value">
-            {this.props.depth} m
+              {this.props.depth} m
             </div>
           </div>
 

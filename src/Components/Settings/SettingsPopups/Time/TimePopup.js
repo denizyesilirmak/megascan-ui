@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import "./TimePopup.css"
-import upArrow from '../../../../Assets/MenuIcons/up-arrow.png'
-import downArrow from '../../../../Assets/MenuIcons/down-arrow.png'
+import upArrow from '../../../../Assets/MenuIcons/date-up-arrow.png'
+import downArrow from '../../../../Assets/MenuIcons/date-down-arrow.png'
 import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 class TimePopup extends Component {

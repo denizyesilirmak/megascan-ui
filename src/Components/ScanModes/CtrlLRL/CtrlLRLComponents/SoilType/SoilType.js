@@ -10,39 +10,39 @@ class SoilType extends Component {
         <div className="soiltype-buttons">
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 0 ? this.context.theme.button_bg_selected : 'black' }}>
-            rock
+            {this.context.strings['rock']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 1 ? this.context.theme.button_bg_selected : 'black' }}>
-            neutral
+            {this.context.strings['neutral']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 2 ? this.context.theme.button_bg_selected : 'black' }}>
-            mixed
+            {this.context.strings['mixed']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 3 ? this.context.theme.button_bg_selected : 'black' }}>
-            metallic
+            {this.context.strings['metallic']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 4 ? this.context.theme.button_bg_selected : 'black' }}>
-            clay
+            {this.context.strings['clay']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 5 ? this.context.theme.button_bg_selected : 'black' }}>
-            sandy
+            {this.context.strings['sandy']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 6 ? this.context.theme.button_bg_selected : 'black' }}>
-            mineral
+            {this.context.strings['mineral']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 7 ? this.context.theme.button_bg_selected : 'black' }}>
-            chalky
+            {this.context.strings['chalky']}
           </div>
           <div className="soiltype-button"
             style={{ borderColor: this.context.theme.border_color, background: this.props.index % 9 === 8 ? this.context.theme.button_bg_selected : 'black' }}>
-            silty
+            {this.context.strings['silty']}
           </div>
         </div>
       </div>

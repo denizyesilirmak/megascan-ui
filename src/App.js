@@ -8,6 +8,7 @@ import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
 import TurnOff from './Components/TurnOff/TurnOff'
+import TurningOff from './Components/TurnOff/TurningOff';
 import LockScreen from './Components/LockScreen/LockScreen.js'
 import ChangePinScreen from './Components/ChangePin/ChangePin'
 import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
@@ -167,6 +168,8 @@ class App extends Component {
         return (<Settings navigateTo={this.navigateTo} setVolume={this.setVolume} settingsTabIndex={this.state.settingsTabIndex} />)
       case "turnOff":
         return (<TurnOff navigateTo={this.navigateTo} />)
+      case "turningOff":
+        return (<TurningOff navigateTo={this.navigateTo} />)
       case "autoLrlScanScreen":
         return (<AutoLRL navigateTo={this.navigateTo} />)
       case "ctrlLrlScanScreen":

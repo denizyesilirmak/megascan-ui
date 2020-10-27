@@ -12,8 +12,10 @@ import LineChart from './LineChat'
 import socketHelper from '../../../SocketHelper'
 import dbStorage from '../../../DatabaseHelper'
 import SoundHelper from '../../../SoundHelper'
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 class Bionic extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -148,7 +150,7 @@ class Bionic extends Component {
     return (
       <div className="calibration-popup-bionic">
         <div className="calibration-popup-text" >
-          Press START button to lock the target
+          {this.context.strings['pressStartToLock']}
         </div>
       </div>
 

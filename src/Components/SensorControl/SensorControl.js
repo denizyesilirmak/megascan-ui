@@ -5,9 +5,12 @@ import LiveStremVideo from '../../Assets/Videos/controlLiveStream.mp4'
 import BionicVideo from '../../Assets/Videos/controlBionic.mp4'
 import GroundScanVideo from '../../Assets/Videos/controlGroundScan.mp4'
 
-const bypass = false
+import { DeviceContext } from '../../Contexts/DeviceContext'
+
+const bypass = true
 
 class SensorControl extends React.Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.indicatorREF = React.createRef()
@@ -113,7 +116,7 @@ class SensorControl extends React.Component {
   renderPopup = () => {
     return (
       <div className="sc-popup">
-        <div className="title">Checking sensor connection...</div>
+        <div className="title">{this.context.strings['controlSensorConnection']}.</div>
         <div className="indicator-container">
           <div ref={this.indicatorREF} className="indicator-value" />
         </div>
@@ -125,7 +128,7 @@ class SensorControl extends React.Component {
     return (
       <>
         <div className="warning" style={{ display: this.state.renderVideo ? 'block' : 'none' }}>
-          Please connect the sensor.
+          {this.context.strings['connectSensor']}
         </div>
         <video
           className="control-video"

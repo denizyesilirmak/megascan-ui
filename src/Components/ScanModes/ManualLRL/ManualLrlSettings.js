@@ -17,7 +17,7 @@ const DISTANCEMAX = 2500
 const DISTANCEMIN = 500
 const DISTANCESTEP = 250
 
-const DEPTHMAX = 10
+const DEPTHMAX = 50
 const DEPTHMIN = 0
 const DEPTHSTEP = 1
 

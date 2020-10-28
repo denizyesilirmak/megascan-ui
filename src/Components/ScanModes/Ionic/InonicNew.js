@@ -48,8 +48,8 @@ class Ionic extends Component {
     if (socketData.type === "bionic") {
       if (this.refs.indicator) {
         if (!this.state.isCalibrated) {
-          this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
-          this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 255, 30, 250) + "px"
+          this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 1024, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 1024, 30, 250) + "px"
         }
       }
 
@@ -61,29 +61,29 @@ class Ionic extends Component {
         SoundHelper.changeFrequencySmooth(this.state.value * 2 + 1)
       } else {
         if (this.state.value < this.state.calibrationValue) {
-          const mv = this.map(this.state.value, 0, this.state.calibrationValue, 0, 255)
+          const mv = this.map(this.state.value, 0, this.state.calibrationValue, 0, 1024)
           if (isNaN(mv)) {
             return
           }
           this.setState({
             newValue: mv
           })
-          SoundHelper.changeFrequencySmooth((255 - mv) * 2 + 1)
-          this.refs.indicator.style.background = `rgb(0,0,${this.map(255 - mv, 0, 255, 0, 255)})`
-          this.refs.indicator.style.width = this.map(255 - mv, 0, 255, 30, 250) + "px"
-          this.refs.indicator.style.height = this.map(255 - mv, 0, 255, 30, 250) + "px"
+          SoundHelper.changeFrequencySmooth((1024 - mv) * 2 + 1)
+          this.refs.indicator.style.background = `rgb(0,0,${this.map(1024 - mv, 0, 1024, 0, 255)})`
+          this.refs.indicator.style.width = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
         } else {
-          const mv = 255 - this.map(this.state.value, this.state.calibrationValue, 255, 0, 255)
+          const mv = 1024 - this.map(this.state.value, this.state.calibrationValue, 1024, 0, 1024)
           if (isNaN(mv)) {
             return
           }
           this.setState({
             newValue: mv
           })
-          SoundHelper.changeFrequencySmooth((255 - mv) * 2 + 1)
-          this.refs.indicator.style.background = `rgb(${this.map(255 - mv, 0, 255, 0, 255)},0,0)`
-          this.refs.indicator.style.width = this.map(255 - mv, 0, 255, 30, 250) + "px"
-          this.refs.indicator.style.height = this.map(255 - mv, 0, 255, 30, 250) + "px"
+          SoundHelper.changeFrequencySmooth((1024 - mv) * 2 + 1)
+          this.refs.indicator.style.background = `rgb(${this.map(1024 - mv, 0, 1024, 0, 255)},0,0)`
+          this.refs.indicator.style.width = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
         }
 
 

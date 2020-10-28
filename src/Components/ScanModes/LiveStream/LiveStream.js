@@ -12,10 +12,10 @@ import WarningIcon from '../../../Assets/MenuIcons/warning.png'
 const COLORS = {
   jet: [
     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
-    { pct: 63, color: { r: 0x00, g: 0xff, b: 0xff } },
-    { pct: 127, color: { r: 0x00, g: 0xad, b: 0x00 } },
-    { pct: 190, color: { r: 0xff, g: 0xff, b: 0x00 } },
-    { pct: 255, color: { r: 0xff, g: 0x00, b: 0x00 } }
+    { pct: 256, color: { r: 0x00, g: 0xff, b: 0xff } },
+    { pct: 512, color: { r: 0x00, g: 0xad, b: 0x00 } },
+    { pct: 768, color: { r: 0xff, g: 0xff, b: 0x00 } },
+    { pct: 1023, color: { r: 0xff, g: 0x00, b: 0x00 } }
   ]
 }
 
@@ -28,7 +28,7 @@ class LiveStrem extends Component {
     this.instantData = 0
     this.total = 0
     this.state = {
-      stream: [127, 127, 127, 127, 127, 127, 127, 127, 127, 127],
+      stream: [512, 512, 512, 512, 512, 512, 512, 512, 512, 512],
       started: true,
       calibration: true,
       speed: 0,
@@ -84,7 +84,7 @@ class LiveStrem extends Component {
 
   requestSensorData = () => {
     if (this.state.started)
-      socketHelper.send('Q' + this.state.stream[9])
+      socketHelper.send('Q' + parseInt(this.state.stream[9] / 4))
   }
 
   handleKeyDown = (socketData) => {
@@ -149,9 +149,9 @@ class LiveStrem extends Component {
       }
       else {
         if (parseInt(socketData.payload) < this.total) {
-          this.instantData = this.map(parseInt(socketData.payload), 0, this.total, 0, 127)
+          this.instantData = this.map(parseInt(socketData.payload), 0, this.total, 0, 512)
         } else {
-          this.instantData = this.map(parseInt(socketData.payload), this.total, 255, 127, 255)
+          this.instantData = this.map(parseInt(socketData.payload), this.total, 1023, 512, 1023)
         }
       }
 
@@ -184,7 +184,7 @@ class LiveStrem extends Component {
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return Math.trunc((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
   }
 
   clamp = (num, min, max) => {
@@ -236,7 +236,7 @@ class LiveStrem extends Component {
           </div>
 
           <div className="sensor-numeric-value">
-            {this.state.stream[9]}
+            {this.map(this.state.stream[9], 0, 1023, 0 , 100)}
           </div>
 
           {/* <div className="stream-orientation">

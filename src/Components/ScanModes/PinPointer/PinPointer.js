@@ -98,7 +98,7 @@ class PinPointer extends Component {
         case 'ok':
           if (this.state.selectedButton % 3 === 0) {
             this.setState({
-              calibration: this.state.rawSensorValue
+              calibration: this.state.rawSensorValue/4
             })
           }
 
@@ -123,7 +123,7 @@ class PinPointer extends Component {
     }
     else if (socketData.type === "bionic") {
       this.setState({
-        sensorValue: this.clamp(this.state.calibration - parseInt(socketData.payload), -127, 127),
+        sensorValue: this.clamp(this.state.calibration - parseInt(socketData.payload/4), -127, 127),
         rawSensorValue: parseInt(socketData.payload),
       })
       SoundHelper.changeFrequencySmooth(Math.abs(this.state.sensorValue * 4))

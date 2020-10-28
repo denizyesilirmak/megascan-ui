@@ -4,7 +4,7 @@ class SoundHelper {
       console.log("soundhelper: instance")
       this.audio_context = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: "interactive" })
       this.gainnode = this.audio_context.createGain()
-      this.gainnode.gain.setValueAtTime(0,this.audio_context.currentTime)
+      this.gainnode.gain.setValueAtTime(0, this.audio_context.currentTime)
       this.gainnode.connect(this.audio_context.destination)
       console.log(this.audio_context.sampleRate)
       // console.log(this.audio_context.baseLatency)
@@ -42,7 +42,9 @@ class SoundHelper {
   changeFrequencySmooth(hertz) {
     if (isNaN(hertz)) {
       return
-   }
+    } else if(hertz > 22050){
+      return
+    }
     this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0, 0.25)
     // this.oscillator.frequency.linearRampToValueAtTime(hertz, this.audio_context.currentTime + 0.04);
   }

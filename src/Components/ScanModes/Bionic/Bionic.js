@@ -124,7 +124,7 @@ class Bionic extends Component {
       })
 
       if (this.state.isCalibrated) {
-        if (Math.abs(this.state.calibrationValue - this.state.sensorData) <= (5 - parseInt(this.state.sensitivity / 25))) {
+        if (Math.abs(this.state.calibrationValue - this.state.sensorData) <= (23 - parseInt(this.state.sensitivity / 5))) {
           this.setState({ locked: true })
           SoundHelper.changeFrequencyFast(800)
         } else {
@@ -167,7 +167,7 @@ class Bionic extends Component {
         <div className="line-chart">
           {
             this.state.isCalibrated ?
-              <LineChart value={this.state.locked ? 255 : this.state.sensorData} /> : null
+              <LineChart value={this.state.locked ? 255 : this.state.sensorData / 4} /> : null
           }
         </div>
 

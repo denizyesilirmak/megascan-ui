@@ -48,35 +48,17 @@ class TurnOff extends Component {
       case 'right':
         tempIndex = !tempIndex
         break
-      case 'up':
-        if (this.state.lrlantennacalibrationcounter < 8) {
-          this.setState({
-            lrlantennacalibrationcounter: this.state.lrlantennacalibrationcounter + 1
-          })
-        } else {
-          this.props.navigateTo('antennaCalibrationScreen')
-        }
-        return
-
       case 'down':
         if (this.state.groundscancalibrationcounter < 8) {
           this.setState({
             groundscancalibrationcounter: this.state.groundscancalibrationcounter + 1
           })
         } else {
-          this.props.navigateTo('groundScanSensorCalibration')
+          this.props.navigateTo('lockerScreen')
         }
         return
 
-      case 'start':
-        if (this.state.serialnumbercalibrationcounter < 8) {
-          this.setState({
-            serialnumbercalibrationcounter: this.state.serialnumbercalibrationcounter + 1
-          })
-        } else {
-          this.props.navigateTo('serialCodeChangerScreen')
-        }
-        return
+
       case 'back':
         console.log("mainmenu: ok")
         this.refs.turnOff.style.transform = "translateY(400px)"

@@ -14,12 +14,28 @@ import DatabaseHelper from '../../../DatabaseHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const DISTANCEMAX = 2500
-const DISTANCEMIN = 500
-const DISTANCESTEP = 250
+const DISTANCEMIN = 250
+const DISTANCESTEP = 50
+const DISTANCEJUMPSTEP = 250
 
 const DEPTHMAX = 50
 const DEPTHMIN = 0
 const DEPTHSTEP = 1
+const DEPTHJUMPSTEP = 10
+
+const FREQUENCY_LIST = [
+  11300, //bronze
+  700, //cavity
+  11700, //copper
+  12700, //diamond
+  13000, //gemstone
+  5200, //goldore
+  4700, //goldtreasure
+  5500, //goldveins
+  17000, //iron
+  13500, //platinum
+  8700  //silver
+]
 
 
 class CtrlLRL extends Component {
@@ -130,6 +146,12 @@ class CtrlLRL extends Component {
           if (tempActiveSettingTab === 0) {
             this.setState({ selectedSoilType: this.state.selectedSoilType + 2 })
           }
+          else if (tempActiveSettingTab === 1) {
+            this.setState({ distance: this.clamp(this.state.distance - DISTANCEJUMPSTEP, DISTANCEMIN, DISTANCEMAX) })
+          }
+          else if (tempActiveSettingTab === 2) {
+            this.setState({ depth: this.clamp(this.state.depth - DEPTHJUMPSTEP, DEPTHMIN, DEPTHMAX) })
+          }
 
         }
         break
@@ -138,12 +160,23 @@ class CtrlLRL extends Component {
           if (tempActiveSettingTab === 0) {
             this.setState({ selectedSoilType: this.state.selectedSoilType - 2 })
           }
+          else if (tempActiveSettingTab === 1) {
+            this.setState({ distance: this.clamp(this.state.distance + DISTANCEJUMPSTEP, DISTANCEMIN, DISTANCEMAX) })
+          }
+          else if (tempActiveSettingTab === 2) {
+            this.setState({ depth: this.clamp(this.state.depth + DEPTHJUMPSTEP, DEPTHMIN, DEPTHMAX) })
+          }
         }
 
         break
       case 'ok':
         if (!tempVerticalIndex) {
           if (tempActiveSettingTab === 3) {
+            socketHelper.send(JSON.stringify({
+              type: 'settings',
+              mode: 'frequency',
+              payload: 'fr.' + FREQUENCY_LIST[this.state.targets % 11]
+            }))
             this.saveToDb()
             this.props.navigateTo('manualLRLScreen')
             return

@@ -1,0 +1,12 @@
+.compass-calibraion{
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compass-image{
+  width: 200px;
+  transition-duration: 2s;
+  transition-property: all;
+}

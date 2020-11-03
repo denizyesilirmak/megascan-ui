@@ -6,6 +6,7 @@ import socketHelper from '../../../../../SocketHelper'
 import dbStorage from '../../../../../DatabaseHelper'
 import { DeviceContext } from '../../../../../Contexts/DeviceContext'
 
+
 class CTRLLRLScan extends Component {
   static contextType = DeviceContext
   constructor(props) {
@@ -25,6 +26,7 @@ class CTRLLRLScan extends Component {
 
 
   componentDidMount() {
+    
     socketHelper.attach(this.handleKeyDown)
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
@@ -77,7 +79,7 @@ class CTRLLRLScan extends Component {
       const angle = this.clamp(this.map(parseInt(socketData.payload), this.left, this.right, 0, 180) - 90, -90, 90)
       this.setState({
         angle: angle,
-        heading: parseInt(socketData.compass) + 720,
+        heading: (parseInt(socketData.compass) ),
         tilt: socketData.angle * 1.3
       })
 

@@ -18,7 +18,8 @@ class GroundScanSensorCalibration extends React.Component {
     this.state = {
       sensorIndex: 4 * 100,
       sensorArray: [0, 0, 0, 0],
-      calibrationArray: [0, 0, 0, 0]
+      calibrationArray: [0, 0, 0, 0],
+      done: false
     }
   }
 
@@ -62,6 +63,11 @@ class GroundScanSensorCalibration extends React.Component {
           this.props.navigateTo('menuScreen')
           return;
 
+        case 'ok':
+          console.log(this.state.calibrationArray)
+          this.saveCalibration()
+          return;
+
         default:
           break;
       }
@@ -91,11 +97,22 @@ class GroundScanSensorCalibration extends React.Component {
     return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
   }
 
+  saveCalibration = () => {
+    fetch(`http://localhost:9090/saveSensorCalibration/${JSON.stringify(this.state.calibrationArray)}`)
+      .then(data => data.json())
+      .then(result => {
+        this.setState({
+          done: true
+        })
+      })
+
+  }
+
   render() {
     return (
       <div className="ground-scan-sensor-calibration component">
         <div className="container">
-          <div className="title">
+          <div className="title" style={{ color: this.state.done ? 'green' : 'red' }}>
             Ground Scan Sensor Calibration
           </div>
           <div className="up-down-buttons">
@@ -116,24 +133,44 @@ class GroundScanSensorCalibration extends React.Component {
           <div className="sensor-colors">
 
             <div className="sensor-color" style={{ background: this.getColor(parseInt(this.state.sensorArray[0]) + this.state.calibrationArray[0]) }}>
-              {
-                this.state.calibrationArray[0] > 0 ? '+' + this.state.calibrationArray[0] : this.state.calibrationArray[0]
-              }
+              <div>
+                {
+                  this.state.calibrationArray[0] > 0 ? '+' + this.state.calibrationArray[0] : this.state.calibrationArray[0]
+                }
+              </div>
+              <div>
+                {parseInt(this.state.sensorArray[0]) + this.state.calibrationArray[0]}
+              </div>
             </div>
             <div className="sensor-color" style={{ background: this.getColor(parseInt(this.state.sensorArray[1]) + this.state.calibrationArray[1]) }}>
-              {
-                this.state.calibrationArray[1] > 0 ? '+' + this.state.calibrationArray[1] : this.state.calibrationArray[1]
-              }
+              <div>
+                {
+                  this.state.calibrationArray[1] > 0 ? '+' + this.state.calibrationArray[1] : this.state.calibrationArray[1]
+                }
+              </div>
+              <div>
+                {parseInt(this.state.sensorArray[1]) + this.state.calibrationArray[1]}
+              </div>
             </div>
             <div className="sensor-color" style={{ background: this.getColor(parseInt(this.state.sensorArray[2]) + this.state.calibrationArray[2]) }}>
-              {
-                this.state.calibrationArray[2] > 0 ? '+' + this.state.calibrationArray[2] : this.state.calibrationArray[2]
-              }
+              <div>
+                {
+                  this.state.calibrationArray[2] > 0 ? '+' + this.state.calibrationArray[2] : this.state.calibrationArray[2]
+                }
+              </div>
+              <div>
+                {parseInt(this.state.sensorArray[2]) + this.state.calibrationArray[2]}
+              </div>
             </div>
             <div className="sensor-color" style={{ background: this.getColor(parseInt(this.state.sensorArray[3]) + this.state.calibrationArray[3]) }}>
-              {
-                this.state.calibrationArray[3] > 0 ? '+' + this.state.calibrationArray[3] : this.state.calibrationArray[3]
-              }
+              <div>
+                {
+                  this.state.calibrationArray[3] > 0 ? '+' + this.state.calibrationArray[3] : this.state.calibrationArray[3]
+                }
+              </div>
+              <div>
+                {parseInt(this.state.sensorArray[3]) + this.state.calibrationArray[3]}
+              </div>
             </div>
 
           </div>

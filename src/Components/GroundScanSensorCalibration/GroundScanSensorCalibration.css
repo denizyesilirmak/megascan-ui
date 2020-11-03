@@ -30,6 +30,7 @@
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  flex-direction: column;
 }
 
 .up-down-buttons {
@@ -47,6 +48,6 @@
   align-items: center;
 }
 
-.up-down-buttons .button-gssc.selected{
+.up-down-buttons .button-gssc.selected {
   background: #303030;
 }

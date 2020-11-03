@@ -15,15 +15,18 @@ import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 const DISTANCEMAX = 2500
 const DISTANCEMIN = 250
-const DISTANCESTEP = 250
+const DISTANCESTEP = 50
+const DISTANCEJUMPSTEP = 250
 
 const DEPTHMAX = 50
 const DEPTHMIN = 0
-const DEPTHSTEP = 5
+const DEPTHSTEP = 1
+const DEPTHJUMPSTEP = 10
 
 const FREQUENCYMAX = 18000
 const FREQUENCYMIN = 250
 const FREQUENCYSTEP = 250
+const FREQUENCYJUMPSTEP = 1000
 
 class CtrlLRL extends Component {
   static contextType = DeviceContext
@@ -78,10 +81,10 @@ class CtrlLRL extends Component {
   }
 
   clamp = (value, min, max) => {
-    if(value <= min){
+    if (value <= min) {
       return min
     }
-    if(value >= max){
+    if (value >= max) {
       return max
     }
     else return value
@@ -137,7 +140,7 @@ class CtrlLRL extends Component {
             this.setState({ distance: this.clamp(this.state.distance + DISTANCESTEP, DISTANCEMIN, DISTANCEMAX) })
           }
           else if (tempActiveSettingTab === 3) {
-            this.setState({ depth:  this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX)})
+            this.setState({ depth: this.clamp(this.state.depth + DEPTHSTEP, DEPTHMIN, DEPTHMAX) })
           }
         }
         break
@@ -148,7 +151,15 @@ class CtrlLRL extends Component {
           if (tempActiveSettingTab === 0) {
             this.setState({ selectedSoilType: this.state.selectedSoilType + 3 })
           }
-
+          else if (tempActiveSettingTab === 1) {
+            this.setState({ frequency: this.clamp(this.state.frequency - FREQUENCYJUMPSTEP, FREQUENCYMIN, FREQUENCYMAX) })
+          }
+          else if (tempActiveSettingTab === 2) {
+            this.setState({ distance: this.clamp(this.state.distance - DISTANCEJUMPSTEP, DISTANCEMIN, DISTANCEMAX) })
+          }
+          else if (tempActiveSettingTab === 3) {
+            this.setState({ depth: this.clamp(this.state.depth - DEPTHJUMPSTEP, DEPTHMIN, DEPTHMAX) })
+          }
         }
         break
       case 'up':
@@ -156,18 +167,32 @@ class CtrlLRL extends Component {
           if (tempActiveSettingTab === 0) {
             this.setState({ selectedSoilType: this.state.selectedSoilType - 3 })
           }
+          else if (tempActiveSettingTab === 1) {
+            this.setState({ frequency: this.clamp(this.state.frequency + FREQUENCYJUMPSTEP, FREQUENCYMIN, FREQUENCYMAX) })
+          }
+          else if (tempActiveSettingTab === 2) {
+            this.setState({ distance: this.clamp(this.state.distance + DISTANCEJUMPSTEP, DISTANCEMIN, DISTANCEMAX) })
+          }
+          else if (tempActiveSettingTab === 3) {
+            this.setState({ depth: this.clamp(this.state.depth + DEPTHJUMPSTEP, DEPTHMIN, DEPTHMAX) })
+          }
         }
 
         break
       case 'ok':
-        if(!tempVerticalIndex){
-          if(tempActiveSettingTab === 4){
+        if (!tempVerticalIndex) {
+          if (tempActiveSettingTab === 4) {
+            socketHelper.send(JSON.stringify({
+              type: 'settings',
+              mode: 'frequency',
+              payload: 'fr.' + this.state.frequency
+            }))
             this.saveToDb()
             this.props.navigateTo('ctrlLrlSearchScreen')
             return
           }
         }
-          tempVerticalIndex = !tempVerticalIndex
+        tempVerticalIndex = !tempVerticalIndex
         break
       case 'back':
         if (tempVerticalIndex) {
@@ -199,16 +224,16 @@ class CtrlLRL extends Component {
       case 1:
         return <Frequency hertz={this.state.frequency} />
       case 2:
-        return <Distance value={this.state.distance}/>
+        return <Distance value={this.state.distance} />
       case 3:
         return <Depth value={this.state.depth} />
       case 4:
-        return <Search 
-        active={!this.state.verticalIndex && this.state.activeSettingTab === 4} 
-        soiltype={this.state.selectedSoilType}
-        distance={this.state.distance}
-        frequency={this.state.frequency}
-        depth={this.state.depth}
+        return <Search
+          active={!this.state.verticalIndex && this.state.activeSettingTab === 4}
+          soiltype={this.state.selectedSoilType}
+          distance={this.state.distance}
+          frequency={this.state.frequency}
+          depth={this.state.depth}
         />
       default:
         break;

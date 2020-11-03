@@ -51,7 +51,7 @@ class Search extends Component {
             {this.context.strings['target']}
             </div>
             <div className="value">
-              {targets[this.props.target].name}
+              {this.context.strings[targets[this.props.target].name]}
             </div>
           </div>
 

@@ -140,7 +140,8 @@
     "goldveins": "Gold Veins",
     "iron": "Iron",
     "platinium": "Platinium",
-    "silver": "Silver"
+    "silver": "Silver",
+    "setupFinished": "Setup has finished"
   },
   "tr": {
     "setupScreen": "İlk Kurulum",

@@ -22,6 +22,8 @@ import HomeScreen from './Components/Homescreen/Homescreen'
 import AntennaCalibration from './Components/AntennaCalibration/AntennaCalibration'
 import GroundScanSensorCalibration from './Components/GroundScanSensorCalibration/GroundScanSensorCalibration'
 import SerialCodeChanger from './Components/SerialCodeChanger/SerialCodeChanger'
+import CompassCalibration from './Components/Compass/Compass'
+import Locker from './Components/Locker/Locker'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -248,6 +250,10 @@ class App extends Component {
         return (<GroundScanSensorCalibration navigateTo={this.navigateTo} />)
       case "serialCodeChangerScreen":
         return (<SerialCodeChanger navigateTo={this.navigateTo} />)
+      case "compassCalibrationScreen":
+        return (<CompassCalibration navigateTo={this.navigateTo} />)
+      case "lockerScreen":
+        return (<Locker navigateTo={this.navigateTo} />)
       default:
         break;
     }

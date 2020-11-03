@@ -20,6 +20,7 @@ import TickIcon from '../../Assets/tick.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 import dbStorage from '../../DatabaseHelper'
+import SoundHelper from '../../SoundHelper'
 
 
 
@@ -217,6 +218,8 @@ class Settings extends Component {
           else if (this.state.subCursor === 2) {
             this.setState({
               searchVolume: this.clamp(this.state.searchVolume - 25, 0, 100)
+            }, () => {
+              SoundHelper.setVolume(this.state.searchVolume)
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
@@ -285,6 +288,8 @@ class Settings extends Component {
           else if (this.state.subCursor === 2) {
             this.setState({
               searchVolume: this.clamp(this.state.searchVolume + 25, 0, 100)
+            }, () => {
+              SoundHelper.setVolume(this.state.searchVolume)
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }

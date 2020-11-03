@@ -43,9 +43,10 @@
   color: white;
   font-size: 12px;
   position: relative;
-  left: -40px;
+  left: -110px;
   top: 123px;
   text-align: right;
+  width: 100px;
 }
 
 .stream-orientation .line .indicator-angle span {
@@ -59,8 +60,8 @@
   height: 2px;
   background: red;
   position: absolute;
-  left: 34px;
-  top: 6px
+  left: 102px;
+  top: 6px;
 }
 
 .stream-plot canvas {

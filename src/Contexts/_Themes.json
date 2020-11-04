@@ -10,7 +10,8 @@
     "background3": "#124b88",
     "shadowPopup": "inset 0px 0px 10px 5px #70643c",
     "arrorHueRotation": "hue-rotate(0deg)",
-    "navigatorItemNumber": 9
+    "navigatorItemNumber": 9,
+    "button_bg_selected_not": "#02192e"
   },
   "goldstar":{
     "background_url": "./Assets/backgrounds/goldstar.png",
@@ -23,7 +24,8 @@
     "background3": "#00224f",
     "shadowPopup": "inset 0px 0px 10px 5px #ffffff",
     "arrorHueRotation": "hue-rotate(160deg)",
-    "navigatorItemNumber": 9
+    "navigatorItemNumber": 9,
+    "button_bg_selected_not": "#02192e"
   },
   "concord": {
     "background_url": "./Assets/backgrounds/infinity.png",
@@ -36,11 +38,12 @@
     "background3": "#124b88",
     "shadowPopup": "inset 0px 0px 10px 5px #70643c",
     "arrorHueRotation": "hue-rotate(320deg)",
-    "navigatorItemNumber": 9
+    "navigatorItemNumber": 9,
+    "button_bg_selected_not": "#02192e"
   },
   "phoenix": {
     "background_url": "./Assets/backgrounds/goldstar.png",
-    "button_bg_selected": "linear-gradient(120deg, rgb(182 67 11), rgb(229 165 21))",
+    "button_bg_selected": "linear-gradient(120deg, #de8e33, #dbc832)",
     "border_color": "rgb(189,113,11)",
     "selected_text_color": "#ffffff",
     "settings_item_bg": "#4a310d",
@@ -48,7 +51,8 @@
     "background2": "#4a310d",
     "background3": "#4a310d",
     "shadowPopup": "inset 0px 0px 10px 5px #ffffff",
-    "arrorHueRotation": "hue-rotate(330deg)",
-    "navigatorItemNumber": 9
+    "arrorHueRotation": "hue-rotate(360deg)",
+    "navigatorItemNumber": 9,
+    "button_bg_selected_not": "#523702"
   }
 }

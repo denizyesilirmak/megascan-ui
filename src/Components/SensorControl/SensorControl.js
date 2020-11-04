@@ -136,10 +136,9 @@ class SensorControl extends React.Component {
           preload="true"
           style={{
             display: this.state.renderVideo ? 'block' : 'none',
-            height: "360px",
-            width: "630px",
-            backgroundSize: "stretch",
-            marginTop: "60px"
+            marginTop: "30px",
+            position: 'absolute',
+            width: "630px"
           }}
           src={this.state.src}
           muted

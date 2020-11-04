@@ -86,7 +86,7 @@ class Settings extends Component {
       hour: this.currentDate.getHours(),
       minute: this.currentDate.getMinutes(),
       day: this.currentDate.getDate(),
-      month: this.currentDate.getMonth(),
+      month: this.currentDate.getMonth() + 1,
       year: this.currentDate.getFullYear(),
       selectedTimeIndex: 2 * 200,
       selectedDateIndex: 3 * 200,

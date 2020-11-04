@@ -24,6 +24,7 @@ import GroundScanSensorCalibration from './Components/GroundScanSensorCalibratio
 import SerialCodeChanger from './Components/SerialCodeChanger/SerialCodeChanger'
 import CompassCalibration from './Components/Compass/Compass'
 import Locker from './Components/Locker/Locker'
+import Suprise from './Components/Suprise/Suprise'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -254,6 +255,8 @@ class App extends Component {
         return (<CompassCalibration navigateTo={this.navigateTo} />)
       case "lockerScreen":
         return (<Locker navigateTo={this.navigateTo} />)
+      case "supriseScreen":
+        return (<Suprise navigateTo={this.navigateTo} />)
       default:
         break;
     }

@@ -3,12 +3,14 @@ import './ManualLRLScan.css'
 import DialImage from '../../../Assets/MenuIcons/dial.png'
 import CompassOut from '../../../Assets/MenuIcons/compas-out.png'
 import socketHelper from '../../../SocketHelper'
+import dbStorage from '../../../DatabaseHelper'
 import {DeviceContext} from '../../../Contexts/DeviceContext'
 
 class ManualLRLScan extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
+
     this.width = 20
     this.amplitute = 15
     this.signal = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -25,7 +27,15 @@ class ManualLRLScan extends Component {
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
     }, 150);
+    this.getCalibrationValues()
   }
+
+  getCalibrationValues = async () => {
+    this.left = await dbStorage.getItem('lrlAntennaLeftEnd')
+    this.right = await dbStorage.getItem('lrlAntennaRightEnd')
+    // console.log(this.left, this.right)
+  }
+
 
   requestSensorData = () => {
     socketHelper.send('L')
@@ -49,12 +59,17 @@ class ManualLRLScan extends Component {
     }
 
     if (socketData.type === "lrlantenna") {
+      const angle = this.clamp(this.map(parseInt(socketData.payload), this.left, this.right, 0, 180) - 90, -90, 90)
       this.setState({
-        angle: (parseInt(socketData.payload) - 90),
+        angle: angle,
         heading: socketData.compass,
         tilt: socketData.angle
       })
     }
+  }
+
+  map = (x, in_min, in_max, out_min, out_max) => {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
   generatePathShape = () => {

@@ -25,7 +25,7 @@ const NotSleepingScreens = [
 const systems = DEVICE_LIST[DEVICE_MODEL]
 const curentTheme = THEMES[DEVICE_MODEL]
 
-const SLEEPMODETIMEOUT = 5000
+const SLEEPMODETIMEOUT = 45000
 
 class DeviceContextProvider extends Component {
   constructor(props) {

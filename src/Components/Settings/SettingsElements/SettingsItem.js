@@ -12,7 +12,7 @@ class SettingsItem extends Component {
     return (
       <div 
       style={{
-        background: this.props.selected ? this.context.theme.button_bg_selected : 'rgb(2, 25, 46)'
+        background: this.props.selected ? this.context.theme.button_bg_selected : this.context.theme.button_bg_selected_not
       }}
       className={`settings-item ${this.props.selected ? 'selected' : ''}`
       }>

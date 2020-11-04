@@ -137,6 +137,7 @@ class Mainmenu extends Component {
           this.props.navigateTo("mobileGroundScan")
           return
         case 'turnoff':
+          this.props.setLastMainMenuIndex(this.state.index)
           this.props.navigateTo("turnOff")
           return
         case 'ok':
@@ -154,13 +155,6 @@ class Mainmenu extends Component {
           }, 300);
           return
         case 'back':
-          if (this.state.lockScreenCounter > 2) {
-            this.props.navigateTo("lockScreen")
-          } else {
-            this.setState({
-              lockScreenCounter: this.state.lockScreenCounter + 1
-            })
-          }
           return
         default:
           break

@@ -91,11 +91,9 @@ class Pulse extends Component {
 
   pushDataToStream = () => {
     let data = this.state.datastream
-    if (Math.random() < 0.501) {
-      data.push(Math.random() * 60)
-    } else {
-      data.push(Math.random() * -60)
-    }
+
+    data.push(Math.random() * -240)
+
     data.shift(1)
     this.setState({ datastream: data })
   }
@@ -103,7 +101,7 @@ class Pulse extends Component {
   generatePlotString = () => {
     let str = `M`
     this.state.datastream.forEach((e, i) => {
-      str += i * 6 + " " + (e + 120) + " "
+      str += i * 6 + " " + (e + 240) + " "
     });
     return str
   }
@@ -158,8 +156,8 @@ class Pulse extends Component {
         </div>
 
         <div className="pulse-info">
-          <Progress value={this.state.datastream[0]} type="gold" label="NON FERROUS" />
-          <Progress value={this.state.datastream[30]} type="iron" label="FERROUS" />
+          <Progress value={95} type="gold" label="NON FERROUS" />
+          <Progress value={80} type="iron" label="FERROUS" />
         </div>
 
       </div >

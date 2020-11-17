@@ -59,7 +59,7 @@ class Suprise extends React.Component {
     return (
       <div className="suprise">
         <div className="suprise-text">
-          bunu yazan tosun okuyana kosun
+          deniz yeşilırmak - 2020
         </div>
         <div className="canvas-container-suprise" ref={this.canvasHolder}>  </div>
       </div>

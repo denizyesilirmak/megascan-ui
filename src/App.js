@@ -43,6 +43,7 @@ import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSettings'
 import MobileLiveStream from './Components/MobileLiveStream/MobileLiveStream'
 import Pulse from './Components/ScanModes/Pulse/Pulse'
+import VlfScan from './Components/ScanModes/Vlf/VlfScan';
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -257,6 +258,8 @@ class App extends Component {
         return (<Locker navigateTo={this.navigateTo} />)
       case "supriseScreen":
         return (<Suprise navigateTo={this.navigateTo} />)
+      case "vlfScanScreen":
+        return (<VlfScan navigateTo={this.navigateTo} />)
       default:
         break;
     }

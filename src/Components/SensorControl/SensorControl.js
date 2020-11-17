@@ -7,7 +7,7 @@ import GroundScanVideo from '../../Assets/Videos/controlGroundScan.mp4'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-const bypass = false
+const bypass = true
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext

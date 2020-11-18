@@ -30,7 +30,7 @@ class SoundHelper {
   }
 
   createOscillator(frequencyType = "sine") {
-    this.gainnode.gain.value = 0
+    this.gainnode.gain.value = 1
     console.log(this.gainnode.gain.value)
 
     // console.log(this.started)

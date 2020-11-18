@@ -26,16 +26,14 @@
   padding: 0px 20px 0px 20px;
   border-radius: 10px;
   font-size: 16px;
-  color: #fff;
+  color: #000000;
 }
 
 .mgs-prop .value {
-  font-size: 24px;
-  color: #ffffff;
+  font-size: 26px;
+  color: #000000;
   /* text-decoration: underline; */
   font-weight: bold;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
 }
 
 .mobile-ground-scan .tablet-image {

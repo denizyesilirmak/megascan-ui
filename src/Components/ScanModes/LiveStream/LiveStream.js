@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import socketHelper from '../../../SocketHelper'
 import './LiveStream.css'
 import calibrationIcon from '../../../Assets/MenuIcons/calibration.png'
-import SpeedIcon from '../../../Assets/MenuIcons/speed.svg'
+import SpeedIcon from '../../../Assets/MenuIcons/speedometer.png'
 import Left from '../../../Assets/MenuIcons/left-arrow3.png'
 import right from '../../../Assets/MenuIcons/right-arrow3.png'
 import SoundHelper from '../../../SoundHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 import WarningIcon from '../../../Assets/MenuIcons/warning.png'
+import KalmanFilter from 'kalmanjs'
+import BezierEasing from 'bezier-easing'
+
+
+
 
 const COLORS = {
   jet: [
@@ -15,7 +20,7 @@ const COLORS = {
     { pct: 256, color: { r: 0x00, g: 0xff, b: 0xff } },
     { pct: 512, color: { r: 0x00, g: 0xad, b: 0x00 } },
     { pct: 768, color: { r: 0xff, g: 0xff, b: 0x00 } },
-    { pct: 1023, color: { r: 0xff, g: 0x00, b: 0x00 } }
+    { pct: 1024, color: { r: 0xff, g: 0x00, b: 0x00 } }
   ]
 }
 
@@ -24,20 +29,26 @@ class LiveStrem extends Component {
   constructor(props) {
     super(props)
 
+    this.easing_I = BezierEasing(0, 0.60, 0.18, 0.32)
+    this.easing_D = BezierEasing(0.32, 0, 0.32, 0.18)
+    this.kf = new KalmanFilter();
+
+    this.calibration_status = true
     this.count = 0
     this.instantData = 0
     this.total = 0
     this.state = {
       stream: [512, 512, 512, 512, 512, 512, 512, 512, 512, 512],
       started: true,
-      calibration: true,
       speed: 0,
-      speedWarning: false
+      speedWarning: false,
+      sensitivity: 0,
+      propIndex: true
     }
   }
 
   componentDidMount() {
-    SoundHelper.createOscillator('square')
+    SoundHelper.createOscillator('sawtooth')
     socketHelper.attach(this.handleKeyDown)
 
 
@@ -89,31 +100,60 @@ class LiveStrem extends Component {
 
   handleKeyDown = (socketData) => {
     let tmpSpeed = this.state.speed
+    let tmpSens = this.state.sensitivity
     if (socketData.type === 'button') {
       switch (socketData.payload) {
         case 'left':
-          if (tmpSpeed > 0) {
-            tmpSpeed = tmpSpeed - 1
-            this.setState({
-              speed: tmpSpeed,
-              speedWarning: true
-            })
+          if (this.state.propIndex) {
+            if (tmpSpeed > 0) {
+              tmpSpeed = tmpSpeed - 1
+              this.setState({
+                speed: tmpSpeed,
+                speedWarning: true
+              })
+            }
+          } else {
+            if (tmpSens > 0) {
+              tmpSens = tmpSens - 1
+              this.setState({
+                sensitivity: tmpSens,
+                speedWarning: true
+              })
+            }
           }
           break
         case 'right':
-          if (tmpSpeed < 5) {
-            tmpSpeed = tmpSpeed + 1
-            this.setState({
-              speed: tmpSpeed,
-              speedWarning: true
-            })
+          if (this.state.propIndex) {
+            if (tmpSpeed < 5) {
+              tmpSpeed = tmpSpeed + 1
+              this.setState({
+                speed: tmpSpeed,
+                speedWarning: true
+              })
+            }
+          } else {
+            if (tmpSens < 5) {
+              tmpSens = tmpSens + 1
+              this.setState({
+                sensitivity: tmpSens,
+                speedWarning: true
+              })
+            }
           }
           break
         case 'down':
-
+          if (this.state.propIndex) {
+            this.setState({
+              propIndex: false
+            })
+          }
           break
         case 'up':
-
+          if (!this.state.propIndex) {
+            this.setState({
+              propIndex: true
+            })
+          }
           break
         case 'ok':
 
@@ -125,6 +165,9 @@ class LiveStrem extends Component {
               speedWarning: false
             }, () => {
               this.startInterval((6 - this.state.speed) * 80)
+              this.easing_I = BezierEasing(0, 0.60, 0.18, this.map(this.state.sensitivity, 0, 5, 0.32, 1))
+              this.easing_D = BezierEasing(0.32, 0, this.map(this.state.sensitivity, 0, 5, 0.32, 0.5), 0.18)
+              console.log(this.state.sensitivity)
             })
           }
           break
@@ -144,18 +187,27 @@ class LiveStrem extends Component {
     else if (socketData.type === 'sensor') {
       var c = this.refs.streamCanvas
       var ctx = c.getContext("2d");
-      if (this.state.calibration) {
+      if (this.calibration_status) {
         this.instantData = parseInt(socketData.payload)
       }
       else {
-        if (parseInt(socketData.payload) < this.total) {
-          this.instantData = this.map(parseInt(socketData.payload), 0, this.total, 0, 512)
+        if (parseInt(socketData.payload) < this.total) { //total = ortalama aslında
+          SoundHelper.changeFrequencyType('sawtooth')
+          this.instantData = parseInt(this.kf.filter(this.easing_D(this.map(parseInt(socketData.payload), 0, this.total, 0, 0.5)) * 512))
         } else {
-          this.instantData = this.map(parseInt(socketData.payload), this.total, 1023, 512, 1023)
+          SoundHelper.changeFrequencyType('sawtooth')
+          this.instantData = parseInt((this.kf.filter(this.easing_I(this.map(parseInt(socketData.payload), this.total, 1024, 0, 0.5)) * 512) + 512))
         }
       }
 
-      SoundHelper.changeFrequencySmooth(this.instantData)
+
+
+      if (!this.calibration_status) {
+      SoundHelper.changeFrequencySmooth((this.instantData - this.total*2) * 5)
+      }
+      console.log(this.instantData)
+      console.log(this.total)
+
       this.calibration(this.instantData)
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))
@@ -176,7 +228,7 @@ class LiveStrem extends Component {
       grd.addColorStop(.9, this.getColor(this.state.stream[9]));
 
       ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, 560, 280);
+      ctx.fillRect(0, 0, 560, 345);
 
       // ANGLE
       // this.refs.indicatorRef.style.transform = `translateY(${this.clamp(this.state.angle * 1.5 - 145, -130, 130)}px)`
@@ -184,7 +236,7 @@ class LiveStrem extends Component {
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return Math.trunc((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+    return ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
   }
 
   clamp = (num, min, max) => {
@@ -195,14 +247,12 @@ class LiveStrem extends Component {
     this.count++
     if (this.count <= 15) {
       // console.log(this.count)
-      this.total += Math.trunc(sensor / 14)
+      this.total += Math.trunc(sensor / 15)
       // console.log("total", this.total)
       this.refs.calib.style.width = (100 / 15) * this.count + "%"
     }
     else {
-      this.setState({
-        calibration: false
-      })
+      this.calibration_status = false
     }
 
   }
@@ -226,17 +276,13 @@ class LiveStrem extends Component {
     return (
       <div ref="livestream" className="live-stream-component component">
         {
-          this.state.calibration ? this.renderCalibrationPopup() : ''
+          this.calibration_status ? this.renderCalibrationPopup() : ''
         }
         <div className="live-stream-top">
           <div className="stream-plot">
-            <canvas ref="streamCanvas" width="560" height="280">
+            <canvas ref="streamCanvas" width="560" height="345">
 
             </canvas>
-          </div>
-
-          <div className="sensor-numeric-value">
-            {this.map(this.state.stream[9], 0, 1023, 0 , 100)}
           </div>
 
           {/* <div className="stream-orientation">
@@ -245,18 +291,48 @@ class LiveStrem extends Component {
             </div>
           </div> */}
         </div>
-        <div className="live-stream-bottom">
-          <div className="speed-holder">
-            <img className="speed-icon" src={SpeedIcon} alt="speed"></img>
-            <img className="arrows" src={Left} alt="speed"></img>
-            <span>{this.state.speed + 1}</span>
-            <img className="arrows" src={right} alt="speed"></img>
+
+
+        <div className="live-stream-props">
+
+          <div className="live-stream-prop">
+            <div className="title">
+              Value
+            </div>
+            <div className="value">
+              <div className="num-val">{parseInt(this.map(this.state.stream[9], 0, 1024, 0, 100))}</div>
+            </div>
           </div>
+
+          <div className={`live-stream-prop ${this.state.propIndex ? 'selected' : ''}`}>
+            <div className="title">
+              Speed
+            </div>
+            <div className="value">
+              <img src={Left} alt="left" />
+              <div className="num-val">{this.state.speed + 1}</div>
+              <img src={right} alt="right" />
+            </div>
+          </div>
+
+          <div className={`live-stream-prop ${!this.state.propIndex ? 'selected' : ''}`}>
+            <div className="title">
+              Sensitivity
+            </div>
+            <div className="value">
+              <img src={Left} alt="left" />
+              <div className="num-val">{this.state.sensitivity + 1}</div>
+              <img src={right} alt="right" />
+            </div>
+          </div>
+
         </div>
+
+
 
         <div className="speed-warning" style={{ display: this.state.speedWarning ? 'flex' : 'none' }}>
           <img alt="warn" src={WarningIcon} />
-        Speed is changed. Press START to apply
+        Settings are changed. Press START to apply
         </div>
 
 

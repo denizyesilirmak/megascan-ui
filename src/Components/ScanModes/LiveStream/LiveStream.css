@@ -3,6 +3,7 @@
   flex-direction: column;
   opacity: 0;
   transition: all 1s;
+  background-color: black;
 }
 
 .live-stream-top {
@@ -137,7 +138,6 @@
 
 .speed-holder .speed-icon {
   width: 48px;
-  filter: invert(100%);
   margin-right: 20px;
   margin-top: 4px;
 }
@@ -156,12 +156,12 @@
   background: #000;
   border: 2px solid white;
   position: absolute;
-  bottom: 13px;
-  left: 13px;
+  bottom: 40px;
+  left: 40px;
   color: white;
-  padding: 10px 20px 10px 20px;
+  padding: 6px 20px 6px 20px;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 14px;
   overflow: hidden;
   height: 32px;
   display: flex;
@@ -171,4 +171,49 @@
 .speed-warning img {
   width: 30px;
   margin-right: 10px;
+}
+
+.live-stream-props {
+  width: 150px;
+  height: 300px;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.live-stream-prop {
+  width: 90%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  color: white;
+  background: #151515;
+  border-radius: 10px;
+}
+
+.live-stream-prop.selected{
+  background: #404040;
+}
+
+.live-stream-prop .value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+}
+
+.live-stream-prop .num-val {
+  margin: 0px 10px 0px 10px;
+  text-align: center;
+}
+
+.live-stream-prop .title{
+  margin-bottom: 8px;
+  font-size: 12px;
 }

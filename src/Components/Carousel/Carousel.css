@@ -63,12 +63,11 @@
 
 .indicator{
   position: absolute;
-  top: 35px;
-  left: 5px;
-  width: 170px;
-  height: 170px;
-  animation: rotate 2s linear infinite;
-  transform-origin: 85px 83px;
+  top: 20px;
+  left: -10px;
+  width: 200px;
+  height: 200px;
+  animation: rotate 2.4s linear infinite;
 }
 
 @keyframes rotate{

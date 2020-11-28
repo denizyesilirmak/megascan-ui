@@ -124,7 +124,7 @@ class Bionic extends Component {
       })
 
       if (this.state.isCalibrated) {
-        if (Math.abs(this.state.calibrationValue - this.state.sensorData) <= (23 - parseInt(this.state.sensitivity / 5))) {
+        if (Math.abs(this.state.calibrationValue - this.state.sensorData) <= (40 - parseInt(this.state.sensitivity / 5))) {
           this.setState({ locked: true })
           SoundHelper.changeFrequencyFast(800)
         } else {
@@ -167,7 +167,7 @@ class Bionic extends Component {
         <div className="line-chart">
           {
             this.state.isCalibrated ?
-              <LineChart value={this.state.locked ? 255 : this.state.sensorData / 4} /> : null
+              <LineChart value={this.state.locked ? 255 : this.state.sensorData / 8} /> : null
           }
         </div>
 
@@ -176,7 +176,7 @@ class Bionic extends Component {
         }
 
         <div className={`dial gain-dial ${(this.state.cursorIndex % 2 === 0) ? "selected" : ""}`}>
-          <div className="dial-label">Gain</div>
+          <div className="dial-label">{this.context.strings['gain']}</div>
           <span>{this.state.gain}</span>
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar
@@ -196,7 +196,7 @@ class Bionic extends Component {
         </div>
 
         <div className={`dial sens-dial ${(this.state.cursorIndex % 2 === 1) ? "selected" : ""}`}>
-          <div className="dial-label">Sensitivity</div>
+          <div className="dial-label">{this.context.strings['sensitivity']}</div>
           <span>{this.state.sensitivity}</span>
           <img alt="left-right" src={LeftRight} className="left-right-icon"></img>
           <CircularProgressbar

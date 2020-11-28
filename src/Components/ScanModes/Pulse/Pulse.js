@@ -147,9 +147,11 @@ class Pulse extends Component {
                 <stop offset="65%" stopColor="#00ffff" />
                 <stop offset="100%" stopColor="#0000ff" />
               </linearGradient>
+
             </defs>
             <g>
               {/* <path id="svg_1" d="M0,120 120,160 L200,120 " opacity="0.5" strokeWidth="8.5" stroke="#ff0000" fill="#fff" /> */}
+
               <path d={this.generatePlotString()} strokeWidth="4" fill="transparent" strokeLinejoin="round" stroke="url(#gradient)" />
             </g>
           </svg>

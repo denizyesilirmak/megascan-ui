@@ -8,7 +8,7 @@ import { DeviceContext } from '../../Contexts/DeviceContext'
 const COLORS = {
   jet: [
     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
-    { pct: 67, color: { r: 0x00, g: 0xff, b: 0xff } },
+    { pct: 64, color: { r: 0x00, g: 0xff, b: 0xff } },
     { pct: 127, color: { r: 0x00, g: 0xff, b: 0x00 } },
     { pct: 192, color: { r: 0xff, g: 0xff, b: 0x00 } },
     { pct: 256, color: { r: 0xff, g: 0x00, b: 0x00 } }

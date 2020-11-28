@@ -12,7 +12,7 @@ class MobileGroundScan extends Component {
 
     this.component = React.createRef()
 
-    
+
 
     this.state = {
       width: this.props.info.width || 0,
@@ -70,23 +70,25 @@ class MobileGroundScan extends Component {
         case "back":
           if (this.state.exitPopup) {
             this.setState({ exitPopup: false })
-          }else{
+          } else {
             this.setState({ exitPopup: true })
           }
           break;
         case "ok":
           if (this.state.exitPopup) {
-            if(this.state.cursorIndex){
+            if (this.state.cursorIndex) {
               this.props.navigateTo("menuScreen")
               return
-            }else{
+            } else {
               this.setState({
                 exitPopup: false
               })
             }
           }
           return;
-
+        case "start":
+          socketHelper.send('Q')
+          break
         default:
           break;
       }

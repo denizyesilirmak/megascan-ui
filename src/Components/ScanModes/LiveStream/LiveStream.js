@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import socketHelper from '../../../SocketHelper'
 import './LiveStream.css'
 import calibrationIcon from '../../../Assets/MenuIcons/calibration.png'
-import SpeedIcon from '../../../Assets/MenuIcons/speedometer.png'
 import Left from '../../../Assets/MenuIcons/left-arrow3.png'
 import right from '../../../Assets/MenuIcons/right-arrow3.png'
 import SoundHelper from '../../../SoundHelper'
@@ -17,10 +16,12 @@ import BezierEasing from 'bezier-easing'
 const COLORS = {
   jet: [
     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
-    { pct: 256, color: { r: 0x00, g: 0xff, b: 0xff } },
-    { pct: 512, color: { r: 0x00, g: 0xad, b: 0x00 } },
-    { pct: 768, color: { r: 0xff, g: 0xff, b: 0x00 } },
-    { pct: 1024, color: { r: 0xff, g: 0x00, b: 0x00 } }
+    { pct: 512, color: { r: 0x00, g: 0xff, b: 0xff } },
+    { pct: 950, color: { r: 0x00, g: 0xff, b: 0xc3 } },
+    { pct: 1024, color: { r: 0x00, g: 0xad, b: 0x00 } },
+    { pct: 1200, color: { r: 0xff, g: 0xff, b: 0x00 } },
+    { pct: 1500, color: { r: 0xff, g: 0xff, b: 0x00 } },
+    { pct: 2048, color: { r: 0xff, g: 0x00, b: 0x00 } }
   ]
 }
 
@@ -29,18 +30,20 @@ class LiveStrem extends Component {
   constructor(props) {
     super(props)
 
-    this.easing_I = BezierEasing(0, 0.60, 0.18, 0.32)
-    this.easing_D = BezierEasing(0.32, 0, 0.32, 0.18)
+    this.easing_I = BezierEasing(0.5, 0.5, 0.5, 0.5)
+    this.easing_D = BezierEasing(0.5, 0.5, 0.5, 0.5)
     this.kf = new KalmanFilter();
 
     this.calibration_status = true
     this.count = 0
     this.instantData = 0
     this.total = 0
+    this.percent = 0
+
     this.state = {
-      stream: [512, 512, 512, 512, 512, 512, 512, 512, 512, 512],
+      stream: [1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024],
       started: true,
-      speed: 0,
+      speed: 5,
       speedWarning: false,
       sensitivity: 0,
       propIndex: true
@@ -48,7 +51,7 @@ class LiveStrem extends Component {
   }
 
   componentDidMount() {
-    SoundHelper.createOscillator('sawtooth')
+    SoundHelper.createOscillator('square')
     socketHelper.attach(this.handleKeyDown)
 
 
@@ -57,7 +60,7 @@ class LiveStrem extends Component {
       this.refs.livestream.style.opacity = 1
     }, 60);
 
-    this.startInterval(300)
+    this.startInterval(80)
 
 
   }
@@ -95,7 +98,7 @@ class LiveStrem extends Component {
 
   requestSensorData = () => {
     if (this.state.started)
-      socketHelper.send('Q' + parseInt(this.state.stream[9] / 4))
+      socketHelper.send('Q' + parseInt(this.state.stream[9] / 8))
   }
 
   handleKeyDown = (socketData) => {
@@ -156,7 +159,9 @@ class LiveStrem extends Component {
           }
           break
         case 'ok':
-
+          this.total = 0
+          this.count = 0
+          this.calibration_status = true
           return
 
         case 'start':
@@ -167,7 +172,6 @@ class LiveStrem extends Component {
               this.startInterval((6 - this.state.speed) * 80)
               this.easing_I = BezierEasing(0, 0.60, 0.18, this.map(this.state.sensitivity, 0, 5, 0.32, 1))
               this.easing_D = BezierEasing(0.32, 0, this.map(this.state.sensitivity, 0, 5, 0.32, 0.5), 0.18)
-              console.log(this.state.sensitivity)
             })
           }
           break
@@ -191,24 +195,30 @@ class LiveStrem extends Component {
         this.instantData = parseInt(socketData.payload)
       }
       else {
-        if (parseInt(socketData.payload) < this.total) { //total = ortalama aslında
-          SoundHelper.changeFrequencyType('sawtooth')
-          this.instantData = parseInt(this.kf.filter(this.easing_D(this.map(parseInt(socketData.payload), 0, this.total, 0, 0.5)) * 512))
+        if (parseInt(socketData.payload) < this.total - 15) { //total = ortalama aslında
+          this.instantData = parseInt(this.kf.filter(this.easing_D(this.map(parseInt(socketData.payload), 0, this.total, 0, 1)) * 1024))
+          SoundHelper.changeFrequencySmooth((this.instantData) /2)
+        } else if(parseInt(socketData.payload) > this.total + 15) {
+          this.instantData = parseInt((this.kf.filter(this.easing_I(this.map(parseInt(socketData.payload), this.total, 2048, 0, 1)) * 1024) + 1024))
+          SoundHelper.changeFrequencySmooth((this.instantData) /2)
         } else {
-          SoundHelper.changeFrequencyType('sawtooth')
-          this.instantData = parseInt((this.kf.filter(this.easing_I(this.map(parseInt(socketData.payload), this.total, 1024, 0, 0.5)) * 512) + 512))
+          this.instantData = 1024
+          SoundHelper.changeFrequencySmooth((this.instantData) /2)
         }
       }
 
 
+      // console.log(this.instantData)
+      // console.log(this.total)
+
 
       if (!this.calibration_status) {
-      SoundHelper.changeFrequencySmooth((this.instantData - this.total*2) * 5)
-      }
-      console.log(this.instantData)
-      console.log(this.total)
 
-      this.calibration(this.instantData)
+      }
+      // console.log(this.instantData)
+      // console.log(this.total)
+
+      this.calibration(parseInt(socketData.payload))
       let tmpStream = this.state.stream
       tmpStream.push(parseInt(this.instantData))
       tmpStream.shift()
@@ -245,11 +255,11 @@ class LiveStrem extends Component {
 
   calibration = (sensor) => {
     this.count++
-    if (this.count <= 15) {
+    if (this.count <= 10) {
       // console.log(this.count)
-      this.total += Math.trunc(sensor / 15)
+      this.total += Math.trunc(sensor / 10)
       // console.log("total", this.total)
-      this.refs.calib.style.width = (100 / 15) * this.count + "%"
+      this.percent = (100 / 10) * this.count
     }
     else {
       this.calibration_status = false
@@ -263,7 +273,7 @@ class LiveStrem extends Component {
         <img src={calibrationIcon} alt="cal"></img>
         <div className="calibration-warning">{this.context.strings["calibrationwarning"]}</div>
         <div className="calibration-preloader-holder">
-          <div ref="calib" className="calibration-preloader-value" style={{ background: this.context.theme.button_bg_selected }}>
+          <div ref="calib" className="calibration-preloader-value" style={{ background: this.context.theme.button_bg_selected, width: this.percent + '%' }}>
 
           </div>
         </div>
@@ -297,16 +307,16 @@ class LiveStrem extends Component {
 
           <div className="live-stream-prop">
             <div className="title">
-              Value
+              {this.context.strings['value']}
             </div>
             <div className="value">
-              <div className="num-val">{parseInt(this.map(this.state.stream[9], 0, 1024, 0, 100))}</div>
+              <div className="num-val">{parseInt(this.map(this.state.stream[9], 0, 2048, 0, 100))}</div>
             </div>
           </div>
 
           <div className={`live-stream-prop ${this.state.propIndex ? 'selected' : ''}`}>
             <div className="title">
-              Speed
+              {this.context.strings['speed']}
             </div>
             <div className="value">
               <img src={Left} alt="left" />
@@ -317,7 +327,7 @@ class LiveStrem extends Component {
 
           <div className={`live-stream-prop ${!this.state.propIndex ? 'selected' : ''}`}>
             <div className="title">
-              Sensitivity
+              {this.context.strings['sensitivity']}
             </div>
             <div className="value">
               <img src={Left} alt="left" />
@@ -332,7 +342,9 @@ class LiveStrem extends Component {
 
         <div className="speed-warning" style={{ display: this.state.speedWarning ? 'flex' : 'none' }}>
           <img alt="warn" src={WarningIcon} />
-        Settings are changed. Press START to apply
+          {
+            this.context.strings['settingsChanged']
+          }
         </div>
 
 

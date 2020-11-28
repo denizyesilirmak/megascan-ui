@@ -29,7 +29,8 @@ class ScanViewer extends Component {
       filter: false,
       depth: 0,
       min: 0,
-      max: 0
+      max: 0,
+      dataPopup: false
     }
     this.widthLimit = 0
     this.heightLimit = 0
@@ -38,7 +39,7 @@ class ScanViewer extends Component {
 
   componentDidMount() {
     SocketHelper.attach(this.handleKeyDown)
-    console.log(this.props.fileToOpen)
+    //console.log(this.props.fileToOpen)
     fetch('http://localhost:9090/readfile/' + this.props.fileToOpen)
       // fetch('http://192.168.1.114:9090/readfile/' + "057")
 
@@ -54,7 +55,7 @@ class ScanViewer extends Component {
             fetch: true
           })
           clearTimeout(timeout)
-        }, 300);
+        }, 400);
       })
 
   }
@@ -65,6 +66,14 @@ class ScanViewer extends Component {
     }
 
     switch (socketData.payload) {
+      case "start":
+        if (this.state.analyseMode === true) {
+            this.setState({
+              dataPopup: !this.state.dataPopup
+            })
+
+        }
+        break;
       case "left":
         if (this.state.analyseMode === true) {
           //move selected data box
@@ -145,7 +154,7 @@ class ScanViewer extends Component {
   }
 
   getColorInfo = (red, green, blue, average, min, max) => {
-    console.log(min, max)
+    //console.log(min, max)
     this.setState({
       red: Math.trunc(red * 100),
       green: Math.trunc(green * 100),
@@ -168,6 +177,27 @@ class ScanViewer extends Component {
   render() {
     return (
       <div className="scan-viewer-component component">
+
+        {
+          this.state.analyseMode && this.state.dataPopup ?
+            <div className="scan-viewer-data-popup">
+              <div className="svdp sen">
+                {this.normalizedData[this.state.height][this.state.width * 4 + 0]}
+              </div>
+              <div className="svdp sen">
+                {this.normalizedData[this.state.height][this.state.width * 4 + 1]}
+              </div>
+              <div className="svdp sen">
+                {this.normalizedData[this.state.height][this.state.width * 4 + 2]}
+              </div>
+              <div className="svdp sen">
+                {this.normalizedData[this.state.height][this.state.width * 4 + 3]}
+              </div>
+            </div> : null
+        }
+
+
+
         <div className="sv-top">
           <div className="sv-scan-container">
             {

@@ -48,8 +48,8 @@ class Ionic extends Component {
     if (socketData.type === "bionic") {
       if (this.refs.indicator) {
         if (!this.state.isCalibrated) {
-          this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 1024, 30, 250) + "px"
-          this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 1024, 30, 250) + "px"
+          this.refs.indicator.style.width = this.map(parseInt(socketData.payload), 0, 2048, 30, 250) + "px"
+          this.refs.indicator.style.height = this.map(parseInt(socketData.payload), 0, 2048, 30, 250) + "px"
         }
       }
 
@@ -69,11 +69,11 @@ class Ionic extends Component {
             newValue: mv
           })
           SoundHelper.changeFrequencySmooth((1024 - mv) * 2 + 1)
-          this.refs.indicator.style.background = `rgb(0,0,${this.map(1024 - mv, 0, 1024, 0, 255)})`
+          this.refs.indicator.style.background = `rgb(0,0,${this.map(1024 - mv, 0, 1024, 100, 255)})`
           this.refs.indicator.style.width = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
           this.refs.indicator.style.height = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
         } else {
-          const mv = 1024 - this.map(this.state.value, this.state.calibrationValue, 1024, 0, 1024)
+          const mv = 1024 - this.map(this.state.value, this.state.calibrationValue, 2048, 0, 1024)
           if (isNaN(mv)) {
             return
           }
@@ -81,7 +81,7 @@ class Ionic extends Component {
             newValue: mv
           })
           SoundHelper.changeFrequencySmooth((1024 - mv) * 2 + 1)
-          this.refs.indicator.style.background = `rgb(${this.map(1024 - mv, 0, 1024, 0, 255)},0,0)`
+          this.refs.indicator.style.background = `rgb(${this.map(1024 - mv, 0, 1024, 100, 255)},0,0)`
           this.refs.indicator.style.width = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
           this.refs.indicator.style.height = this.map(1024 - mv, 0, 1024, 30, 250) + "px"
         }

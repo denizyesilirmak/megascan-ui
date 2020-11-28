@@ -16,6 +16,7 @@ class SoundHelper {
       this.gainnode.connect(this.audio_context.destination)
       setTimeout(() => {
         this.oscillator.disconnect()
+        this.audio_context.resume()
       }, 800);
     }
     return SoundHelper.instance
@@ -30,13 +31,9 @@ class SoundHelper {
   }
 
   createOscillator(frequencyType = "sine") {
-    this.gainnode.gain.value = 1
-    console.log(this.gainnode.gain.value)
-
-    // console.log(this.started)
     if (this.started === false) {
+      this.oscillator.connect(this.gainnode)
       this.oscillator.type = frequencyType
-      this.oscillator.connect(this.audio_context.destination)
       this.started = true
     }
   }
@@ -47,7 +44,7 @@ class SoundHelper {
     } else if (hertz > 22050) {
       return
     }
-    this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0, 0.25)
+    this.oscillator.frequency.setTargetAtTime(hertz, this.audio_context.currentTime + 0, 0.10)
     // this.oscillator.frequency.linearRampToValueAtTime(hertz, this.audio_context.currentTime + 0.04);
   }
 
@@ -60,9 +57,7 @@ class SoundHelper {
   }
 
   setVolume = (vol) => {
-    console.log(vol)
     this.gainnode.gain.value = vol/100
-    console.log(this.gainnode.gain)
   }
 
 

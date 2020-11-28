@@ -13,7 +13,7 @@ import DatabaseHelper from '../../../DatabaseHelper'
 
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
-const DISTANCEMAX = 2500
+const DISTANCEMAX = 3000
 const DISTANCEMIN = 250
 const DISTANCESTEP = 50
 const DISTANCEJUMPSTEP = 250

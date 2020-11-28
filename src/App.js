@@ -51,6 +51,7 @@ import ScanScreen from './Components/ScanScreen/ScanScreen'
 
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/SensorControl'
+import SoundHelper from './SoundHelper'
 
 import dbStorage from './DatabaseHelper'
 dbStorage.init()
@@ -97,6 +98,8 @@ class App extends Component {
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
           pinlock: settings['pinlock']
+        }, () => {
+          SoundHelper.setVolume(this.state.searchVolume)
         })
       })
   }

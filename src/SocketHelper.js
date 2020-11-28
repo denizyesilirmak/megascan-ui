@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import dbStorage from './DatabaseHelper'
 
 const SOCKET_SERVER_ADDRESS = 'ws://localhost:9090'
 const VOID = () => { }
@@ -21,7 +22,8 @@ class SocketHelper {
     this._socket.on('connect', () => {
       if (this._socket.connected) {
         console.clear()
-        console.log(`%csocket connected ${this._socket.id}`, "color:green")
+        console.log(`%csocket connected ${this._socket.id}`, "color: white; background-color: green")
+        this._sendInitialSettings()
       }
     })
 
@@ -88,9 +90,22 @@ class SocketHelper {
     this._keypressInterceptor = fn
   }
 
+  _sendInitialSettings = async () => {
+    const brightnessLevel = await dbStorage.getItem('brightness')
+    this.send(JSON.stringify({
+      type: 'settings',
+      mode: 'brightness',
+      payload: 'br.' + brightnessLevel
+    }))
+  }
+
 }
 
 const socketHelperInstance = new SocketHelper()
 // Object.freeze(socketHelperInstance) // Extra measure
 
 export default socketHelperInstance
+
+
+
+// socketHelper.

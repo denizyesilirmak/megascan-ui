@@ -58,7 +58,7 @@ const LANGUAGES = [
   },
   {
     code: "zh",
-    name: "Chinese",
+    name: "中文",
     flag: flag_zh
   },
   {

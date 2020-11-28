@@ -8,7 +8,7 @@ const Interpolation = require('./Interpolation.js');
 const COLORS = {
   jet: [
     { pct: 0, color: { r: 0x00, g: 0x00, b: 0xff } },
-    { pct: 63, color: { r: 0x00, g: 0xff, b: 0xff } },
+    { pct: 64, color: { r: 0x00, g: 0xff, b: 0xff } },
     { pct: 127, color: { r: 0x00, g: 0xad, b: 0x00 } },
     { pct: 192, color: { r: 0xff, g: 0xff, b: 0x00 } },
     { pct: 255, color: { r: 0xff, g: 0x00, b: 0x00 } }
@@ -47,7 +47,7 @@ class Plot extends Component {
     }
 
     this.average = Math.trunc(this.total / count)
-    console.log(`total:${this.total} average:${this.average} max: ${this.max} min: ${this.min}`)
+    //console.log(`total:${this.total} average:${this.average} max: ${this.max} min: ${this.min}`)
 
     this.normalizedArr = this.data.map((e, i) => {
       return e.map((a, i) => {
@@ -77,8 +77,8 @@ class Plot extends Component {
         }
       })
     })
-    console.log(count)
-    console.log(red, green, blue)
+    //console.log(count)
+    //console.log(red, green, blue)
     this.props.getColorInfo(red / count, green / count, blue / count, this.average, this.min, this.max)
 
   }
@@ -156,7 +156,7 @@ class Plot extends Component {
   }
 
   drawSelectedData = () => {
-    console.log("selected")
+    //console.log("selected")
     var material = new THREE.LineBasicMaterial({
       color: 0xffffff,
       linewidth: 3,
@@ -176,7 +176,7 @@ class Plot extends Component {
   }
 
   initGrid = () => {
-    console.log("init grid")
+    //console.log("init grid")
     var material = new THREE.LineBasicMaterial({
       color: 0x000000,
       linewidth: 1,
@@ -210,7 +210,7 @@ class Plot extends Component {
       // if (e.color.g > 0.67)
     })
     this.renderer.render(this.scene, this.camera);
-    console.log("filter processing")
+    //console.log("filter processing")
     this.setState({ waiting: false })
   }
 
@@ -232,12 +232,12 @@ class Plot extends Component {
     }
 
     if ((prevProps.filter !== this.props.filter) && this.props.filter === true) {
-      console.log("filter on")
+      //console.log("filter on")
       this.filterGreens()
       return
     }
     else if ((prevProps.filter !== this.props.filter) && this.props.filter === false) {
-      console.log("filter off")
+      // console.log("filter off")
       this.drawPlot()
       this.renderer.render(this.scene, this.camera);
       return

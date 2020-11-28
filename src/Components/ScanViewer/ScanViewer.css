@@ -95,3 +95,30 @@
   padding: 3px;
 }
 
+.scan-viewer-data-popup{
+  height: 60px;
+  background: #363636;
+  position: absolute;
+  top: 120px;
+  left: 190px;
+  display: flex;
+  padding: 5px 10px 5px 10px;
+  border-radius: 15px;
+  box-shadow:  5px 5px 10px #3b3d3f, -5px -5px 10px #4f5355;
+  color: #000000;
+}
+
+.scan-viewer-data-popup .svdp{
+  border: 2px solid white;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply;
+}

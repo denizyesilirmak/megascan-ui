@@ -56,7 +56,7 @@
 .rotating-indicator-container .rotator {
   width: 200px;
   height: 200px;
-  animation: spin-full .8s linear infinite;
+  animation: spin-full 1.5s linear infinite;
 }
 
 .rotator.locked {

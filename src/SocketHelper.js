@@ -91,7 +91,8 @@ class SocketHelper {
   }
 
   _sendInitialSettings = async () => {
-    const brightnessLevel = await dbStorage.getItem('brightness')
+    const brightnessLevel = await dbStorage.getItem('brightness') || 100
+    console.log(brightnessLevel)
     this.send(JSON.stringify({
       type: 'settings',
       mode: 'brightness',

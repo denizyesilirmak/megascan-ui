@@ -30,7 +30,8 @@ class ScanViewer extends Component {
       depth: 0,
       min: 0,
       max: 0,
-      dataPopup: false
+      dataPopup: false,
+      newAverage: 0
     }
     this.widthLimit = 0
     this.heightLimit = 0
@@ -68,9 +69,9 @@ class ScanViewer extends Component {
     switch (socketData.payload) {
       case "start":
         if (this.state.analyseMode === true) {
-            this.setState({
-              dataPopup: !this.state.dataPopup
-            })
+          this.setState({
+            dataPopup: !this.state.dataPopup
+          })
 
         }
         break;
@@ -146,8 +147,11 @@ class ScanViewer extends Component {
         break;
     }
     if (this.state.analyseMode) {
+      const sensorsAvarage = (this.normalizedData[this.state.height][this.state.width * 4 + 0] + this.normalizedData[this.state.height][this.state.width * 4 + 1] + this.normalizedData[this.state.height][this.state.width * 4 + 2] + this.normalizedData[this.state.height][this.state.width * 4 + 3]) / 4
       this.setState({
-        depth: this.calculateDepth(this.normalizedData[this.state.height][this.state.width * 4 + 1], this.state.max, this.state.min, this.state.average)
+        depth: this.calculateDepth(sensorsAvarage, this.state.max, this.state.min, this.state.average),
+        newAverage: parseInt(sensorsAvarage)
+
       })
     }
     // console.log(this.normalizedData[this.state.height][this.state.width * 4 + 1])
@@ -159,7 +163,6 @@ class ScanViewer extends Component {
       red: Math.trunc(red * 100),
       green: Math.trunc(green * 100),
       blue: Math.trunc(blue * 100),
-      average,
       min,
       max
     })
@@ -217,17 +220,19 @@ class ScanViewer extends Component {
         </div>
         <div className="sv-bottom">
 
-          <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
-            <div className="title">{this.context.strings["average"]}</div>
-            <div className="value">{this.state.average}</div>
-          </div>
-
           {
             this.state.analyseMode ?
-              <div className="sv-bottom-panel animation" style={{ background: this.context.theme.button_bg_selected }}>
-                <div className="title">{this.context.strings["depth"]}</div>
-                <div className="value">{this.state.depth.toFixed(2)}</div>
-              </div>
+              <>
+                <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
+                  <div className="title">{this.context.strings["average"]}</div>
+                  <div className="value">{this.state.newAverage}</div>
+                </div>
+
+                <div className="sv-bottom-panel animation" style={{ background: this.context.theme.button_bg_selected }}>
+                  <div className="title">{this.context.strings["depth"]}</div>
+                  <div className="value">{this.state.depth.toFixed(1)}</div>
+                </div>
+              </>
               :
               null
           }

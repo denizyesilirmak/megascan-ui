@@ -492,14 +492,13 @@ class Settings extends Component {
         return
       case 'home':
       case 'back':
-        
         if (this.state.verticalIndex === true && this.state.activePopup === "") {
           this.setState({ verticalIndex: false })
         } else if (this.state.activePopup === "") {
+          socketHelper.detach()
           this.refs.settings.style.opacity = 0
           this.refs.settings.style.transform = "translateY(400px)"
           setTimeout(() => {
-            socketHelper.detach()
             this.props.navigateTo("menuScreen")
           }, 500);
         }

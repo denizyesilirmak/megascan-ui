@@ -7,7 +7,7 @@ import GroundScanVideo from '../../Assets/Videos/controlGroundScan.mp4'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-const bypass = true
+const bypass = false
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext
@@ -59,7 +59,11 @@ class SensorControl extends React.Component {
     SocketHelper.attach(this.controlRespond)
     const timeoutB = setTimeout(() => {
       SocketHelper.send('X')
-      this.indicatorREF.current.style.width = "100%"
+      try {
+        this.indicatorREF.current.style.width = "100%"
+      } catch (error) {
+        
+      }
       clearTimeout(timeoutB)
     }, 1000);
 

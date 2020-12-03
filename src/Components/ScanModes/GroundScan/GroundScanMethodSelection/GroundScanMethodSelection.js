@@ -3,14 +3,22 @@ import socketHelper from '../../../../SocketHelper'
 import './GroundScanMethodSelection.css'
 import MiniCarousel from '../MiniCarousel/MiniCarousel'
 
-import DeviceIcon from '../../../../Assets/MenuIcons/m-device.png'
 import TabletIcon from '../../../../Assets/MenuIcons/tablet.png'
 import { DeviceContext } from '../../../../Contexts/DeviceContext'
+
+import GoldStarIcon from '../../../../Assets/MenuIcons/deviceicons/goldstar_device_icon.png'
+import PhoenixIcon from '../../../../Assets/MenuIcons/deviceicons/phoenix_device_icon.png'
+
+
+
 
 class GroundScanMethodSelection extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
+
+
+
 
     this.state = {
       buttonIndex: 800 * 2
@@ -19,7 +27,7 @@ class GroundScanMethodSelection extends Component {
     this.buttons = [
       {
         name: "device",
-        icon: DeviceIcon
+        icon: null
       },
       {
         name: "tablet",
@@ -29,6 +37,21 @@ class GroundScanMethodSelection extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.context.device)
+
+    switch (this.context.device) {
+      case 'goldstar':
+        this.buttons[0].icon = GoldStarIcon
+        break
+      case 'phoenix':
+        this.buttons[0].icon = PhoenixIcon
+        break;
+
+      default:
+        break;
+    }
+
+    this.forceUpdate()
 
     socketHelper.attach(this.handleKeyDown)
   }

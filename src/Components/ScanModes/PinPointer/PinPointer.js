@@ -129,7 +129,7 @@ class PinPointer extends Component {
     }
     else if (socketData.type === "bionic") {
       this.setState({
-        sensorValue: this.clamp(this.state.calibration - parseInt(socketData.payload / 8), -127, 127),
+        sensorValue: this.clamp(this.state.calibration - parseInt(socketData.payload / 8), -127, 127) * -1,
         rawSensorValue: parseInt(socketData.payload),
       })
       SoundHelper.changeFrequencySmooth(Math.abs(this.state.sensorValue * 4))
@@ -175,7 +175,7 @@ class PinPointer extends Component {
             {
               lines.map((e, i) => {
                 return (
-                  <line key={i} className="pin-pointer-line" fill="none" stroke={this.state.sensorValue / (11 - this.state.sensitivity) < 0 ? e[0] : e[1]} x1={7 + (i * 30)} y1="128" x2={7 + (i * 30)} y2={(128 - (this.state.sensorValue / (11 - this.state.sensitivity) * Math.sin(i / 7.1)))} id="svg_8" strokeWidth="12" strokeLinecap="butt" />
+                  <line key={i} className="pin-pointer-line" fill="none" stroke={this.state.sensorValue / (11 - this.state.sensitivity) < 0 ? e[1] : e[0]} x1={7 + (i * 30)} y1="128" x2={7 + (i * 30)} y2={(128 - (this.state.sensorValue / (11 - this.state.sensitivity) * Math.sin(i / 7.1)))} id="svg_8" strokeWidth="12" strokeLinecap="butt" />
                 )
               })
             }

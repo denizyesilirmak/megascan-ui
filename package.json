@@ -20,7 +20,8 @@
     "start": "PORT=3002 react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node ../serial-bridge-2/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"

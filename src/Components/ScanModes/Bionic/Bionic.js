@@ -161,7 +161,7 @@ class Bionic extends Component {
     return (
       <div ref="bionic" className="bionic component">
         <div className="rotating-indicator-container">
-          <img ref="Rotator" className={`rotator ${this.state.locked ? 'locked' : ''}`} src={Bionic_Rotator} alt="rotator" />
+          <img className={`rotator ${this.state.locked ? 'locked' : ''}`} src={Bionic_Rotator} alt="rotator" />
         </div>
 
         <div className="line-chart">

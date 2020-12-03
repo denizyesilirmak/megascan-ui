@@ -57,7 +57,7 @@ class SoundHelper {
   }
 
   setVolume = (vol) => {
-    this.gainnode.gain.value = vol/100
+    this.gainnode.gain.value = vol/400
   }
 
 

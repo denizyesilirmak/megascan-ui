@@ -42,7 +42,7 @@ class PinPointer extends Component {
 
     this.state = {
       sensorValue: 0,
-      calibration: 127,
+      calibration: 512,
       selectedButton: 3 * 100,
       sensitivity: 5
     }
@@ -132,6 +132,7 @@ class PinPointer extends Component {
         sensorValue: this.clamp(this.state.calibration - parseInt(socketData.payload / 8), -127, 127) * -1,
         rawSensorValue: parseInt(socketData.payload),
       })
+      // console.log((this.state.calibration - parseInt(socketData.payload / 8)))
       SoundHelper.changeFrequencySmooth(Math.abs(this.state.sensorValue * 4))
     }
 

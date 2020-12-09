@@ -9,7 +9,7 @@ import AutoLRLResultScreen from './AutoLRLResult'
 import dbStorage from '../../../DatabaseHelper'
 
 const LIMITS = {
-  MAXDISTANCE: 2500,
+  MAXDISTANCE: 3000,
   MINDISTANCE: 100,
   MAXDEPTH: 100,
   MINDEPTH: 10

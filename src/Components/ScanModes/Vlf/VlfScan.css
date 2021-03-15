@@ -1,3 +1,152 @@
-.vlf-scan{
-  background: red;
+.vlf-scan {
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vlf-panel {
+  width: 160px;
+  height: 340px;
+  background: rgb(9, 9, 99);
+  position: absolute;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.vlf-panel.left {
+  left: 20px;
+  transform: translateX(-300px) scale(1.4);
+  transition: transform 2s;
+  background: linear-gradient(to right, rgba(0, 18, 124, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.vlf-panel.right {
+  right: 20px;
+  transform: translateX(300px) scale(1.4);
+  transition: transform 2s;
+  background: linear-gradient(to left, rgba(0, 18, 124, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.vlf-center {
+  animation: scaleDown 1s ease-in-out 1s 1 normal both;
+}
+
+@keyframes scaleDown {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.vlf-indicator {
+  width: 350px;
+  height: 320px;
+  position: absolute;
+}
+
+.vlf-rect {
+  transition: fill .5s;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.vlf-circle {
+  transition: all 0.5s;
+}
+
+.vlf-modes {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.vlf-modes .vlf-mode {
+  display: flex;
+  width: 90%;
+  height: 50px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid black;
+  font-size: 15px;
+  color: white;
+  transition: color 0.5s;
+}
+
+.vlf-modes .vlf-mode.selected {
+  background: linear-gradient(to right, rgb(7, 222, 250) 0%, rgba(0, 0, 0, 1) 100%);
+  color: #000000 !important;
+}
+
+.vlf-mode:last-child {
+  border-bottom: none;
+}
+
+.vlf-modes .vlf-mode .vlf-mode-toggle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #ffffff
+}
+
+.vlf-mode-panel-title {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #00000080;
+  color: #ffffff;
+  text-align: center;
+}
+
+.vlf-settings {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.vlf-setting {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #000000;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.vlf-setting.selected {
+  background: linear-gradient(to left, rgb(7, 222, 250) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.vlf-setting.active {
+  background: linear-gradient(to left, rgb(250, 145, 7) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.vlf-setting:last-child {
+  border-bottom: none;
+}
+
+.vlf-setting-title {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.vlf-setting-bar {
+  width: 100%;
+  height: 52px;
+  margin-top: 5px;
 }

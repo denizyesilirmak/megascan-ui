@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 80px;
+  font-size: 50px;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 10px;
@@ -31,7 +31,7 @@
   left: 0px;
   background: red;
   z-index: 100;
-  font-size: 30px;
+  font-size: 23px;
   letter-spacing: normal;
   display: flex;
   justify-content: center;

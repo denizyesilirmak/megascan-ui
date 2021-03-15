@@ -5,6 +5,7 @@ import CompassOut from '../../../../../Assets/MenuIcons/compas-out.png'
 import socketHelper from '../../../../../SocketHelper'
 import dbStorage from '../../../../../DatabaseHelper'
 import { DeviceContext } from '../../../../../Contexts/DeviceContext'
+import SoundHelper from '../../../../../SoundHelper'
 
 
 class CTRLLRLScan extends Component {
@@ -28,6 +29,7 @@ class CTRLLRLScan extends Component {
   componentDidMount() {
     
     socketHelper.attach(this.handleKeyDown)
+    SoundHelper.createOscillator('sawtooth')
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
     }, 90);
@@ -36,6 +38,7 @@ class CTRLLRLScan extends Component {
   }
 
   componentWillUnmount() {
+    SoundHelper.stopOscillator()
     clearInterval(this.compassInterval)
   }
 
@@ -82,6 +85,15 @@ class CTRLLRLScan extends Component {
         heading: (parseInt(socketData.compass) ),
         tilt: socketData.angle * 1.3
       })
+
+      const hertz = Math.abs(this.state.angle)
+
+      if(hertz > 75){
+        SoundHelper.changeFrequencyFast(1000)
+      }else{
+        SoundHelper.changeFrequencyFast('0')
+      }
+
 
       // let hertz = 0
       // if (angle < 0) {

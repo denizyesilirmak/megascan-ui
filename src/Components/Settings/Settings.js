@@ -218,8 +218,6 @@ class Settings extends Component {
           else if (this.state.subCursor === 2) {
             this.setState({
               searchVolume: this.clamp(this.state.searchVolume - 25, 0, 100)
-            }, () => {
-              SoundHelper.setVolume(this.state.searchVolume)
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }
@@ -288,8 +286,6 @@ class Settings extends Component {
           else if (this.state.subCursor === 2) {
             this.setState({
               searchVolume: this.clamp(this.state.searchVolume + 25, 0, 100)
-            }, () => {
-              SoundHelper.setVolume(this.state.searchVolume)
             })
             await dbStorage.setItem("searchVolume", this.state.searchVolume)
           }

@@ -11,7 +11,7 @@
 
 .pulse-progress-bar {
   height: 100%;
-  transition: width .1s;
+  transition: width .4s;
   max-width: 100%;
 }
 

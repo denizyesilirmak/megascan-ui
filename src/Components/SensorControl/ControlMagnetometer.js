@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import LiveStremVideo from '../../Assets/Videos/_controlLiveStream.mp4'
 import BionicVideo from '../../Assets/Videos/_controlIonicBionic.mp4'
 import GroundScanVideo from '../../Assets/Videos/_controlGroundScan.mp4'
+
+
 // import Resistivity from '../../Assets/Videos/controlResistivity.mp4'
 // import PulseVideo from '../../Assets/Videos/controlPulse.mp4'
 // import VlfVideo from '../../Assets/Videos/controlVlf.mp4'

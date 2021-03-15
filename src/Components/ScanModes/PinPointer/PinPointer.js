@@ -51,7 +51,7 @@ class PinPointer extends Component {
 
 
   async componentDidMount() {
-    SoundHelper.createOscillator('sine');
+    SoundHelper.createOscillator('sawtooth');
     this.setState({
       sensitivity: await dbStorage.getItem('sensitivity_pinpointer') || 5
     })

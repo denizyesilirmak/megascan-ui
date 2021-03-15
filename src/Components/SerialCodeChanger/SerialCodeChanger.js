@@ -13,7 +13,7 @@ class SerialCodeChanger extends React.Component {
       },
       {
         name: 'gold star',
-        prefix: 'GLD301'
+        prefix: 'GLD201'
       },
       {
         name: 'viber',
@@ -25,7 +25,7 @@ class SerialCodeChanger extends React.Component {
       },
       {
         name: 'pheonix',
-        prefix: 'PNG501'
+        prefix: 'PNX501'
       }
     ]
 

@@ -1,13 +1,21 @@
 import React from 'react'
 import './SensorControl.css'
 import SocketHelper from '../../SocketHelper'
-import LiveStremVideo from '../../Assets/Videos/controlLiveStream.mp4'
-import BionicVideo from '../../Assets/Videos/controlBionic.mp4'
-import GroundScanVideo from '../../Assets/Videos/controlGroundScan.mp4'
+
+
+//goldstar
+// import LiveStremVideo from '../../Assets/Videos/controlLiveStream_goldstar.mp4'
+import BionicVideo from '../../Assets/Videos/controlBionic_goldstar.mp4'
+// import GroundScanVideo from '../../Assets/Videos/controlGroundScan_goldstar.mp4'
+
+
+//phoenix
+import LiveStremVideo from '../../Assets/Videos/controlLiveStream_phoenix.mp4'
+import GroundScanVideo from '../../Assets/Videos/controlGroundScan_phoenix.mp4'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-const bypass = false
+const bypass = true
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext

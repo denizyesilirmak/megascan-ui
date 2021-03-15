@@ -39,7 +39,7 @@ class Bionic extends Component {
     }, 20);
     this.dataSensorInterval = setInterval(() => {
       socketHelper.send('J')
-    }, 60);
+    }, 80);
 
 
     this.setState({

@@ -5,6 +5,7 @@ import CompassOut from '../../../Assets/MenuIcons/compas-out.png'
 import socketHelper from '../../../SocketHelper'
 import dbStorage from '../../../DatabaseHelper'
 import {DeviceContext} from '../../../Contexts/DeviceContext'
+import SoundHelper from '../../../SoundHelper'
 
 class ManualLRLScan extends Component {
   static contextType = DeviceContext
@@ -24,10 +25,17 @@ class ManualLRLScan extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    SoundHelper.createOscillator('sawtooth')
     this.compassInterval = setInterval(() => {
       this.requestSensorData()
     }, 150);
     this.getCalibrationValues()
+  }
+
+  componentWillUnmount() {
+    console.log('osilator stoped')
+    SoundHelper.stopOscillator()
+    clearInterval(this.compassInterval)
   }
 
   getCalibrationValues = async () => {
@@ -65,6 +73,14 @@ class ManualLRLScan extends Component {
         heading: socketData.compass,
         tilt: socketData.angle
       })
+
+      const hertz = Math.abs(this.state.angle)
+
+      if(hertz > 75){
+        SoundHelper.changeFrequencyFast(1000)
+      }else{
+        SoundHelper.changeFrequencyFast('0')
+      }
     }
   }
 

@@ -1,0 +1,10 @@
+.geopyhsical-action{
+  background-color: #000000;
+}
+
+.geopyhsical-action-video{
+  width: 600px;
+  position: absolute;
+  left: 80px;
+  top: 10px;
+}

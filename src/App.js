@@ -25,6 +25,8 @@ import SerialCodeChanger from './Components/SerialCodeChanger/SerialCodeChanger'
 import CompassCalibration from './Components/Compass/Compass'
 import Locker from './Components/Locker/Locker'
 import Suprise from './Components/Suprise/Suprise'
+import DetectorModeSelector from './Components/DetectorModeSelector/DetectorModeSelector'
+
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -38,12 +40,15 @@ import Bionic from './Components/ScanModes/Bionic/Bionic'
 import IonicNew from './Components/ScanModes/Ionic/InonicNew'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
 import Geophysical from './Components/ScanModes/Geophysical/Geophysical'
+import GeopyhsicalAction from './Components/ScanModes/Geophysical/GeophysicalAction'
+import GeophysicalReport from './Components/ScanModes/Geophysical/GeophysicalResport'
 import MobileGroundScan from './Components/MobileGroundScan/MobileGroundScan'
 import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSettings'
 import MobileLiveStream from './Components/MobileLiveStream/MobileLiveStream'
 import Pulse from './Components/ScanModes/Pulse/Pulse'
 import VlfScan from './Components/ScanModes/Vlf/VlfScan';
+import Nugget from './Components/ScanModes/Nugget/Nugget'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -92,7 +97,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'vlfScanScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'geophysicalReportScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -115,6 +120,9 @@ class App extends Component {
     // }, 1500);
   }
 
+  /**
+   * @param {object} scanPropObj - Scan Properties
+   */
   setScanProperties = (scanPropObj) => {
     console.log(scanPropObj)
     this.tmpScanPropObj = scanPropObj
@@ -260,6 +268,14 @@ class App extends Component {
         return (<Suprise navigateTo={this.navigateTo} />)
       case "vlfScanScreen":
         return (<VlfScan navigateTo={this.navigateTo} />)
+      case "nuggetScanScreen":
+        return (<Nugget navigateTo={this.navigateTo} />)
+      case "detectorModeSelectorScreen":
+        return (<DetectorModeSelector navigateTo={this.navigateTo} />)
+      case "geophysicalActionScreen":
+        return (<GeopyhsicalAction navigateTo={this.navigateTo} />)
+      case "geophysicalReportScreen":
+        return (<GeophysicalReport navigateTo={this.navigateTo} />)
       default:
         break;
     }

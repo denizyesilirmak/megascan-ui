@@ -65,7 +65,7 @@ const VLFSettings = (props) => {
             <image href={LeftArrowIcon} x="60" y="10" width="30" height="30" />
             <image href={RightArrowIcon} x="120" y="10" width="30" height="30" />
 
-            <text fill="#ffffff" x="104" y="26" alignmentBaseline="middle" fontSize="20" textAnchor="middle">0</text>
+            <text fill="#ffffff" x="104" y="26" alignmentBaseline="middle" fontSize="20" textAnchor="middle">{props.tone}</text>
           </svg>
         </div>
       </div>

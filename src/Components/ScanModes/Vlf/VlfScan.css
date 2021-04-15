@@ -29,13 +29,13 @@
 }
 
 .vlf-center {
-  animation: scaleDown 1s ease-in-out 1s 1 normal both;
+  animation: scaleDown 1s ease-in-out 0.6s 1 normal both;
 }
 
 @keyframes scaleDown {
   0% {
     opacity: 0;
-    transform: scale(1.2);
+    transform: scale(0.7);
   }
   100% {
     opacity: 1;
@@ -50,8 +50,8 @@
 }
 
 .vlf-rect {
-  transition: fill .5s;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: fill 1s;
+  transition-timing-function: cubic-bezier(0.0, 1, 0, 0.01);
 }
 
 .vlf-circle {

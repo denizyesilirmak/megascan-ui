@@ -10,7 +10,7 @@ import Water from '../../../Assets/Sprites/water.png'
 import Iron from '../../../Assets/Sprites/iron.png'
 
 import GeoPhysical from '../../../Assets/MenuIcons/geophysical.png'
-import Restart from '../../../Assets/MenuIcons/restart.png'
+// import Restart from '../../../Assets/MenuIcons/restart.png'
 
 const MATERIALS = [
   {
@@ -54,20 +54,17 @@ class Geophysical extends Component {
     if (socketData.type !== 'button') { return }
     switch (socketData.payload) {
       case 'up':
-        if (this.state.activeCursor === 2) {
+        if (this.state.activeCursor === 1) {
           this.setState({ activeCursor: 0 })
         }
         break
       case 'down':
         if (this.state.activeCursor === 0) {
-          this.setState({ activeCursor: 2 })
+          this.setState({ activeCursor: 1 })
         }
         break
       case 'left':
-        if (this.state.activeCursor === 2) {
-          this.setState({ activeCursor: 1 })
-        }
-        else if (this.state.activeCursor === 0) {
+        if (this.state.activeCursor === 0) {
           if (this.state.activeMaterialIndex >= 1) {
             this.setState({
               activeMaterialIndex: this.state.activeMaterialIndex - 1
@@ -81,10 +78,7 @@ class Geophysical extends Component {
         }
         break
       case 'right':
-        if (this.state.activeCursor === 1) {
-          this.setState({ activeCursor: 2 })
-        }
-        else if (this.state.activeCursor === 0) {
+        if (this.state.activeCursor === 0) {
           if (this.state.activeMaterialIndex < 4) {
             this.setState({
               activeMaterialIndex: this.state.activeMaterialIndex + 1
@@ -98,8 +92,13 @@ class Geophysical extends Component {
         }
         break
       case 'back':
-
         this.props.navigateTo("menuScreen")
+        return
+
+      case 'ok':
+        if (this.state.activeCursor === 1) {
+          this.props.navigateTo("geophysicalActionScreen")
+        }
         return
       default:
         break
@@ -121,12 +120,12 @@ class Geophysical extends Component {
             Start
           </div>
         </div>
-        <div className="geo-restart">
+        {/* <div className="geo-restart">
           <div className={`restart-button ${this.state.activeCursor === 2 ? " selected" : ""}`}>
             <img src={Restart} alt="restart" />
             <div className="geo-restart">Restart</div>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }

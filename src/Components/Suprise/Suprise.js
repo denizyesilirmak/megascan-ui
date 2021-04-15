@@ -59,7 +59,7 @@ class Suprise extends React.Component {
     return (
       <div className="suprise">
         <div className="suprise-text">
-          deniz yeşilırmak - 2020
+          Этот проект измотал душу разработчика и опустошил весь серотонин из его тела.
         </div>
         <div className="canvas-container-suprise" ref={this.canvasHolder}>  </div>
       </div>

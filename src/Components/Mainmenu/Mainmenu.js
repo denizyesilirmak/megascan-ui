@@ -17,6 +17,7 @@ import FilesIcon from '../../Assets/MenuIcons/mainmenu/files.png'
 import PinPointerIcon from '../../Assets/MenuIcons/mainmenu/pinpointer.png'
 import PulseIcon from '../../Assets/MenuIcons/mainmenu/pulse.png'
 import VlfIcon from '../../Assets/MenuIcons/mainmenu/vlf.png'
+import DetectorIcon from '../../Assets/MenuIcons/mainmenu/detectormodes.png'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
@@ -86,6 +87,11 @@ class Mainmenu extends Component {
         name: "vlf",
         icon: VlfIcon,
         screenName: "vlfScanScreen"
+      },
+      {
+        name: "detectormodes",
+        icon: DetectorIcon,
+        screenName: "detectorModeSelectorScreen"
       },
       {
         name: "settings",

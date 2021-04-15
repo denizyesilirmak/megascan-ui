@@ -8,7 +8,9 @@ import { DeviceContext } from '../../../../Contexts/DeviceContext'
 
 import GoldStarIcon from '../../../../Assets/MenuIcons/deviceicons/goldstar_device_icon.png'
 import PhoenixIcon from '../../../../Assets/MenuIcons/deviceicons/phoenix_device_icon.png'
-
+import InfinityIcon from '../../../../Assets/MenuIcons/deviceicons/infinity_device_icon.png'
+// import ConcordIcon from '../../../../Assets/MenuIcons/deviceicons/concord_device_icon.png'
+// import ViperIcon from '../../../../Assets/MenuIcons/deviceicons/viper_device_icon.png'
 
 
 
@@ -45,6 +47,9 @@ class GroundScanMethodSelection extends Component {
         break
       case 'phoenix':
         this.buttons[0].icon = PhoenixIcon
+        break;
+      case 'infinity':
+        this.buttons[0].icon = InfinityIcon
         break;
 
       default:

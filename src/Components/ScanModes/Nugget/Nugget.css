@@ -1,0 +1,29 @@
+.nugget-scan {
+  background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ng-left {
+  width: 180px;
+  height: 100%;
+}
+
+.ng-middle {
+  width: calc(100% - 360px);
+  height: 100%;
+}
+
+.ng-right {
+  width: 180px;
+  height: 100%;
+}
+
+.nugget-circle{
+  transition: stroke 0.3s;
+}
+
+.nugget-text{
+  transition: fill 1s;
+}

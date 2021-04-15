@@ -3,6 +3,7 @@ import './Pulse.css'
 import SoundHelper from '../../../SoundHelper'
 import SocketHelper from '../../../SocketHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
+import dbStorage from '../../../DatabaseHelper'
 
 import Progress from './PulseItems/Progress'
 import PulseBar from './PulseItems/PulseBar'
@@ -56,6 +57,7 @@ class Pulse extends Component {
   }
 
   componentDidMount() {
+    this.readFromDb()
     SocketHelper.attach(this.handleSocket)
     SoundHelper.createOscillator('square')
     this.generatePlotString()
@@ -64,8 +66,28 @@ class Pulse extends Component {
   }
 
   componentWillUnmount() {
+    this.saveToDb()
     SocketHelper.send('H.0')
     SocketHelper.detach()
+  }
+
+  readFromDb = async () => {
+    try {
+      const threshold = await dbStorage.getItem('pulse_threshold') || 0
+      const gain = await dbStorage.getItem('pulse_gain') || 0
+      console.log(threshold, gain)
+      this.setState({
+        threshold: threshold,
+        gain: gain
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  saveToDb = async () => {
+    await dbStorage.setItem('pulse_threshold', this.state.threshold)
+    await dbStorage.setItem('pulse_gain', this.state.gain)
   }
 
   handleSocket = (socketData) => {
@@ -119,7 +141,11 @@ class Pulse extends Component {
         case 'back':
           clearInterval(this.dataInterval)
           SoundHelper.stopOscillator()
-          this.props.navigateTo('menuScreen')
+          if (this.context.device === "infinity") {
+            this.props.navigateTo('detectorModeSelectorScreen')
+          } else {
+            this.props.navigateTo('menuScreen')
+          }
           return;
 
         default:

@@ -75,7 +75,8 @@ class App extends Component {
       serial: '',
       lastMainMenuIndex: -1,
       settingsTabIndex: 0,
-      info: {}
+      info: {},
+      resistivityParams: {}
     }
 
     fetch('http://localhost:9090/serial')
@@ -134,12 +135,13 @@ class App extends Component {
    * @param {number} settingsTabIndex - Last Settings Tab index.
    * @param {object} mobileGroundScan - Mobile ground scan options.
    */
-  navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}) => {
+  navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}, resistivityParams = {}) => {
     this.setState({
       settingsTabIndex: settingsTabIndex,
       activeScreen: screenName,
       fileToOpen: file,
-      info: mobileGroundScanInfo
+      info: mobileGroundScanInfo,
+      resistivityParams: resistivityParams
     })
   }
 
@@ -273,9 +275,9 @@ class App extends Component {
       case "detectorModeSelectorScreen":
         return (<DetectorModeSelector navigateTo={this.navigateTo} />)
       case "geophysicalActionScreen":
-        return (<GeopyhsicalAction navigateTo={this.navigateTo} />)
+        return (<GeopyhsicalAction navigateTo={this.navigateTo} resistivityParams={this.state.resistivityParams} />)
       case "geophysicalReportScreen":
-        return (<GeophysicalReport navigateTo={this.navigateTo} />)
+        return (<GeophysicalReport navigateTo={this.navigateTo} resistivityParams={this.state.resistivityParams} />)
       default:
         break;
     }

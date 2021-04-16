@@ -43,7 +43,6 @@ class Geophysical extends Component {
       activeMaterialIndex: 0,
       activeCursor: 0
     }
-
   }
 
   componentDidMount() {
@@ -97,13 +96,12 @@ class Geophysical extends Component {
 
       case 'ok':
         if (this.state.activeCursor === 1) {
-          this.props.navigateTo("geophysicalActionScreen")
+          this.props.navigateTo("geophysicalActionScreen", null, null, null, { target: (MATERIALS[this.state.activeMaterialIndex].name).toLowerCase() })
         }
         return
       default:
         break
     }
-
   }
 
   render() {

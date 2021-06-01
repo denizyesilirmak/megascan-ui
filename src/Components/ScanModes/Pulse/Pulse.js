@@ -62,7 +62,6 @@ class Pulse extends Component {
     SoundHelper.createOscillator('square')
     this.generatePlotString()
     SocketHelper.send('H.1')
-
   }
 
   componentWillUnmount() {
@@ -172,7 +171,6 @@ class Pulse extends Component {
       datastream: tempArray
     })
 
-
     if (this.normalizedData > 0) {
       this.setState({
         gold: this.map(this.normalizedData, 0, 920, 0, 100),
@@ -185,7 +183,6 @@ class Pulse extends Component {
         gold: 0
       })
     }
-
 
     if (Math.abs(this.normalizedData) > this.state.threshold * 90) {
       SoundHelper.changeFrequencySmooth(Math.abs(this.normalizedData) * 3)
@@ -251,7 +248,6 @@ class Pulse extends Component {
                 <stop offset="65%" stopColor="#00ffff" />
                 <stop offset="100%" stopColor="#0000ff" />
               </linearGradient>
-
             </defs>
             <g>
               {/* <path id="svg_1" d="M0,120 120,160 L200,120 " opacity="0.5" strokeWidth="8.5" stroke="#ff0000" fill="#fff" /> */}

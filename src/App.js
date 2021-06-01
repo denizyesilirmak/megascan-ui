@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import DeviceContextProvider from './Contexts/DeviceContext'
 import DeviceInfo from './Contexts/_DeviceInfo.json'
 
@@ -8,7 +8,7 @@ import Statusbar from './Components/Statusbar/Statusbar'
 import MainMenu from './Components/Mainmenu/Mainmenu'
 import Settings from './Components/Settings/Settings'
 import TurnOff from './Components/TurnOff/TurnOff'
-import TurningOff from './Components/TurnOff/TurningOff';
+import TurningOff from './Components/TurnOff/TurningOff'
 import LockScreen from './Components/LockScreen/LockScreen.js'
 import ChangePinScreen from './Components/ChangePin/ChangePin'
 import ChangeLanguage from './Components/ChangeLanguage/ChangeLanguage'
@@ -47,8 +47,9 @@ import PinPointer from './Components/ScanModes/PinPointer/PinPointer'
 import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSettings'
 import MobileLiveStream from './Components/MobileLiveStream/MobileLiveStream'
 import Pulse from './Components/ScanModes/Pulse/Pulse'
-import VlfScan from './Components/ScanModes/Vlf/VlfScan';
+// import VlfScan from './Components/ScanModes/Vlf/VlfScan'
 import Nugget from './Components/ScanModes/Nugget/Nugget'
+import Pulse2 from './Components/ScanModes/Pulse2/Pulse'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -65,7 +66,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.tmpScanPropObj = { mode: "manual", path: "zigzag", lines: 10, steps: 10, startPoint: "right" } // not if this is needed.
-    document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')";
+    document.body.style.backgroundImage = "url('backgrounds/" + DeviceInfo.deviceModelName + ".jpg')"
     // console.log(DeviceInfo.deviceModelName)
 
     this.state = {
@@ -98,7 +99,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'geophysicalReportScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'pulse2Screen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -268,8 +269,6 @@ class App extends Component {
         return (<Locker navigateTo={this.navigateTo} />)
       case "supriseScreen":
         return (<Suprise navigateTo={this.navigateTo} />)
-      case "vlfScanScreen":
-        return (<VlfScan navigateTo={this.navigateTo} />)
       case "nuggetScanScreen":
         return (<Nugget navigateTo={this.navigateTo} />)
       case "detectorModeSelectorScreen":
@@ -278,8 +277,10 @@ class App extends Component {
         return (<GeopyhsicalAction navigateTo={this.navigateTo} resistivityParams={this.state.resistivityParams} />)
       case "geophysicalReportScreen":
         return (<GeophysicalReport navigateTo={this.navigateTo} resistivityParams={this.state.resistivityParams} />)
+      case "pulse2Screen":
+        return (<Pulse2 navigateTo={this.navigateTo} />)
       default:
-        break;
+        break
     }
   }
 
@@ -302,4 +303,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

@@ -1,0 +1,27 @@
+.pulse2-component {
+  background: #000000;
+  display: flex;
+}
+
+.pulse2-component .left {
+  width: 160px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pulse2-component .middle {
+  width: 436px;
+  height: 100%;
+}
+
+.pulse2-component .right {
+  width: 160px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

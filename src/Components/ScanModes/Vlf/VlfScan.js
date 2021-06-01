@@ -130,7 +130,7 @@ class VlfScan extends React.Component {
     this.timeoutInit = setTimeout(() => {
       this.leftRef.current.style.transform = 'translateX(0px) scale(1)'
       this.rightRef.current.style.transform = 'translateX(0px) scale(1)'
-      SocketHelper.send('Y.1')
+      SocketHelper.send('H.1')
       clearTimeout(this.timeoutInit)
     }, 160);
 
@@ -142,7 +142,7 @@ class VlfScan extends React.Component {
   }
 
   componentWillUnmount() {
-    SocketHelper.send('Y.0')
+    SocketHelper.send('H.0')
     SoundHelper.stopOscillator()
     SocketHelper.detach()
     clearInterval(this.interval)
@@ -336,6 +336,12 @@ class VlfScan extends React.Component {
       })
       this.generateSound()
     }
+    else if (socketData.type === 'pulse') {
+      this.setState({
+        value: parseInt(socketData.payload)
+      })
+      this.generateSound()
+    }
   }
 
 
@@ -449,7 +455,7 @@ class VlfScan extends React.Component {
           </div>
         </div>
 
-        <Indicator value={this.state.raw / 4} id={this.state.id} disc={this.getDiscrimination(this.state.value)} />
+        <Indicator value={this.state.value / 4} id={this.state.id} disc={this.state.value / 4} />
 
         <div className="vlf-panel right" ref={this.rightRef}   >
           <div className="vlf-settings">

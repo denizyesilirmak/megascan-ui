@@ -100,7 +100,7 @@ class AntennaCalibration extends Component {
             LEFT: {this.state.left}
           </div>
           <div>
-            CENTER: {((this.state.left + this.state.right) / 2).toFixed(1)}
+            CENTER: {((this.state.left + this.state.right) / 2).toFixed(1)}oooos
           </div>
           <div>
             RIGHT: {this.state.right}

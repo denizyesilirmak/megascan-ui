@@ -10,32 +10,87 @@ const Indicator = (props) => {
           <stop offset="95%" stopColor="#133c6e" />
         </radialGradient>
       </defs>
+      {
+        props.selectedDiscType === 0 ?
+          <g>
+            <line x1="100" x2="150" y1="40" y2="40" strokeWidth="20" stroke={Math.trunc(props.value) > 700 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="70" x2="150" y1="70" y2="70" strokeWidth="20" stroke={Math.trunc(props.value) > 500 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="50" x2="150" y1="100" y2="100" strokeWidth="20" stroke={Math.trunc(props.value) > 400 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="40" x2="150" y1="130" y2="130" strokeWidth="20" stroke={Math.trunc(props.value) > 300 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="34" x2="150" y1="160" y2="160" strokeWidth="20" stroke={Math.trunc(props.value) > 200 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="34" x2="150" y1="190" y2="190" strokeWidth="20" stroke={Math.trunc(props.value) > 150 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="40" x2="150" y1="220" y2="220" strokeWidth="20" stroke={Math.trunc(props.value) > 70 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="50" x2="150" y1="250" y2="250" strokeWidth="20" stroke={Math.trunc(props.value) > 30 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="70" x2="150" y1="280" y2="280" strokeWidth="20" stroke={Math.trunc(props.value) > 10 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="100" x2="150" y1="310" y2="310" strokeWidth="20" stroke={Math.trunc(props.value) > 5 ? '#ffffff' : '#303030'} strokeLinecap="round" />
 
-      <g>
-        <line x1="100" x2="150" y1="40" y2="40" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
-        <line x1="70" x2="150" y1="70" y2="70" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
-        <line x1="50" x2="150" y1="100" y2="100" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
-        <line x1="40" x2="150" y1="130" y2="130" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
-        <line x1="34" x2="150" y1="160" y2="160" strokeWidth="20" stroke="#d14600" strokeLinecap="round" />
-        <line x1="34" x2="150" y1="190" y2="190" strokeWidth="20" stroke="#d15700" strokeLinecap="round" />
-        <line x1="40" x2="150" y1="220" y2="220" strokeWidth="20" stroke="#d17300" strokeLinecap="round" />
-        <line x1="50" x2="150" y1="250" y2="250" strokeWidth="20" stroke="#d19200" strokeLinecap="round" />
-        <line x1="70" x2="150" y1="280" y2="280" strokeWidth="20" stroke="#d1ab00" strokeLinecap="round" />
-        <line x1="100" x2="150" y1="310" y2="310" strokeWidth="20" stroke="#d1ca00" strokeLinecap="round" />
-      </g>
+            <line x1="200" x2="335" y1="40" y2="40" strokeWidth="20" stroke={Math.trunc(props.value) > 700 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="370" y1="70" y2="70" strokeWidth="20" stroke={Math.trunc(props.value) > 500 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="390" y1="100" y2="100" strokeWidth="20" stroke={Math.trunc(props.value) > 400 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="400" y1="130" y2="130" strokeWidth="20" stroke={Math.trunc(props.value) > 300 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="405" y1="160" y2="160" strokeWidth="20" stroke={Math.trunc(props.value) > 200 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="405" y1="190" y2="190" strokeWidth="20" stroke={Math.trunc(props.value) > 150 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="400" y1="220" y2="220" strokeWidth="20" stroke={Math.trunc(props.value) > 70 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="390" y1="250" y2="250" strokeWidth="20" stroke={Math.trunc(props.value) > 30 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="370" y1="280" y2="280" strokeWidth="20" stroke={Math.trunc(props.value) > 10 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+            <line x1="200" x2="335" y1="310" y2="310" strokeWidth="20" stroke={Math.trunc(props.value) > 5 ? '#ffffff' : '#303030'} strokeLinecap="round" />
+          </g> : null
+      }
 
-      <g>
-        <line x1="200" x2="335" y1="40" y2="40" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
-        <line x1="200" x2="370" y1="70" y2="70" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
-        <line x1="200" x2="390" y1="100" y2="100" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
-        <line x1="200" x2="400" y1="130" y2="130" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
-        <line x1="200" x2="405" y1="160" y2="160" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
-        <line x1="200" x2="405" y1="190" y2="190" strokeWidth="20" stroke="#006cd1" strokeLinecap="round" />
-        <line x1="200" x2="400" y1="220" y2="220" strokeWidth="20" stroke="#0084d1" strokeLinecap="round" />
-        <line x1="200" x2="390" y1="250" y2="250" strokeWidth="20" stroke="#0092d1" strokeLinecap="round" />
-        <line x1="200" x2="370" y1="280" y2="280" strokeWidth="20" stroke="#00b2d1" strokeLinecap="round" />
-        <line x1="200" x2="335" y1="310" y2="310" strokeWidth="20" stroke="#00bcd1" strokeLinecap="round" />
-      </g>
+      {
+        props.selectedDiscType === 1 ?
+          <g>
+            <line x1="100" x2="150" y1="40" y2="40" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="70" x2="150" y1="70" y2="70" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="50" x2="150" y1="100" y2="100" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="40" x2="150" y1="130" y2="130" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="34" x2="150" y1="160" y2="160" strokeWidth="20" stroke="#d14600" strokeLinecap="round" />
+            <line x1="34" x2="150" y1="190" y2="190" strokeWidth="20" stroke="#d15700" strokeLinecap="round" />
+            <line x1="40" x2="150" y1="220" y2="220" strokeWidth="20" stroke="#d17300" strokeLinecap="round" />
+            <line x1="50" x2="150" y1="250" y2="250" strokeWidth="20" stroke="#d19200" strokeLinecap="round" />
+            <line x1="70" x2="150" y1="280" y2="280" strokeWidth="20" stroke="#d1ab00" strokeLinecap="round" />
+            <line x1="100" x2="150" y1="310" y2="310" strokeWidth="20" stroke="#d1ca00" strokeLinecap="round" />
+
+            <line x1="200" x2="335" y1="40" y2="40" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="370" y1="70" y2="70" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="390" y1="100" y2="100" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="400" y1="130" y2="130" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="405" y1="160" y2="160" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="405" y1="190" y2="190" strokeWidth="20" stroke="#006cd1" strokeLinecap="round" />
+            <line x1="200" x2="400" y1="220" y2="220" strokeWidth="20" stroke="#0084d1" strokeLinecap="round" />
+            <line x1="200" x2="390" y1="250" y2="250" strokeWidth="20" stroke="#0092d1" strokeLinecap="round" />
+            <line x1="200" x2="370" y1="280" y2="280" strokeWidth="20" stroke="#00b2d1" strokeLinecap="round" />
+            <line x1="200" x2="335" y1="310" y2="310" strokeWidth="20" stroke="#00bcd1" strokeLinecap="round" />
+          </g> : null
+      }
+
+      {
+        props.selectedDiscType === 2 ?
+          <g>
+            <line x1="100" x2="150" y1="40" y2="40" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="70" x2="150" y1="70" y2="70" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="50" x2="150" y1="100" y2="100" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="40" x2="150" y1="130" y2="130" strokeWidth="20" stroke="#d12a00" strokeLinecap="round" />
+            <line x1="34" x2="150" y1="160" y2="160" strokeWidth="20" stroke="#d14600" strokeLinecap="round" />
+            <line x1="34" x2="150" y1="190" y2="190" strokeWidth="20" stroke="#d15700" strokeLinecap="round" />
+            <line x1="40" x2="150" y1="220" y2="220" strokeWidth="20" stroke="#d17300" strokeLinecap="round" />
+            <line x1="50" x2="150" y1="250" y2="250" strokeWidth="20" stroke="#d19200" strokeLinecap="round" />
+            <line x1="70" x2="150" y1="280" y2="280" strokeWidth="20" stroke="#d1ab00" strokeLinecap="round" />
+            <line x1="100" x2="150" y1="310" y2="310" strokeWidth="20" stroke="#d1ca00" strokeLinecap="round" />
+
+            <line x1="200" x2="335" y1="40" y2="40" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="370" y1="70" y2="70" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="390" y1="100" y2="100" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="400" y1="130" y2="130" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="405" y1="160" y2="160" strokeWidth="20" stroke="#005bd1" strokeLinecap="round" />
+            <line x1="200" x2="405" y1="190" y2="190" strokeWidth="20" stroke="#006cd1" strokeLinecap="round" />
+            <line x1="200" x2="400" y1="220" y2="220" strokeWidth="20" stroke="#0084d1" strokeLinecap="round" />
+            <line x1="200" x2="390" y1="250" y2="250" strokeWidth="20" stroke="#0092d1" strokeLinecap="round" />
+            <line x1="200" x2="370" y1="280" y2="280" strokeWidth="20" stroke="#00b2d1" strokeLinecap="round" />
+            <line x1="200" x2="335" y1="310" y2="310" strokeWidth="20" stroke="#00bcd1" strokeLinecap="round" />
+          </g> : null
+      }
+
 
 
       <circle

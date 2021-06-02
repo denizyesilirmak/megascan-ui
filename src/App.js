@@ -48,8 +48,9 @@ import ManualLRLSettings from './Components/ScanModes/ManualLRL/ManualLrlSetting
 import MobileLiveStream from './Components/MobileLiveStream/MobileLiveStream'
 import Pulse from './Components/ScanModes/Pulse/Pulse'
 // import VlfScan from './Components/ScanModes/Vlf/VlfScan'
-import Nugget from './Components/ScanModes/Nugget/Nugget'
+// import Nugget from './Components/ScanModes/Nugget/Nugget'
 import Pulse2 from './Components/ScanModes/Pulse2/Pulse'
+import Pulse3 from './Components/ScanModes/Pulse3/Pulse3'
 
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
@@ -99,7 +100,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'pulse2Screen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'nuggetScanScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -269,8 +270,6 @@ class App extends Component {
         return (<Locker navigateTo={this.navigateTo} />)
       case "supriseScreen":
         return (<Suprise navigateTo={this.navigateTo} />)
-      case "nuggetScanScreen":
-        return (<Nugget navigateTo={this.navigateTo} />)
       case "detectorModeSelectorScreen":
         return (<DetectorModeSelector navigateTo={this.navigateTo} />)
       case "geophysicalActionScreen":
@@ -279,6 +278,8 @@ class App extends Component {
         return (<GeophysicalReport navigateTo={this.navigateTo} resistivityParams={this.state.resistivityParams} />)
       case "pulse2Screen":
         return (<Pulse2 navigateTo={this.navigateTo} />)
+      case "nuggetScanScreen":
+        return (<Pulse3 navigateTo={this.navigateTo} />)
       default:
         break
     }

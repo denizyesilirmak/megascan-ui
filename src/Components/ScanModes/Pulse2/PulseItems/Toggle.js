@@ -9,7 +9,7 @@ const Toggle = (props) => {
       style={{ background: props.active ? context.theme.button_bg_selected : '#000000', color: props.active ? context.theme.selected_text_color : '#ffffff' }}
     >
       <div className="label">{props.label}</div>
-      <div className={`toggle-indicator ${props.on ? 'active' : ''}`} />
+      <div className={`toggle-indicator ${props.on ? 'active' : ''}`} style={{ display: props.passive ? 'none' : 'block' }} />
     </div>
   )
 }

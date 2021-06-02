@@ -1,0 +1,4 @@
+.indicator-elipse{
+  transition: stroke 1s;
+  transition-timing-function: cubic-bezier(0,1.12,.14,.96);
+}

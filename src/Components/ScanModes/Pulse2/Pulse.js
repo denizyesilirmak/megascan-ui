@@ -4,11 +4,15 @@ import './Pulse.css'
 import Toggle from './PulseItems/Toggle'
 import PulseDial from './PulseItems/PulseDial'
 import Indicator from './PulseItems/Indicator'
+
 import SocketHelper from '../../../SocketHelper'
+import SoundHelper from '../../../SoundHelper'
 
 class Pulse extends React.Component {
   constructor(props) {
     super(props)
+
+    this.pulseCounter = 0
 
     this.state = {
       discrimination: false,
@@ -18,21 +22,41 @@ class Pulse extends React.Component {
       sensitivity: 0,
       treshold: 0,
       cursorX: 0,
-      cursorY: 0
+      cursorY: 0,
+      selectedDiscrimination: 0
     }
   }
 
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
+    SocketHelper.send('H.1')
+
   }
 
   componentWillUnmount() {
+    SocketHelper.send('H.0')
+    SoundHelper.stopOscillator()
     SocketHelper.detach()
   }
 
   handleSocket = (socketData) => {
     if (socketData.type === 'button') {
       this.moveCursor(socketData.payload)
+    }
+    else if (socketData.type === 'pulse') {
+      const raw = parseInt(socketData.payload)
+      if (this.pulseCounter < 4) {
+        this.pulseCounter++
+        console.log('ayar')
+        this.setState({
+          average: raw
+        })
+      }
+
+      this.setState({
+        raw_value: raw,
+        value: parseInt(raw - this.state.average)
+      })
     }
   }
 
@@ -48,7 +72,6 @@ class Pulse extends React.Component {
             cursorY: this.clamp(this.state.cursorY - 1, 0, 1)
           })
         }
-
         break
       case 'down':
         if (this.state.cursorX === 0) {
@@ -60,8 +83,6 @@ class Pulse extends React.Component {
             cursorY: this.clamp(this.state.cursorY + 1, 0, 1)
           })
         }
-
-
         break
       case 'left':
         this.setState({
@@ -82,8 +103,12 @@ class Pulse extends React.Component {
 
         break
       case 'start':
+        this.setState({
+          average: this.state.raw_value
+        })
 
         break
+
       default:
         break
     }
@@ -104,7 +129,8 @@ class Pulse extends React.Component {
       <div className="pulse2-component component">
         <div className="left">
           <Toggle
-            label="Disc."
+            label="BALANCE"
+            passive={true}
             active={this.state.cursorX === 0 && this.state.cursorY === 0}
             on={true}
           />
@@ -112,23 +138,23 @@ class Pulse extends React.Component {
             <Toggle
               label="ALL METALS"
               active={this.state.cursorX === 0 && this.state.cursorY === 1}
-              on={false}
+              on={this.state.selectedDiscrimination === 0}
             />
             <Toggle
               label="NON-FE."
               active={this.state.cursorX === 0 && this.state.cursorY === 2}
-              on={true}
+              on={this.state.selectedDiscrimination === 1}
             />
             <Toggle
               label="FERROUS"
               active={this.state.cursorX === 0 && this.state.cursorY === 3}
-              on={false}
+              on={this.state.selectedDiscrimination === 2}
             />
           </div>
           <Toggle
             label="SOUND"
             active={this.state.cursorX === 0 && this.state.cursorY === 4}
-            on={false}
+            on={true}
           />
 
         </div>
@@ -136,6 +162,7 @@ class Pulse extends React.Component {
           <Indicator
             value={this.state.value}
             groundBalance={this.state.groundBalance}
+            selectedDiscType={this.state.selectedDiscrimination}
           />
         </div>
         <div className="right">
@@ -147,7 +174,6 @@ class Pulse extends React.Component {
             label="Sens."
             active={this.state.cursorX === 1 && this.state.cursorY === 1}
           />
-
         </div>
       </div>
     )

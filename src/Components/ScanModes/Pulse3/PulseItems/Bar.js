@@ -4,6 +4,7 @@ import './Bar.css'
 const Bar = (props) => {
   return (
     <svg width="178" height="367">
+
       <text
         fontSize="20"
         fill="#ffffff"
@@ -62,11 +63,6 @@ const Bar = (props) => {
             d={`M120,${50 + props.level * 35} 105,${60 + props.level * 35} 120,${70 + props.level * 35}`}
           />
       }
-
-
-
-
-
 
     </svg>
   )

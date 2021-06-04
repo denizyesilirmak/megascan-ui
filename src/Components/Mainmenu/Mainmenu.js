@@ -89,7 +89,7 @@ class Mainmenu extends Component {
         screenName: "vlfScanScreen"
       },
       {
-        name: "detectormodes",
+        name: "detectorModeSelectorScreen",
         icon: DetectorIcon,
         screenName: "detectorModeSelectorScreen"
       },

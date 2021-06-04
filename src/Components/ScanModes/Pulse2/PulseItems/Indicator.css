@@ -1,3 +1,32 @@
-.pulse-2-indicator {
+.pulse-2-indicator {}
 
+#svg-p-1 {
+  r: 0px;
+  animation: pulse-p 2s ease 0s infinite;
+}
+
+#svg-p-2 {
+  r: 0px;
+  animation: pulse-p 2s ease 0.5s infinite;
+}
+
+#svg-p-3 {
+  r: 0px;
+  animation: pulse-p 2s ease 1s infinite;
+}
+
+@keyframes pulse-p {
+  0% {
+    r: 0px;
+    opacity: 0;
+  }
+  100% {
+    r: 155px;
+    opacity: 0.5;
+  }
+}
+
+.level-lines{
+  transition: all 1s;
+  transition-timing-function: cubic-bezier(0,1.12,.14,.96);
 }

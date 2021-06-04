@@ -4,8 +4,12 @@ import Indicator from './PulseItems/Indicator'
 import Bar from './PulseItems/Bar'
 
 import SocketHelper from '../../../SocketHelper'
+import SoundHelper from '../../../SoundHelper'
+import { DeviceContext } from '../../../Contexts/DeviceContext'
+
 
 class Pulse3 extends React.Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -17,14 +21,17 @@ class Pulse3 extends React.Component {
       sensitivity: 0,
       treshold: 0
     }
+
   }
 
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
+    SoundHelper.createOscillator('square')
     SocketHelper.send('H.1')
   }
 
   componentWillUnmount() {
+    SoundHelper.stopOscillator()
     SocketHelper.send('H.0')
     SocketHelper.detach()
 
@@ -81,6 +88,9 @@ class Pulse3 extends React.Component {
           average: this.state.raw_value
         })
         break
+      case 'back':
+        this.props.navigateTo('detectorModeSelectorScreen')
+        return
 
       default:
         break
@@ -91,7 +101,21 @@ class Pulse3 extends React.Component {
     this.setState({
       value: value,
       raw_value: raw
+    }, () => {
+      this.generateSound(this.state.value)
     })
+  }
+
+  generateSound = (value) => {
+    if (Math.abs(value) + this.state.sensitivity > (this.state.treshold * 20) + 3) {
+      if (this.state.value > 0) {
+        SoundHelper.changeFrequencyFast(800)
+      } else {
+        SoundHelper.changeFrequencyFast(400)
+      }
+    } else {
+      SoundHelper.changeFrequencyFast(0)
+    }
   }
 
   clamp = (value, min, max) => {
@@ -109,7 +133,7 @@ class Pulse3 extends React.Component {
       <div className="component pulse-3">
         <div className="left">
           <Bar
-            label="Sensitivity"
+            label={this.context.strings['sensitivity']}
             left={true}
             level={this.state.sensitivity}
             active={this.state.cursor}
@@ -125,7 +149,7 @@ class Pulse3 extends React.Component {
 
         <div className="right">
           <Bar
-            label="Treshold"
+            label={this.context.strings['treshold']}
             left={false}
             level={this.state.treshold}
             active={!this.state.cursor}

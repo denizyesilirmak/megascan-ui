@@ -34,7 +34,10 @@
   color: #ffffff;
   text-align: center;
   width: 100%;
-  font-size: 20px;
+  font-size: 15px;
+  width: 210px;
+  word-break: normal;
+  margin-top: 10px;
 }
 
 .detector-mode-indicator {

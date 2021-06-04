@@ -141,7 +141,18 @@
     "value": "القيمة",
     "wrongPinWarn": "الرمز الامني الذي أدخلته غير صحيح. يرجى التصحيح وحاول مرة أخرى.",
     "year": "السنة",
-    "yes": "نعم"
+    "yes": "نعم",
+    "treshold": "عتبة",
+    "detectorModeSelectorScreen": "كاشف معادن",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "de": {
     "alternative": "Zickzack",
@@ -289,7 +300,18 @@
     "value": "Wert",
     "wrongPinWarn": "Der eingegebene Pin ist falsch. Bitte korrigieren und erneut versuchen.",
     "year": "Jahr",
-    "yes": "Ja"
+    "yes": "Ja",
+    "treshold": "Schwelle",
+    "detectorModeSelectorScreen": "Metalldetektor",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "en": {
     "alternative": "Zigzag",
@@ -439,7 +461,17 @@
     "year": "Year",
     "yes": "Yes",
     "detectormodes": "Metal Detectors",
-    "detectorModeSelectorScreen": "Detectors"
+    "treshold": "Threshold",
+    "detectorModeSelectorScreen": "Metal Detector",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "es": {
     "alternative": "Zigzag",
@@ -586,7 +618,18 @@
     "value": "Valor",
     "wrongPinWarn": "El PIN que ingresaste es incorrecto. Corrija y vuelva a intentarlo.",
     "year": "Año",
-    "yes": "si"
+    "yes": "si",
+    "treshold": "Umbral",
+    "detectorModeSelectorScreen": "Detector de metales",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -729,7 +772,18 @@
     "value": "ارزش",
     "wrongPinWarn": "رمز وارد شده اشتباه است. لطفاً تصحیح کنید و دوباره امتحان کنید.",
     "year": "سال",
-    "yes": "بله"
+    "yes": "بله",
+    "treshold": "آستانه",
+    "detectorModeSelectorScreen": "فلزیاب",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "fr": {
     "alternative": "Zigzag",
@@ -876,7 +930,18 @@
     "value": "Valeur",
     "wrongPinWarn": "Le code PIN que vous avez entré est incorrect. Veuillez corriger et réessayer.",
     "year": "An",
-    "yes": "Oui"
+    "yes": "Oui",
+    "treshold": "Seuil",
+    "detectorModeSelectorScreen": "Détecteur de métaux",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "it": {
     "alternative": "Zigzag",
@@ -1023,7 +1088,18 @@
     "value": "Valore",
     "wrongPinWarn": "Il PIN che hai inserito non è corretto. Correggi e riprova.",
     "year": "Anno",
-    "yes": "sì"
+    "yes": "sì",
+    "treshold": "Soglia",
+    "detectorModeSelectorScreen": "Metal detector",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1170,7 +1246,18 @@
     "value": "ערך",
     "wrongPinWarn": "הסיכה שהזנת שגויה. אנא תקן ונסה שוב.",
     "year": "שָׁנָה",
-    "yes": "כן"
+    "yes": "כן",
+    "treshold": "מפתן",
+    "detectorModeSelectorScreen": "גלאי מתכות",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1317,7 +1404,18 @@
     "value": "Значение",
     "wrongPinWarn": "Вы ввели неправильный PIN-код. Пожалуйста, исправьте и попробуйте еще раз.",
     "year": "Год",
-    "yes": "да"
+    "yes": "да",
+    "treshold": "порог",
+    "detectorModeSelectorScreen": "Металлоискатель",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1464,7 +1562,18 @@
     "value": "Değer",
     "wrongPinWarn": "Girdiğiniz pin yanlış. Lütfen düzeltip tekrar deneyin.",
     "year": "Yıl",
-    "yes": "Evet"
+    "yes": "Evet",
+    "treshold": "Eşik",
+    "detectorModeSelectorScreen": "Metal dedektörü",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1611,7 +1720,18 @@
     "value": "قدر",
     "wrongPinWarn": "آپ نے جو پن داخل کیا ہے وہ غلط ہے۔ براہ کرم درست کریں اور دوبارہ کوشش کریں۔",
     "year": "سال",
-    "yes": "جی ہاں"
+    "yes": "جی ہاں",
+    "treshold": "دہلیز",
+    "detectorModeSelectorScreen": "میٹل ڈیٹیکٹر",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   },
   "zh": {
     "alternative": "之字形",
@@ -1758,6 +1878,17 @@
     "value": "值",
     "wrongPinWarn": "您输入的密码不正确。请更正，然后重试。",
     "year": "年",
-    "yes": "是"
+    "yes": "是",
+    "treshold": "临界点",
+    "detectorModeSelectorScreen": "金属探测器",
+    "detectorMode1": "#DETECTOR MODE1",
+    "detectorMode2": "#DETECTOR MODE2",
+    "detectorMode3": "#DETECTOR MODE3",
+    "detectorMode1Desc": "#detector mode 1 description",
+    "detectorMode2Desc": "#detector mode 2 description",
+    "detectorMode3Desc": "#detector mode 3 description",
+    "allMetals": "All Metals",
+    "nonFerrous": "Non Ferrous",
+    "Ferrous": "Ferrous"
   }
 }

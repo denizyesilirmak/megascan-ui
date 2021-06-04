@@ -7,8 +7,10 @@ import Indicator from './PulseItems/Indicator'
 
 import SocketHelper from '../../../SocketHelper'
 import SoundHelper from '../../../SoundHelper'
+import { DeviceContext } from '../../../Contexts/DeviceContext'
 
 class Pulse extends React.Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
 
@@ -97,11 +99,41 @@ class Pulse extends React.Component {
         })
         break
       case 'ok':
-
+        if (this.state.cursorX === 0) {
+          //left side
+          if (this.state.cursorY === 1) {
+            //all metals
+            this.setState({
+              selectedDiscrimination: 0
+            })
+          }
+          else if (this.state.cursorY === 2) {
+            //Non ferrous
+            this.setState({
+              selectedDiscrimination: 1
+            })
+          }
+          else if (this.state.cursorY === 3) {
+            //ferrous
+            this.setState({
+              selectedDiscrimination: 2
+            })
+          }
+          else if (this.state.cursorY === 0) {
+            //calibration
+          }
+          else if (this.state.cursorY === 4) {
+            //sound
+          }
+        }
+        else if (this.state.cursorX === 1) {
+          //right side
+        }
         break
       case 'back':
+        this.props.navigateTo('detectorModeSelectorScreen')
 
-        break
+        return
       case 'start':
         this.setState({
           average: this.state.raw_value
@@ -129,30 +161,30 @@ class Pulse extends React.Component {
       <div className="pulse2-component component">
         <div className="left">
           <Toggle
-            label="BALANCE"
+            label={this.context.strings['calibration']}
             passive={true}
             active={this.state.cursorX === 0 && this.state.cursorY === 0}
             on={true}
           />
           <div className="button-group">
             <Toggle
-              label="ALL METALS"
+              label={this.context.strings['allMetals']}
               active={this.state.cursorX === 0 && this.state.cursorY === 1}
               on={this.state.selectedDiscrimination === 0}
             />
             <Toggle
-              label="NON-FE."
+              label={this.context.strings['nonFerrous']}
               active={this.state.cursorX === 0 && this.state.cursorY === 2}
               on={this.state.selectedDiscrimination === 1}
             />
             <Toggle
-              label="FERROUS"
+              label={this.context.strings['Ferrous']}
               active={this.state.cursorX === 0 && this.state.cursorY === 3}
               on={this.state.selectedDiscrimination === 2}
             />
           </div>
           <Toggle
-            label="SOUND"
+            label={this.context.strings['sound']}
             active={this.state.cursorX === 0 && this.state.cursorY === 4}
             on={true}
           />
@@ -167,11 +199,11 @@ class Pulse extends React.Component {
         </div>
         <div className="right">
           <PulseDial
-            label="Treshold"
+            label={this.context.strings['treshold']}
             active={this.state.cursorX === 1 && this.state.cursorY === 0}
           />
           <PulseDial
-            label="Sens."
+            label={this.context.strings['sensitivity']}
             active={this.state.cursorX === 1 && this.state.cursorY === 1}
           />
         </div>

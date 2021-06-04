@@ -51,7 +51,7 @@ class DetectorModeSelector extends React.Component {
           this.props.navigateTo('pulseScreen') 
         }
         else if (this.state.cursor === 1) {
-          this.props.navigateTo('vlfScanScreen')
+          this.props.navigateTo('pulse2Screen')
         }
         else if (this.state.cursor === 2) {
           this.props.navigateTo('nuggetScanScreen')
@@ -76,7 +76,7 @@ class DetectorModeSelector extends React.Component {
               <img src={PulseIcon} alt="dms" />
             </div>
             <div className="detector-mode-title">
-              Pulse
+              {this.context.strings['detectorMode1']}
             </div>
           </div>
 
@@ -86,7 +86,8 @@ class DetectorModeSelector extends React.Component {
               <img src={VlfIcon} alt="dms" />
             </div>
             <div className="detector-mode-title">
-              Vlf
+            {this.context.strings['detectorMode2']}
+
             </div>
           </div>
 
@@ -96,15 +97,16 @@ class DetectorModeSelector extends React.Component {
               <img src={PulseIcon} alt="dms" />
             </div>
             <div className="detector-mode-title">
-              Nugget
+            {this.context.strings['detectorMode3']}
+
             </div>
           </div>
         </div>
 
         <div className="detector-mode-selector-info">
-          <span style={{ display: this.state.cursor === 0 ? 'inline' : 'none' }}>Metal detector system using the pulse induction method. It uses the X coil head.</span>
-          <span style={{ display: this.state.cursor === 1 ? 'inline' : 'none' }}>Metal detector system using the very low frequency method. It uses the Y coil head.</span>
-          <span style={{ display: this.state.cursor === 2 ? 'inline' : 'none' }}>Metal detector fits to search small golden nuggets or small metals. It uses the Z coil head.</span>
+          <span style={{ display: this.state.cursor === 0 ? 'inline' : 'none' }}>{this.context.strings['detectorMode1Desc']}</span>
+          <span style={{ display: this.state.cursor === 1 ? 'inline' : 'none' }}>{this.context.strings['detectorMode2Desc']}</span>
+          <span style={{ display: this.state.cursor === 2 ? 'inline' : 'none' }}>{this.context.strings['detectorMode3Desc']}</span>
         </div>
 
 

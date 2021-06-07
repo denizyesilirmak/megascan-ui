@@ -9,6 +9,9 @@ import SocketHelper from '../../../SocketHelper'
 import SoundHelper from '../../../SoundHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
 
+const MINLIMIT = -40
+const MAXLIMIT = 40
+
 class Pulse extends React.Component {
   static contextType = DeviceContext
   constructor(props) {
@@ -20,7 +23,7 @@ class Pulse extends React.Component {
       discrimination: false,
       raw_value: 0,
       value: 0,
-      average: 0,
+      average: 1108,
       sensitivity: 0,
       treshold: 0,
       cursorX: 0,
@@ -32,7 +35,7 @@ class Pulse extends React.Component {
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
     SocketHelper.send('H.1')
-
+    SoundHelper.createOscillator('triangle')
   }
 
   componentWillUnmount() {
@@ -47,7 +50,7 @@ class Pulse extends React.Component {
     }
     else if (socketData.type === 'pulse') {
       const raw = parseInt(socketData.payload)
-      if (this.pulseCounter < 4) {
+      if (this.pulseCounter < 30) {
         this.pulseCounter++
         console.log('ayar')
         this.setState({
@@ -58,6 +61,35 @@ class Pulse extends React.Component {
       this.setState({
         raw_value: raw,
         value: parseInt(raw - this.state.average)
+      }, () => {
+        if (this.state.selectedDiscrimination === 0) {
+          if (this.state.value > MAXLIMIT) {
+            SoundHelper.changeFrequencySmooth(800 + this.state.value * 2)
+          } else if (this.state.value < MINLIMIT) {
+            SoundHelper.changeFrequencySmooth(this.state.value / -3)
+          } else {
+            SoundHelper.changeFrequencySmooth(0)
+          }
+        }
+        else if (this.state.selectedDiscrimination === 1) {
+          if (this.state.value > MAXLIMIT) {
+            SoundHelper.changeFrequencySmooth(800 + this.state.value * 2)
+          } else if (this.state.value < MINLIMIT) {
+            // SoundHelper.changeFrequencySmooth(this.state.value / -3)
+          } else {
+            SoundHelper.changeFrequencySmooth(0)
+          }
+
+        }
+        else if (this.state.selectedDiscrimination === 2) {
+          if (this.state.value > MAXLIMIT) {
+            // SoundHelper.changeFrequencySmooth(800 + this.state.value * 2)
+          } else if (this.state.value < MINLIMIT) {
+            SoundHelper.changeFrequencySmooth(this.state.value / -3)
+          } else {
+            SoundHelper.changeFrequencySmooth(0)
+          }
+        }
       })
     }
   }
@@ -105,22 +137,31 @@ class Pulse extends React.Component {
             //all metals
             this.setState({
               selectedDiscrimination: 0
+            }, () => {
+              SoundHelper.changeFrequencyType('sine')
             })
           }
           else if (this.state.cursorY === 2) {
             //Non ferrous
             this.setState({
               selectedDiscrimination: 1
+            }, () => {
+              SoundHelper.changeFrequencyType('sawtooth')
             })
           }
           else if (this.state.cursorY === 3) {
             //ferrous
             this.setState({
               selectedDiscrimination: 2
+            }, () => {
+              SoundHelper.changeFrequencyType('square')
             })
           }
           else if (this.state.cursorY === 0) {
             //calibration
+            this.setState({
+              average: this.state.raw_value
+            })
           }
           else if (this.state.cursorY === 4) {
             //sound
@@ -154,6 +195,24 @@ class Pulse extends React.Component {
       return max
     }
     else return value
+  }
+
+  map = (x, in_min, in_max, out_min, out_max) => {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+  }
+
+  calculateIndicatorValue = () => {
+    if (this.state.selectedDiscrimination === 0) {
+      return Math.trunc(this.map(Math.abs(this.state.value), 0, 1100, 0, 100))
+    }
+    else if (this.state.selectedDiscrimination === 1) {
+      return Math.trunc(this.map(Math.abs(this.state.value), 0, 1100, 0, 100))
+    }
+    else if (this.state.selectedDiscrimination === 2) {
+      return Math.trunc(this.map(Math.abs(this.state.value), 0, 1100, 0, 100))
+
+    }
+    return 0
   }
 
   render() {
@@ -193,6 +252,7 @@ class Pulse extends React.Component {
         <div className="middle">
           <Indicator
             value={this.state.value}
+            valueIndicator={this.calculateIndicatorValue()}
             groundBalance={this.state.groundBalance}
             selectedDiscType={this.state.selectedDiscrimination}
           />

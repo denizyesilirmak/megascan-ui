@@ -3,7 +3,7 @@ import './Homescreen.css'
 import HomeScreenVideo from '../../Assets/homescreen/homescreen.mp4'
 import MegaLogo from '../../Assets/homescreen/mega.png'
 import SocketHelper from '../../SocketHelper'
-import LiveClock from 'react-live-clock';
+import LiveClock from 'react-live-clock'
 
 class Homescreen extends Component {
   constructor(props) {
@@ -11,20 +11,18 @@ class Homescreen extends Component {
     this.date = new Date()
     this.homescreenref = React.createRef()
   }
+
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
     this.timeout = setTimeout(() => {
       this.homescreenref.current.style.transform = "scale(1)"
       this.homescreenref.current.style.opacity = "1"
       clearTimeout(this.timeout)
-    }, 120);
-
-
+    }, 120)
   }
 
   componentWillUnmount() {
     SocketHelper.detach()
-
   }
 
   handleSocket = (socketData) => {
@@ -37,10 +35,9 @@ class Homescreen extends Component {
       setTimeout(() => {
         this.props.navigateTo('menuScreen')
         return
-      }, 550);
+      }, 550)
     }
   }
-
 
   render() {
     return (

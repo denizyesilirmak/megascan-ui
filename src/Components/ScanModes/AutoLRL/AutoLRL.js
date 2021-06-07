@@ -24,7 +24,6 @@ class AutoLRL extends Component {
       settingsMode: true, //true: distance false: depth
       distance: LIMITS.MINDISTANCE,
       depth: LIMITS.MINDEPTH
-
     }
   }
 

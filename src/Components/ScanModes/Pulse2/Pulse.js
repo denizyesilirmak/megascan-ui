@@ -210,7 +210,6 @@ class Pulse extends React.Component {
     }
     else if (this.state.selectedDiscrimination === 2) {
       return Math.trunc(this.map(Math.abs(this.state.value), 0, 1100, 0, 100))
-
     }
     return 0
   }

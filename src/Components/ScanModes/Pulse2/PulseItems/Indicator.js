@@ -142,7 +142,6 @@ const Indicator = (props) => {
         />
       </g>
 
-
       <text
         fill="#ffffff"
         x="218"

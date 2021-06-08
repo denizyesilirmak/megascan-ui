@@ -94,7 +94,8 @@ const Indicator = (props) => {
       <circle
         cx="218"
         cy="175"
-        r="150"
+        r={160 - Math.abs(props.value) / 60}
+        className="pulse-scale-circle"
         stroke="#18457a"
         strokeWidth="20"
         fill="url('#gradient')"
@@ -189,7 +190,7 @@ const Indicator = (props) => {
         fontFamily="Courier"
         fontWeight="bold"
       >
-        Non-Ferrous
+        {props.value > 30 ? 'Non-Ferrous' : props.value < -30 ? 'Ferrous' : ''}
       </text>
 
       <text
@@ -202,7 +203,7 @@ const Indicator = (props) => {
         fontFamily="Courier"
         fontWeight="bold"
       >
-        GB:20
+        GB: {Math.trunc(props.groundBalance / 50)}
       </text>
 
     </svg>

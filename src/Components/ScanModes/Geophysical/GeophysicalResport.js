@@ -4,7 +4,7 @@ import { DeviceContext } from '../../../Contexts/DeviceContext'
 import SocketHelper from '../../../SocketHelper'
 
 
-const height = 4
+// const height = 4
 
 const targets = {
   water: {

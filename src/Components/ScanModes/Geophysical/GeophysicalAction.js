@@ -8,7 +8,7 @@ import SocketHelper from '../../../SocketHelper'
 class GeophysicalAction extends React.Component {
   constructor(props){
     super(props)
-    this.sensorValue = 560
+    this.sensorValue = 100
 
   }
 

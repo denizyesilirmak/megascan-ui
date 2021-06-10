@@ -19,9 +19,6 @@ class GroundScanMethodSelection extends Component {
   constructor(props) {
     super(props)
 
-
-
-
     this.state = {
       buttonIndex: 800 * 2
     }

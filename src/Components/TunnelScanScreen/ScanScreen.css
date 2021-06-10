@@ -1,0 +1,97 @@
+.scan-screen {
+  display: flex;
+  /* background: #000; */
+}
+
+.canvas-container {
+  width: 563px;
+  height: 100%;
+  background: #000;
+}
+
+.scan-screen-details {
+  /* background: red; */
+  width: 187px;
+  height: 100%;
+  margin-right: 3px;
+}
+
+.detail-bar {
+  border: 3px solid;
+  color: white;
+  text-align: center;
+  width: 160px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  margin-top: 15px;
+  border-radius: 3px;
+  font-size: 18px;
+  background: black;
+}
+
+.bar-name{
+  border-bottom: 1px solid black;
+}
+
+.bar-value{
+  font-size: 30px;
+}
+
+.new-line-popup-container{
+  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: in 0.1s forwards 500ms;
+}
+
+.new-line-popup-container .new-line-popup{
+  flex-direction: column;
+  width: 550px;
+  height: min-content;
+  border: 4px solid;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  text-align: center;
+  color: white;
+
+  background: black;
+}
+
+@keyframes in{
+  100%{
+    opacity: 1;
+  }
+}
+
+.scan-screen-buttons{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.scan-screen-buttons .scan-screen-button{
+  /* background: rgb(0, 0, 0); */
+  padding: 5px 20px 5px 20px;
+  color: white;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.scan-screen-button.selected{
+  background: rgb(19, 96, 168);
+  color: white;
+  
+}

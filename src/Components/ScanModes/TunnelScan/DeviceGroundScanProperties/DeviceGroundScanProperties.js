@@ -309,7 +309,7 @@ class DeviceGroundScanProperties extends Component {
             this.savePropertiesState()
             // console.log("Scan Properties: ", scanProperties)
             this.props.setScanProperties(scanProperties)
-            this.props.navigateTo("scanScreen")
+            this.props.navigateTo("tunnelScanScreen")
           }
 
           return

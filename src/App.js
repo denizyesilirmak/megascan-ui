@@ -59,6 +59,8 @@ import Pulse3 from './Components/ScanModes/Pulse3/Pulse3'
 //3D scan
 import ScanViewer from './Components/ScanViewer/ScanViewer'
 import ScanScreen from './Components/ScanScreen/ScanScreen'
+import TunnelScanScreen from './Components/TunnelScanScreen/ScanScreen'
+
 
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/SensorControl'
@@ -239,6 +241,8 @@ class App extends Component {
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="autoLrlScanScreen" />)
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
+      case "tunnelScanScreen":
+        return (<TunnelScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
       case "changePinScreen":
         return (<ChangePinScreen navigateTo={this.navigateTo} currentPin={this.state.pin} />)
       case "changeLanguageScreen":

@@ -15,7 +15,7 @@ import GroundScanVideo from '../../Assets/Videos/controlGroundScan_phoenix.mp4'
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-const bypass = false
+const bypass = true
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext
@@ -38,30 +38,33 @@ class SensorControl extends React.Component {
     switch (this.props.target) {
       case "liveStreamScreen":
         this.setState({ src: LiveStremVideo, targetSensorID: 2 })
-        break;
+        break
       case "bionicScreen":
         this.setState({ src: BionicVideo, targetSensorID: 1 })
-        break;
+        break
       case "ionicScreen":
         this.setState({ src: BionicVideo, targetSensorID: 1 })
-        break;
+        break
       case "groundScanMethodSelectionScreen":
         this.setState({ src: GroundScanVideo, targetSensorID: 3 })
-        break;
+        break
+      case "tunnelScanMethodSelectionScreen":
+        this.setState({ src: GroundScanVideo, targetSensorID: 3 })
+        break
       case "pinPointerScreen":
         this.setState({ src: LiveStremVideo, targetSensorID: 2 })
-        break;
+        break
       case "manualLRLSettingsScreen":
         this.setState({ src: BionicVideo, targetSensorID: 1 })
-        break;
+        break
       case "ctrlLrlScanScreen":
         this.setState({ src: BionicVideo, targetSensorID: 1 })
-        break;
+        break
       case "autoLrlScanScreen":
         this.setState({ src: BionicVideo, targetSensorID: 1 })
-        break;
+        break
       default:
-        break;
+        break
     }
 
     SocketHelper.attach(this.controlRespond)
@@ -70,16 +73,16 @@ class SensorControl extends React.Component {
       try {
         this.indicatorREF.current.style.width = "100%"
       } catch (error) {
-        
+
       }
       clearTimeout(timeoutB)
-    }, 1000);
+    }, 1000)
 
     this.failTimeout = setTimeout(() => {
       clearTimeout(this.failTimeout)
       SocketHelper.detach()
       this.props.navigateTo('menuScreen')
-    }, 4000);
+    }, 4000)
   }
 
   onVideoEnded = () => {
@@ -88,7 +91,7 @@ class SensorControl extends React.Component {
     setTimeout(() => {
       SocketHelper.detach()
       this.props.navigateTo("menuScreen")
-    }, 100);
+    }, 100)
   }
 
   controlRespond = (data) => {
@@ -112,7 +115,7 @@ class SensorControl extends React.Component {
           clearTimeout(this.failTimeout)
           this.props.navigateTo(this.props.target)
         }
-      }, 1000);
+      }, 1000)
     } else if (data.type === 'button') {
       if (data.payload === 'back') {
         clearTimeout(this.failTimeout)

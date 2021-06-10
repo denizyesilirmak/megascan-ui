@@ -471,7 +471,11 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan"
   },
   "es": {
     "alternative": "Zigzag",

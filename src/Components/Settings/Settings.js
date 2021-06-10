@@ -22,10 +22,6 @@ import { DeviceContext } from '../../Contexts/DeviceContext'
 import dbStorage from '../../DatabaseHelper'
 // import SoundHelper from '../../SoundHelper'
 
-
-
-
-
 class Settings extends Component {
   static contextType = DeviceContext
   constructor(props) {
@@ -160,7 +156,6 @@ class Settings extends Component {
       </div>
     )
   }
-
 
   handleKeyDown = async (socketData) => {
     if (socketData.type !== 'button') { return }
@@ -385,7 +380,6 @@ class Settings extends Component {
               //Power saver -- turn off on power saver
               this.setState({ powersaver: !this.state.powersaver })
               await dbStorage.setItem("powersaver", this.state.powersaver)
-
             }
           }
           else if (this.state.activeSettingTab === 1) {
@@ -464,7 +458,6 @@ class Settings extends Component {
               this.context.changeSleepModeStatus(this.state.sleepmode)
               await dbStorage.setItem("sleepmode", this.state.sleepmode)
             }
-
           }
 
           else if (this.state.activeSettingTab === 5) {
@@ -473,7 +466,6 @@ class Settings extends Component {
               console.log("change language")
               this.props.navigateTo("changeLanguageScreen")
             }
-
           }
 
           else if (this.state.activeSettingTab === 6) {

@@ -36,9 +36,9 @@ class Mainmenu extends Component {
         screenName: "controlGroundScan"
       },
       {
-        name: "groundscan",
+        name: "tunnelscan",
         icon: TunnelScanIcon,
-        screenName: "controlGroundScan"
+        screenName: "controlTunnelScan"
       },
       {
         name: "geophysical",

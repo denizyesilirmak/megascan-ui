@@ -1,0 +1,71 @@
+
+.method-selection-buttons {
+  height: 260px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.msb {
+  width: 200px;
+  height: 260px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  transform: scale(0.8);
+  transition: all 0.3s;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.msb .icon-holder{
+  background-image: url(../../../../Assets/MenuIcons/button-border.png);
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.msb-title{
+  color: white;
+  text-align: center;
+  font-size: 24px;
+}
+
+.msb-icon{
+  width: 170px;
+  margin-top: 0px;
+}
+
+.msb-indicator{
+  position: absolute;
+  animation: msb-rotating 2s infinite linear;
+  top: 8px;
+  width: 208px;
+  height: 207px;
+  transform-origin: 104px 100px;
+}
+
+@keyframes msb-rotating{
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.msb-selected{
+  transform: scale(1.1);
+}
+
+.msb-arrow{
+  position: absolute;
+}
+
+.msb-arrow.left{
+  left: 15px;
+}
+
+.msb-arrow.right{
+  right: 15px;
+}

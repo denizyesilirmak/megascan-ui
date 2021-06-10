@@ -195,9 +195,6 @@ class SerialCodeChanger extends React.Component {
           <div className={`serial-number ${this.state.cursorIndex === 3 ? 'selected' : ''}`}>
             {this.state.three}
           </div>
-
-
-
         </div>
       </>
     )

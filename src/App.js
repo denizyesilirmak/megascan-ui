@@ -35,6 +35,11 @@ import CtrlScan from './Components/ScanModes/CtrlLRL/CtrlLRLComponents/CtrlScan/
 import LiveStream from './Components/ScanModes/LiveStream/LiveStream'
 import GroundScanMethodSelection from './Components/ScanModes/GroundScan/GroundScanMethodSelection/GroundScanMethodSelection'
 import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
+
+import TunnelScanMethodSelection from './Components/ScanModes/TunnelScan/GroundScanMethodSelection/GroundScanMethodSelection'
+import DeviceTunnelScanProperies from './Components/ScanModes/TunnelScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
+
+
 import Bionic from './Components/ScanModes/Bionic/Bionic'
 import IonicNew from './Components/ScanModes/Ionic/InonicNew'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
@@ -196,6 +201,12 @@ class App extends Component {
         return (<GroundScanMethodSelection navigateTo={this.navigateTo} />)
       case "deviceGroundScanPropertiesScreen":
         return (<DeviceGroundScanProperties navigateTo={this.navigateTo} setScanProperties={this.setScanProperties} />)
+
+      case "tunnelScanMethodSelectionScreen":
+        return (<TunnelScanMethodSelection navigateTo={this.navigateTo} />)
+      case "deviceTunnelScanPropertiesScreen":
+        return (<DeviceTunnelScanProperies navigateTo={this.navigateTo} setScanProperties={this.setScanProperties} />)
+
       case "scanViewerScreen":
         return (<ScanViewer navigateTo={this.navigateTo} fileToOpen={this.state.fileToOpen} />)
       case "bionicScreen":
@@ -216,6 +227,8 @@ class App extends Component {
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="ionicScreen" />)
       case "controlGroundScan":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="groundScanMethodSelectionScreen" />)
+      case "controlTunnelScan":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="tunnelScanMethodSelectionScreen" />)
       case "controlPinPointer":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="pinPointerScreen" />)
       case "controlManualLrlScreen":

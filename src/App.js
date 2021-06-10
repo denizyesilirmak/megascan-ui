@@ -27,7 +27,6 @@ import Locker from './Components/Locker/Locker'
 import Suprise from './Components/Suprise/Suprise'
 import DetectorModeSelector from './Components/DetectorModeSelector/DetectorModeSelector'
 
-
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
 import CtrlLRL from './Components/ScanModes/CtrlLRL/CtrlLRL'
@@ -136,6 +135,7 @@ class App extends Component {
    * @param {string} file - File name to send 3D Scan Viewer.
    * @param {number} settingsTabIndex - Last Settings Tab index.
    * @param {object} mobileGroundScan - Mobile ground scan options.
+   * @param {object} resistivityParams - Resistivity data.
    */
   navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}, resistivityParams = {}) => {
     this.setState({
@@ -229,7 +229,7 @@ class App extends Component {
       case "changePinScreen":
         return (<ChangePinScreen navigateTo={this.navigateTo} currentPin={this.state.pin} />)
       case "changeLanguageScreen":
-        return (<ChangeLanguage navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} />)
+        return (<ChangeLanguage navigateTo={this.navigateTo} setLanguage={(languageCode) => this.setLanguage(languageCode)} />)
       case "fileListScreen":
         return (<FileList navigateTo={this.navigateTo} />)
       case "geophysicalScreen":
@@ -241,7 +241,7 @@ class App extends Component {
       case "pinPointerScreen":
         return (<PinPointer navigateTo={this.navigateTo} generalVolume={this.state.generalVolume} searchVolume={this.state.searchVolume} />)
       case "setupScreen":
-        return (<Setup navigateTo={this.navigateTo} setLanguage={(a) => this.setLanguage(a)} serial={this.state.serial} />)
+        return (<Setup navigateTo={this.navigateTo} setLanguage={(languageCode) => this.setLanguage(languageCode)} serial={this.state.serial} />)
       case "factoryResetScreen":
         return (<ResetFactory navigateTo={this.navigateTo} />)
       case "resetSettingsScreen":

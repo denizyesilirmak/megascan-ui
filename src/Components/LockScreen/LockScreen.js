@@ -4,10 +4,7 @@ import socketHelper from '../../SocketHelper'
 import LockIcon from '../../Assets/MenuIcons/lock.png'
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
-const DEFAULTPINS = [
-  "0808",
-  "4444",
-  "9856",
+let DEFAULTPINS = [
   "1402"
 ]
 
@@ -15,6 +12,7 @@ class LockScreen extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
+
 
     console.log(this.props.currentPin)
     DEFAULTPINS.push(this.props.currentPin)
@@ -27,13 +25,38 @@ class LockScreen extends Component {
     }
   }
 
+  preDefinedPins = (device) => {
+    switch (device) {
+      case 'goldstar':
+        DEFAULTPINS.push('4444')
+        break
+      case 'phoenix':
+        DEFAULTPINS.push('1545')
+        break
+      case 'concord':
+        DEFAULTPINS.push('8565')
+        break
+      case 'infinity':
+        DEFAULTPINS.push('8871')
+        break
+      case 'viber':
+        DEFAULTPINS.push('1257')
+        break
+      default:
+        break
+    }
+  }
+
   componentDidMount() {
+    this.preDefinedPins(this.context.device)
+
+
     socketHelper.attach(this.handleKeyDown)
     this.introTimeout = setTimeout(() => {
       this.refs.lockHolder.style.opacity = 1
       this.refs.lockHolder.style.transform = "scale(1)"
       clearTimeout(this.introTimeout)
-    }, 1200);
+    }, 1200)
   }
 
   toggleWrongPinPopup() {
@@ -42,7 +65,7 @@ class LockScreen extends Component {
       this.setState({ pin: [] })
       this.setState({ wrongPinPopup: false })
       clearTimeout(this.wrongPinTimeout)
-    }, 2500);
+    }, 2500)
   }
 
   componentWillUnmount() {
@@ -105,8 +128,8 @@ class LockScreen extends Component {
               this.props.navigateTo("menuScreen")
               return
             }
-          });
-          this.toggleWrongPinPopup();
+          })
+          this.toggleWrongPinPopup()
           break
         }
         break
@@ -138,17 +161,17 @@ class LockScreen extends Component {
             <span className="digit">{this.state.pin[3] !== undefined ? this.state.pin[3] : "-"}</span>
           </div>
           <div className="num-pad">
-            <div style={{ background: this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>1</div>
-            <div style={{ background: this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 0 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>2</div>
-            <div style={{ background: this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 0 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>3</div>
-            <div style={{ background: this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 1 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>4</div>
-            <div style={{ background: this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 1 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>5</div>
-            <div style={{ background: this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 1 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>6</div>
-            <div style={{ background: this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 2 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>7</div>
-            <div style={{ background: this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 2 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>8</div>
-            <div style={{ background: this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 2 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>9</div>
+            <div style={{ background: this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>1</div>
+            <div style={{ background: this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 0 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>2</div>
+            <div style={{ background: this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 0 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 0 ? "selected" : ""}`}>3</div>
+            <div style={{ background: this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 1 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>4</div>
+            <div style={{ background: this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 1 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>5</div>
+            <div style={{ background: this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 1 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 1 ? "selected" : ""}`}>6</div>
+            <div style={{ background: this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 2 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 0 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>7</div>
+            <div style={{ background: this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 2 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 1 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>8</div>
+            <div style={{ background: this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 2 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorX % 3 === 2 && this.state.cursorY % 4 === 2 ? "selected" : ""}`}>9</div>
             <div></div>
-            <div style={{ background: this.state.cursorY % 4 === 3 ? this.context.theme.button_bg_selected: null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorY % 4 === 3 ? "selected" : ""}`}>0</div>
+            <div style={{ background: this.state.cursorY % 4 === 3 ? this.context.theme.button_bg_selected : null, color: this.context.theme.selected_text_color, borderColor: this.context.theme.border_color }} className={`key ${this.state.cursorY % 4 === 3 ? "selected" : ""}`}>0</div>
             <div></div>
           </div>
         </div>
@@ -156,4 +179,5 @@ class LockScreen extends Component {
     )
   }
 }
+
 export default LockScreen

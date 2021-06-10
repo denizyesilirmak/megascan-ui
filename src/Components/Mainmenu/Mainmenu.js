@@ -18,6 +18,8 @@ import PinPointerIcon from '../../Assets/MenuIcons/mainmenu/pinpointer.png'
 import PulseIcon from '../../Assets/MenuIcons/mainmenu/pulse.png'
 import VlfIcon from '../../Assets/MenuIcons/mainmenu/vlf.png'
 import DetectorIcon from '../../Assets/MenuIcons/mainmenu/detectormodes.png'
+import TunnelScanIcon from '../../Assets/MenuIcons/mainmenu/tunnelscan.png'
+
 
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
@@ -31,6 +33,11 @@ class Mainmenu extends Component {
       {
         name: "groundscan",
         icon: GroundScanIcon,
+        screenName: "controlGroundScan"
+      },
+      {
+        name: "groundscan",
+        icon: TunnelScanIcon,
         screenName: "controlGroundScan"
       },
       {
@@ -120,7 +127,7 @@ class Mainmenu extends Component {
     socketHelper.attach(this.handleKeyDown)
     this.timeout = setTimeout(() => {
       this.refs.mainmenu.style.opacity = 1
-    }, 100);
+    }, 100)
   }
 
   componentWillUnmount() {
@@ -130,7 +137,7 @@ class Mainmenu extends Component {
   handleKeyDown = (socketData) => {
     //console.log(socketData)
     if (socketData.type === 'button') {
-      
+
       let tempIndex = this.state.index
       switch (socketData.payload) {
         case 'home':
@@ -164,7 +171,7 @@ class Mainmenu extends Component {
               socketHelper.detach()
               this.props.navigateTo(this.state.buttons[this.state.index + 1].screenName)
             }
-          }, 300);
+          }, 300)
           return
         case 'back':
           return
@@ -183,7 +190,7 @@ class Mainmenu extends Component {
         this.props.navigateTo("mobileGroundScan", null, null, socketData.info)
         return
       }
-      else if(socketData.payload === 'ls'){
+      else if (socketData.payload === 'ls') {
         this.props.navigateTo("mobileLiveStream")
         return
       }

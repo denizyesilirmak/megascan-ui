@@ -31,7 +31,8 @@ class ScanViewer extends Component {
       min: 0,
       max: 0,
       dataPopup: false,
-      newAverage: 0
+      newAverage: 0,
+      isTunnelScan: false
     }
     this.widthLimit = 0
     this.heightLimit = 0
@@ -40,14 +41,16 @@ class ScanViewer extends Component {
 
   componentDidMount() {
     SocketHelper.attach(this.handleKeyDown)
-    //console.log(this.props.fileToOpen)
+    this.setState({
+      isTunnelScan: this.props.fileToOpen.split('-')[0].charAt(3) === 't'
+    })
     fetch('http://localhost:9090/readfile/' + this.props.fileToOpen)
       // fetch('http://192.168.1.114:9090/readfile/' + "057")
 
       .then(res => res.json())
       .then(data => {
         this.normalizedData = data.data.map(element => {
-          return element.reduce((acc, val) => acc.concat(val), []);
+          return element.reduce((acc, val) => acc.concat(val), [])
         })
         this.widthLimit = (this.normalizedData[0].length / 4 - 1)
         this.heightLimit = (this.normalizedData.length - 2)
@@ -56,7 +59,7 @@ class ScanViewer extends Component {
             fetch: true
           })
           clearTimeout(timeout)
-        }, 400);
+        }, 400)
       })
 
   }
@@ -74,7 +77,7 @@ class ScanViewer extends Component {
           })
 
         }
-        break;
+        break
       case "left":
         if (this.state.analyseMode === true) {
           //move selected data box
@@ -83,7 +86,7 @@ class ScanViewer extends Component {
           }
 
         }
-        break;
+        break
       case "right":
         if (this.state.analyseMode === true) {
           //move selected data box
@@ -91,7 +94,7 @@ class ScanViewer extends Component {
             this.setState({ width: this.state.width + 1 })
           }
         }
-        break;
+        break
       case "up":
         if (this.state.selectedButtonIndex > 0 && this.state.analyseMode === false) {
           this.setState({
@@ -105,7 +108,7 @@ class ScanViewer extends Component {
           }
 
         }
-        break;
+        break
       case "down":
         if (this.state.selectedButtonIndex < 2 && this.state.analyseMode === false) {
           this.setState({
@@ -118,7 +121,7 @@ class ScanViewer extends Component {
             this.setState({ height: this.state.height + 1 })
           }
         }
-        break;
+        break
       case "ok":
         if (this.state.selectedButtonIndex === 0) {
           this.setState({
@@ -135,16 +138,16 @@ class ScanViewer extends Component {
             filter: !this.state.filter
           })
         }
-        break;
+        break
       case "back":
         if (this.state.analyseMode === true) {
           this.setState({ analyseMode: false })
         } else {
           this.props.navigateTo("fileListScreen")
         }
-        break;
+        break
       default:
-        break;
+        break
     }
     if (this.state.analyseMode) {
       const sensorsAvarage = (this.normalizedData[this.state.height][this.state.width * 4 + 0] + this.normalizedData[this.state.height][this.state.width * 4 + 1] + this.normalizedData[this.state.height][this.state.width * 4 + 2] + this.normalizedData[this.state.height][this.state.width * 4 + 3]) / 4
@@ -205,7 +208,7 @@ class ScanViewer extends Component {
           <div className="sv-scan-container">
             {
               this.state.fetch ?
-                <Plot data={this.normalizedData} filter={this.state.filter} getColorInfo={this.getColorInfo} grid={this.state.grid} selectedBoxPosition={{ width: this.state.width, height: this.state.height }} />
+                <Plot isTunnelScan={this.state.isTunnelScan} data={this.normalizedData} filter={this.state.filter} getColorInfo={this.getColorInfo} grid={this.state.grid} selectedBoxPosition={{ width: this.state.width, height: this.state.height }} />
                 :
                 null
             }
@@ -237,15 +240,18 @@ class ScanViewer extends Component {
               null
           }
 
+          {
+            !this.state.isTunnelScan ?
+              <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
+                <span>{this.state.red}%</span>
+                <div className="line-graph-container">
+                  <div className="line-value" style={{ width: this.state.red + "%", background: "red" }}>
 
-          <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
-            <span>{this.state.red}%</span>
-            <div className="line-graph-container">
-              <div className="line-value" style={{ width: this.state.red + "%", background: "red" }}>
+                  </div>
+                </div>
+              </div> : null
+          }
 
-              </div>
-            </div>
-          </div>
 
           <div className="sv-bottom-panel" style={{ background: this.context.theme.button_bg_selected }}>
             <span>{this.state.green}%</span>

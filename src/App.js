@@ -84,7 +84,8 @@ class App extends Component {
       lastMainMenuIndex: -1,
       settingsTabIndex: 0,
       info: {},
-      resistivityParams: {}
+      resistivityParams: {},
+      isFileTunnelScan: false
     }
 
     fetch('http://localhost:9090/serial')
@@ -144,13 +145,14 @@ class App extends Component {
    * @param {object} mobileGroundScan - Mobile ground scan options.
    * @param {object} resistivityParams - Resistivity data.
    */
-  navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}, resistivityParams = {}) => {
+  navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}, resistivityParams = {}, isFileTunnelScan = false) => {
     this.setState({
       settingsTabIndex: settingsTabIndex,
       activeScreen: screenName,
       fileToOpen: file,
       info: mobileGroundScanInfo,
-      resistivityParams: resistivityParams
+      resistivityParams: resistivityParams,
+      isFileTunnelScan: isFileTunnelScan
     })
   }
 

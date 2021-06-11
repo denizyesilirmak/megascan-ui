@@ -59,7 +59,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
           tempDeletePopupCursorIndex--
         }
-        
+
         break
       case 'right':
         if (this.state.popup === false && this.state.deletePopup === false) {
@@ -71,7 +71,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
           tempDeletePopupCursorIndex++
         }
-        
+
         break
       case 'up':
         if (this.state.popup === false && this.state.deletePopup === false) {
@@ -83,7 +83,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
 
         }
-        
+
         break
       case 'down':
         if (this.state.popup === false && this.state.deletePopup === false) {
@@ -95,7 +95,7 @@ class FileList extends Component {
         else if (this.state.deletePopup) {
 
         }
-        
+
         break
       case 'ok':
         if (!this.state.popup && !this.state.deletePopup && this.state.fileList.length > 0) {
@@ -105,7 +105,7 @@ class FileList extends Component {
           })
         } else if (this.state.popup) {
           if (this.state.popupCursorIndex % 3 === 0) {
-            this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex])
+            this.props.navigateTo("scanViewerScreen", this.state.fileList[this.state.cursorIndex], null, null, null)
           }
           else if (this.state.popupCursorIndex % 3 === 1) {
             this.setState({ popup: false })
@@ -130,7 +130,7 @@ class FileList extends Component {
           }
 
         }
-        
+
         return
       case 'back':
         if (this.state.popup)
@@ -141,7 +141,7 @@ class FileList extends Component {
           //back to mainmenu
           this.props.navigateTo("menuScreen")
         }
-        
+
         return
       case 'turnoff':
         this.props.navigateTo('turnOff')
@@ -254,7 +254,12 @@ class FileList extends Component {
                 <div key={i} className='file' style={{ background: this.state.cursorIndex === i ? this.context.theme.button_bg_selected : null }}>
                   <img src={FileIcon} alt="file" />
                   <div className="file-th">
-                    <span className="file-number">{e.split('-')[0]}</span>
+                    <span
+                      className="file-number"
+                      style={{ color: e.split('-')[0].charAt(3) === 't' ? '#0000ff' : '#000000' }}
+                    >
+                      {e.split('-')[0].charAt(3) === 't' ? e.split('-')[0].slice(0, -1) : e.split('-')[0]}
+                    </span>
                     <span className="file-date">{this.dateFormatter(e.split('-')[1])}</span>
                   </div>
                 </div>

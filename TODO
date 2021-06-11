@@ -2,10 +2,10 @@
 ✔ Sensör kontrol videoları, atmega ile haberleşerek navigasyon sağlayacak @critical @done(20-06-22 16:55)
 ✔ Anamenüden bir tarama moduna girildiğinde, önce sensör kontrol sistemi açılacak @done(20-06-22 16:55)
 ✔ Pin değiştirme menüsü eklenecek @done(20-06-22 16:55)
-☐ Pin değiştirirken eski pin doğrulanacak
-☐ Tarama ekranında kullanılan dial'lara aşağı yukarı ikonlar eklenecek @low
+✔ Pin değiştirirken eski pin doğrulanacak @done(21-06-11 15:30)
+✔ Tarama ekranında kullanılan dial'lara aşağı yukarı ikonlar eklenecek @low @done(21-06-11 15:30)
 ✔ Veritabanı sistemi eklenecek @done(20-06-22 16:55)
-☐ Dil, tarih, saat cihaz ilk açıldığında ayarlanacak
+✔ Dil, tarih, saat cihaz ilk açıldığında ayarlanacak @done(21-06-11 15:30)
 ✔ LiveStrem'den eğim göstergesi kaldırılacak @done(20-02-17 11:44)
 ✔ Dil desteği eklenecek @done(20-06-22 16:55)
 

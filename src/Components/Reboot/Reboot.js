@@ -13,7 +13,6 @@ class Reboot extends React.Component {
     }, 5000);
   }
 
-
   render() {
     return (
       <div className="reboot component">

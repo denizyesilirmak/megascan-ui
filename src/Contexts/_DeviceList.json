@@ -11,7 +11,7 @@
     "livestream": true,
     "pinpointer": true,
     "vlf": false,
-    "pulse": false,
+    "pulse": true,
     "files": true,
     "settings": true,
     "detectorModeSelectorScreen": true
@@ -40,15 +40,15 @@
     "autolrl": true,
     "ctrllrl": true,
     "manuallrl": true,
-    "ionic": true,
-    "bionic": true,
+    "ionic": false,
+    "bionic": false,
     "livestream": false,
     "pinpointer": false,
     "vlf": false,
-    "pulse": false,
+    "pulse": true,
     "files": false,
     "settings": true,
-    "detectorModeSelectorScreen": false
+    "detectorModeSelectorScreen": true
   },
   "phoenix": {
     "groundscan": true,
@@ -68,20 +68,20 @@
     "detectorModeSelectorScreen": false
   },
   "viber": {
-    "groundscan": true,
+    "groundscan": false,
     "tunnelscan": false,
     "geophysical": false,
-    "autolrl": false,
-    "ctrllrl": false,
-    "manuallrl": false,
-    "ionic": false,
-    "bionic": false,
-    "livestream": true,
-    "pinpointer": true,
+    "autolrl": true,
+    "ctrllrl": true,
+    "manuallrl": true,
+    "ionic": true,
+    "bionic": true,
+    "livestream": false,
+    "pinpointer": false,
     "vlf": false,
     "pulse": false,
-    "files": true,
+    "files": false,
     "settings": true,
-    "detectorModeSelectorScreen": false
+    "detectorModeSelectorScreen": true
   }
 }

@@ -141,7 +141,7 @@ class Pulse extends Component {
           clearInterval(this.dataInterval)
           SoundHelper.stopOscillator()
           if (this.context.device === "infinity") {
-            this.props.navigateTo('detectorModeSelectorScreen')
+            this.props.navigateTo('menuScreen')
           } else {
             this.props.navigateTo('menuScreen')
           }

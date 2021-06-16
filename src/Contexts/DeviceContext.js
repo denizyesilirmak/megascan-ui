@@ -38,7 +38,6 @@ class DeviceContextProvider extends Component {
     //gets sleep mode status current state on device boot
     this.sleepModeStatus = await dbStorage.getItem("sleepmode") || false
     // console.log(this.sleepModeStatus)
-
   }
 
   componentDidMount() {
@@ -83,7 +82,6 @@ class DeviceContextProvider extends Component {
       clearTimeout(this.sleepModeTimer)
       this.sleepModeTimer = setTimeout(() => {
         if (this.sleepModeStatus === true) {
-
           if (!NotSleepingScreens.includes(this.props.activeScreen))
             this.setState({ sleepModeActive: true })
           this.sleepMode = true;
@@ -91,8 +89,6 @@ class DeviceContextProvider extends Component {
       }, SLEEPMODETIMEOUT);
     }
   }
-
-
 
   render() {
     return (

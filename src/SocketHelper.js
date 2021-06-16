@@ -30,7 +30,7 @@ class SocketHelper {
     this._socket.on('message', this._messageHandler)
 
     this._socket.on('disconnect', () => {
-      console.log("%cSocket disconnected", "color:red");
+      console.log("%cSocket disconnected", "color:red")
     })
 
     return SocketHelper.instance
@@ -101,7 +101,7 @@ class SocketHelper {
       brightnessLevel = 100
     } else if (brightnessLevel === '0') {
       brightnessLevel = 0
-    } 
+    }
 
     this.send(JSON.stringify({
       type: 'settings',
@@ -120,19 +120,19 @@ class SocketHelper {
       generalVolume = 100
     } else if (generalVolume === '0') {
       generalVolume = 0
-    } 
+    }
 
     if (keyToneVolume === undefined) {
       keyToneVolume = 0
     } else if (keyToneVolume === '0') {
       keyToneVolume = 0
-    } 
+    }
 
     if (searchVolume === undefined) {
       searchVolume = 100
     } else if (searchVolume === '0') {
       searchVolume = 0
-    } 
+    }
 
 
     console.log('socket.js _sendInitialSettings', generalVolume, keyToneVolume, searchVolume)

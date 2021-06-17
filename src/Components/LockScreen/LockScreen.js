@@ -13,7 +13,6 @@ class LockScreen extends Component {
   constructor(props) {
     super(props)
 
-
     console.log(this.props.currentPin)
     DEFAULTPINS.push(this.props.currentPin)
 

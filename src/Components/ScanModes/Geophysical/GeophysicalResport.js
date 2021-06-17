@@ -34,18 +34,21 @@ class GeophysicalReport extends React.Component {
   constructor(props) {
     super(props)
     this.tempProp = {
-      target: "water",
-      value: 390
+      target: "",
+      value: 0
     }
 
     this.state = {
-      plotheight: 3.4
+      plotheight: 3.4,
+      percentage: 0
     }
   }
 
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
     //console.log(this.props.resistivityParams)
+    this.tempProp = this.props.resistivityParams
+    console.log(this.tempProp)
     this.calculateValue()
 
   }
@@ -117,12 +120,20 @@ class GeophysicalReport extends React.Component {
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
   }
 
   render() {
     return (
       <div className="component geophysical-report">
+        {
+          this.state.percentage === 0 ?
+            <div className="no-target-found">
+              {this.context.strings['targetNotFound']}
+            </div> : null
+        }
+
+
         <div className="geo-plot-holder">
           <svg width="400" height="330" viewBox="0 -3 8 6.6" style={{ position: 'absolute' }}>
             <line x1="4" y1={(this.state.plotheight * -1) + 7.04} x2="8" y2={(this.state.plotheight * -1) + 7.04} strokeWidth="0.06" stroke="#ff0000" />
@@ -174,7 +185,7 @@ class GeophysicalReport extends React.Component {
 
           <div className="geo-plot-result-panel" style={{ background: this.context.theme.button_bg_selected }}>
             <div className="result-title">
-              Target
+              {this.context.strings['target']}
             </div>
             <div className="result-value">
               {this.props.resistivityParams.target}
@@ -183,7 +194,7 @@ class GeophysicalReport extends React.Component {
 
           <div className="geo-plot-result-panel" style={{ background: this.context.theme.button_bg_selected }}>
             <div className="result-title">
-              Value
+              {this.context.strings['value']}
             </div>
             <div className="result-value">
               {this.tempProp.value}
@@ -192,7 +203,7 @@ class GeophysicalReport extends React.Component {
 
           <div className="geo-plot-result-panel" style={{ background: this.context.theme.button_bg_selected }}>
             <div className="result-title">
-              Result
+              {this.context.strings['rate']}
             </div>
             <div className="result-value">
               {this.state.percentage}%

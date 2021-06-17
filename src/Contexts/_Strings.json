@@ -152,7 +152,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "de": {
     "alternative": "Zickzack",
@@ -311,7 +321,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "en": {
     "alternative": "Zigzag",
@@ -472,10 +492,16 @@
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
     "Ferrous": "Ferrous",
+    "water": "Water",
     "tunnelscan": "Tunnel Scan",
     "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
     "tunnelScanMethodSelectionScreen": "Tunnel Scan",
-    "controlTunnelScan": "Tunnel Scan"
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "es": {
     "alternative": "Zigzag",
@@ -633,7 +659,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -787,7 +823,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "fr": {
     "alternative": "Zigzag",
@@ -945,7 +991,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "it": {
     "alternative": "Zigzag",
@@ -1103,7 +1159,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1261,7 +1327,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1419,7 +1495,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1470,7 +1556,7 @@
     "gain": "Güç",
     "gemstones": "Değerli Taşlar",
     "generalvolume": "Genel Ses",
-    "geophysical": "Jeofizik",
+    "geophysical": "Jeofiziksel",
     "gold": "Altın",
     "goldore": "Altın Cevheri",
     "goldtreasure": "Altın Hazinesi",
@@ -1577,7 +1663,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Su",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1735,7 +1831,17 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   },
   "zh": {
     "alternative": "之字形",
@@ -1893,6 +1999,16 @@
     "detectorMode3Desc": "#detector mode 3 description",
     "allMetals": "All Metals",
     "nonFerrous": "Non Ferrous",
-    "Ferrous": "Ferrous"
+    "Ferrous": "Ferrous",
+    "water": "Water",
+    "tunnelscan": "Tunnel Scan",
+    "deviceTunnelScanPropertiesScreen": "Tunnel Scan",
+    "tunnelScanMethodSelectionScreen": "Tunnel Scan",
+    "controlTunnelScan": "Tunnel Scan",
+    "geophysicalScreen": "Geophysical Scan",
+    "geophysicalActionScreen": "Geophysical Scan",
+    "geophysicalReportScreen": "Geophysical Report",
+    "targetNotFound": "Target not found",
+    "rate": "Rate"
   }
 }

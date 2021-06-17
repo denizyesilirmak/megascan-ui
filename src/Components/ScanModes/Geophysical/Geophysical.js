@@ -12,6 +12,8 @@ import Iron from '../../../Assets/Sprites/iron.png'
 import GeoPhysical from '../../../Assets/MenuIcons/geophysical.png'
 // import Restart from '../../../Assets/MenuIcons/restart.png'
 
+import { DeviceContext } from '../../../Contexts/DeviceContext'
+
 const MATERIALS = [
   {
     name: "Gold",
@@ -37,6 +39,7 @@ const MATERIALS = [
 
 
 class Geophysical extends Component {
+  static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.state = {
@@ -115,7 +118,7 @@ class Geophysical extends Component {
         </div>
         <div className="geo-start-results">
           <div className={`geo-start-button ${this.state.activeCursor === 1 ? " selected" : ""}`}>
-            Start
+            {this.context.strings['startscan']}
           </div>
         </div>
         {/* <div className="geo-restart">

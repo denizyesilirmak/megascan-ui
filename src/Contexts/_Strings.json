@@ -162,7 +162,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "de": {
     "alternative": "Zickzack",
@@ -331,7 +333,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "en": {
     "alternative": "Zigzag",
@@ -501,7 +505,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "es": {
     "alternative": "Zigzag",
@@ -669,7 +675,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -833,7 +841,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "fr": {
     "alternative": "Zigzag",
@@ -1001,7 +1011,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "it": {
     "alternative": "Zigzag",
@@ -1169,7 +1181,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1337,7 +1351,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1505,7 +1521,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1608,7 +1626,7 @@
     "pressoktosave": "Kaydetmek için Tamam'a basın",
     "pressoktoscan": "Taramak için Tamam'a basın",
     "pulse": "Darbe İndüksiyonu",
-    "pulseScreen": "Nabız",
+    "pulseScreen": "Darbe İndüksiyonu",
     "report": "Bildiri",
     "reset": "Sıfırla",
     "resetFactoryProgress": "Fabrika ayarlarına sıfırlanıyor, lütfen bekleyin ...",
@@ -1654,7 +1672,7 @@
     "year": "Yıl",
     "yes": "Evet",
     "treshold": "Eşik",
-    "detectorModeSelectorScreen": "Metal dedektörü",
+    "detectorModeSelectorScreen": "Akıllı Tarama",
     "detectorMode1": "#DETECTOR MODE1",
     "detectorMode2": "#DETECTOR MODE2",
     "detectorMode3": "#DETECTOR MODE3",
@@ -1673,7 +1691,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1841,7 +1861,9 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   },
   "zh": {
     "alternative": "之字形",
@@ -2009,6 +2031,8 @@
     "geophysicalActionScreen": "Geophysical Scan",
     "geophysicalReportScreen": "Geophysical Report",
     "targetNotFound": "Target not found",
-    "rate": "Rate"
+    "rate": "Rate",
+    "groundBalance": "Ground Balance",
+    "tone": "Sound"
   }
 }

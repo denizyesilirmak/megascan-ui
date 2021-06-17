@@ -216,22 +216,22 @@ class Pulse extends Component {
 
           <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 0 ? this.context.theme.button_bg_selected : '#000000' }}>
             <img src={BalanceIcon} alt="balance" />
-            <div className="label">Ground Balance</div>
+            <div className="label">{this.context.strings['groundBalance']}</div>
           </div>
 
           <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 1 ? this.context.theme.button_bg_selected : '#000000' }}>
-            <div className="label">Treshold</div>
+            <div className="label">{this.context.strings['treshold']}</div>
             <PulseBar value={this.state.threshold} />
           </div>
 
           <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 2 ? this.context.theme.button_bg_selected : '#000000' }}>
-            <div className="label">Gain</div>
+            <div className="label">{this.context.strings['gain']}</div>
             <PulseBar value={this.state.gain} />
           </div>
 
           <div className={`pulse-options-item`} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', background: this.state.cursorIndex % 4 === 3 ? this.context.theme.button_bg_selected : '#000000' }}>
             <img src={ToneIcon} alt="balance" style={{ marginBottom: 0 }} />
-            <div className="label">Tone</div>
+            <div className="label">{this.context.strings['tone']}</div>
             <img src={FrequencyTypes[this.signalCursor].icon} alt="signal" />
           </div>
 

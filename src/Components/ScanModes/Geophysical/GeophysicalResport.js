@@ -188,7 +188,7 @@ class GeophysicalReport extends React.Component {
               {this.context.strings['target']}
             </div>
             <div className="result-value">
-              {this.props.resistivityParams.target}
+              {this.context.strings[this.props.resistivityParams.target]}
             </div>
           </div>
 

@@ -72,6 +72,10 @@ class Locker extends React.Component {
           SocketHelper.detach()
           this.props.navigateTo('supriseScreen')
         }
+        else if (currentCodeString === '003645') {
+          SocketHelper.detach()
+          this.props.navigateTo('resistivityCalibrationScreen')
+        }
         else{
           this.setState({
             currentCode: [0, 0, 0, 0, 0, 0]

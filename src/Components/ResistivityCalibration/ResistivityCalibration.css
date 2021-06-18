@@ -1,0 +1,20 @@
+.resitivity-calibration {
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.res-info {
+  color: white;
+}
+
+.res-value {
+  color: red;
+  font-size: 100px;
+  border: 2px dashed white;
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+}

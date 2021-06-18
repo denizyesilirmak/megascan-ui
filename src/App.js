@@ -26,6 +26,7 @@ import CompassCalibration from './Components/Compass/Compass'
 import Locker from './Components/Locker/Locker'
 import Suprise from './Components/Suprise/Suprise'
 import DetectorModeSelector from './Components/DetectorModeSelector/DetectorModeSelector'
+import ResistivityCalibration from './Components/ResistivityCalibration/ResistivityCalibration'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -107,7 +108,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'geophysicalReportScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -145,6 +146,7 @@ class App extends Component {
    * @param {object} mobileGroundScan - Mobile ground scan options.
    * @param {object} resistivityParams - Resistivity data.
    */
+
   navigateTo = (screenName, file, settingsTabIndex = 0, mobileGroundScanInfo = {}, resistivityParams = {}, isFileTunnelScan = false) => {
     this.setState({
       settingsTabIndex: settingsTabIndex,
@@ -299,6 +301,8 @@ class App extends Component {
         return (<Pulse2 navigateTo={this.navigateTo} />)
       case "nuggetScanScreen":
         return (<Pulse3 navigateTo={this.navigateTo} />)
+      case "resistivityCalibrationScreen":
+        return (<ResistivityCalibration navigateTo={this.navigateTo} />)
       default:
         break
     }

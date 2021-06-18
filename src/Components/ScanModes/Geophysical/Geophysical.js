@@ -42,6 +42,9 @@ class Geophysical extends Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
+
+    this.geoPRef = React.createRef()
+
     this.state = {
       activeMaterialIndex: 0,
       activeCursor: 0
@@ -50,6 +53,11 @@ class Geophysical extends Component {
 
   componentDidMount() {
     socketHelper.attach(this.handleKeyDown)
+    this.loadertimeout = setTimeout(() => {
+      this.geoPRef.current.style.opacity = 1
+      this.geoPRef.current.style.transform = 'scale(1)'
+    }, 60)
+
   }
 
   handleKeyDown = (socketData) => {
@@ -109,7 +117,7 @@ class Geophysical extends Component {
 
   render() {
     return (
-      <div className="component geophysical">
+      <div className="component geophysical" ref={this.geoPRef}>
         <div className="resistivity">
           <img src={GeoPhysical} alt="geophysical" />
         </div>

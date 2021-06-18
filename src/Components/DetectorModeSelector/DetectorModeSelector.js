@@ -2,8 +2,8 @@ import React from 'react'
 import './DetectorModeSelector.css'
 import SocketHelper from '../../SocketHelper'
 
-import PulseIcon from '../../Assets/MenuIcons/mainmenu/pulse.png'
-import VlfIcon from '../../Assets/MenuIcons/mainmenu/vlf.png'
+// import PulseIcon from '../../Assets/MenuIcons/mainmenu/pulse.png'
+// import VlfIcon from '../../Assets/MenuIcons/mainmenu/vlf.png'
 import PS25Icon from '../../Assets/MenuIcons/mainmenu/ps28.png'
 import PS36Icon from '../../Assets/MenuIcons/mainmenu/ps36.png'
 

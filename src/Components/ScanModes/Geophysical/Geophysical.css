@@ -5,6 +5,9 @@
   grid-template-rows: 65% 35%;
   justify-items: center;
   align-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 1s, transform 0.6s;
 }
 
 .geo-restart {

@@ -115,8 +115,7 @@ class Settings extends Component {
           keyToneVolume: settings.keyToneVolume || 0,
           searchVolume: settings.searchVolume || 0,
           sleepmode: settings.sleepmode || false,
-          brightness: settings.brightness || 50,
-
+          brightness: settings.brightness || 50
         })
       })
 

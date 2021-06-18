@@ -153,7 +153,7 @@ class Plot extends Component {
       return 'rgb(' + [color.r, color.g, color.b].join(',') + ')'
     }
     else {
-      for (var i = 1; i < COLORS.jet.length - 1; i++) {
+      for (i = 1; i < COLORS.jet.length - 1; i++) {
         if (pct < COLORS.jet[i].pct) {
           break
         }

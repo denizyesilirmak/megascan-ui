@@ -40,7 +40,6 @@ import DeviceGroundScanProperties from './Components/ScanModes/GroundScan/Device
 import TunnelScanMethodSelection from './Components/ScanModes/TunnelScan/GroundScanMethodSelection/GroundScanMethodSelection'
 import DeviceTunnelScanProperies from './Components/ScanModes/TunnelScan/DeviceGroundScanProperties/DeviceGroundScanProperties'
 
-
 import Bionic from './Components/ScanModes/Bionic/Bionic'
 import IonicNew from './Components/ScanModes/Ionic/InonicNew'
 import ManualScan from './Components/ScanModes/ManualLRL/ManualLRLScan'
@@ -62,13 +61,11 @@ import ScanViewer from './Components/ScanViewer/ScanViewer'
 import ScanScreen from './Components/ScanScreen/ScanScreen'
 import TunnelScanScreen from './Components/TunnelScanScreen/ScanScreen'
 
-
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/SensorControl'
 
 import dbStorage from './DatabaseHelper'
 dbStorage.init()
-
 
 class App extends Component {
   constructor(props) {
@@ -108,7 +105,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'resistivityCalibrationScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),

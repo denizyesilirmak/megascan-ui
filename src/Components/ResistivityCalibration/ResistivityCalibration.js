@@ -10,7 +10,6 @@ class ResistivityCalibration extends React.Component {
     }
   }
 
-
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
     this.interval = setInterval(() => {

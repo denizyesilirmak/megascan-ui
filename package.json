@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "Deniz Yesilirmak <dnzyslrmk@gmail.com>",
+  "description": "Embedded system user interface for Mega detection devices",
   "dependencies": {
     "bezier-easing": "^2.1.0",
     "kalmanjs": "^1.1.0",
@@ -22,7 +23,8 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node ../serial-bridge-2/index.js"
+    "server": "node ../serial-bridge-2/index.js",
+    "language": "node ./src/translationController.js"
   },
   "eslintConfig": {
     "extends": "react-app"

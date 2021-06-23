@@ -1,27 +1,45 @@
 import React from 'react'
 import './SensorControl.css'
 import SocketHelper from '../../SocketHelper'
+import { DeviceContext } from '../../Contexts/DeviceContext'
 
 
 //goldstar
-// import LiveStremVideo from '../../Assets/Videos/controlLiveStream_goldstar.mp4'
-import BionicVideo from '../../Assets/Videos/controlBionic_goldstar.mp4'
-// import GroundScanVideo from '../../Assets/Videos/controlGroundScan_goldstar.mp4'
+import GLD_LiveStremVideo from '../../Assets/Videos/controlLiveStream_goldstar.mp4'
+import GLD_BionicVideo from '../../Assets/Videos/controlBionic_goldstar.mp4'
+import GLD_GroundScanVideo from '../../Assets/Videos/controlGroundScan_goldstar.mp4'
 
 
 //phoenix
-import LiveStremVideo from '../../Assets/Videos/controlLiveStream_phoenix.mp4'
-import GroundScanVideo from '../../Assets/Videos/controlGroundScan_phoenix.mp4'
+import PNX_LiveStremVideo from '../../Assets/Videos/controlLiveStream_phoenix.mp4'
+import PNX_GroundScanVideo from '../../Assets/Videos/controlGroundScan_phoenix.mp4'
 
-import { DeviceContext } from '../../Contexts/DeviceContext'
+//infinity
+import INF_LiveStreamVideo from '../../Assets/Videos/controlLiveStream_infinity.mp4'
+import INF_BionicVideo from '../../Assets/Videos/controlBionic_infinity.mp4'
+import INF_GroundScanVideo from '../../Assets/Videos/controlGroundScan_infinity.mp4'
 
-const bypass = true
+//concord
+
+import CND_BionicVideo from '../../Assets/Videos/controlBionic_concord.mp4'
+
+///viber
+
+import VPR_BionicVideoo from '../../Assets/Videos/controlBionic_viper.mp4'
+
+
+const bypass = false
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
     this.indicatorREF = React.createRef()
+
+    this.livestreamVideo = ''
+    this.bionicVideo = ''
+    this.groundScanVideo = ''
+
     this.state = {
       checking: true,
       currentSensor: 0,
@@ -31,37 +49,70 @@ class SensorControl extends React.Component {
   }
 
   componentDidMount() {
+    const device = this.context.device
+    //console.log('sensor control device', device)
+
+
+
+    if (device === 'infinity') {
+      this.livestreamVideo = INF_LiveStreamVideo
+      this.groundScanVideo = INF_GroundScanVideo
+      this.bionicVideo = INF_BionicVideo
+    }
+    else if (device === 'goldstar') {
+      this.livestreamVideo = GLD_LiveStremVideo
+      this.groundScanVideo = GLD_GroundScanVideo
+      this.bionicVideo = GLD_BionicVideo
+    }
+    else if (device === 'phoenix') {
+      this.livestreamVideo = PNX_LiveStremVideo
+      this.groundScanVideo = PNX_GroundScanVideo
+      this.bionicVideo = PNX_GroundScanVideo
+    }
+    else if (device === 'concord') {
+      this.livestreamVideo = CND_BionicVideo
+      this.groundScanVideo = CND_BionicVideo
+      this.bionicVideo = CND_BionicVideo
+    }
+    else if (device === 'viber') {
+      this.livestreamVideo = VPR_BionicVideoo
+      this.groundScanVideo = VPR_BionicVideoo
+      this.bionicVideo = VPR_BionicVideoo
+    }
+
+
+
     if (bypass) {
       this.props.navigateTo(this.props.target)
       return
     }
     switch (this.props.target) {
       case "liveStreamScreen":
-        this.setState({ src: LiveStremVideo, targetSensorID: 2 })
+        this.setState({ src: this.livestreamVideo, targetSensorID: 2 })
         break
       case "bionicScreen":
-        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
         break
       case "ionicScreen":
-        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
         break
       case "groundScanMethodSelectionScreen":
-        this.setState({ src: GroundScanVideo, targetSensorID: 3 })
+        this.setState({ src: this.groundScanVideo, targetSensorID: 3 })
         break
       case "tunnelScanMethodSelectionScreen":
-        this.setState({ src: GroundScanVideo, targetSensorID: 3 })
+        this.setState({ src: this.groundScanVideo, targetSensorID: 3 })
         break
       case "pinPointerScreen":
-        this.setState({ src: LiveStremVideo, targetSensorID: 2 })
+        this.setState({ src: this.livestreamVideo, targetSensorID: 2 })
         break
       case "manualLRLSettingsScreen":
-        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
         break
       case "ctrlLrlScanScreen":
-        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
         break
       case "autoLrlScanScreen":
-        this.setState({ src: BionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
         break
       default:
         break

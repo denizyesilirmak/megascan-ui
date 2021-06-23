@@ -22,7 +22,7 @@ class SocketHelper {
     this._socket.on('connect', () => {
       if (this._socket.connected) {
         console.clear()
-        console.log(`%csocket connected ${this._socket.id}`, "color: white; background-color: green")
+        //console.log(`%csocket connected ${this._socket.id}`, "color: white; background-color: green")
         this._sendInitialSettings()
       }
     })
@@ -30,7 +30,7 @@ class SocketHelper {
     this._socket.on('message', this._messageHandler)
 
     this._socket.on('disconnect', () => {
-      console.log("%cSocket disconnected", "color:red")
+      //console.log("%cSocket disconnected", "color:red")
     })
 
     return SocketHelper.instance
@@ -135,7 +135,7 @@ class SocketHelper {
     }
 
 
-    console.log('socket.js _sendInitialSettings', generalVolume, keyToneVolume, searchVolume)
+    //console.log('socket.js _sendInitialSettings', generalVolume, keyToneVolume, searchVolume)
 
     this.send(JSON.stringify({
       type: 'settings',

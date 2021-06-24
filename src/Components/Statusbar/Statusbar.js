@@ -38,7 +38,7 @@ class Statusbar extends Component {
     return (
       <div className='status-bar-component'>
         <img className="device-logo" src={this.getLogo()} alt="logo"></img>
-        <div className='title'> <ResponsizeText large={this.props.currentLanguage === 'ar'} text={this.context.strings[this.props.title] ? this.context.strings[this.props.title] : this.props.title} /> </div>
+        <div className='title'> <ResponsizeText large={this.props.currentLanguage === 'ar'} text={this.context.strings[this.props.title] ? this.context.strings[this.props.title] : ''} /> </div>
         <div className='icons'>
           <Volume generalVolume={this.props.generalVolume} />
           <Wifi />

@@ -166,7 +166,11 @@
     "rate": "معدل",
     "groundBalance": "توازن الأرض",
     "tone": "صوت",
-    "resistivityCalibrationScreen": "معايرة"
+    "resistivityCalibrationScreen": "معايرة",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "de": {
     "alternative": "Zickzack",
@@ -339,7 +343,11 @@
     "rate": "Bewertung",
     "groundBalance": "Bodenausgleich",
     "tone": "Klang",
-    "resistivityCalibrationScreen": "Kalibrierung"
+    "resistivityCalibrationScreen": "Kalibrierung",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "en": {
     "alternative": "Zigzag",
@@ -511,7 +519,11 @@
     "rate": "Rate",
     "groundBalance": "Ground Balance",
     "tone": "Sound",
-    "resistivityCalibrationScreen": "Calibration"
+    "resistivityCalibrationScreen": "Calibration",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "es": {
     "alternative": "Zigzag",
@@ -683,7 +695,11 @@
     "rate": "Velocidad",
     "groundBalance": "Balance de tierra",
     "tone": "Sonar",
-    "resistivityCalibrationScreen": "Calibración"
+    "resistivityCalibrationScreen": "Calibración",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -850,7 +866,11 @@
     "rate": "Rate",
     "groundBalance": "Ground Balance",
     "tone": "Sound",
-    "resistivityCalibrationScreen": "Calibration"
+    "resistivityCalibrationScreen": "Calibration",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "fr": {
     "alternative": "Zigzag",
@@ -1022,7 +1042,11 @@
     "rate": "Taux",
     "groundBalance": "Équilibre au sol",
     "tone": "Sonner",
-    "resistivityCalibrationScreen": "Étalonnage"
+    "resistivityCalibrationScreen": "Étalonnage",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "it": {
     "alternative": "Zigzag",
@@ -1194,7 +1218,11 @@
     "rate": "Vota",
     "groundBalance": "Bilanciamento del terreno",
     "tone": "Suono",
-    "resistivityCalibrationScreen": "Calibrazione"
+    "resistivityCalibrationScreen": "Calibrazione",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1366,7 +1394,11 @@
     "rate": "ציון",
     "groundBalance": "איזון קרקע",
     "tone": "נשמע",
-    "resistivityCalibrationScreen": "כִּיוּל"
+    "resistivityCalibrationScreen": "כִּיוּל",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1538,7 +1570,11 @@
     "rate": "Показатель",
     "groundBalance": "Баланс грунта",
     "tone": "Звук",
-    "resistivityCalibrationScreen": "Калибровка"
+    "resistivityCalibrationScreen": "Калибровка",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1710,7 +1746,11 @@
     "rate": "puan",
     "groundBalance": "Zemin Dengesi",
     "tone": "Ses",
-    "resistivityCalibrationScreen": "kalibrasyon"
+    "resistivityCalibrationScreen": "kalibrasyon",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1882,7 +1922,11 @@
     "rate": "شرح",
     "groundBalance": "گراؤنڈ بیلنس",
     "tone": "آواز",
-    "resistivityCalibrationScreen": "انشانکن"
+    "resistivityCalibrationScreen": "انشانکن",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   },
   "zh": {
     "alternative": "之字形",
@@ -2054,6 +2098,10 @@
     "rate": "速度",
     "groundBalance": "地面平衡",
     "tone": "声音",
-    "resistivityCalibrationScreen": "校准"
+    "resistivityCalibrationScreen": "校准",
+    "controlLiveStream": "",
+    "controlBionic": "",
+    "controlIonic": "",
+    "controlGroundScan": ""
   }
 }

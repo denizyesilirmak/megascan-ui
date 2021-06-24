@@ -172,7 +172,7 @@ class VlfScan extends React.Component {
       await dbStorage.setItem('vlf_custom_discrimination', this.customModeProperties.discrimination)
       await dbStorage.setItem('vlf_custom_tone', this.customModeProperties.tone)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 
@@ -187,7 +187,7 @@ class VlfScan extends React.Component {
       this.customModeProperties.discrimination = custom_discrimination
       this.customModeProperties.tone = custom_tone
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
     //console.log(PREDEFINED_SETTINGS[5])
   }
@@ -288,10 +288,10 @@ class VlfScan extends React.Component {
                 discrimination: PREDEFINED_SETTINGS[this.state.cursorModes].discrimination,
                 tone: PREDEFINED_SETTINGS[this.state.cursorModes].tone
               }, () => {
-                console.log('scan mode changed')
+                //console.log('scan mode changed')
               })
             } else {
-              console.log('custom')
+              //console.log('custom')
               this.setState({
                 activeMode: this.state.cursorModes,
                 treshold: this.customModeProperties.treshold,
@@ -299,7 +299,7 @@ class VlfScan extends React.Component {
                 discrimination: this.customModeProperties.discrimination,
                 tone: this.customModeProperties.tone
               }, () => {
-                console.log('scan mode changed')
+                //console.log('scan mode changed')
               })
             }
 
@@ -403,22 +403,22 @@ class VlfScan extends React.Component {
 
   handleModeChange = () => {
     if (this.state.activeMode === 0) {
-      console.log('general mode')
+      //console.log('general mode')
     }
     else if (this.state.activeMode === 1) {
-      console.log('stable mode')
+      //console.log('stable mode')
     }
     else if (this.state.activeMode === 2) {
-      console.log('high sens')
+      //console.log('high sens')
     }
     else if (this.state.activeMode === 3) {
-      console.log('ferrous')
+      //console.log('ferrous')
     }
     else if (this.state.activeMode === 4) {
-      console.log('non ferrous')
+      //console.log('non ferrous')
     }
     else if (this.state.activeMode === 5) {
-      console.log('custom')
+      //console.log('custom')
     }
   }
 

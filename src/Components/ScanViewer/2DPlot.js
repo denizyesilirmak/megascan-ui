@@ -62,7 +62,7 @@ class Plot extends Component {
       })
     })
 
-    console.log(this.max, this.min)
+    //console.log(this.max, this.min)
 
     this.reducedData = [];
     for (var i = 0; i < this.data.length; i++) {

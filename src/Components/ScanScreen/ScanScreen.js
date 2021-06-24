@@ -268,7 +268,7 @@ class ScanScreen extends Component {
       body: JSON.stringify({ "data": this.matrix })
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
+        //console.log(data)
         this.props.navigateTo('scanViewerScreen', data.fileName)
       })
   }
@@ -448,7 +448,7 @@ class ScanScreen extends Component {
 
   zigzag = (startPos) => {
     // First run
-    console.log(this.counter, this.width * this.height)
+    //console.log(this.counter, this.width * this.height)
     if (this.currentPoint.x === null) {
       let startPoint = { x: null, y: null }
 

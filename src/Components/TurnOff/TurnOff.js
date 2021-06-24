@@ -60,7 +60,7 @@ class TurnOff extends Component {
 
 
       case 'back':
-        console.log("mainmenu: ok")
+        //console.log("mainmenu: ok")
         this.refs.turnOff.style.transform = "translateY(400px)"
         this.refs.turnOff.style.opacity = 0
 

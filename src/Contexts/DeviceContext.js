@@ -50,7 +50,7 @@ class DeviceContextProvider extends Component {
     this.sleepModeTimer = setTimeout(() => {
       //turn off screen after SLEEPMODETIMEOUT ms
       if (this.sleepModeStatus === true) {
-        console.log("screen off")
+        //console.log("screen off")
         if (!NotSleepingScreens.includes(this.props.activeScreen)) {
           // console.log("selamın aleyküm:mount")
           this.sleepMode = true;
@@ -61,7 +61,7 @@ class DeviceContextProvider extends Component {
   }
 
   changeSleepModeStatus = (status) => {
-    console.log('DeviceContext / sleep mode status: ', status)
+    //console.log('DeviceContext / sleep mode status: ', status)
     this.sleepModeStatus = status
     this.sleepModeTimer = setTimeout(() => {
       //turn off screen after SLEEPMODETIMEOUT ms

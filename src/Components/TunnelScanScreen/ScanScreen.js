@@ -52,6 +52,7 @@ class ScanScreen extends Component {
     socketHelper.attach(this.handleKeyDown)
     const createMatrix = (x, y) => Array(y).fill().map(() => Array(x).fill([null, null, null, null]))
     this.matrix = createMatrix(this.x / 4, this.y)
+    
     this.currentPoint = {
       x: null,
       y: null

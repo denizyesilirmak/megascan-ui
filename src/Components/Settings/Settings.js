@@ -310,7 +310,6 @@ class Settings extends Component {
             minute: this.state.minute - 1
           })
         }
-
         else if (this.state.activePopup === "date" && this.state.selectedDateIndex % 3 === 0 && this.state.day > 1) {
           //change day
           this.setState({
@@ -366,8 +365,7 @@ class Settings extends Component {
           this.setState({
             year: this.state.year + 1
           })
-        }
-        
+        }        
         break
       case 'ok':
         if (this.state.verticalIndex === false && this.state.activePopup === "") {

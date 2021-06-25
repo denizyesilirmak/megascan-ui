@@ -69,10 +69,6 @@ class Plot extends Component {
       this.reducedData[i] = new Array(this.data[0].length);
     }
 
-
-
-
-
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {

@@ -24,7 +24,6 @@ class DatePopup extends Component {
             </div>
           </div>
 
-
           <div className="date-prop-holder">
             <div className="date-time-label" >{this.context.strings["month"]} </div>
             <div></div>

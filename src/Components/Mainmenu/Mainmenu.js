@@ -81,11 +81,6 @@ class Mainmenu extends Component {
         screenName: "controlPinPointer"
       },
       {
-        name: "files",
-        icon: FilesIcon,
-        screenName: "fileListScreen"
-      },
-      {
         name: "pulse",
         icon: PulseIcon,
         screenName: "pulseScreen"
@@ -99,6 +94,11 @@ class Mainmenu extends Component {
         name: "detectorModeSelectorScreen",
         icon: DetectorIcon,
         screenName: "detectorModeSelectorScreen"
+      },
+      {
+        name: "files",
+        icon: FilesIcon,
+        screenName: "fileListScreen"
       },
       {
         name: "settings",
@@ -178,8 +178,6 @@ class Mainmenu extends Component {
         default:
           break
       }
-
-
       this.setState({
         index: tempIndex
       })

@@ -26,6 +26,10 @@ const targets = {
   silver: {
     minLimit: 585,
     maxLimit: 605
+  },
+  tunnel: {
+    minLimit: 20,
+    maxLimit: 105
   }
 }
 

@@ -18,17 +18,17 @@ import PNX_GroundScanVideo from '../../Assets/Videos/controlGroundScan_phoenix.m
 import INF_LiveStreamVideo from '../../Assets/Videos/controlLiveStream_infinity.mp4'
 import INF_BionicVideo from '../../Assets/Videos/controlBionic_infinity.mp4'
 import INF_GroundScanVideo from '../../Assets/Videos/controlGroundScan_infinity.mp4'
-
+import INF_LrlVideo from '../../Assets/Videos/controlLRL_infinity.mp4'
 //concord
 
 import CND_BionicVideo from '../../Assets/Videos/controlBionic_concord.mp4'
-
+import CND_LrlVideo from '../../Assets/Videos/controlLRL_concord.mp4'
 ///viber
 
 import VPR_BionicVideoo from '../../Assets/Videos/controlBionic_viper.mp4'
+import VPR_LrlVideo from '../../Assets/Videos/controlLRL_viper.mp4'
 
-
-const bypass = false
+const bypass = true
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext
@@ -58,26 +58,33 @@ class SensorControl extends React.Component {
       this.livestreamVideo = INF_LiveStreamVideo
       this.groundScanVideo = INF_GroundScanVideo
       this.bionicVideo = INF_BionicVideo
+      this.lrlVideo = INF_LrlVideo
     }
     else if (device === 'goldstar') {
       this.livestreamVideo = GLD_LiveStremVideo
       this.groundScanVideo = GLD_GroundScanVideo
       this.bionicVideo = GLD_BionicVideo
+      this.lrlVideo = INF_LrlVideo //this will create problem!!! hotfix
+
     }
     else if (device === 'phoenix') {
       this.livestreamVideo = PNX_LiveStremVideo
       this.groundScanVideo = PNX_GroundScanVideo
       this.bionicVideo = PNX_GroundScanVideo
+      this.lrlVideo = INF_LrlVideo //this will create problem!!! hotfix
+
     }
     else if (device === 'concord') {
       this.livestreamVideo = CND_BionicVideo
       this.groundScanVideo = CND_BionicVideo
       this.bionicVideo = CND_BionicVideo
+      this.lrlVideo = CND_LrlVideo
     }
     else if (device === 'viber') {
       this.livestreamVideo = VPR_BionicVideoo
       this.groundScanVideo = VPR_BionicVideoo
       this.bionicVideo = VPR_BionicVideoo
+      this.lrlVideo = VPR_LrlVideo
     }
 
 
@@ -106,13 +113,13 @@ class SensorControl extends React.Component {
         this.setState({ src: this.livestreamVideo, targetSensorID: 2 })
         break
       case "manualLRLSettingsScreen":
-        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.lrlVideo, targetSensorID: 1 })
         break
       case "ctrlLrlScanScreen":
-        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.lrlVideo, targetSensorID: 1 })
         break
       case "autoLrlScanScreen":
-        this.setState({ src: this.bionicVideo, targetSensorID: 1 })
+        this.setState({ src: this.lrlVideo, targetSensorID: 1 })
         break
       default:
         break

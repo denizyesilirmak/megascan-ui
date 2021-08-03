@@ -170,7 +170,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "de": {
     "alternative": "Zickzack",
@@ -347,7 +350,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "en": {
     "alternative": "Zigzag",
@@ -523,7 +529,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "es": {
     "alternative": "Zigzag",
@@ -699,7 +708,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -870,7 +882,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "fr": {
     "alternative": "Zigzag",
@@ -1046,7 +1061,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "it": {
     "alternative": "Zigzag",
@@ -1222,7 +1240,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1398,7 +1419,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1574,7 +1598,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1750,7 +1777,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1926,7 +1956,10 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   },
   "zh": {
     "alternative": "之字形",
@@ -2102,6 +2135,9 @@
     "controlLiveStream": "",
     "controlBionic": "",
     "controlIonic": "",
-    "controlGroundScan": ""
+    "controlGroundScan": "",
+    "controlManualLrlScreen": "",
+    "controlCtrlLrlScreen": "",
+    "controlAutoLrlScreen": ""
   }
 }

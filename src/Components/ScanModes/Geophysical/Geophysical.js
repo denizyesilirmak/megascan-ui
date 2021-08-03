@@ -8,6 +8,8 @@ import Bronze from '../../../Assets/Sprites/bronze.png'
 import Silver from '../../../Assets/Sprites/silver.png'
 import Water from '../../../Assets/Sprites/water.png'
 import Iron from '../../../Assets/Sprites/iron.png'
+import Copper from '../../../Assets/Sprites/copper.png'
+import Cavity from '../../../Assets/Sprites/cavity.png'
 
 import GeoPhysical from '../../../Assets/MenuIcons/geophysical.png'
 // import Restart from '../../../Assets/MenuIcons/restart.png'
@@ -34,9 +36,16 @@ const MATERIALS = [
   {
     name: "Iron",
     sprite: Iron
+  },
+  {
+    name: "Cavity",
+    sprite: Cavity
+  }, 
+  {
+    name: "Copper",
+    sprite: Copper
   }
 ]
-
 
 class Geophysical extends Component {
   static contextType = DeviceContext
@@ -57,7 +66,6 @@ class Geophysical extends Component {
       this.geoPRef.current.style.opacity = 1
       this.geoPRef.current.style.transform = 'scale(1)'
     }, 60)
-
   }
 
   handleKeyDown = (socketData) => {
@@ -89,12 +97,12 @@ class Geophysical extends Component {
         break
       case 'right':
         if (this.state.activeCursor === 0) {
-          if (this.state.activeMaterialIndex < 4) {
+          if (this.state.activeMaterialIndex < 6) {
             this.setState({
               activeMaterialIndex: this.state.activeMaterialIndex + 1
             })
           }
-          else if (this.state.activeMaterialIndex === 4) {
+          else if (this.state.activeMaterialIndex === 6) {
             this.setState({
               activeMaterialIndex: 0
             })
@@ -106,7 +114,7 @@ class Geophysical extends Component {
         return
 
       case 'ok':
-        if (this.state.activeCursor === 1) {
+        if (true) {
           this.props.navigateTo("geophysicalActionScreen", null, null, null, { target: (MATERIALS[this.state.activeMaterialIndex].name).toLowerCase() })
         }
         return

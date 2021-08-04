@@ -52,10 +52,10 @@ class DetectorModeSelector extends React.Component {
       case 'ok':
         if (this.state.cursor === 0) {
 
-          this.props.navigateTo('pulse2Screen')
+          this.props.navigateTo('controlPulse2Screen')
         }
         else if (this.state.cursor === 1) {
-          this.props.navigateTo('nuggetScanScreen')
+          this.props.navigateTo('controlNuggetScanScreen')
         }
         else if (this.state.cursor === 2) {
         }

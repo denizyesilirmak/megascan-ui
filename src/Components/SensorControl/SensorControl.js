@@ -19,16 +19,25 @@ import INF_LiveStreamVideo from '../../Assets/Videos/controlLiveStream_infinity.
 import INF_BionicVideo from '../../Assets/Videos/controlBionic_infinity.mp4'
 import INF_GroundScanVideo from '../../Assets/Videos/controlGroundScan_infinity.mp4'
 import INF_LrlVideo from '../../Assets/Videos/controlLRL_infinity.mp4'
+import INF_28 from '../../Assets/Videos/control28_infinity.mp4'
+import INF_36 from '../../Assets/Videos/control36_infinity.mp4'
+import INF_50 from '../../Assets/Videos/control50_infinity.mp4'
+
 //concord
 
 import CND_BionicVideo from '../../Assets/Videos/controlBionic_concord.mp4'
 import CND_LrlVideo from '../../Assets/Videos/controlLRL_concord.mp4'
+import CND_28 from '../../Assets/Videos/control28_concord.mp4'
+import CND_36 from '../../Assets/Videos/control36_concord.mp4'
+import CND_50 from '../../Assets/Videos/control50_concord.mp4'
 ///viber
 
 import VPR_BionicVideoo from '../../Assets/Videos/controlBionic_viper.mp4'
 import VPR_LrlVideo from '../../Assets/Videos/controlLRL_viper.mp4'
+import VPR_28 from '../../Assets/Videos/control28_viper.mp4'
+import VPR_36 from '../../Assets/Videos/control36_viper.mp4'
 
-const bypass = true
+const bypass = false
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext
@@ -59,19 +68,22 @@ class SensorControl extends React.Component {
       this.groundScanVideo = INF_GroundScanVideo
       this.bionicVideo = INF_BionicVideo
       this.lrlVideo = INF_LrlVideo
+      this.coil28 = INF_28
+      this.coil36 = INF_36
+      this.coil50 = INF_50
     }
     else if (device === 'goldstar') {
       this.livestreamVideo = GLD_LiveStremVideo
       this.groundScanVideo = GLD_GroundScanVideo
       this.bionicVideo = GLD_BionicVideo
-      this.lrlVideo = INF_LrlVideo //this will create problem!!! hotfix
+      this.lrlVideo = INF_LrlVideo //this might create problem!!! hotfix
 
     }
     else if (device === 'phoenix') {
       this.livestreamVideo = PNX_LiveStremVideo
       this.groundScanVideo = PNX_GroundScanVideo
       this.bionicVideo = PNX_GroundScanVideo
-      this.lrlVideo = INF_LrlVideo //this will create problem!!! hotfix
+      this.lrlVideo = INF_LrlVideo //this might create problem!!! hotfix
 
     }
     else if (device === 'concord') {
@@ -79,12 +91,18 @@ class SensorControl extends React.Component {
       this.groundScanVideo = CND_BionicVideo
       this.bionicVideo = CND_BionicVideo
       this.lrlVideo = CND_LrlVideo
+      this.coil28 = CND_28
+      this.coil36 = CND_36
+      this.coil50 = CND_50
     }
     else if (device === 'viber') {
       this.livestreamVideo = VPR_BionicVideoo
       this.groundScanVideo = VPR_BionicVideoo
       this.bionicVideo = VPR_BionicVideoo
       this.lrlVideo = VPR_LrlVideo
+      this.coil28 = VPR_28
+      this.coil36 = VPR_36
+      this.coil50 = CND_50
     }
 
 
@@ -120,6 +138,15 @@ class SensorControl extends React.Component {
         break
       case "autoLrlScanScreen":
         this.setState({ src: this.lrlVideo, targetSensorID: 1 })
+        break
+      case "pulseScreen":
+        this.setState({ src: this.coil50, targetSensorID: 6 })
+        break
+      case "pulse2Screen":
+        this.setState({ src: this.coil36, targetSensorID: 5 })
+        break
+      case "nuggetScanScreen":
+        this.setState({ src: this.coil28, targetSensorID: 4 })
         break
       default:
         break

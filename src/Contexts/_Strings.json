@@ -173,7 +173,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "de": {
     "alternative": "Zickzack",
@@ -353,7 +356,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "en": {
     "alternative": "Zigzag",
@@ -506,7 +512,7 @@
     "detectorModeSelectorScreen": "Smart Detect",
     "detectorMode1": "#DETECTOR MODE1",
     "detectorMode2": "MODE 1 / PS 36",
-    "detectorMode3": "MODE 1 / PS 28",
+    "detectorMode3": "MODE 2 / PS 28",
     "detectorMode1Desc": "#detector mode 1 description",
     "detectorMode2Desc": "Please use with PS36 search coil",
     "detectorMode3Desc": "Please use with PS28 search coil",
@@ -532,7 +538,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "es": {
     "alternative": "Zigzag",
@@ -711,7 +720,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -885,7 +897,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "fr": {
     "alternative": "Zigzag",
@@ -1064,7 +1079,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "it": {
     "alternative": "Zigzag",
@@ -1243,7 +1261,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1422,7 +1443,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1601,7 +1625,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1780,7 +1807,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1959,7 +1989,10 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   },
   "zh": {
     "alternative": "之字形",
@@ -2138,6 +2171,9 @@
     "controlGroundScan": "",
     "controlManualLrlScreen": "",
     "controlCtrlLrlScreen": "",
-    "controlAutoLrlScreen": ""
+    "controlAutoLrlScreen": "",
+    "controlPulseScreen": "",
+    "controlPulse2Screen": "",
+    "controlNuggetScanScreen": ""
   }
 }

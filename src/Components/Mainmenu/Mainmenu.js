@@ -83,7 +83,7 @@ class Mainmenu extends Component {
       {
         name: "pulse",
         icon: PulseIcon,
-        screenName: "pulseScreen"
+        screenName: "controlPulseScreen"
       },
       {
         name: "vlf",

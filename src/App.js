@@ -240,6 +240,12 @@ class App extends Component {
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="ctrlLrlScanScreen" />)
       case "controlAutoLrlScreen":
         return (<ControlMagnetometer navigateTo={this.navigateTo} target="autoLrlScanScreen" />)
+      case "controlPulseScreen":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="pulseScreen" />)
+      case "controlPulse2Screen":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="pulse2Screen" />)
+      case "controlNuggetScanScreen":
+        return (<ControlMagnetometer navigateTo={this.navigateTo} target="nuggetScanScreen" />)
       case "scanScreen":
         return (<ScanScreen navigateTo={this.navigateTo} scanProps={this.tmpScanPropObj} />)
       case "tunnelScanScreen":

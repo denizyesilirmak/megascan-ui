@@ -1,0 +1,31 @@
+.plugged-sensor-test {
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.plugged-sensor {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.plugged-sensor-title {
+  margin-bottom: 20px;
+}
+
+.plugged-sensor-circles {
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.plugged-sensor-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+}

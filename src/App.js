@@ -27,6 +27,7 @@ import Locker from './Components/Locker/Locker'
 import Suprise from './Components/Suprise/Suprise'
 import DetectorModeSelector from './Components/DetectorModeSelector/DetectorModeSelector'
 import ResistivityCalibration from './Components/ResistivityCalibration/ResistivityCalibration'
+import PluggedSensorTest from './Components/PluggedSensorTest/PluggedSensorTest'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -306,6 +307,8 @@ class App extends Component {
         return (<Pulse3 navigateTo={this.navigateTo} />)
       case "resistivityCalibrationScreen":
         return (<ResistivityCalibration navigateTo={this.navigateTo} />)
+      case "pluggedSensorTestScreen":
+        return (<PluggedSensorTest navigateTo={this.navigateTo} />)
       default:
         break
     }

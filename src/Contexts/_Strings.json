@@ -176,7 +176,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "التحقق من اتصال ملف البحث",
+    "connectCorrectCoil": "يرجى توصيل ملف البحث الصحيح"
   },
   "de": {
     "alternative": "Zickzack",
@@ -359,7 +361,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Anschluss der Suchspule prüfen",
+    "connectCorrectCoil": "Bitte schließen Sie die richtige Suchspule an"
   },
   "en": {
     "alternative": "Zigzag",
@@ -541,7 +545,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Checking search coil connection",
+    "connectCorrectCoil": "Please connect the correct search coil"
   },
   "es": {
     "alternative": "Zigzag",
@@ -723,7 +729,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Comprobando la conexión de la bobina de búsqueda",
+    "connectCorrectCoil": "Conecte la bobina de búsqueda correcta"
   },
   "fa": {
     "alternative": "زیگزاگ",
@@ -900,7 +908,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "بررسی اتصال سیم پیچ جستجو",
+    "connectCorrectCoil": "لطفاً کویل جستجوی صحیح را وصل کنید"
   },
   "fr": {
     "alternative": "Zigzag",
@@ -1082,7 +1092,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Vérification de la connexion de la bobine de recherche",
+    "connectCorrectCoil": "Vérification de la connexion de la bobine de recherche"
   },
   "it": {
     "alternative": "Zigzag",
@@ -1264,7 +1276,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Controllo della connessione della bobina di ricerca",
+    "connectCorrectCoil": "Si prega di collegare la bobina di ricerca corretta"
   },
   "iw": {
     "alternative": "לְזַגזֵג",
@@ -1446,7 +1460,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "בודק את חיבור סליל החיפוש",
+    "connectCorrectCoil": "אנא חבר את סליל החיפוש הנכון"
   },
   "ru": {
     "alternative": "Зигзаг",
@@ -1628,7 +1644,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Проверка подключения поисковой катушки",
+    "connectCorrectCoil": "Подключите правильную поисковую катушку"
   },
   "tr": {
     "alternative": "Zikzak",
@@ -1810,7 +1828,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "Arama bobini bağlantısı kontrol ediliyor",
+    "connectCorrectCoil": "Lütfen doğru arama başlığını bağlayın"
   },
   "ur": {
     "alternative": "زگ زگ",
@@ -1992,7 +2012,9 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "سرچ کنڈلی کنکشن چیک کیا جا رہا ہے۔",
+    "connectCorrectCoil": "براہ کرم صحیح سرچ کنڈلی کو جوڑیں۔"
   },
   "zh": {
     "alternative": "之字形",
@@ -2174,6 +2196,8 @@
     "controlAutoLrlScreen": "",
     "controlPulseScreen": "",
     "controlPulse2Screen": "",
-    "controlNuggetScanScreen": ""
+    "controlNuggetScanScreen": "",
+    "checkingCoilConnection": "检查搜索线圈连接",
+    "connectCorrectCoil": "请连接正确的搜索线圈"
   }
 }

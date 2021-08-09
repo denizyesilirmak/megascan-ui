@@ -24,14 +24,13 @@ import INF_36 from '../../Assets/Videos/control36_infinity.mp4'
 import INF_50 from '../../Assets/Videos/control50_infinity.mp4'
 
 //concord
-
 import CND_BionicVideo from '../../Assets/Videos/controlBionic_concord.mp4'
 import CND_LrlVideo from '../../Assets/Videos/controlLRL_concord.mp4'
 import CND_28 from '../../Assets/Videos/control28_concord.mp4'
 import CND_36 from '../../Assets/Videos/control36_concord.mp4'
 import CND_50 from '../../Assets/Videos/control50_concord.mp4'
-///viber
 
+///viber
 import VPR_BionicVideoo from '../../Assets/Videos/controlBionic_viper.mp4'
 import VPR_LrlVideo from '../../Assets/Videos/controlLRL_viper.mp4'
 import VPR_28 from '../../Assets/Videos/control28_viper.mp4'
@@ -54,6 +53,8 @@ class SensorControl extends React.Component {
       currentSensor: 0,
       src: '',
       renderVideo: false,
+      checkingText: "controlSensorConnection",
+      wrongSensorText: 'connectSensor'
     }
   }
 
@@ -140,13 +141,13 @@ class SensorControl extends React.Component {
         this.setState({ src: this.lrlVideo, targetSensorID: 1 })
         break
       case "pulseScreen":
-        this.setState({ src: this.coil50, targetSensorID: 6 })
+        this.setState({ src: this.coil50, targetSensorID: 6, checkingText: 'checkingCoilConnection', wrongSensorText: 'connectCorrectCoil' })
         break
       case "pulse2Screen":
-        this.setState({ src: this.coil36, targetSensorID: 5 })
+        this.setState({ src: this.coil36, targetSensorID: 5, checkingText: 'checkingCoilConnection', wrongSensorText: 'connectCorrectCoil' })
         break
       case "nuggetScanScreen":
-        this.setState({ src: this.coil28, targetSensorID: 4 })
+        this.setState({ src: this.coil28, targetSensorID: 4, checkingText: 'checkingCoilConnection', wrongSensorText: 'connectCorrectCoil' })
         break
       default:
         break
@@ -216,7 +217,11 @@ class SensorControl extends React.Component {
   renderPopup = () => {
     return (
       <div className="sc-popup">
-        <div className="title">{this.context.strings['controlSensorConnection']}.</div>
+        <div className="title">
+          {
+            this.context.strings[this.state.checkingText]
+          }
+        </div>
         <div className="indicator-container">
           <div ref={this.indicatorREF} className="indicator-value" />
         </div>
@@ -228,7 +233,7 @@ class SensorControl extends React.Component {
     return (
       <>
         <div className="warning" style={{ display: this.state.renderVideo ? 'block' : 'none' }}>
-          {this.context.strings['connectSensor']}
+          {this.context.strings[this.state.wrongSensorText]}
         </div>
         <video
           className="control-video"

@@ -1,0 +1,20 @@
+.pulse-d-t {
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bar-container {
+  width: 700px;
+  height: 40px;
+  border: 2px solid #000000;
+}
+
+.bar-container .bar-itself{
+  width: 0%;
+  height: 100%;
+  background-color: red;
+  transition: width 0.2s;
+}

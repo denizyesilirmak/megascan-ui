@@ -64,6 +64,8 @@ import TunnelScanScreen from './Components/TunnelScanScreen/ScanScreen'
 
 //Sensor Controls
 import ControlMagnetometer from './Components/SensorControl/SensorControl'
+import PulseTimings from './Components/PulseTimings/PulseTimings'
+import PulseDiscriminationTest from './Components/PulseDiscriminationTest/PulseDiscriminationTest'
 
 import dbStorage from './DatabaseHelper'
 dbStorage.init()
@@ -309,6 +311,10 @@ class App extends Component {
         return (<ResistivityCalibration navigateTo={this.navigateTo} />)
       case "pluggedSensorTestScreen":
         return (<PluggedSensorTest navigateTo={this.navigateTo} />)
+      case "pulseTimingsScreen":
+        return (<PulseTimings navigateTo={this.navigateTo} />)
+      case "pulseDiscriminationTest":
+        return (<PulseDiscriminationTest navigateTo={this.navigateTo} />)
       default:
         break
     }

@@ -18,6 +18,9 @@ import sig_sawtooth from '../../../Assets/MenuIcons/signals/sawtooth.png'
 import sig_sine from '../../../Assets/MenuIcons/signals/sine.png'
 // import soundHelperInstance from '../../../SoundHelper'
 
+import KalmanFilter from 'kalmanjs'
+import { clamp } from 'lodash'
+
 const FrequencyTypes = [
   {
     name: 'square',
@@ -42,8 +45,21 @@ class Pulse extends Component {
   constructor(props) {
     super(props)
 
+    this.previousValue = 0
+    this.kf = new KalmanFilter()
     this.rawData = 0
     this.signalCursor = 0
+
+    this.sensor = 0
+    this.disc = 0
+    this.ratio = 0
+
+    this.averageSensor = 0
+    this.averageDisc = 0
+    this.averageRatio = 0
+
+    this.counter = 0
+    this.ready = false
 
     this.state = {
       threshold: 0,
@@ -61,12 +77,12 @@ class Pulse extends Component {
     SocketHelper.attach(this.handleSocket)
     SoundHelper.createOscillator('square')
     this.generatePlotString()
-    SocketHelper.send('H.1')
+    SocketHelper.send('H3')
   }
 
   componentWillUnmount() {
     this.saveToDb()
-    SocketHelper.send('H.0')
+    SocketHelper.send('H0')
     SocketHelper.detach()
   }
 
@@ -100,18 +116,25 @@ class Pulse extends Component {
               this.signalCursor++
             }
             SoundHelper.changeFrequencyType(FrequencyTypes[this.signalCursor].name)
+          }else if (this.state.cursorIndex % 4 === 0) {
+            this.setState({
+              average: parseInt(this.rawData)
+            })
+            this.averageSensor = this.sensor
+            this.averageRatio = this.ratio
+            this.averageDisc = this.disc
           }
           break
         case 'up':
           this.setState({
             cursorIndex: this.state.cursorIndex - 1
           })
-          break;
+          break
         case 'down':
           this.setState({
             cursorIndex: this.state.cursorIndex + 1
           })
-          break;
+          break
         case 'left':
           if (this.state.threshold > 0 && this.state.cursorIndex % 4 === 1)
             this.setState({
@@ -121,7 +144,7 @@ class Pulse extends Component {
             this.setState({
               gain: this.state.gain - 1
             })
-          break;
+          break
         case 'right':
           if (this.state.threshold < 6 && this.state.cursorIndex % 4 === 1)
             this.setState({
@@ -131,12 +154,16 @@ class Pulse extends Component {
             this.setState({
               gain: this.state.gain + 1
             })
-          break;
+          break
         case 'start':
           this.setState({
             average: parseInt(this.rawData)
           })
-          break;
+          this.averageSensor = this.sensor
+          this.averageRatio = this.ratio
+          this.averageDisc = this.disc
+
+          break
         case 'back':
           clearInterval(this.dataInterval)
           SoundHelper.stopOscillator()
@@ -145,72 +172,130 @@ class Pulse extends Component {
           } else {
             this.props.navigateTo('menuScreen')
           }
-          return;
+          return
 
         default:
-          return;
+          return
       }
       return
     }
     else if (socketData.type === 'pulse') {
-      this.pushDataToStream(socketData.payload)
+      if (this.counter < this.state.datastream.length) {
+        this.counter++
+        if (this.counter === this.state.datastream.length - 5) {
+          this.setState({
+            average: parseInt(this.rawData)
+          })
+          this.averageSensor = this.sensor
+          this.averageRatio = this.ratio
+          this.averageDisc = this.disc
+        }
+      } else {
+        this.ready = true
+      }
+
+      let result = this.kf.filter(socketData.payload)
+      this.rawData = result
+      const value = (result - this.state.average) * this.state.gain
+      //console.log(value)
+      const temp = this.state.datastream
+      temp.push(value)
+      temp.shift()
+      this.setState({
+        datastream: temp
+      })
+
+      if (result < this.state.average - 5) {
+        this.setState({
+          average: this.state.average - 3,
+        })
+      }
+
+      if (Math.abs(value) > this.state.threshold * 4 && this.ready) {
+        SoundHelper.changeFrequencySmooth(clamp(Math.abs(value) * 5, 0, 600))
+      } else {
+        SoundHelper.changeFrequencyFast(0)
+      }
+
+      this.sensor = socketData.payload
+      this.disc = socketData.disc
+      this.ratio = socketData.ratio
+
+      const resultArr = [
+        this.sensor - this.averageSensor,
+        this.disc - this.averageDisc,
+        this.ratio - this.averageRatio
+      ]
+
+      const material = this.predictMaterialType(resultArr)
+      //console.log(material)
+      switch (material) {
+        case 0:
+          this.setState({
+            iron: 0,
+            gold: 0
+          })
+          break
+        case 1:
+          this.setState({
+            iron: 100,
+            gold: 0
+          })
+          break
+        case 2:
+          this.setState({
+            iron: 0,
+            gold: 100
+          })
+          break
+
+        default:
+          break
+      }
+
+
     }
   }
 
-  pushDataToStream = (newData) => {
-    this.rawData = newData
+  predictMaterialType = (arr) => {
 
-    this.normalizedData = (this.rawData - this.state.average) * (1 + (1 / (7 - this.state.gain)))
-    // console.log(this.normalizedData)
+    //console.log((arr[1] / arr[2]), arr[2])
 
-    let tempArray = this.state.datastream
-    tempArray.push(this.normalizedData)
-    tempArray.shift()
-
-    this.setState({
-      datastream: tempArray
-    })
-
-    if (this.normalizedData > 0) {
-      this.setState({
-        gold: this.map(this.normalizedData, 0, 920, 0, 100),
-        iron: 0
-      })
-    }
-    else if (this.normalizedData < 0) {
-      this.setState({
-        iron: this.map(Math.abs(this.normalizedData), 0, 920, 0, 100),
-        gold: 0
-      })
-    }
-
-    if (Math.abs(this.normalizedData) > this.state.threshold * 90) {
-      SoundHelper.changeFrequencySmooth(Math.abs(this.normalizedData) * 3)
+    const value = Math.abs(arr[1] / arr[2])
+    if (arr[0] > 20 && value > 3 && value !== Infinity && arr[2] < 50) {
+      if (arr[2] > 0) {
+        return 1
+      }
     } else {
-      SoundHelper.changeFrequencyFast(0)
+      if (arr[2] > 30) {
+
+        return 2
+      } else {
+        return 0
+      }
+
     }
+
+    return 0
   }
 
   generatePlotString = () => {
     let str = `M`
     this.state.datastream.forEach((e, i) => {
-      str += i * 6 + "," + this.map(-1 * e, -1050, 920, 10, 210) + " "
-    });
+      const data = clamp((240 - this.map(1 * e, 0, 460, 10, 210)), 0, 550)
+      str += i * 6 + "," + data + " "
+    })
     return str
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return this.clamp((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min, out_min, out_max);
+    return clamp((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min, out_min, out_max)
   }
-
-  clamp = (num, min, max) => {
-    return num <= min ? min : num >= max ? max : num;
-  }
-
 
   render() {
     return (
       <div className="pulse component">
+        <img src={BalanceIcon} className="pulse-calibration-icon-a" style={{display: this.ready ? 'none': 'block'}}/>
 
         <div className="pulse-options">
 
@@ -244,9 +329,9 @@ class Pulse extends Component {
               <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stopColor="#ff0000" />
                 <stop offset="35%" stopColor="#ffff00" />
-                <stop offset="50%" stopColor="#00ff00" />
-                <stop offset="65%" stopColor="#00ffff" />
-                <stop offset="100%" stopColor="#0000ff" />
+                <stop offset="50%" stopColor="#ffff00" />
+                <stop offset="65%" stopColor="#00ff00" />
+                <stop offset="100%" stopColor="#00ff00" />
               </linearGradient>
             </defs>
             <g>

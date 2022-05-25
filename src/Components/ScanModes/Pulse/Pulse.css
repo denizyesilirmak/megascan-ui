@@ -59,3 +59,12 @@
   text-align: center;
   word-wrap: break-word;
 }
+
+.pulse-calibration-icon-a{
+  position: absolute;
+  background-color: black;
+  background: black;
+  z-index: 100;
+  right: 30px;
+  top: 20px;
+}

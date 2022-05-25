@@ -42,6 +42,7 @@ class Pulse3 extends React.Component {
       this.handleButton(socketData.payload)
     }
     else if (socketData.type === 'pulse') {
+      console.log(socketData)
       const value = (parseInt(socketData.payload) - this.state.average)
       this.history(value, parseInt(socketData.payload))
     }

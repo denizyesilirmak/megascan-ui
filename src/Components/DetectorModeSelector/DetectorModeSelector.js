@@ -7,7 +7,6 @@ import SocketHelper from '../../SocketHelper'
 import PS25Icon from '../../Assets/MenuIcons/mainmenu/ps28.png'
 import PS36Icon from '../../Assets/MenuIcons/mainmenu/ps36.png'
 
-
 import IndicatorIcon from '../../Assets/MenuIcons/button-indicator.png'
 import { DeviceContext } from '../../Contexts/DeviceContext'
 
@@ -51,7 +50,6 @@ class DetectorModeSelector extends React.Component {
         break
       case 'ok':
         if (this.state.cursor === 0) {
-
           this.props.navigateTo('controlPulse2Screen')
         }
         else if (this.state.cursor === 1) {
@@ -62,6 +60,9 @@ class DetectorModeSelector extends React.Component {
         return
       case 'back':
         this.props.navigateTo('menuScreen')
+        return
+      case 'turnoff':
+        this.props.navigateTo('turnOff')
         return
 
       default:

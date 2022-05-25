@@ -66,7 +66,7 @@
   z-index: 1000;
   border-radius: 10px;
   border: 2px solid white;
-  animation: popup-anim 3s ease-in-out both infinite;
+  animation: popup-anim 4s ease-in-out both infinite;
 }
 
 .language-changed-popup img {

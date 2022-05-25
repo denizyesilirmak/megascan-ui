@@ -37,12 +37,12 @@ class Pulse extends React.Component {
 
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
-    SocketHelper.send('H.1')
-    SoundHelper.createOscillator('triangle')
+    SocketHelper.send('H2')
+    SoundHelper.createOscillator('square')
   }
 
   componentWillUnmount() {
-    SocketHelper.send('H.0')
+    SocketHelper.send('H0')
     SoundHelper.stopOscillator()
     SocketHelper.detach()
   }
@@ -52,6 +52,7 @@ class Pulse extends React.Component {
       this.moveCursor(socketData.payload)
     }
     else if (socketData.type === 'pulse') {
+      //-------------------------------------------------------
       const raw = parseInt(socketData.payload)
       if (this.pulseCounter < 30) {
         this.pulseCounter++
@@ -99,6 +100,8 @@ class Pulse extends React.Component {
         }
 
       })
+
+      //-------------------------------------------------------
     }
   }
 

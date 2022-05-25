@@ -12,7 +12,6 @@ class Language extends Component{
         this.refs.sc.style.opacity = 1
       } catch (error) {
         console.warn("couldn't catch speed")
-
       }
     }, 25);
   }

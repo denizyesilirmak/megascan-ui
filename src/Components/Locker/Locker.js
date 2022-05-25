@@ -80,6 +80,10 @@ class Locker extends React.Component {
           SocketHelper.detach()
           this.props.navigateTo('pluggedSensorTestScreen')
         }
+        else if (currentCodeString === '120000') {
+          SocketHelper.detach()
+          this.props.navigateTo('pulseTimingsScreen')
+        }
         else{
           this.setState({
             currentCode: [0, 0, 0, 0, 0, 0]

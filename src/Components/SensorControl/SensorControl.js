@@ -36,7 +36,7 @@ import VPR_LrlVideo from '../../Assets/Videos/controlLRL_viper.mp4'
 import VPR_28 from '../../Assets/Videos/control28_viper.mp4'
 import VPR_36 from '../../Assets/Videos/control36_viper.mp4'
 
-const bypass = false
+const bypass = true
 
 class SensorControl extends React.Component {
   static contextType = DeviceContext

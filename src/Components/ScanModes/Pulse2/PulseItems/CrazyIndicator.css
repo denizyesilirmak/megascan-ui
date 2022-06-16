@@ -1,0 +1,32 @@
+.pulse-indicator-crazy {
+  /* border: 1px solid #ffffff; */
+}
+
+.animated-indicator-circle {
+  transform: scale(1);
+  animation: a-c-i 1s ease-in-out infinite;
+  transform-origin: center;
+  animation-duration: 1s;
+}
+
+@keyframes a-c-i {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+line {
+  transition: stroke 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.775);
+}

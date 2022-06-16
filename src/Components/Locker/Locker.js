@@ -16,6 +16,10 @@ class Locker extends React.Component {
     SocketHelper.attach(this.handleSocket)
   }
 
+  componentWillUnmount(){
+    SocketHelper.detach()
+  }
+
   handleSocket = (socketData) => {
     if (socketData.type !== 'button')
       return
@@ -53,36 +57,36 @@ class Locker extends React.Component {
       case 'ok':
         const currentCodeString = this.state.currentCode.join('')
         if (currentCodeString === '158694') {
-          SocketHelper.detach()
           this.props.navigateTo('compassCalibrationScreen')
+          return
         }
         else if (currentCodeString === '569128') {
-          SocketHelper.detach()
           this.props.navigateTo('serialCodeChangerScreen')
+          return
         }
         else if (currentCodeString === '012540') {
-          SocketHelper.detach()
           this.props.navigateTo('groundScanSensorCalibration')
+          return
         }
         else if (currentCodeString === '005263') {
-          SocketHelper.detach()
           this.props.navigateTo('antennaCalibrationScreen')
+          return
         }
         else if (currentCodeString === '160791') {
-          SocketHelper.detach()
           this.props.navigateTo('supriseScreen')
+          return
         }
         else if (currentCodeString === '003645') {
-          SocketHelper.detach()
           this.props.navigateTo('resistivityCalibrationScreen')
+          return
         }
         else if (currentCodeString === '002323') {
-          SocketHelper.detach()
           this.props.navigateTo('pluggedSensorTestScreen')
+          return
         }
         else if (currentCodeString === '120000') {
-          SocketHelper.detach()
           this.props.navigateTo('pulseTimingsScreen')
+          return
         }
         else{
           this.setState({
@@ -92,7 +96,6 @@ class Locker extends React.Component {
 
         break;
       case 'back':
-        SocketHelper.detach()
         this.props.navigateTo('menuScreen')
         break;
 

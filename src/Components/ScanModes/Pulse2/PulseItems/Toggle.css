@@ -28,6 +28,7 @@
 .pulse2-toggle .toggle-indicator.active {
   background: lime;
   border: 2px solid #407a43;
+  transition: 0.4s background;
 }
 
 .button-group .pulse2-toggle {

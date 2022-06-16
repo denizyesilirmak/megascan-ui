@@ -66,10 +66,24 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(0.7);
   }
+
   100% {
     transform: scale(1);
   }
+}
+
+.device-version-number {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  text-align: end;
+  box-sizing: border-box;
+  padding-right: 10px;
+  font-size: 11px;
+  opacity: 0.5;
 }

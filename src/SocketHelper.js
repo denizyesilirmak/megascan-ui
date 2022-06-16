@@ -21,7 +21,7 @@ class SocketHelper {
 
     this._socket.on('connect', () => {
       if (this._socket.connected) {
-        console.clear()
+        //console.clear()
         //console.log(`%csocket connected ${this._socket.id}`, "color: white; background-color: green")
         this._sendInitialSettings()
       }

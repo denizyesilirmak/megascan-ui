@@ -6,14 +6,16 @@
   right: 0px;
   left: 0px;
   bottom: 0px;
-  background: black;
   z-index: 1000;
+  display: flex;
+  justify-content: center;
+  background: #000;
 }
 
 .canvas-container-suprise {
   width: 100%;
   height: 100vh;
-  background: #000;
+  z-index: 10;
 }
 
 .suprise .suprise-text {
@@ -22,7 +24,45 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
+  animation: suprise-text-color 20s infinite;
+  z-index: 5;
+  margin-top: 160px;
+}
+
+
+@keyframes suprise-text-color {
+  0% {
+    color: yellow;
+  }
+
+  20% {
+    color: rgb(30, 255, 0);
+  }
+
+  40% {
+    color: rgb(255, 0, 221);
+  }
+
+  60% {
+    color: rgb(0, 140, 255);
+  }
+
+  80% {
+    color: rgb(153, 19, 113);
+  }
+
+  100% {
+    color: yellow;
+  }
+}
+
+.suprise img{
+  width: 80%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: 0;
 }

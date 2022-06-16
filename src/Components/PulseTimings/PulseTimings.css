@@ -8,32 +8,40 @@
 }
 
 .pulse-timing-box {
-  background: rgb(0, 132, 255);
+  background: #151515;
   padding: 6px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 6px;
   margin-right: 3px;
   margin-left: 3px;
+  margin-bottom: 20px;
 }
 
 .pulse-timing-box.selected {
   background: rgb(255, 102, 0);
+  transition: background 0.4s;
+  color: #000000;
+}
+
+.pulse-timing-box img{
+  width: 15px;
 }
 
 .pulse-timing-value {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 18px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
 
 .pulse-timing-title {
   margin-bottom: 10px;
+  font-size: 13px;
 }
 
 .timings-container {
@@ -45,6 +53,48 @@
 
 .eeprom-data {
   color: #ffffff;
-  margin-bottom: 30px;
-  font-size: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  background: #252525;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pulse-disc-plot {
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: asd-ad 1s ease-in-out 0.5s 1 forwards;
+}
+
+@keyframes asd-ad {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.pulse-timings-plot-holder {
+  display: flex;
+  flex-direction: row;
+}
+
+.pulse-angle {
+  margin-left: 5px;
+}
+
+.pulse-angle line {
+  transform-origin: center;
+  transform: rotate(30deg);
+  transition: transform 0.2s;
+}
+
+.pulse-timimgs-active-coil{
+  width: 100%;
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  color: orange;
 }

@@ -6,12 +6,14 @@ import Bar from './PulseItems/Bar'
 import SocketHelper from '../../../SocketHelper'
 import SoundHelper from '../../../SoundHelper'
 import { DeviceContext } from '../../../Contexts/DeviceContext'
+import Kevgir from '../../../Kevgir'
 
 
 class Pulse3 extends React.Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
+    this.kevgir = new Kevgir()
 
     this.state = {
       raw_value: 0,
@@ -27,12 +29,12 @@ class Pulse3 extends React.Component {
   componentDidMount() {
     SocketHelper.attach(this.handleSocket)
     SoundHelper.createOscillator('square')
-    SocketHelper.send('H.1')
+    SocketHelper.send('H1')
   }
 
   componentWillUnmount() {
     SoundHelper.stopOscillator()
-    SocketHelper.send('H.0')
+    SocketHelper.send('H0')
     SocketHelper.detach()
 
   }
@@ -42,9 +44,19 @@ class Pulse3 extends React.Component {
       this.handleButton(socketData.payload)
     }
     else if (socketData.type === 'pulse') {
-      console.log(socketData)
-      const value = (parseInt(socketData.payload) - this.state.average)
-      this.history(value, parseInt(socketData.payload))
+      const result = this.kevgir.detectorFunction(socketData)
+      if (!result.ready) {
+        return
+      }
+      //console.log(result)
+
+      if(result.sens * 300 > this.state.treshold * 3){
+        SoundHelper.changeFrequencySmooth(parseInt((result.sens * 500) + 300))
+      }else {
+        SoundHelper.changeFrequencySmooth(0)
+        
+      }
+
     }
   }
 
@@ -85,9 +97,7 @@ class Pulse3 extends React.Component {
         }
         break
       case 'start':
-        this.setState({
-          average: this.state.raw_value
-        })
+        this.kevgir.calibrate()
         break
       case 'back':
         this.props.navigateTo('detectorModeSelectorScreen')

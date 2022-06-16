@@ -7,6 +7,7 @@ const DEVICE_LIST = require('./_DeviceList.json')
 const THEMES = require('./_Themes.json')
 export const DeviceContext = createContext()
 
+//FIXME
 const NotSleepingScreens = [
   "pinPointerScreen",
   "liveStreamScreen",

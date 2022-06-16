@@ -11,7 +11,7 @@ class TurningOff extends React.Component {
         type: 'settings',
         mode: 'turnoff'
       }))
-    }, 3300);
+    }, 3300)
   }
 
   render() {

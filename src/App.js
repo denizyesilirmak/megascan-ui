@@ -68,6 +68,7 @@ import PulseTimings from './Components/PulseTimings/PulseTimings'
 import PulseDiscriminationTest from './Components/PulseDiscriminationTest/PulseDiscriminationTest'
 
 import dbStorage from './DatabaseHelper'
+import EasterEgg from './Components/Suprise/EasterEgg'
 dbStorage.init()
 
 class App extends Component {
@@ -108,7 +109,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'detectorModeSelectorScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -119,7 +120,7 @@ class App extends Component {
 
   componentDidMount() {
     if (this.state.pinlock) {
-      console.log("kilit")
+      //console.log("kilit")
       this.navigateTo("lockScreen")
     }
   }
@@ -297,6 +298,8 @@ class App extends Component {
         return (<Locker navigateTo={this.navigateTo} />)
       case "supriseScreen":
         return (<Suprise navigateTo={this.navigateTo} />)
+      case "easterEggScreen":
+        return (<EasterEgg navigateTo={this.navigateTo} />)
       case "detectorModeSelectorScreen":
         return (<DetectorModeSelector navigateTo={this.navigateTo} />)
       case "geophysicalActionScreen":

@@ -1,3 +1,7 @@
+//IndexedDB abstraction for 
+//Conrad linux embedded menu user interfaces
+//dnzyslrmk@gmail.com
+
 export default {
   init () {
     return new Promise((resolve, reject) => {

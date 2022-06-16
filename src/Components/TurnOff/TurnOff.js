@@ -3,6 +3,8 @@ import "./TurnOff.css"
 import socketHelper from '../../SocketHelper'
 import TurnOffIcon from "../../Assets/MenuIcons/turn-off.png"
 import { DeviceContext } from '../../Contexts/DeviceContext'
+import ProjectInfo from '../../../package.json'
+
 
 class TurnOff extends Component {
   static contextType = DeviceContext
@@ -22,7 +24,7 @@ class TurnOff extends Component {
     setTimeout(() => {
       this.refs.turnOff.style.opacity = 1
       this.refs.turnOff.style.transform = 'scale(1)'
-    }, 15);
+    }, 15)
   }
 
   handleKeyDown = (socketData) => {
@@ -39,7 +41,7 @@ class TurnOff extends Component {
           setTimeout(() => {
             socketHelper.detach()
             this.props.navigateTo("menuScreen")
-          }, 500);
+          }, 500)
         }
         return
       case 'left':
@@ -67,7 +69,7 @@ class TurnOff extends Component {
         setTimeout(() => {
           socketHelper.detach()
           this.props.navigateTo("menuScreen")
-        }, 500);
+        }, 500)
         return
       default:
         break
@@ -90,6 +92,9 @@ class TurnOff extends Component {
           <div style={{ background: !this.state.yesNo ? this.context.theme.button_bg_selected : null, borderColor: this.context.theme.border_color }} className={`button ${!this.state.yesNo ? "selected" : ""}`}>{this.context.strings['no']}</div>
         </div>
 
+        <div className="device-version-number">
+          v{ProjectInfo.version}
+        </div>
       </div>
     )
   }

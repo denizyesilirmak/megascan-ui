@@ -18,8 +18,10 @@ import sig_sawtooth from '../../../Assets/MenuIcons/signals/sawtooth.png'
 import sig_sine from '../../../Assets/MenuIcons/signals/sine.png'
 // import soundHelperInstance from '../../../SoundHelper'
 
-import KalmanFilter from 'kalmanjs'
+import Kevgir from '../../../Kevgir'
+
 import { clamp } from 'lodash'
+import PulseWaitingPopup from '../../PulseWaitingPopup/PulseWaitingPopup'
 
 const FrequencyTypes = [
   {
@@ -46,28 +48,30 @@ class Pulse extends Component {
     super(props)
 
     this.previousValue = 0
-    this.kf = new KalmanFilter()
+
     this.rawData = 0
     this.signalCursor = 0
-
-    this.sensor = 0
-    this.disc = 0
-    this.ratio = 0
-
-    this.averageSensor = 0
-    this.averageDisc = 0
-    this.averageRatio = 0
 
     this.counter = 0
     this.ready = false
 
+    this.rawValue = []
+    this.calibration = []
+    this.ratio = 0
+    this.sens = 0
+    this.angle = 0
+
+    this.kevgir = new Kevgir()
+
     this.state = {
+      ready: false,
       threshold: 0,
       gain: 0,
       gold: 0,
       iron: 0,
       cursorIndex: 4 * 200,
       average: 1127,
+      rV: 0,
       datastream: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   }
@@ -78,6 +82,11 @@ class Pulse extends Component {
     SoundHelper.createOscillator('square')
     this.generatePlotString()
     SocketHelper.send('H3')
+    const popupTimeOut = setTimeout(() => {
+      clearTimeout(popupTimeOut)
+      this.setState({ ready: true })
+      this.kevgir.calibrate()
+    }, 7000)
   }
 
   componentWillUnmount() {
@@ -109,6 +118,10 @@ class Pulse extends Component {
     if (socketData.type === 'button') {
       switch (socketData.payload) {
         case 'ok':
+          if (!this.state.ready) {
+            return
+          }
+
           if (this.state.cursorIndex % 4 === 3) {
             if (this.signalCursor === 3) {
               this.signalCursor = 0
@@ -116,7 +129,7 @@ class Pulse extends Component {
               this.signalCursor++
             }
             SoundHelper.changeFrequencyType(FrequencyTypes[this.signalCursor].name)
-          }else if (this.state.cursorIndex % 4 === 0) {
+          } else if (this.state.cursorIndex % 4 === 0) {
             this.setState({
               average: parseInt(this.rawData)
             })
@@ -126,16 +139,28 @@ class Pulse extends Component {
           }
           break
         case 'up':
+          if (!this.state.ready) {
+            return
+          }
+
           this.setState({
             cursorIndex: this.state.cursorIndex - 1
           })
           break
         case 'down':
+          if (!this.state.ready) {
+            return
+          }
+
           this.setState({
             cursorIndex: this.state.cursorIndex + 1
           })
           break
         case 'left':
+          if (!this.state.ready) {
+            return
+          }
+
           if (this.state.threshold > 0 && this.state.cursorIndex % 4 === 1)
             this.setState({
               threshold: this.state.threshold - 1
@@ -146,7 +171,11 @@ class Pulse extends Component {
             })
           break
         case 'right':
-          if (this.state.threshold < 6 && this.state.cursorIndex % 4 === 1)
+          if (!this.state.ready) {
+            return
+          }
+
+          if (this.state.threshold < 15 && this.state.cursorIndex % 4 === 1)
             this.setState({
               threshold: this.state.threshold + 1
             })
@@ -156,12 +185,11 @@ class Pulse extends Component {
             })
           break
         case 'start':
-          this.setState({
-            average: parseInt(this.rawData)
-          })
-          this.averageSensor = this.sensor
-          this.averageRatio = this.ratio
-          this.averageDisc = this.disc
+          if (!this.state.ready) {
+            return
+          }
+          
+          this.kevgir.calibrate()
 
           break
         case 'back':
@@ -180,103 +208,53 @@ class Pulse extends Component {
       return
     }
     else if (socketData.type === 'pulse') {
-      if (this.counter < this.state.datastream.length) {
-        this.counter++
-        if (this.counter === this.state.datastream.length - 5) {
-          this.setState({
-            average: parseInt(this.rawData)
-          })
-          this.averageSensor = this.sensor
-          this.averageRatio = this.ratio
-          this.averageDisc = this.disc
-        }
-      } else {
-        this.ready = true
+      //this.rawValue = [socketData.payload, socketData.disc, socketData.ratio]
+
+
+
+      //here
+      const result = this.kevgir.detectorFunction(socketData)
+      if (!result.ready) {
+        return
       }
+      //console.log(result)
 
-      let result = this.kf.filter(socketData.payload)
-      this.rawData = result
-      const value = (result - this.state.average) * this.state.gain
-      //console.log(value)
-      const temp = this.state.datastream
-      temp.push(value)
-      temp.shift()
-      this.setState({
-        datastream: temp
-      })
+      this.ratio = result.ratio
+      this.sens = result.sens
+      this.angle = result.angle
 
-      if (result < this.state.average - 5) {
+      if (result.ratio === 0.5) {
         this.setState({
-          average: this.state.average - 3,
+          gold: 0,
+          iron: 0
+        })
+      } else if (result.ratio > 0.5) {
+        this.setState({
+          gold: clamp((result.ratio - 0.5) * 400, 0, 100),
+          iron: 0
+        })
+      } else if (result.ratio < 0.5) {
+        this.setState({
+          iron: clamp((0.5 - result.ratio) * 400, 0, 100),
+          gold: 0
         })
       }
 
-      if (Math.abs(value) > this.state.threshold * 4 && this.ready) {
-        SoundHelper.changeFrequencySmooth(clamp(Math.abs(value) * 5, 0, 600))
+      const soundFreq = Math.trunc(this.sens * 1000)
+      if (soundFreq > this.state.threshold * 5 + 3) {
+        SoundHelper.changeFrequencySmooth(soundFreq + 200)
       } else {
-        SoundHelper.changeFrequencyFast(0)
+        SoundHelper.changeFrequencySmooth(0)
       }
 
-      this.sensor = socketData.payload
-      this.disc = socketData.disc
-      this.ratio = socketData.ratio
-
-      const resultArr = [
-        this.sensor - this.averageSensor,
-        this.disc - this.averageDisc,
-        this.ratio - this.averageRatio
-      ]
-
-      const material = this.predictMaterialType(resultArr)
-      //console.log(material)
-      switch (material) {
-        case 0:
-          this.setState({
-            iron: 0,
-            gold: 0
-          })
-          break
-        case 1:
-          this.setState({
-            iron: 100,
-            gold: 0
-          })
-          break
-        case 2:
-          this.setState({
-            iron: 0,
-            gold: 100
-          })
-          break
-
-        default:
-          break
-      }
-
+      const tempStream = this.state.datastream
+      tempStream.push(result.sens * 500)
+      tempStream.shift()
+      this.setState({
+        datastream: tempStream
+      })
 
     }
-  }
-
-  predictMaterialType = (arr) => {
-
-    //console.log((arr[1] / arr[2]), arr[2])
-
-    const value = Math.abs(arr[1] / arr[2])
-    if (arr[0] > 20 && value > 3 && value !== Infinity && arr[2] < 50) {
-      if (arr[2] > 0) {
-        return 1
-      }
-    } else {
-      if (arr[2] > 30) {
-
-        return 2
-      } else {
-        return 0
-      }
-
-    }
-
-    return 0
   }
 
   generatePlotString = () => {
@@ -294,59 +272,63 @@ class Pulse extends Component {
 
   render() {
     return (
-      <div className="pulse component">
-        <img src={BalanceIcon} className="pulse-calibration-icon-a" style={{display: this.ready ? 'none': 'block'}}/>
+      <>
+        <PulseWaitingPopup show={!this.state.ready} />
 
-        <div className="pulse-options">
+        <div className="pulse component">
+          <img alt="calib" src={BalanceIcon} className="pulse-calibration-icon-a" style={{ display: this.ready ? 'none' : 'block' }} />
 
-          <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 0 ? this.context.theme.button_bg_selected : '#000000' }}>
-            <img src={BalanceIcon} alt="balance" />
-            <div className="label">{this.context.strings['groundBalance']}</div>
+          <div className="pulse-options">
+
+            <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 0 ? this.context.theme.button_bg_selected : '#000000' }}>
+              <img src={BalanceIcon} alt="balance" />
+              <div className="label">{this.context.strings['groundBalance']}</div>
+            </div>
+
+            <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 1 ? this.context.theme.button_bg_selected : '#000000' }}>
+              <div className="label">{this.context.strings['treshold']}</div>
+              <PulseBar value={this.state.threshold} />
+            </div>
+
+            <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 2 ? this.context.theme.button_bg_selected : '#000000' }}>
+              <div className="label">{this.context.strings['gain']}</div>
+              <PulseBar value={this.state.gain} />
+            </div>
+
+            <div className={`pulse-options-item`} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', background: this.state.cursorIndex % 4 === 3 ? this.context.theme.button_bg_selected : '#000000' }}>
+              <img src={ToneIcon} alt="balance" style={{ marginBottom: 0 }} />
+              <div className="label">{this.context.strings['tone']}</div>
+              <img src={FrequencyTypes[this.signalCursor].icon} alt="signal" />
+            </div>
+
+
           </div>
 
-          <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 1 ? this.context.theme.button_bg_selected : '#000000' }}>
-            <div className="label">{this.context.strings['treshold']}</div>
-            <PulseBar value={this.state.threshold} />
+          <div className="pulse-plot">
+            <svg width="550" height="240" xmlns="http://www.w3.org/2000/svg" >
+              <defs>
+                <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#ff0000" />
+                  <stop offset="35%" stopColor="#ffff00" />
+                  <stop offset="50%" stopColor="#ffff00" />
+                  <stop offset="65%" stopColor="#00ff00" />
+                  <stop offset="100%" stopColor="#00ff00" />
+                </linearGradient>
+              </defs>
+              <g>
+                {/* <path id="svg_1" d="M0,120 120,160 L200,120 " opacity="0.5" strokeWidth="8.5" stroke="#ff0000" fill="#fff" /> */}
+                <path d={this.generatePlotString()} strokeWidth="10" fill="transparent" strokeLinejoin="round" stroke="url(#gradient)" />
+              </g>
+            </svg>
           </div>
 
-          <div className={`pulse-options-item`} style={{ flexDirection: 'column', background: this.state.cursorIndex % 4 === 2 ? this.context.theme.button_bg_selected : '#000000' }}>
-            <div className="label">{this.context.strings['gain']}</div>
-            <PulseBar value={this.state.gain} />
+          <div className="pulse-info">
+            <Progress value={this.state.gold} type="gold" label="NON FERROUS" />
+            <Progress value={this.state.iron} type="iron" label="FERROUS" />
           </div>
 
-          <div className={`pulse-options-item`} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', background: this.state.cursorIndex % 4 === 3 ? this.context.theme.button_bg_selected : '#000000' }}>
-            <img src={ToneIcon} alt="balance" style={{ marginBottom: 0 }} />
-            <div className="label">{this.context.strings['tone']}</div>
-            <img src={FrequencyTypes[this.signalCursor].icon} alt="signal" />
-          </div>
-
-
-        </div>
-
-        <div className="pulse-plot">
-          <svg width="550" height="240" xmlns="http://www.w3.org/2000/svg" >
-            <defs>
-              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#ff0000" />
-                <stop offset="35%" stopColor="#ffff00" />
-                <stop offset="50%" stopColor="#ffff00" />
-                <stop offset="65%" stopColor="#00ff00" />
-                <stop offset="100%" stopColor="#00ff00" />
-              </linearGradient>
-            </defs>
-            <g>
-              {/* <path id="svg_1" d="M0,120 120,160 L200,120 " opacity="0.5" strokeWidth="8.5" stroke="#ff0000" fill="#fff" /> */}
-              <path d={this.generatePlotString()} strokeWidth="10" fill="transparent" strokeLinejoin="round" stroke="url(#gradient)" />
-            </g>
-          </svg>
-        </div>
-
-        <div className="pulse-info">
-          <Progress value={this.state.gold} type="gold" label="NON FERROUS" />
-          <Progress value={this.state.iron} type="iron" label="FERROUS" />
-        </div>
-
-      </div >
+        </div >
+      </>
     )
   }
 }

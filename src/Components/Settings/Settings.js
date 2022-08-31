@@ -28,7 +28,7 @@ class Settings extends Component {
     super(props)
 
     //get current date time
-    this.currentDate = new Date();
+    this.currentDate = new Date()
     // console.log(this.currentDate.getHours())
 
     this.buttons = [
@@ -122,11 +122,11 @@ class Settings extends Component {
     setTimeout(() => {
       this.refs.settings.style.opacity = 1
       this.refs.settings.style.transform = "scale(1)"
-    }, 15);
+    }, 15)
   }
 
   updateDateBeforePopupOpen = () => {
-    this.currentDate = new Date();
+    this.currentDate = new Date()
     this.setState({
       hour: this.currentDate.getHours(),
       minute: this.currentDate.getMinutes(),
@@ -145,7 +145,7 @@ class Settings extends Component {
         okPopup: false,
         activePopup: ""
       })
-    }, 2200);
+    }, 2200)
   }
 
   renderOkPopup = () => {
@@ -223,7 +223,7 @@ class Settings extends Component {
           // socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
 
-        
+
         break
       case 'right':
         if (tempActiveSettingTab < this.buttons.length - 1 && !this.state.verticalIndex) {
@@ -290,7 +290,7 @@ class Settings extends Component {
           }))
           // socketHelper.send(`vol#${this.state.generalVolume}.${this.state.keyToneVolume}.${this.state.searchVolume}`)
         }
-        
+
         break
       case 'down':
         if (this.state.verticalIndex && this.state.activePopup === "") {
@@ -328,7 +328,7 @@ class Settings extends Component {
             year: this.state.year - 1
           })
         }
-        
+
         break
       case 'up':
         if (this.state.verticalIndex && this.state.activePopup === "") {
@@ -365,7 +365,7 @@ class Settings extends Component {
           this.setState({
             year: this.state.year + 1
           })
-        }        
+        }
         break
       case 'ok':
         if (this.state.verticalIndex === false && this.state.activePopup === "") {
@@ -473,7 +473,7 @@ class Settings extends Component {
             }
           }
         }
-        
+
         return
       case 'home':
       case 'back':
@@ -485,7 +485,7 @@ class Settings extends Component {
           this.refs.settings.style.transform = "translateY(400px)"
           setTimeout(() => {
             this.props.navigateTo("menuScreen")
-          }, 500);
+          }, 500)
         }
 
         if (this.state.activePopup !== "") {
@@ -527,7 +527,7 @@ class Settings extends Component {
       case 7:
         return (<Info selected={this.state.verticalIndex} serial={this.state.serial} />)
       default:
-        break;
+        break
     }
   }
 
@@ -540,18 +540,18 @@ class Settings extends Component {
       case "pin":
         return <PinPopup />
       default:
-        break;
+        break
     }
   }
 
   clamp = (number, lower, upper) => {
     if (upper !== undefined) {
-      number = number <= upper ? number : upper;
+      number = number <= upper ? number : upper
     }
     if (lower !== undefined) {
-      number = number >= lower ? number : lower;
+      number = number >= lower ? number : lower
     }
-    return number;
+    return number
   }
 
   render() {

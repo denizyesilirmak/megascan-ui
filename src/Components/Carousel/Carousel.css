@@ -67,7 +67,10 @@
   left: -10px;
   width: 200px;
   height: 200px;
-  animation: rotate 2.4s linear infinite;
+}
+
+.carousel-button.selected .indicator{
+  animation: rotate 1.4s linear infinite;
 }
 
 @keyframes rotate{

@@ -6,6 +6,8 @@ class Locker extends React.Component {
   constructor(props) {
     super(props)
 
+    this.wrongAttempCounter = 0
+
     this.state = {
       selectedCursor: 0,
       currentCode: [0, 0, 0, 0, 0, 0]
@@ -16,7 +18,7 @@ class Locker extends React.Component {
     SocketHelper.attach(this.handleSocket)
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     SocketHelper.detach()
   }
 
@@ -26,17 +28,28 @@ class Locker extends React.Component {
 
     switch (socketData.payload) {
       case 'left':
+        if (this.wrongAttempCounter > 3) {
+          return
+        }
         if (this.state.selectedCursor > 0) {
           this.setState({ selectedCursor: this.state.selectedCursor - 1 })
         }
-        break;
-
+        break
       case 'right':
+        if (this.wrongAttempCounter > 3) {
+          return
+        }
+
         if (this.state.selectedCursor < 5) {
           this.setState({ selectedCursor: this.state.selectedCursor + 1 })
         }
-        break;
+        break
       case 'up':
+        if (this.wrongAttempCounter > 3) {
+          return
+        }
+
+
         if (this.state.currentCode[this.state.selectedCursor] < 9) {
           const temp = this.state.currentCode
           temp[this.state.selectedCursor] = temp[this.state.selectedCursor] + 1
@@ -44,8 +57,12 @@ class Locker extends React.Component {
             currentCode: temp
           })
         }
-        break;
+        break
       case 'down':
+        if (this.wrongAttempCounter > 3) {
+          return
+        }
+
         if (this.state.currentCode[this.state.selectedCursor] > 0) {
           const temp = this.state.currentCode
           temp[this.state.selectedCursor] = temp[this.state.selectedCursor] - 1
@@ -53,8 +70,12 @@ class Locker extends React.Component {
             currentCode: temp
           })
         }
-        break;
+        break
       case 'ok':
+        if (this.wrongAttempCounter > 3) {
+          return
+        }
+
         const currentCodeString = this.state.currentCode.join('')
         if (currentCodeString === '158694') {
           this.props.navigateTo('compassCalibrationScreen')
@@ -76,6 +97,10 @@ class Locker extends React.Component {
           this.props.navigateTo('supriseScreen')
           return
         }
+        else if (currentCodeString === '230423') {
+          this.props.navigateTo('projectHistoryScreen')
+          return
+        }
         else if (currentCodeString === '003645') {
           this.props.navigateTo('resistivityCalibrationScreen')
           return
@@ -88,25 +113,43 @@ class Locker extends React.Component {
           this.props.navigateTo('pulseTimingsScreen')
           return
         }
-        else{
+        else if (currentCodeString === '130000') {
+          this.props.navigateTo('detectorNoiseLevelScreen')
+          return
+        }
+        else if (currentCodeString === '021000') {
+          this.props.navigateTo('lockerMenuScreen')
+          return
+        }
+        else {
+          this.wrongAttempCounter++
           this.setState({
             currentCode: [0, 0, 0, 0, 0, 0]
           })
         }
 
-        break;
+        break
       case 'back':
         this.props.navigateTo('menuScreen')
-        break;
+        break
 
       default:
-        break;
+        break
     }
   }
 
   render() {
     return (
-      <div className="locker component">
+      <div className="locker component" style={{ background: this.wrongAttempCounter > 3 ? 'red' : '#000000' }}>
+
+        <div className="locker-title">
+          Device Administration
+        </div>
+
+        <div className="locker-warning" >
+          Changing these device settings other than authorized service will cause your device to be out of warranty.
+        </div>
+
         <div className="digits-container">
 
           <div className={`single-digit-panel ${this.state.selectedCursor === 0 ? 'selected' : ''}`}>
@@ -128,6 +171,7 @@ class Locker extends React.Component {
           <div className={`single-digit-panel ${this.state.selectedCursor === 5 ? 'selected' : ''}`}>
             <div className="digit-a">{this.state.currentCode[5]}</div>
           </div>
+
         </div>
       </div>
     )

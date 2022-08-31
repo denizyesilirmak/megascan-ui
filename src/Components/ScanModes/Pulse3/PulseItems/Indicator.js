@@ -16,7 +16,7 @@ const Indicator = (props) => {
         fill="#a1a115"
         y="67"
         rx="4"
-        opacity={props.disc && props.value > 4 ? 1 : 0.1}
+        opacity={props.disc > 0.6 ? 1 : 0.1}
 
       />
 
@@ -25,7 +25,7 @@ const Indicator = (props) => {
         x="10"
         y="90"
         fontSize="18"
-        opacity={props.disc && props.value > 4 ? 1 : 0.1}
+        opacity={props.disc > 0.6 ? 1 : 0.1}
       >
         NONFE
       </text>
@@ -38,7 +38,7 @@ const Indicator = (props) => {
         y="67"
         x="260"
         rx="4"
-        opacity={props.disc === false && props.value > 4 ? 1 : 0.1}
+        opacity={props.disc < 0.4 ? 1 : 0.1}
 
       />
 
@@ -47,7 +47,7 @@ const Indicator = (props) => {
         x="315"
         y="90"
         fontSize="20"
-        opacity={props.disc === false && props.value > 4 ? 1 : 0.1}
+        opacity={props.disc < 0.4 ? 1 : 0.1}
 
       >
         FE

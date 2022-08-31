@@ -1,6 +1,6 @@
 {
   "name": "megascan-ui",
-  "version": "1.2.7",
+  "version": "1.3.7",
   "private": true,
   "author": "Deniz Yesilirmak <dnzyslrmk@gmail.com>",
   "description": "Embedded system user interface for Mega detection devices",

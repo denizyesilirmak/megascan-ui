@@ -20,10 +20,8 @@ class Pulse extends React.Component {
   static contextType = DeviceContext
   constructor(props) {
     super(props)
-
-
+    
     this.kevgir = new Kevgir()
-
 
     this.state = {
       discrimination: false,
@@ -102,6 +100,11 @@ class Pulse extends React.Component {
       })
 
       const soundFreq = Math.trunc(result.sens * 700)
+
+      if(!this.state.sound){
+        SoundHelper.changeFrequencySmooth(0)
+        return
+      }
 
       if (soundFreq > this.state.treshold * 5) {
         if (this.state.selectedDiscrimination === 0) {
@@ -199,7 +202,7 @@ class Pulse extends React.Component {
             this.setState({
               selectedDiscrimination: 0
             }, () => {
-              SoundHelper.changeFrequencyType('sine')
+              SoundHelper.changeFrequencyType('square')
             })
           }
           else if (this.state.cursorY === 2) {
@@ -207,7 +210,7 @@ class Pulse extends React.Component {
             this.setState({
               selectedDiscrimination: 1
             }, () => {
-              SoundHelper.changeFrequencyType('sawtooth')
+              SoundHelper.changeFrequencyType('square')
             })
           }
           else if (this.state.cursorY === 3) {
@@ -220,9 +223,10 @@ class Pulse extends React.Component {
           }
           else if (this.state.cursorY === 0) {
             //calibration
-            this.setState({
-              average: this.state.raw_value
-            })
+            if (!this.state.ready) {
+              return
+            }
+            this.kevgir.calibrate()
           }
           else if (this.state.cursorY === 4) {
             //sound
@@ -327,7 +331,7 @@ class Pulse extends React.Component {
           /> */}
 
             <CrazyIndicator
-              textValue={this.clamp(parseInt(this.state.value * 99), 0, 99)}
+              textValue={this.clamp(parseInt(this.state.value * 200), 0, 99)}
               rightValue={this.state.iron}
               leftValue={this.state.gold}
             />

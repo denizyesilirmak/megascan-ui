@@ -1,0 +1,42 @@
+.project-history {
+  background: #031d0b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.commit {
+  width: 500px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  color: #19b13a;
+  box-sizing: border-box;
+  padding: 20px;
+  animation: project-history-anim 2s ease-in-out infinite forwards;
+  font-size: 30px;
+}
+
+.commit .commit-date {}
+
+.commit .commit-message {
+  margin-top: 20px;
+  color: #49f36e;
+
+}
+
+@keyframes project-history-anim {
+  0% {
+    transform: translateX(800px) skew(300deg, 0);
+  }
+  20% {
+    transform: translateX(0px) skew(10deg, 0);
+  }
+  90% {
+    transform: translateX(0px) skew(0deg, 0);
+  }
+  100% {
+    transform: translateX(-800px) skew(80deg, 0);
+  }
+}

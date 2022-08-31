@@ -30,3 +30,19 @@
 line {
   transition: stroke 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.775);
 }
+
+.metal-type-text {
+  animation: metal-type-text-animation 2s;
+  animation-delay: 0.3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+@keyframes metal-type-text-animation {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

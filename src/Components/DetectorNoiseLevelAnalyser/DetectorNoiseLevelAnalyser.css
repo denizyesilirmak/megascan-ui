@@ -1,0 +1,26 @@
+.detector-noise-level-analyser {
+  background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#noise-level-plot {
+  background: #202020;
+  width: 600px;
+  height: 350px;
+}
+
+.detector-noise-level-analyser-treshold{
+  color: #ffffff;
+  position: absolute;
+  font-size: 30px;
+}
+
+.detector-noise-level-analyser-value{
+  color: lime;
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+}

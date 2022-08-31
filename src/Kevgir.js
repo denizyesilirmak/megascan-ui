@@ -4,7 +4,8 @@ import KalmanFilter from 'kalmanjs'
 class Kevgir {
 
   constructor() {
-    this.kf = new KalmanFilter({ R: 0.01, Q: 3 })
+    this.kf = new KalmanFilter({ R: 0.01, Q: 4 })
+
     this.values = []
     this.calibrationValues = []
 
@@ -25,8 +26,6 @@ class Kevgir {
 
   detectorFunction = (pulseData) => {
     this.rawValue = [this.kf.filter(pulseData.payload), pulseData.disc, pulseData.ratio]
-
-
 
 
     this.realValues = this.rawValue.map((e, i) => e - this.calibration[i])
@@ -65,7 +64,7 @@ class Kevgir {
       r = 1
     }
 
-    let s = this.realValues[0] / (3400 - this.calibration[0])
+    let s = this.realValues[0] / (3400 - this.calibration[0]) //3400
     if (s < 0 || isNaN(s)) {
       s = 0
     }

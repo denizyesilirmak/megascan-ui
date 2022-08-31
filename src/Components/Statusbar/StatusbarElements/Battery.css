@@ -9,7 +9,6 @@
 
 .battery-juice {
   height: 100%;
-  transition: width .2s;
 }
 
 .battery-indicator {

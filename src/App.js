@@ -28,6 +28,7 @@ import Suprise from './Components/Suprise/Suprise'
 import DetectorModeSelector from './Components/DetectorModeSelector/DetectorModeSelector'
 import ResistivityCalibration from './Components/ResistivityCalibration/ResistivityCalibration'
 import PluggedSensorTest from './Components/PluggedSensorTest/PluggedSensorTest'
+import LockerMenu from './Components/LockerMenu/LockerMenu'
 
 //Scan modes
 import AutoLRL from './Components/ScanModes/AutoLRL/AutoLRL'
@@ -69,6 +70,8 @@ import PulseDiscriminationTest from './Components/PulseDiscriminationTest/PulseD
 
 import dbStorage from './DatabaseHelper'
 import EasterEgg from './Components/Suprise/EasterEgg'
+import ProjectHistory from './Components/Suprise/ProjectHistory'
+import DetectorNoiseLevelAnalyser from './Components/DetectorNoiseLevelAnalyser/DetectorNoiseLevelAnalyser'
 dbStorage.init()
 
 class App extends Component {
@@ -109,7 +112,7 @@ class App extends Component {
         this.setState({
           ready: true,
           currentLanguage: settings['lang'] || 'en',
-          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'detectorModeSelectorScreen' : "setupScreen",
+          activeScreen: settings['setupCompleted'] ? settings['pinlock'] ? 'lockScreen' : 'menuScreen' : "setupScreen",
           generalVolume: settings['generalVolume'] || 0, // volume 0 gives false TODO
           searchVolume: settings['searchVolume'] || 0, // volume 0 gives false TODO
           pin: settings['pincode'] || this.state.serial.slice(-4),
@@ -318,6 +321,12 @@ class App extends Component {
         return (<PulseTimings navigateTo={this.navigateTo} />)
       case "pulseDiscriminationTest":
         return (<PulseDiscriminationTest navigateTo={this.navigateTo} />)
+      case "projectHistoryScreen":
+        return (<ProjectHistory navigateTo={this.navigateTo} />)
+      case "detectorNoiseLevelScreen":
+        return (<DetectorNoiseLevelAnalyser navigateTo={this.navigateTo} />)
+      case "lockerMenuScreen":
+        return (<LockerMenu navigateTo={this.navigateTo} />)
       default:
         break
     }

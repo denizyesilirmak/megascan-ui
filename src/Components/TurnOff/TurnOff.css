@@ -84,6 +84,15 @@
   text-align: end;
   box-sizing: border-box;
   padding-right: 10px;
-  font-size: 11px;
-  opacity: 0.5;
+  font-size: 14px;
+  animation: version-number 1s linear 3s 1 both;
+}
+
+@keyframes version-number {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }

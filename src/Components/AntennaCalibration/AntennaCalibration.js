@@ -8,7 +8,7 @@ class AntennaCalibration extends Component {
     super(props)
     this.rawPotValue = 0
     this.state = {
-      rotationAngle: -30,
+      rotationAngle: 0,
       left: 0,
       center: 0,
       right: 0
@@ -19,7 +19,7 @@ class AntennaCalibration extends Component {
     SocketHelper.attach(this.handleSocket)
     this.interval = setInterval(() => {
       SocketHelper.send('L')
-    }, 150);
+    }, 150)
   }
 
   componentWillUnmount() {
@@ -32,17 +32,17 @@ class AntennaCalibration extends Component {
       switch (socketData.payload) {
         case 'back':
           this.props.navigateTo('menuScreen')
-          return;
+          return
         case 'left':
           this.setState({
             left: this.rawPotValue
           })
-          break;
+          break
         case 'right':
           this.setState({
             right: this.rawPotValue
           })
-          break;
+          break
 
         case 'ok':
         case 'start':
@@ -51,13 +51,13 @@ class AntennaCalibration extends Component {
           break
 
         default:
-          return;
+          return
       }
     }
     else if (socketData.type === 'lrlantenna') {
       //sağın solun limitlerini al.
       this.rawPotValue = parseInt(socketData.payload)
-      const angle = this.clamp(this.map(parseInt(socketData.payload), 46, 778, 0, 180) - 90, -90, 90)
+      const angle = this.clamp(this.map(this.rawPotValue, 46, 778, 0, 180) - 90, -90, 90)
       this.setState({
         rotationAngle: (angle)
       })
@@ -65,7 +65,7 @@ class AntennaCalibration extends Component {
   }
 
   map = (x, in_min, in_max, out_min, out_max) => {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
   }
 
   clamp = (value, min, max) => {
@@ -100,10 +100,13 @@ class AntennaCalibration extends Component {
             LEFT: {this.state.left}
           </div>
           <div>
-            CENTER: {((this.state.left + this.state.right) / 2).toFixed(1)}oooos
+            CENTER: {((this.state.left + this.state.right) / 2).toFixed(1)}
           </div>
           <div>
             RIGHT: {this.state.right}
+          </div>
+          <div>
+            VALUE: {this.rawPotValue}
           </div>
         </div>
 

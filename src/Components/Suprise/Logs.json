@@ -1,0 +1,1098 @@
+[
+  {
+    "date": 1575883869,
+    "commit": "ADDED: Background"
+  },
+  {
+    "date": 1575888117,
+    "commit": "ADDED: Statusbar"
+  },
+  {
+    "date": 1575902309,
+    "commit": "ADDED: Carousel Component"
+  },
+  {
+    "date": 1575979102,
+    "commit": "ADDED: Active screen & Settings Navigator"
+  },
+  {
+    "date": 1575988796,
+    "commit": "UPDATE: Navigator pagination"
+  },
+  {
+    "date": 1576045677,
+    "commit": "Fast-forward"
+  },
+  {
+    "date": 1576053618,
+    "commit": "ADDED: Settings component renderer"
+  },
+  {
+    "date": 1576057162,
+    "commit": "ADDED: Switch Component"
+  },
+  {
+    "date": 1576058698,
+    "commit": "ADDED: DateTime Settings component"
+  },
+  {
+    "date": 1576059475,
+    "commit": "UPDATE: Date and time values shown"
+  },
+  {
+    "date": 1576060424,
+    "commit": "UPDATE: Carousel navigation moved its parent"
+  },
+  {
+    "date": 1576064388,
+    "commit": "ADDED: Menu navigation function"
+  },
+  {
+    "date": 1576065642,
+    "commit": "UPDATE: Transition while menus changing"
+  },
+  {
+    "date": 1576133217,
+    "commit": "ADDED: Clock added statusbar"
+  },
+  {
+    "date": 1576242293,
+    "commit": "ADDED: Display Settings Component"
+  },
+  {
+    "date": 1576245300,
+    "commit": "ADDED: Auto LRL Scan Screen"
+  },
+  {
+    "date": 1576477726,
+    "commit": "Fast-forward"
+  },
+  {
+    "date": 1576744711,
+    "commit": "ADDED: Settings/Info Component"
+  },
+  {
+    "date": 1576746184,
+    "commit": "UPDATE: Settings/Info componenet"
+  },
+  {
+    "date": 1576747245,
+    "commit": "ADDED: Reset Component"
+  },
+  {
+    "date": 1576756464,
+    "commit": "ADDED: AutoLRLScan component svg"
+  },
+  {
+    "date": 1576760385,
+    "commit": "UPDATE: AutoLRLScan component text visualization"
+  },
+  {
+    "date": 1576762872,
+    "commit": "ADDED: Auto lrl settings component"
+  },
+  {
+    "date": 1576762949,
+    "commit": "DELETED: readme.md"
+  },
+  {
+    "date": 1577110332,
+    "commit": "ADDED: Language setting component with lots of bugs."
+  },
+  {
+    "date": 1577179977,
+    "commit": "ADDED: CTRL LRL Component layout"
+  },
+  {
+    "date": 1577180802,
+    "commit": "UPDATE: CTRL LRL component sub menu render function"
+  },
+  {
+    "date": 1577182195,
+    "commit": "ADDED: CTRL LRL Soil type component"
+  },
+  {
+    "date": 1577183989,
+    "commit": "ADDED: CTRL LRL Frequency component"
+  },
+  {
+    "date": 1577188954,
+    "commit": "ADDED: CTRL LRL Distance component. (Optimization required later)"
+  },
+  {
+    "date": 1577256178,
+    "commit": "UPDATE: CTRL LRL arrows"
+  },
+  {
+    "date": 1577348230,
+    "commit": "ADDED: LiveStream scan mode component"
+  },
+  {
+    "date": 1577350537,
+    "commit": "UPDATE: Live Stream top part layout"
+  },
+  {
+    "date": 1577353185,
+    "commit": "UPDATE: LiveStream canvas gradient graph"
+  },
+  {
+    "date": 1577357801,
+    "commit": "UPDATE: Live Stream clear some button commands"
+  },
+  {
+    "date": 1577703378,
+    "commit": "ADDED: Live stream scan orientation"
+  },
+  {
+    "date": 1577794315,
+    "commit": "ADDED: Ground Scan Method Selection Componenet"
+  },
+  {
+    "date": 1577795226,
+    "commit": "UPDATE: GroundScanMethodSelection carousel moved seperate component"
+  },
+  {
+    "date": 1577797027,
+    "commit": "UPDATE: Ground Scan Method selected menu item"
+  },
+  {
+    "date": 1577798552,
+    "commit": "ADDED: Device Ground Scan Properties Component"
+  },
+  {
+    "date": 1577799538,
+    "commit": "UPDATE: Device Ground Scan Properties Tabs"
+  },
+  {
+    "date": 1577800037,
+    "commit": "UPDATE: Device Ground Scan Properties handleKeyDown func"
+  },
+  {
+    "date": 1577804157,
+    "commit": "UPDATE: DGSP mini carousel"
+  },
+  {
+    "date": 1577951458,
+    "commit": "ADDED: Scan step selector screen added to device ground scan component"
+  },
+  {
+    "date": 1577952728,
+    "commit": "ADDED: Start Point selection to Device Ground Scan"
+  },
+  {
+    "date": 1577956798,
+    "commit": "ADDED: Scan Viewer"
+  },
+  {
+    "date": 1577964143,
+    "commit": "UPDATE: Scan viewer 2d svg plot"
+  },
+  {
+    "date": 1577967850,
+    "commit": "ADDED: interpolation"
+  },
+  {
+    "date": 1577969128,
+    "commit": "UPDATE: Scan viewer grid"
+  },
+  {
+    "date": 1577969616,
+    "commit": "FIXED: Interpolation warnings"
+  },
+  {
+    "date": 1578638164,
+    "commit": "UPDATE: Interpolation level changed"
+  },
+  {
+    "date": 1578638290,
+    "commit": "moving from master to new-settings"
+  },
+  {
+    "date": 1578652823,
+    "commit": "UPDATE: New Settings Components"
+  },
+  {
+    "date": 1578659199,
+    "commit": "UPDATE: More settings component changed"
+  },
+  {
+    "date": 1578661167,
+    "commit": "ADDED: Language settings component"
+  },
+  {
+    "date": 1578662471,
+    "commit": "ADDED: Info component"
+  },
+  {
+    "date": 1578663946,
+    "commit": "UPDATE: Info component completed"
+  },
+  {
+    "date": 1578666107,
+    "commit": "UPDATE: Selected mode for settings items"
+  },
+  {
+    "date": 1579609424,
+    "commit": "UPDATE: Livestream clamp func."
+  },
+  {
+    "date": 1579682870,
+    "commit": "ADDED: basic settings navigation"
+  },
+  {
+    "date": 1579696099,
+    "commit": "ADDED: date and time picker popups"
+  },
+  {
+    "date": 1579696423,
+    "commit": "ADDED: date and time picker popups"
+  },
+  {
+    "date": 1579698582,
+    "commit": "UPDATE: brigthness slider control"
+  },
+  {
+    "date": 1579699498,
+    "commit": "moving to HEAD~1"
+  },
+  {
+    "date": 1579699511,
+    "commit": "moving to HEAD~1"
+  },
+  {
+    "date": 1579699547,
+    "commit": "UPDATE: brightness slider control"
+  },
+  {
+    "date": 1579699646,
+    "commit": "moving to HEAD~1"
+  },
+  {
+    "date": 1579699700,
+    "commit": "moving to HEAD~1"
+  },
+  {
+    "date": 1579699742,
+    "commit": "UPDATE: brightness slider control"
+  },
+  {
+    "date": 1579700085,
+    "commit": "moving from new-settings to master"
+  },
+  {
+    "date": 1579700102,
+    "commit": "Fast-forward"
+  },
+  {
+    "date": 1579703800,
+    "commit": "UPDATE: Active tab index changed"
+  },
+  {
+    "date": 1579771181,
+    "commit": "UPDATE: more settings navigations"
+  },
+  {
+    "date": 1579773198,
+    "commit": "UPDATE: more settings navigations again"
+  },
+  {
+    "date": 1579790839,
+    "commit": "ADDED: Turn off screen"
+  },
+  {
+    "date": 1580308643,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1580369648,
+    "commit": "ADDED: Bionic Scan Mode screen added"
+  },
+  {
+    "date": 1580376245,
+    "commit": "UPDATE: Bionic components"
+  },
+  {
+    "date": 1580380424,
+    "commit": "ADDED: LineChart component to bionic scan"
+  },
+  {
+    "date": 1580390281,
+    "commit": "ADDED: Gain and sensitivity dials"
+  },
+  {
+    "date": 1580392116,
+    "commit": "UPDATE: Bionic enter, exit transitions"
+  },
+  {
+    "date": 1580394340,
+    "commit": "ADDED: Ionic scan screen"
+  },
+  {
+    "date": 1580475441,
+    "commit": "UPDATE: Ionic screen ui"
+  },
+  {
+    "date": 1580480221,
+    "commit": "ADDED: Lock screen component"
+  },
+  {
+    "date": 1580481325,
+    "commit": "UPDATE: Num pad"
+  },
+  {
+    "date": 1580737117,
+    "commit": "ADDED: Lock screen, keypress events"
+  },
+  {
+    "date": 1580813028,
+    "commit": "ADDED: Manual LRL Scan screen"
+  },
+  {
+    "date": 1581056485,
+    "commit": "UPDATE: Manual LRL Scan screen"
+  },
+  {
+    "date": 1581320761,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1581343712,
+    "commit": "UPDATE: Change hour and minute values"
+  },
+  {
+    "date": 1581344330,
+    "commit": "UPDATE: Change day, month, year"
+  },
+  {
+    "date": 1581418628,
+    "commit": "ADDED: Pin settings popup"
+  },
+  {
+    "date": 1581576515,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1581587704,
+    "commit": "ADDED: Sensor control system"
+  },
+  {
+    "date": 1581676427,
+    "commit": "UPDATE: Ionic navigation on buttons"
+  },
+  {
+    "date": 1581687217,
+    "commit": "UPDATE: Ionic dials value change"
+  },
+  {
+    "date": 1581687602,
+    "commit": "UPDATE TODO"
+  },
+  {
+    "date": 1581691321,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1581927993,
+    "commit": "UPDATE: bionic screen dial control"
+  },
+  {
+    "date": 1581928730,
+    "commit": "UPDATE: Livestream sensor numeric data"
+  },
+  {
+    "date": 1582018761,
+    "commit": "UPDATE: Calibration for live stream"
+  },
+  {
+    "date": 1582025461,
+    "commit": "UPDATE: Live stream speed ui"
+  },
+  {
+    "date": 1582038122,
+    "commit": "ADDED: Scan screen"
+  },
+  {
+    "date": 1582109697,
+    "commit": "ADDED: scan plane for scan screen"
+  },
+  {
+    "date": 1582209620,
+    "commit": "UPDATE: Matrix fill function"
+  },
+  {
+    "date": 1582292587,
+    "commit": "UPDATE: scanscreen grid texture, scan details..."
+  },
+  {
+    "date": 1582548407,
+    "commit": "UPDATE: Scan Screen new line and finish scan popups"
+  },
+  {
+    "date": 1582551235,
+    "commit": "UPDATE: Request sensor data"
+  },
+  {
+    "date": 1582633852,
+    "commit": "UPDATE: plot colors."
+  },
+  {
+    "date": 1583926822,
+    "commit": "ADDED: AutoLRLSettings indicators and limits"
+  },
+  {
+    "date": 1584022183,
+    "commit": "Update"
+  },
+  {
+    "date": 1584091657,
+    "commit": "ADDED: Scan intro videos"
+  },
+  {
+    "date": 1584099328,
+    "commit": "ADDED: master keys to lockscreen"
+  },
+  {
+    "date": 1584106499,
+    "commit": "ADDED: Change pin screen"
+  },
+  {
+    "date": 1584108888,
+    "commit": "UPDATE: Change pin stages"
+  },
+  {
+    "date": 1584360207,
+    "commit": "update: change pin component"
+  },
+  {
+    "date": 1584370143,
+    "commit": "ADDED: change language screen"
+  },
+  {
+    "date": 1584444898,
+    "commit": "ADDED: Language seletion screen"
+  },
+  {
+    "date": 1584688363,
+    "commit": "ADDED: generate date time string"
+  },
+  {
+    "date": 1584975433,
+    "commit": "ADDED: file list component"
+  },
+  {
+    "date": 1585052799,
+    "commit": "ADDED: File list popup component"
+  },
+  {
+    "date": 1585059035,
+    "commit": "FIX: typo on svg elements"
+  },
+  {
+    "date": 1585132445,
+    "commit": "ADDED: Ground scan properties screen"
+  },
+  {
+    "date": 1585143672,
+    "commit": "UPDATE: console log on animate function"
+  },
+  {
+    "date": 1585213201,
+    "commit": "ADDED: Lanugage context provider & Strings.json"
+  },
+  {
+    "date": 1585218023,
+    "commit": "ADDED: Change language function"
+  },
+  {
+    "date": 1585296251,
+    "commit": "UPDATE: Settings slider limits and functions"
+  },
+  {
+    "date": 1585665576,
+    "commit": "ADDED: Settings are saved on db"
+  },
+  {
+    "date": 1585730415,
+    "commit": "UPDATE: Scanscreen: current Y normalization and tunnel scan condition"
+  },
+  {
+    "date": 1585744536,
+    "commit": "UPDATE: fetch file list from server & save scan to server"
+  },
+  {
+    "date": 1585750108,
+    "commit": "UPDATE: Save file when scan finished"
+  },
+  {
+    "date": 1585836493,
+    "commit": "FIXED 2DPlot blue colors"
+  },
+  {
+    "date": 1585905828,
+    "commit": "UPDATE: Mainmenu icons changed & Autolrl options stored in db"
+  },
+  {
+    "date": 1585909971,
+    "commit": "ADDED: Geophysical scan mode"
+  },
+  {
+    "date": 1585915575,
+    "commit": "ADDED: Geophysical selector component and sprites"
+  },
+  {
+    "date": 1585919241,
+    "commit": "UPDATE: Geophysical button navigation"
+  },
+  {
+    "date": 1585924549,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1587022663,
+    "commit": "ADDED: Pinpointer component"
+  },
+  {
+    "date": 1587047941,
+    "commit": "ADDED: Battery level"
+  },
+  {
+    "date": 1588604284,
+    "commit": "UPDATE: volume and date settings info sent to serial-bridge"
+  },
+  {
+    "date": 1588686976,
+    "commit": "UPDATE: migrated to threejs on scanviewer screen"
+  },
+  {
+    "date": 1588690581,
+    "commit": "ADDED: Selected data indicator"
+  },
+  {
+    "date": 1588950180,
+    "commit": "UPDATE: compass"
+  },
+  {
+    "date": 1589202680,
+    "commit": "UPDATE: language context changed to device context"
+  },
+  {
+    "date": 1589271991,
+    "commit": "ADDED: Goldstar device logo on statusbar."
+  },
+  {
+    "date": 1589285235,
+    "commit": "UPDATE: New theme properties"
+  },
+  {
+    "date": 1589463845,
+    "commit": "ADDED: Sleep mode timer on context"
+  },
+  {
+    "date": 1590046793,
+    "commit": "UPDATE: Some improvements"
+  },
+  {
+    "date": 1590140773,
+    "commit": "ADDED: Setup screen"
+  },
+  {
+    "date": 1590159269,
+    "commit": "ADDED: Language selection menu for setup screen"
+  },
+  {
+    "date": 1590584073,
+    "commit": "UPDATE: language change functionality on setup screen"
+  },
+  {
+    "date": 1590651693,
+    "commit": "UPDATE: Setup screen finish screen"
+  },
+  {
+    "date": 1590653895,
+    "commit": "UPDATE: Setup completed stored on db"
+  },
+  {
+    "date": 1590764912,
+    "commit": "UPDATE: Factory commit screens"
+  },
+  {
+    "date": 1591004768,
+    "commit": "UPDATE: Progress bar on commitfactory screen"
+  },
+  {
+    "date": 1591013413,
+    "commit": "UPDATE: Factory commit screen navigations from settins"
+  },
+  {
+    "date": 1591190716,
+    "commit": "UPDATE: Popup colors based on device"
+  },
+  {
+    "date": 1591276180,
+    "commit": "ADDED: walking human animation on lrl scan settings"
+  },
+  {
+    "date": 1591282269,
+    "commit": "UPDATE: Fix starting points"
+  },
+  {
+    "date": 1591346893,
+    "commit": "Fast-forward"
+  },
+  {
+    "date": 1591358645,
+    "commit": "UPDATE: Ground scan properties stored on db"
+  },
+  {
+    "date": 1591367095,
+    "commit": "ADDED: Filelist popup button functions"
+  },
+  {
+    "date": 1591781460,
+    "commit": "UPDATE: colors on scan viewer"
+  },
+  {
+    "date": 1591961964,
+    "commit": "UPDATE: Colors adapted to new background image"
+  },
+  {
+    "date": 1591963303,
+    "commit": "UPDATE: New languages added on settings"
+  },
+  {
+    "date": 1592206670,
+    "commit": "ADDED: Battery percentage on statusbar"
+  },
+  {
+    "date": 1592305323,
+    "commit": "UPDATE: some color adjustments"
+  },
+  {
+    "date": 1592307741,
+    "commit": "Catch error on App.js to prevent freeze."
+  },
+  {
+    "date": 1592311656,
+    "commit": "UPDATE: Device ground scan properties are transfering to scan screen with props. Context api not reachable on constructor"
+  },
+  {
+    "date": 1592313654,
+    "commit": "UPDATE: Useless variables cleaned"
+  },
+  {
+    "date": 1592314786,
+    "commit": "ADDED: Scan screen pause button functions"
+  },
+  {
+    "date": 1592316402,
+    "commit": "FIXED: Bug when calculated sensor value is not number"
+  },
+  {
+    "date": 1592480869,
+    "commit": "ADDED: Depth info on scan viewer screen"
+  },
+  {
+    "date": 1592833830,
+    "commit": "UPDATE: Goldstar colors on lockscreen and ground scan settings"
+  },
+  {
+    "date": 1592834178,
+    "commit": "UPDATE: TODO"
+  },
+  {
+    "date": 1592988433,
+    "commit": "improvemnets"
+  },
+  {
+    "date": 1593008675,
+    "commit": "UPDATE: Bionic screen indicator now changes color and rotation"
+  },
+  {
+    "date": 1593010186,
+    "commit": "ADDED: Atmega code backup"
+  },
+  {
+    "date": 1593010928,
+    "commit": "UPDATE: Turn off screen colors based on device model"
+  },
+  {
+    "date": 1593169276,
+    "commit": "ADDED: Fallback font based on current language"
+  },
+  {
+    "date": 1593171629,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1593185871,
+    "commit": "UPDATE: Time and date popups border color"
+  },
+  {
+    "date": 1593435978,
+    "commit": "UPDATE: Sensitivity control on pinpointer screen"
+  },
+  {
+    "date": 1593502651,
+    "commit": "Pin pointer screen functions, ctrl lrl settings"
+  },
+  {
+    "date": 1593508373,
+    "commit": "UPDATE: CTRL LRL settings screen values clamped"
+  },
+  {
+    "date": 1593515077,
+    "commit": "ADDED: Manual LRL Settings screens"
+  },
+  {
+    "date": 1593521991,
+    "commit": "UPDATE: Manual LRL Settings Target"
+  },
+  {
+    "date": 1593527838,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1593601537,
+    "commit": "UPDATE: LRL Gauge"
+  },
+  {
+    "date": 1593696143,
+    "commit": "UPDATE: Serial and pin codes"
+  },
+  {
+    "date": 1593764224,
+    "commit": "UPDATE: CTRL LRL scan properties stored on db"
+  },
+  {
+    "date": 1593767455,
+    "commit": "UPDATE: Lockscreen gets pin code"
+  },
+  {
+    "date": 1593771605,
+    "commit": "UPDATE: Manual lrl settings saved on db"
+  },
+  {
+    "date": 1593775766,
+    "commit": "UPDATE: Prevent lockscreen in given screens -NEEDS OPTIMIZATION!"
+  },
+  {
+    "date": 1594217662,
+    "commit": "UPDATE: Settings icons changed"
+  },
+  {
+    "date": 1594906025,
+    "commit": "Update: Ionic scan indicator action"
+  },
+  {
+    "date": 1594997213,
+    "commit": "UPDATE: Ionic Screen indicator"
+  },
+  {
+    "date": 1595230983,
+    "commit": "UPDATE: Bionic sensitivity and gain stored on db"
+  },
+  {
+    "date": 1595231970,
+    "commit": "UPDATE: Ionic sensitivity and gain stored"
+  },
+  {
+    "date": 1595236541,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1595421095,
+    "commit": "UPDATE: Asset optimization and icons backup"
+  },
+  {
+    "date": 1596726352,
+    "commit": "UPDATE: Pinpointer frequency sound"
+  },
+  {
+    "date": 1596792591,
+    "commit": "UPDATE: Pinpointer gets volume control"
+  },
+  {
+    "date": 1596807927,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1596812170,
+    "commit": "UPDATE"
+  },
+  {
+    "date": 1597072151,
+    "commit": "Update"
+  },
+  {
+    "date": 1598881466,
+    "commit": "added file delete func"
+  },
+  {
+    "date": 1599051405,
+    "commit": "update"
+  },
+  {
+    "date": 1599229715,
+    "commit": "added: turn of navigation"
+  },
+  {
+    "date": 1599471296,
+    "commit": "added new sensor control component"
+  },
+  {
+    "date": 1599660649,
+    "commit": "added lots of things"
+  },
+  {
+    "date": 1599832981,
+    "commit": "added sound control - last menu index - fixes on audiocontext"
+  },
+  {
+    "date": 1599835430,
+    "commit": "update file list popup wont open if filelist.lenght is 0"
+  },
+  {
+    "date": 1600175921,
+    "commit": "update sound helper dertleri fixed. kind of"
+  },
+  {
+    "date": 1600324262,
+    "commit": "fixes"
+  },
+  {
+    "date": 1600415826,
+    "commit": "update settings last tab index"
+  },
+  {
+    "date": 1600418233,
+    "commit": "delete empty lines"
+  },
+  {
+    "date": 1600434163,
+    "commit": "some background updates"
+  },
+  {
+    "date": 1600746412,
+    "commit": "added manual lrl scan button tab"
+  },
+  {
+    "date": 1600932747,
+    "commit": "update fill scan with average when scan is not complete"
+  },
+  {
+    "date": 1600959733,
+    "commit": "added: open mobile ground scan screen when mobile app requests"
+  },
+  {
+    "date": 1601043089,
+    "commit": "update strings added"
+  },
+  {
+    "date": 1601303361,
+    "commit": "added mobile live stream menu"
+  },
+  {
+    "date": 1601473339,
+    "commit": "added new strings (ar, de) & responsive text helper"
+  },
+  {
+    "date": 1601473552,
+    "commit": "fix setup change language socket message"
+  },
+  {
+    "date": 1601726430,
+    "commit": "Date on filelist & lrl antenna calibration"
+  },
+  {
+    "date": 1601911405,
+    "commit": "added antenna calibration functions"
+  },
+  {
+    "date": 1602857251,
+    "commit": "update"
+  },
+  {
+    "date": 1603454477,
+    "commit": "revisions"
+  },
+  {
+    "date": 1603722752,
+    "commit": "revisions 2"
+  },
+  {
+    "date": 1603808074,
+    "commit": "revision - translations etc"
+  },
+  {
+    "date": 1603893353,
+    "commit": "update - check again"
+  },
+  {
+    "date": 1604414003,
+    "commit": "added: locker"
+  },
+  {
+    "date": 1604501196,
+    "commit": "update improvements"
+  },
+  {
+    "date": 1605602267,
+    "commit": "update"
+  },
+  {
+    "date": 1605713002,
+    "commit": "added: cubic bezier function to livestream"
+  },
+  {
+    "date": 1606565815,
+    "commit": "strings"
+  },
+  {
+    "date": 1606978002,
+    "commit": "update scan data avarage view"
+  },
+  {
+    "date": 1607002811,
+    "commit": "update: bionic indicator animation changed"
+  },
+  {
+    "date": 1607515446,
+    "commit": "last update before migration"
+  },
+  {
+    "date": 1615791168,
+    "commit": "Added vlf screen"
+  },
+  {
+    "date": 1618498259,
+    "commit": "added geophysical action and result screen"
+  },
+  {
+    "date": 1618579146,
+    "commit": "added: geophysical calculation"
+  },
+  {
+    "date": 1622555551,
+    "commit": "added new pulse screen"
+  },
+  {
+    "date": 1622644039,
+    "commit": "added nugget scan mode"
+  },
+  {
+    "date": 1622732301,
+    "commit": "added: new nugget search screen"
+  },
+  {
+    "date": 1622814160,
+    "commit": "update"
+  },
+  {
+    "date": 1623074382,
+    "commit": "added: pulse2 component"
+  },
+  {
+    "date": 1623076303,
+    "commit": "fix empty lines"
+  },
+  {
+    "date": 1623151871,
+    "commit": "added: pulse 2 screen threshold"
+  },
+  {
+    "date": 1623163923,
+    "commit": "test"
+  },
+  {
+    "date": 1623313916,
+    "commit": "update: different pin codes for each device"
+  },
+  {
+    "date": 1623332138,
+    "commit": "duplicate ground scan as tunnel scan"
+  },
+  {
+    "date": 1623337510,
+    "commit": "added tunnel scan properties"
+  },
+  {
+    "date": 1623407984,
+    "commit": "file and scanviewer component opens tunnel scan file"
+  },
+  {
+    "date": 1623414622,
+    "commit": "update todo"
+  },
+  {
+    "date": 1623769450,
+    "commit": "detector modes seperated"
+  },
+  {
+    "date": 1623855276,
+    "commit": "update concord device background image"
+  },
+  {
+    "date": 1623936962,
+    "commit": "added: geophysical component socket communication"
+  },
+  {
+    "date": 1623939699,
+    "commit": "added: translation to pulse screen"
+  },
+  {
+    "date": 1624016150,
+    "commit": "update: enterence animation on resistivity & resistivity calibration screen"
+  },
+  {
+    "date": 1624023134,
+    "commit": "added: resistivity calibration title to strings"
+  },
+  {
+    "date": 1624025305,
+    "commit": "added: language string key test script"
+  },
+  {
+    "date": 1624027683,
+    "commit": "update: initial screen set menuscreen"
+  },
+  {
+    "date": 1624263445,
+    "commit": "update strings"
+  },
+  {
+    "date": 1624441256,
+    "commit": "added sensor videos based on device type"
+  },
+  {
+    "date": 1624542570,
+    "commit": "fixed: text colors on some device types"
+  },
+  {
+    "date": 1624545586,
+    "commit": "fixed: missing translations on status bar hidden"
+  },
+  {
+    "date": 1624628035,
+    "commit": "update"
+  },
+  {
+    "date": 1627998992,
+    "commit": "fix: border color on infinity, lrl sensor control videos, missing strings"
+  },
+  {
+    "date": 1628078880,
+    "commit": "added: sensor control videos for metal detector modes"
+  },
+  {
+    "date": 1628164254,
+    "commit": "add: sensor control test screen"
+  },
+  {
+    "date": 1628497526,
+    "commit": "update: different warning messages on detector coil control"
+  },
+  {
+    "date": 1653472572,
+    "commit": "migrate to new pulse"
+  }
+]

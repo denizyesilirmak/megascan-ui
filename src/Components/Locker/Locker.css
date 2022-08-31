@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .digits-container {
@@ -25,4 +26,18 @@
 .single-digit-panel.selected {
   background: linear-gradient(0deg, rgba(154,154,65,1) 0%, rgba(247,242,88,1) 33%, rgba(96,90,4,1) 100%);
   color: black;
+}
+
+.locker-title{
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.locker-warning{
+  color: #ffffff;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 13px;
 }

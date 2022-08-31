@@ -3,7 +3,6 @@ import "./TurnOff.css"
 import socketHelper from '../../SocketHelper'
 import TurnOffIcon from "../../Assets/MenuIcons/turn-off.png"
 import { DeviceContext } from '../../Contexts/DeviceContext'
-import ProjectInfo from '../../../package.json'
 
 
 class TurnOff extends Component {
@@ -93,7 +92,7 @@ class TurnOff extends Component {
         </div>
 
         <div className="device-version-number">
-          v{ProjectInfo.version}
+          v3.5
         </div>
       </div>
     )

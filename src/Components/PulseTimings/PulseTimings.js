@@ -15,7 +15,6 @@ const MODES = [
   { name: 'large', command: 'H3' },
 ]
 
-
 class PulseTimings extends React.Component {
 
   constructor(props) {
@@ -24,7 +23,7 @@ class PulseTimings extends React.Component {
     this.rawValue = [0, 0, 0]
     this.calibration = [0, 0, 0]
     this.realValues = [0, 0, 0]
-    this.calibrated = false
+    this.calibrated = true
     this.angle = 0
     this.ratio = 0.5
     this.sens = 0
@@ -56,6 +55,7 @@ class PulseTimings extends React.Component {
     SocketHelper.detach()
   }
 
+
   handleSocketData = (data) => {
     //console.log(data)
     if (data.type === 'button') {
@@ -78,8 +78,31 @@ class PulseTimings extends React.Component {
         case 'back':
           this.props.navigateTo('lockerScreen')
           break
+        case 'home':
+          console.log('home')
+          // SocketHelper.send('U')
+
+          // const timeout = setTimeout(() => {
+          //   const times = this.state.timings
+
+          //   const hexArrayTemp = times.map(e => {
+          //     return (padStart(e.toString(), 4, '0').toUpperCase())
+          //   })
+
+
+          //   const commandTemp = hexArrayTemp.join('')
+          //   //console.log(commandTemp)
+          //   SocketHelper.send('G' + commandTemp)
+          //   clearTimeout(timeout)
+          // }, 120)
+
+          // const timeout2 = setTimeout(() => {
+          //   SocketHelper.send('U')
+          //   clearTimeout(timeout2)
+          // }, 300)
+
+          break
         case 'start':
-          SocketHelper.send('U')
           this.calibrated = true
           this.kevgirInstanse.calibrate()
           break
@@ -93,7 +116,8 @@ class PulseTimings extends React.Component {
 
           const command = hexArray.join('')
           //console.log(command)
-          SocketHelper.send('G' + command)
+          SocketHelper.send('G' + command + '\n')
+          //SocketHelper.send('U')
           break
         default:
           break
@@ -105,19 +129,21 @@ class PulseTimings extends React.Component {
       this.setState({ timings: eeprom })
     }
     else if (data.type === 'pulse') {
-
-
-
       const result = this.kevgirInstanse.detectorFunction(data)
 
-      console.log(result)
+      //console.log(result)
 
       this.ratio = result.ratio
       this.sens = result.sens
       this.angle = result.angle
       this.realValues = result.realValues
 
-      SoundHelper.changeFrequencySmooth(Math.trunc(this.sens * 1000 * 5))
+      //console.log(this.sens)
+      if (Math.trunc(this.sens * 1000 * 5) > 15) {
+        SoundHelper.changeFrequencySmooth(Math.trunc(this.sens * 1000 * 5))
+      } else {
+        SoundHelper.changeFrequencyFast(0)
+      }
 
       this.forceUpdate()
     }
